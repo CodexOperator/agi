@@ -145,3 +145,35 @@ Live record of build progress against `context/plans/build-site.md`.
 - **Status:** DONE
 - **Files:** src/graph_core/types.py, tests/graph_core/test_uniform_contract.py
 - **Validation:** Tests 3/3 PASS, R5.3 covered
+
+### Iteration 18 — 2026-05-01T04:35:00Z
+- **Task:** T-013 — Warm-load cache with content-addressed digest (graph-core/R7)
+- **Tier:** 3
+- **Status:** DONE
+- **Files:** src/graph_core/cache.py (new), tests/graph_core/test_warm_load.py (new)
+- **Validation:** Tests 7/7 PASS. R7.1 (second load is cache hit + within <5ms noise floor), R7.2 (modifying any file invalidates cache → fresh miss), R7.3 (renaming detected via path-included digest → fresh miss) covered.
+- **Notes:** `directory_digest()` is sha256 over sorted `(rel_path, sha256(file_bytes))` tuples — both content and path participate, so any rename or edit changes the digest. `WarmLoadCache.get()` keyed on `(resolved_path, digest)`; loader is injectable for testability. `hits`/`misses` exposed for assertions; `clear()` resets both cache and stats.
+
+### Iteration 19 — 2026-05-01T05:00:00Z
+- **Task:** T-024 — Optional validation hook engine (schema-registry/R4)
+- **Tier:** 3
+- **Status:** DONE
+- **Files:** src/schema_registry/dsl.py (new), src/schema_registry/validation.py (new), src/schema_registry/__init__.py (edit), tests/schema_registry/test_validation.py (new)
+- **Validation:** Tests 7/7 PASS (test_validation.py); full schema_registry suite 21/21 PASS. R4.1 (no validation block → no per-field checks), R4.2 (violators produce structured ValidationError with rule/field/reason), R4.3 (errors do not abort the rest of the load — siblings still validated), R4.4 (`failures_by_schema()` returns counts per schema) all covered.
+- **Notes:** `parse_rules()` normalizes the optional `validation:` frontmatter block into `{required, types, regex}`. `validate()` walks each rule kind: required (None or empty-string-stripped triggers fail), types (int/str/bool/float/list/dict via `_TYPE_MAP`, missing fields skipped, unknown type names skipped), regex (compile errors emit fail with reason 'invalid pattern', non-string values fail, uses `re.search` for match). `ValidationResult` exposes `failures_by_schema()` (dict counts) and `failures_for_node()` (per-id slice). `validate_nodes_against_registry()` skips unknown schema names silently — pairs cleanly with the T-020 generic fallback path.
+
+### Iteration 20 — 2026-05-01T05:15:00Z
+- **Task:** T-022 — Schemas as meta_node in graph (schema-registry/R3)
+- **Tier:** 3
+- **Status:** DONE
+- **Files:** src/schema_registry/meta_nodes.py (new), src/schema_registry/__init__.py (edit), tests/schema_registry/test_meta_nodes.py (new)
+- **Validation:** Tests 5/5 PASS (test_meta_nodes.py); full schema_registry suite 26/26 PASS. R3.1 (one meta_node per registered schema; id from schema name), R3.2 (active flag exposed on meta_node tags), R3.4 (`diff_meta_nodes` returns added/removed sets across reloads) covered.
+- **Notes:** `schema_to_meta_node()` mints id via `mint_id("schema", schema.name, registry=...)`; payload_ref is `str(schema.source_path)`; tags include `schema-name:<name>` and `active` when bracketed. `synthesize_meta_nodes()` iterates registry in sorted-name order for determinism, returns `{name: Node}`. `diff_meta_nodes()` computes (added, removed) name-set tuple for reload-driven invalidation.
+
+### Iteration 21 — 2026-05-01T06:00:00Z
+- **Task:** T-062 — ASCII footer: type counts and edge summary (renderers/R2.3)
+- **Tier:** 3
+- **Status:** DONE
+- **Files:** src/renderers/ascii.py (edit), tests/renderers/test_ascii_summary.py (new)
+- **Validation:** Tests 10/10 PASS (test_ascii.py 6/6, test_ascii_summary.py 4/4). R2.3 footer with Types/Edges lines, alphabetically sorted, omitted for empty graph, edges line omitted when no edges. 200-line budget respected by pre-computing footer size and reserving slots before body rendering.
+- **Notes:** Footer pre-built before body loop so its line count (2–3 lines) is known. Body loop checks `len(lines) + 1 + (1 if more_nodes_remain) + footer_size > MAX_LINES` before emitting each node line; truncation marker emitted when limit hit. Footer appended after body (and after truncation marker when present). Empty graph skips footer entirely.

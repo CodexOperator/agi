@@ -27,7 +27,7 @@ def render_ascii(representation: Representation) -> str:
     tokens = list(representation.tokens)
     lines: list[str] = []
 
-    # Header summary (always 2 lines)
+    # Header summary (always 3 lines: graph count, types, separator).
     type_counts: dict[str, int] = defaultdict(int)
     for t in tokens:
         type_counts[t.type] += 1
@@ -39,11 +39,38 @@ def render_ascii(representation: Representation) -> str:
     lines.append(_truncate_line(type_line))
     lines.append(_truncate_line("#"))
 
-    # Body: one line per token, indented by depth.
+    # Pre-build footer so we know how many lines it occupies.
+    footer_lines: list[str] = []
+    if tokens:
+        edge_counts: dict[str, int] = defaultdict(int)
+        for t in tokens:
+            for _tgt, rel in t.edges:
+                edge_counts[rel] += 1
+        footer_lines.append("----")
+        footer_lines.append(
+            "Types: " + ", ".join(f"{k}={v}" for k, v in sorted(type_counts.items()))
+        )
+        if edge_counts:
+            footer_lines.append(
+                "Edges: " + ", ".join(f"{k}={v}" for k, v in sorted(edge_counts.items()))
+            )
+
+    # Budget: reserve 1 line for truncation marker + footer lines.
+    footer_size = len(footer_lines)
+    # body_limit is the max lines index before we must emit truncation marker.
+    # We need room for: current lines (header=3) + body + trunc_marker(1) + footer.
+    # So max body lines = MAX_LINES - 3 (header) - 1 (trunc marker) - footer_size.
+    # But if no truncation needed, no trunc marker line is used.
+
     rendered_count = 0
     truncated = False
     for t in tokens:
-        if len(lines) >= MAX_LINES - 1:
+        # Lines so far + 1 (this node) + footer_size must stay <= MAX_LINES.
+        # Also need 1 spare for truncation marker if there are still nodes left.
+        remaining_after = len(tokens) - rendered_count - 1
+        need_trunc_slot = remaining_after > 0
+        slots_needed = 1 + (1 if need_trunc_slot else 0) + footer_size
+        if len(lines) + slots_needed > MAX_LINES:
             remaining = len(tokens) - rendered_count
             lines.append(_truncate_line(TRUNC_MARKER_FMT.format(n=remaining)))
             truncated = True
@@ -58,39 +85,9 @@ def render_ascii(representation: Representation) -> str:
         lines.append(_truncate_line(line))
         rendered_count += 1
 
-    # Footer: type counts and edge counts (omitted for empty graph).
-    if tokens:
-        # Collect edge relation counts across all tokens.
-        edge_counts: dict[str, int] = defaultdict(int)
-        for t in tokens:
-            for _tgt, rel in t.edges:
-                edge_counts[rel] += 1
-
-        footer_lines: list[str] = [
-            "----",
-            "Types: " + ", ".join(f"{k}={v}" for k, v in sorted(type_counts.items())),
-        ]
-        if edge_counts:
-            footer_lines.append(
-                "Edges: " + ", ".join(f"{k}={v}" for k, v in sorted(edge_counts.items()))
-            )
-
-        # If body was truncated, drop the truncation marker and place footer last.
-        if truncated:
-            lines.pop()
-
-        # Append footer if it fits within MAX_LINES; if not, still append (footer wins).
-        for fl in footer_lines:
-            lines.append(_truncate_line(fl))
-
-        # If we exceed MAX_LINES after adding footer, trim body lines to make room.
-        while len(lines) > MAX_LINES:
-            # Remove the line just before the footer block (index = len - footer_lines).
-            footer_start = len(lines) - len(footer_lines)
-            if footer_start > 0:
-                lines.pop(footer_start - 1)
-            else:
-                break
+    # Append footer (after truncation marker if present, or after body).
+    for fl in footer_lines:
+        lines.append(_truncate_line(fl))
 
     return "\n".join(lines) + "\n"
 
