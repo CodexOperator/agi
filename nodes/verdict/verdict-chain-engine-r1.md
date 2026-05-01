@@ -13,6 +13,4 @@ tags:
 next_edges:
   - mvp:chain-engine-r1
 ---
-**Verdict:** proved
-
-8-hop chain: idea→hypothesis→experiment→verdict→mvp→outcome→bigger_outcome→app_purpose. Confidence: 1.0. Evidence: cold reload test.
+VERDICT: proved. 8-hop chain verified on cold reload. Confidence: 1.0.

@@ -1,6 +1,6 @@
 ---
 id: "mvp:chain-engine-r1"
-title: "MVP: chain-engine chain persistence"
+title: "Mvp: chain-engine"
 type: mvp
 status: open
 confidence: 1.0
@@ -11,6 +11,4 @@ tags:
 next_edges:
   - outcome:chain-engine-r1
 ---
-# MVP: chain-engine Chain Persistence
-
-Persists next_edges to idea, hypothesis, experiment, verdict, mvp, outcome, bigger-outcome, app-purpose node frontmatter. Enables find_chains() to return 8-hop capillary chains from disk.
+MVP: persists next_edges to 8 node files enabling find_chains() to return 8-hop capillary chains.

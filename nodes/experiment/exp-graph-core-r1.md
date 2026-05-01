@@ -1,9 +1,9 @@
 ---
 id: "exp:graph-core-r1"
-title: "Experiment: graph-core R13"
+title: "Experiment: graph-core"
 type: experiment
 status: open
-confidence: 0.8
+confidence: 1.0
 parents:
   - hyp:graph-core-r1
 tags:
@@ -11,6 +11,4 @@ tags:
 next_edges:
   - verdict:graph-core-r1
 ---
-**Experiment:** R13 chain-persistence for domain-graph-core
-
-Validates that next_edges in node frontmatter enable find_chains() to return 8-hop chains from cold reload.
+graph-core R13 experiment: validates next_edges chain persistence.
