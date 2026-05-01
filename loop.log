@@ -600,3 +600,89 @@ Traceback (most recent call last):
     return len(sub_types) / max(len(g.nodes), 1)
                                 ^^^^^^^^^^^^
 TypeError: object of type 'dict_valueiterator' has no len()
+=== iter 1 @ 2026-05-01T18:59:45Z ===
+wrote: 7 idea + 60 hypothesis + 91 task = 158 nodes
+target dir: /home/ubuntu/.hermes/agi-tree/nodes
+loaded 157 nodes from /home/ubuntu/.hermes/agi-tree/nodes
+ASCII rendering: 163 lines
+wrote: /home/ubuntu/.hermes/agi-tree/context/INJECTION.md
+METRIC longest_chain_length=2
+METRIC avg_chain_depth=0.96
+METRIC mvp_count=0
+METRIC outcome_coverage=0.000
+METRIC chain_branching_factor=2.21
+METRIC node_count=157
+METRIC edge_count=148
+ERR: ollama package not installed (pip install ollama)
+[smoke] skipping agent dispatch + heal
+=== iter 2 @ 2026-05-01T18:59:45Z ===
+wrote: 7 idea + 60 hypothesis + 91 task = 158 nodes
+target dir: /home/ubuntu/.hermes/agi-tree/nodes
+loaded 157 nodes from /home/ubuntu/.hermes/agi-tree/nodes
+ASCII rendering: 163 lines
+wrote: /home/ubuntu/.hermes/agi-tree/context/INJECTION.md
+METRIC longest_chain_length=2
+METRIC avg_chain_depth=0.96
+METRIC mvp_count=0
+METRIC outcome_coverage=0.000
+METRIC chain_branching_factor=2.21
+METRIC node_count=157
+METRIC edge_count=148
+ERR: ollama package not installed (pip install ollama)
+[smoke] skipping agent dispatch + heal
+=== iter 3 @ 2026-05-01T18:59:46Z ===
+wrote: 7 idea + 60 hypothesis + 91 task = 158 nodes
+target dir: /home/ubuntu/.hermes/agi-tree/nodes
+loaded 157 nodes from /home/ubuntu/.hermes/agi-tree/nodes
+ASCII rendering: 163 lines
+wrote: /home/ubuntu/.hermes/agi-tree/context/INJECTION.md
+METRIC longest_chain_length=2
+METRIC avg_chain_depth=0.96
+METRIC mvp_count=0
+METRIC outcome_coverage=0.000
+METRIC chain_branching_factor=2.21
+METRIC node_count=157
+METRIC edge_count=148
+ERR: ollama package not installed (pip install ollama)
+[smoke] skipping agent dispatch + heal
+=== iter 1 @ 2026-05-01T19:04:03Z ===
+wrote: 7 idea + 60 hypothesis + 91 task = 158 nodes
+target dir: /home/ubuntu/.hermes/agi-tree/nodes
+loaded 157 nodes from /home/ubuntu/.hermes/agi-tree/nodes
+ASCII rendering: 163 lines
+wrote: /home/ubuntu/.hermes/agi-tree/context/INJECTION.md
+METRIC longest_chain_length=2
+METRIC avg_chain_depth=0.96
+METRIC mvp_count=0
+METRIC outcome_coverage=0.000
+METRIC chain_branching_factor=2.21
+METRIC node_count=157
+METRIC edge_count=148
+ERR: ollama package not installed (pip install ollama)
+scaffolded hypothesis node: hypothesis:a00-21905a37-924f95
+spawned a00-21905a37 pid=1248052 level=big target=- strategy=explore_new
+manifest: /home/ubuntu/.hermes/agi-tree/sessions/iter-001/manifest.json
+all agents terminal
+[post_wire] iter=1
+  nodes updated: 0
+  edges added: 0
+  graph snapshot: /home/ubuntu/.hermes/agi-tree/sessions/iter-001/iter-001-graph.json
+iter 1: 1 agents
+  a00-21905a37: status=done verdict=pending pid=1248052
+=== iter 2 @ 2026-05-01T19:05:34Z ===
+wrote: 7 idea + 60 hypothesis + 91 task = 158 nodes
+target dir: /home/ubuntu/.hermes/agi-tree/nodes
+loaded 157 nodes from /home/ubuntu/.hermes/agi-tree/nodes
+ASCII rendering: 163 lines
+wrote: /home/ubuntu/.hermes/agi-tree/context/INJECTION.md
+METRIC longest_chain_length=2
+METRIC avg_chain_depth=0.96
+METRIC mvp_count=0
+METRIC outcome_coverage=0.000
+METRIC chain_branching_factor=2.21
+METRIC node_count=157
+METRIC edge_count=148
+ERR: ollama package not installed (pip install ollama)
+scaffolded hypothesis node: hypothesis:a00-6414af82-f1b9dd
+spawned a00-6414af82 pid=1248336 level=big target=- strategy=explore_new
+manifest: /home/ubuntu/.hermes/agi-tree/sessions/iter-002/manifest.json

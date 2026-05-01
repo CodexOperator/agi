@@ -34,8 +34,14 @@ def find_chains(graph: RenderableGraph) -> list[Chain]:
     for edge in graph.edges:
         if edge.relation == "next":
             next_edges.setdefault(edge.source_id, []).append(edge.target_id)
-        elif edge.relation == "spawns":
-            spawns_edges.setdefault(edge.source_id, []).append(edge.target_id)
+        # Note: 'spawns' edges are NOT created by the loader (only 'next' edges are).
+        # Build spawns_edges from each node's 'parents' field (parent spawns child).
+    for nid in graph.node_ids:
+        node = graph.get_node(nid)
+        if node is None:
+            continue
+        for parent_id in node.parents:
+            spawns_edges.setdefault(parent_id, []).append(nid)
 
     # Find all idea nodes (roots with no 'next' incoming edge)
     next_targets: set[str] = {t for targets in next_edges.values() for t in targets}
@@ -112,8 +118,13 @@ def find_chains_from_node(graph: RenderableGraph, start_id: str) -> list[Chain]:
     for edge in graph.edges:
         if edge.relation == "next":
             next_edges.setdefault(edge.source_id, []).append(edge.target_id)
-        elif edge.relation == "spawns":
-            spawns_edges.setdefault(edge.source_id, []).append(edge.target_id)
+    # Build spawns_edges from node.parents (loader doesn't create 'spawns' graph edges)
+    for nid in graph.node_ids:
+        node = graph.get_node(nid)
+        if node is None:
+            continue
+        for parent_id in node.parents:
+            spawns_edges.setdefault(parent_id, []).append(nid)
 
     start_node = graph.get_node(start_id)
     if start_node is None:

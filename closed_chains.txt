@@ -1,0 +1,2 @@
+# closed_chains.txt — chains that have been judged "close" by benchmark.py
+# One chain_id per line. dispatch.py reads this to filter out closed chains.

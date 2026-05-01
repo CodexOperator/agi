@@ -1,144 +1,144 @@
-# HANDOFF — autoresearch-tree (Capillary DAG Memory)
-
-> Fresh session brief. Read top-to-bottom once. Everything else is reachable from here.
-
-## What This Project Is
-
-Capillary DAG memory layer: LLM agents build a graph of `idea → hypothesis → experiment → verdict → mvp → outcome → bigger_outcome → app_purpose` chains. The graph is the knowledge base; agents onboard fast by reading it.
-
-**Predecessor** (`~/.hermes/agi/`) is frozen at iter 47 — 40-hop chains, 257 tests, proved formula `hops = 2×N + 8`. This project is a fresh run with a new scaffold pipeline.
-
-## Project Root
-
-`~/.hermes/agi-tree/` — all state lives here.
-
-## How to Run the Loop
-
-```bash
-# Start (55 iters, 1 agent/iter, fresh session)
-cd ~/.hermes/agi-tree
-tmux new-session -d -s autoresearch-tree \
-  "autoresearch-tree --max-iters 55 2>&1 | tee ~/.hermes/agi-tree/loop.log"
-
-# Monitor
-tail -f ~/.hermes/agi-tree/loop.log
-
-# Attach to see live output
-tmux attach -t autoresearch-tree
-
-# Stop
-tmux kill-session -t autoresearch-tree
-```
-
-## Key Files
-
-| File | Purpose |
-|------|---------|
-| `loop.log` | Driver output — METRICS, spawns, healers, iter summaries |
-| `sessions/iter-NNN/manifest.json` | Per-iter agent IDs, pids, statuses |
-| `context/INJECTION.md` | Auto-rendered ASCII graph snapshot (≤200 lines) |
-| `autoresearch.jsonl` | Frozen predecessor's experiment log (~89 entries) |
-| `nodes/` | All node files — hypothesis/, idea/, task/ (verdict/exp/mvp/outcome dirs will grow) |
-| `autoresearch-tree.config.json` | Config (1 agent/iter, 55 max, 10min timeout) |
-
-## Plugin (Engine Code — where changes land)
-
-`~/.pi/agent/git/github.com/davebcn87/pi-autoresearch/extensions/autoresearch-tree/`
-
-Key files modified in this session:
-- `bin/dispatch.py` — scaffolds node file before each agent starts
-- `bin/cli.py` — agent signals done here; writes verdict into node frontmatter
-- `lib/agent-prompt.md` — agent rules + Chain Workflow section
-
-## The Scaffold Pipeline (How It Works Now)
-
-1. **Driver spawns agent** → `dispatch.py` calls `_scaffold_node_for_agent()` 
-2. **Node file pre-created** → `nodes/<type>/<slug>.md` with frontmatter already filled (`type`, `parents`, `next_edges: []`)
-3. **Agent fills body** → only the markdown body, frontmatter untouched
-4. **Agent signals done** → `cli.py done` finds the node by ID, adds `verdict:` + `confidence:` to frontmatter, appends notes
-
-Node type per iteration:
-- Big zoom → `hypothesis` (new chain branch)
-- Small zoom → next step: hypothesis→experiment→verdict→mvp→outcome→bigger-outcome
-
-## Current Loop Status
-
-- **Loop**: Running (tmux `autoresearch-tree`, started ~15:01)
-- **Iter**: ~1–5 range (fresh restart after plugin update)
-- **Metrics**: `longest_chain_length=2` (only idea→hypothesis, no exp/verdict nodes yet)
-- **Problem known**: Prior 20 iters produced `verdict=proved` but no node files on disk — fixed by scaffold pipeline
-- **Git commit**: `b5fd816` — "engine: scaffold+verdict pipeline"
-
-## Frozen Predecessor Key Discoveries (from `autoresearch.jsonl`)
-
-**PROVED:**
-- Chain formula: `hops = 2×N + 8` where N = verdict→experiment→verdict cycles. Basic chain = 8 hops.
-- Node2Vec 2D projection NOT isomorphic to graph (Spearman -0.18 — DISPROVED)
-- Test coverage 41% — disproved >80% hypothesis
-- `next_edges` in YAML frontmatter required for chain reconstruction on cold reload
-- Git `checkout HEAD -- nodes/` WIPES verdict/mvp/outcome — must commit immediately
-- Type normalization bug: hyphens vs underscores silently broke chain edges
-
-**Critical bugs fixed by predecessor:**
-- `_reconstruct_next_edges` break-at-first-level prevented subdirectory traversal
-- 3 verdict files missing `type:verdict` frontmatter
-- schema-registry missing `bigger-outcome:schema-registry-r2` node
-
-## What's Different This Fresh Run
-
-- 157 seed nodes loaded (7 ideas, 60 hypotheses, 90 tasks) — inherited from predecessor graph
-- `longest_chain_length=2` because no experiment/verdict/mvp/outcome nodes exist yet
-- Agents previously called `done --verdict proved` without creating node files → FIXED (scaffold pipeline)
-- 55 iters budgeted, 1 agent/iter
-
-## Monitoring One-Liners
-
-```bash
-# Current position
-grep "^=== iter" ~/.hermes/agi-tree/loop.log | tail -5
-
-# Last iter result
-grep -E "^iter [0-9]+:" ~/.hermes/agi-tree/loop.log | tail -3
-
-# Healers fired
-grep "healer:" ~/.hermes/agi-tree/loop.log | wc -l
-
-# Primary metric over time
-grep "METRIC longest_chain_length" ~/.hermes/agi-tree/loop.log
-
-# Node count growth
-grep "METRIC node_count" ~/.hermes/agi-tree/loop.log
-
-# Are verdict/exp/mvp dirs growing?
-ls ~/.hermes/agi-tree/nodes/
-```
-
-## What to Look For in 5–10 More Iters
-
-- `METRIC longest_chain_length` climbing past 2 (needs experiment→verdict pair)
-- `METRIC mvp_count` going from 0 to >0
-- New directories appearing in `nodes/` (verdict/, experiment/, mvp/)
-- Agents completing without healers (iter summary shows `status=done` with no `healer:` line above it)
-
-## If Loop Dies or Gets Stuck
-
-```bash
-# Check if driver still alive
-pgrep -f "autoresearch-tree --max-iters" | head -3
-
-# Force restart
-tmux kill-session -t autoresearch-tree 2>/dev/null
-cd ~/.hermes/agi-tree
-tmux new-session -d -s autoresearch-tree \
-  "autoresearch-tree --max-iters 55 2>&1 | tee ~/.hermes/agi-tree/loop.log"
-```
-
-## Architecture Decision Record (This Session)
-
-- **Scaffold-first**: driver pre-creates node skeleton → agent fills body → `cli.py done` adds verdict. Eliminates silent success (agent reports done but writes nothing).
-- **No auto-experiment-run**: the scaffold tells agent what kind of node, agent decides the content. Kept simple to avoid over-automation.
-- **Fresh loop vs continue**: killed old session and restarted so new pipeline (commit `b5fd816`) takes effect from iter 1.
+# AGI Tree — Loop State Handoff
+## Session: 2025-05-01 | Engine: b5fd816
 
 ---
 
-**Last updated:** 2026-05-01T15:01 UTC | **Loop:** running | **Commit:** `b5fd816`
+## Loop Start / Restart / Monitor Commands
+
+```bash
+# Terminal 1 — watch loop progress
+watch -n5 'echo "=== CHAIN COUNTS ===" && find ~/.hermes/agi-tree/nodes -type d | while read d; do count=$(find "$d" -name "*.md" 2>/dev/null | wc -l); [ "$count" -gt 0 ] && echo "$d: $count"; done | sort'
+
+# Terminal 2 — run one iteration
+cd ~/.hermes/agi-tree && bash bin/autoresearch-tree.sh run --iter N
+
+# Terminal 3 — tail logs
+tail -F ~/.hermes/agi-tree/logs/loop.log
+
+# Manual dispatch (override automation)
+cd ~/.hermes/agi-tree && python3 bin/dispatch.py --iter N --dry
+
+# Post-wire (wire edges after iteration)
+cd ~/.hermes/agi-tree && python3 bin/post_wire.py --iter N
+
+# Smoke test: confirm chain count > 2
+find ~/.hermes/agi-tree/nodes -name "*.md" | wc -l
+find_chains() { find ~/.hermes/agi-tree/nodes -mindepth 1 -maxdepth 1 -type d; }
+find_chains | wc -l   # should be > 2
+```
+
+---
+
+## Scaffold Pipeline (How Agents Work Now)
+
+### Two-Agent Parallelism (b5fd816 new)
+Single parent node spawns **two agents in parallel** on the same hypothesis:
+1. **experiment agent** — runs experiments, tests assumptions, gathers evidence
+2. **mvp agent** — builds working code/MVP toward app_purpose
+
+Both share `parent_id`, `role` plumbs through scaffold. Results are
+verdict nodes that feed into dispatch attractiveness scoring.
+
+### Dispatch Target Selection
+`_pick_targets()` in `dispatch.py`:
+- Loads `closed_chains.txt` → excludes those chain IDs from all candidates
+- Scores each chain by: edges_wired, chain_length, missing_mvp, missing_verdict
+- Picks highest-attractiveness chain; spawns research+mvp agents on it
+
+### Edge Wiring
+`post_wire.py` wires new nodes into the graph:
+- `_wire_verdicts()` — rel=next from parent verdict to new verdict
+- `_wire_mvps()` — rel=next from parent mvp to new mvp
+- `_wire_experiment_to_verdict()` — rel=supports from experiment to verdict
+- Writes plain node IDs to `next_edges:` in frontmatter (no YAML list)
+
+### Next Edge Flag (b5fd816 new)
+`cli.py --next-edge TARGET` writes a node ID as a plain string to the
+`next_edges:` frontmatter field of the current node (not a YAML list).
+Used by `post_wire.py` to wire programmatic next-edge overrides.
+
+---
+
+## What to Watch For (Working Signals)
+
+| Signal | Location | Meaning |
+|--------|----------|---------|
+| Chain count grows | `find_chains \| wc -l` | New chains spawning |
+| verdict/ dir grows | `ls verdict/` | Experiment → verdict pipeline running |
+| mvp/ dir grows | `ls mvp/` | MVP agents shipping code |
+| hypothesis/ dir | hypothesis chain growing | Interpretability work |
+| closed_chains.txt | root | benchmark.py actively culling dead chains |
+| find_chains > 2 | smoke test | At least 3 chains alive |
+
+---
+
+## Frozen Predecessor Discoveries
+
+- **Ollama model**: qwen3:4b (judge), llama3:8b (fallback)
+- **benchmark.py**: sends node content to Ollama, returns continue/close/branch
+- **closed_chains.txt**: Filter loaded at top of `_pick_targets()` — works but
+  integration not end-to-end; chains can still be picked if not yet in file
+- **heuristic edge wiring** in `post_wire.py` is fragile — inspect `find_chains`
+  output after each run to verify correct parents
+
+---
+
+## This Session's Engine Changes (b5fd816)
+
+### 1. `--next-edge TARGET` flag (cli.py)
+- Adds `cli.py --next-edge TARGET` option
+- Writes TARGET as plain string (not YAML list) to `next_edges:` in frontmatter
+- Enables programmatic next-edge override for post_wire.py
+
+### 2. Two-Agent Pipeline (dispatch.py)
+- New `_research_pipeline_targets()` — picks best attractiveness chain as single parent
+- Spawns **research agent** (role=experiment) + **implementation agent** (role=mvp)
+- Both on same parent; both get `role` plumbed through scaffold
+- `find_chains` should grow by 2 (experiment + mvp) per iteration
+
+### 3. closed_chains.txt (dispatch.py)
+- Loaded at top of `_pick_targets()` before candidate filtering
+- Excludes closed chain IDs from attractiveness scoring
+- File location: `~/.hermes/agi-tree/closed_chains.txt`
+- Format: one `chain_id` per line, `#` comments
+
+### 4. Ollama Benchmark Feedback Loop (idea node)
+- Not yet wired into loop
+- Idea: benchmark verdict → closed_chains.txt → dispatch picks differently
+- Remaining work: `--auto` mode in benchmark.py, driver.sh integration
+
+---
+
+## File Inventory
+
+```
+~/.hermes/agi-tree/
+├── HANDOFF.md              ← this file
+├── closed_chains.txt       ← benchmark.py writes closed chain IDs here
+└── nodes/
+    ├── hypothesis/         ← hypothesis chain
+    ├── experiment/         ← experiment results (research agent output)
+    ├── mvp/                ← shipped code (implementation agent output)
+    ├── verdict/            ← Ollama verdicts (continue/close/branch)
+    ├── app_purpose/        ← app purpose chain
+    ├── bigger_outcome/     ← bigger outcome chain
+    ├── idea/               ← ideas for future work
+    └── ...
+bin/
+    ├── autoresearch-tree.sh    ← loop entry point
+    ├── cli.py                   ← --next-edge flag added (b5fd816)
+    ├── dispatch.py              ← two-agent pipeline + closed_chains (b5fd816)
+    ├── post_wire.py             ← edge wiring (plain strings, rel="next")
+    ├── benchmark.py             ← Ollama judgment (continue/close/branch)
+    ├── heal.py                  ← timeout monitoring
+    └── zoom.py                  ← context scoping
+```
+
+---
+
+## Next Steps for Testing
+
+1. Run `bash bin/autoresearch-tree.sh run --iter N`
+2. After completion: `find_chains | wc -l` should be > 2
+3. Check `hypothesis/`, `mvp/`, `verdict/` for new nodes
+4. If chains < 3, check `closed_chains.txt` and dispatch.py attractiveness scoring
