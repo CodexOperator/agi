@@ -10,6 +10,8 @@ tags:
 testable_claim: Skill Lives in a Forked Skill Repository
 title: "autoresearch-tree-skill/R1: Skill Lives in a Forked Skill Repository"
 type: hypothesis
+next_edges:
+  - "exp:autoresearch-tree-skill-r1"
 ---
 
 **Description:** A new skill is added to the existing autoresearch skill repository alongside the existing skills, without modifying or removing them.
