@@ -175,7 +175,7 @@ Decomposition of 7 cavekits, 59 requirements, and 236 acceptance criteria into e
 
 ### Domain: schema-registry (8 R, 32 criteria, T-019..T-031)
 
-#### T-019: Schema as file with naming convention
+#### T-090: Schema as file with naming convention
 - **Cavekit Requirement:** schema-registry/R1
 - **Acceptance Criteria Mapped:** R1.1 (schema lives at known context path with documented naming), R1.2 (adding new schema file makes node type available without code changes/restart), R1.4 (Markdown-with-frontmatter or structured-data file accepted)
 - **blockedBy:** T-006
@@ -184,7 +184,7 @@ Decomposition of 7 cavekits, 59 requirements, and 236 acceptance criteria into e
 - **Files:** `agi-tree/src/schema_registry/loader.py`, `agi-tree/tests/schema_registry/test_schema_files.py`, `agi-tree/tests/fixtures/schemas/example.md`, `agi-tree/tests/fixtures/schemas/example.json`
 - **Test Strategy:** Drop a new schema file into a fixture and assert it appears in the registry on next load without code changes.
 
-#### T-020: Schema removal handling with generic fallback warning
+#### T-091: Schema removal handling with generic fallback warning
 - **Cavekit Requirement:** schema-registry/R1
 - **Acceptance Criteria Mapped:** R1.3 (removing schema makes type unavailable next load; existing nodes of that type fall back to generic with warning)
 - **blockedBy:** T-019
@@ -845,8 +845,8 @@ Tier 0 is the set of tasks with `blockedBy: none`. After fix:
 ### Tier 3
 - T-009: Recursive node bodies (blockedBy: T-007, T-004)
 - T-011: Directory-walking loader (blockedBy: T-006, T-005)
-- T-020: Schema removal handling (blockedBy: T-019)
-- T-021: Bracket convention for active schemas (blockedBy: T-019)
+- T-020: Schema removal handling (blockedBy: T-090)
+- T-021: Bracket convention for active schemas (blockedBy: T-090)
 - T-061: ASCII renderer — bounded 200x200 (blockedBy: T-060)
 - T-063: Mermaid renderer (blockedBy: T-060)
 - T-065: Git-diff renderer (blockedBy: T-060)
@@ -1449,9 +1449,9 @@ Once T-001 completes, Tier 1's four tasks (T-002, T-003, T-005, T-006) become el
 - Tasks marked `[CONDITIONAL]` or `[DYNAMIC]` are not present in this plan; all 88 tasks have determinate scope.
 - Tier 3 widths (9 tasks) and Tier 4 widths (9 tasks) are the prime parallelization opportunities; the 5-builder pool can pull continuously from those tiers.
 
-### Domain: graph-core (11 R, 44 criteria, T-001..T-020)
+### Domain: graph-core (11 R, 47 criteria, T-001..T-018, T-090, T-092)
 
-#### T-019: BFS/DFS traversal primitives
+#### T-090: BFS/DFS traversal primitives
 - **Cavekit Requirement:** graph-core/R11
 - **Acceptance Criteria Mapped:** R11.1 (traverse_bfs), R11.2 (traverse_dfs), R11.8 (cycle detection utility)
 - **blockedBy:** T-004
@@ -1459,10 +1459,10 @@ Once T-001 completes, Tier 1's four tasks (T-002, T-003, T-005, T-006) become el
 - **Description:** Implement `traverse_bfs(start_id)` and `traverse_dfs(start_id)` as lazy generators yielding node ids in traversal order. Also expose a `detect_cycle(node_id)` utility that runs DFS from that node and reports any found cycle path. Use the existing Graph container from T-004.
 - **Files:** `src/graph_core/traversal.py`, `tests/graph_core/test_traversal.py`
 
-#### T-020: Query API and path finding
+#### T-092: Query API and path finding
 - **Cavekit Requirement:** graph-core/R11
 - **Acceptance Criteria Mapped:** R11.3 (find_paths), R11.4 (find_ancestors), R11.5 (find_descendants), R11.6 (query filters), R11.7 (lazy iterators)
-- **blockedBy:** T-019
+- **blockedBy:** T-090
 - **Effort:** M
 - **Description:** Implement `find_paths(source_id, target_id)` returning all simple paths via DFS backtracking. Implement `find_ancestors(node_id)` and `find_descendants(node_id)` using BFS. Implement `query(type=None, tags=None, has_parent=None, has_child=None)` filtering nodes by criteria without loading bodies. All return lazy generators.
 - **Files:** `src/graph_core/query.py`, `tests/graph_core/test_query.py`
