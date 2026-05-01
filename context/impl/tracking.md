@@ -130,3 +130,11 @@ Live record of build progress against `context/plans/build-site.md`.
 - **Files:** src/embeddings/similarity.py (new), src/embeddings/__init__.py (edit), tests/embeddings/test_similarity.py (new)
 - **Validation:** Tests 9/9 PASS. R5.1 (top-k descending), R5.2 (missing embedding → [] + UserWarning, no raise), R5.3 (scores ∈ [-1.0, 1.0] with float-drift clamp), R5.4 (deterministic via (-score, id) tie-break) covered.
 - **Notes:** `cosine()` handles dim mismatch (raise), zero-vectors (return 0.0), and clamps tiny float drift outside [-1, 1]. `similar_to()` excludes self, deterministic lexicographic tie-break, no-op on `k <= 0`. UserWarning carries node id for diagnostic clarity.
+
+### Iteration 16 — 2026-05-01T04:00:00Z
+- **Task:** T-070 — UMAP-style projection 2D/3D (embeddings/R2)
+- **Tier:** 3
+- **Status:** DONE
+- **Files:** src/embeddings/projection.py (new), src/embeddings/__init__.py (edit), tests/embeddings/test_projection.py (new)
+- **Validation:** Tests 8/8 PASS (test_projection.py); full embeddings suite 24/24 PASS. R2.1 (every embedded node has (x,y)), R2.2 (dim configurable to 2 or 3, default 2), R2.3 (same vectors+config+seed → identical coords), R2.4 (≤1 nodes → degenerate result + UserWarning, no raise) covered.
+- **Notes:** v1 placeholder using SVD-based PCA when numpy is available, else hash-based deterministic random projection. `ProjectionConfig` is frozen dataclass with `dim`, `seed`, `n_neighbors`, `min_dist`. Tie-break determinism via seeded numpy RNG noise (1e-12). Algorithm swappable to true UMAP in v2 — contract is what matters.
