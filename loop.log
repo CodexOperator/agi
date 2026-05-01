@@ -129,3 +129,21 @@ METRIC edge_count=148
 scaffolded hypothesis node: hypothesis:a00-3d70458a-12619d
 spawned a00-3d70458a pid=1205429 level=big target=-
 manifest: /home/ubuntu/.hermes/agi-tree/sessions/iter-010/manifest.json
+iter 12: 1 agents
+  a00-aaa993de: status=done verdict=proved pid=1172406
+=== iter 13 @ 2026-05-01T15:52:06Z ===
+wrote: 7 idea + 60 hypothesis + 91 task = 158 nodes
+target dir: /home/ubuntu/.hermes/agi-tree/nodes
+loaded 157 nodes from /home/ubuntu/.hermes/agi-tree/nodes
+ASCII rendering: 163 lines
+wrote: /home/ubuntu/.hermes/agi-tree/context/INJECTION.md
+METRIC longest_chain_length=2
+METRIC avg_chain_depth=0.96
+METRIC mvp_count=0
+METRIC outcome_coverage=0.000
+METRIC chain_branching_factor=2.21
+METRIC node_count=157
+METRIC edge_count=148
+scaffolded hypothesis node: hypothesis:a00-204c9d9e-1d958f
+spawned a00-204c9d9e pid=1206168 level=big target=-
+manifest: /home/ubuntu/.hermes/agi-tree/sessions/iter-013/manifest.json
