@@ -106,3 +106,11 @@ Live record of build progress against `context/plans/build-site.md`.
 - **Files:** src/renderers/ascii.py (new), src/renderers/__init__.py (edit), tests/renderers/test_ascii.py (new)
 - **Validation:** Tests 6/6 PASS, R2.1+R2.2+R2.4 covered (200-line/200-col bounds, truncation markers, byte-equal determinism, depth indent, header summary).
 - **Notes:** Hierarchical depth-driven layout; truncate column at 200 with " ... [line cut]" suffix; truncate line at 200 with "... [truncated, N more nodes]" final line; deterministic over sorted-by-id Representation.
+
+### Iteration 14 — 2026-05-01T03:00:00Z
+- **Task:** T-009 — Recursive node bodies (graph-core/R5)
+- **Tier:** 3
+- **Status:** DONE
+- **Files:** src/graph_core/loader.py (formalized), tests/graph_core/test_recursive_bodies.py (new), tests/fixtures/nested/top.md, tests/fixtures/nested/level_a/outer.md, tests/fixtures/nested/level_a/level_b/middle.md, tests/fixtures/nested/level_a/level_b/level_c/leaf.md
+- **Validation:** Tests 4/4 PASS (test_recursive_bodies.py); full suite 96/96 PASS. R5.1 (subgraph: true loads inner graph), R5.2 (≥3 nesting levels via load_directory), R5.4 (outer queries opaque to inner) covered.
+- **Notes:** `load_node_with_subgraph()` returns `LoadedNode` containing `node`, `body`, optional `subgraph`. When frontmatter has `subgraph: true`, body is parsed via `_SUBGRAPH_LINE_RE` into a child Graph; cycles silently dropped. Same loader recursion through `load_directory()` walks `.md`/`.json` files deterministically.
