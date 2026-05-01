@@ -1,3 +1,17 @@
+---
+confidence: 0.9
+id: "exp:environment-indexers-r10"
+parents:
+  - hyp:environment-indexers-r10
+status: complete
+tags:
+  - environment-indexers
+  - R10
+  - experiment
+title: "experiment:environment-indexers-r10"
+type: experiment
+---
+
 # experiment:environment-indexers-r10
 
 **type**: experiment
@@ -33,6 +47,9 @@ Given a target path, the system auto-detects which indexer(s) apply without the 
 **TC5: Explicit override bypasses auto-discovery**
 - Input: path with `pyproject.toml` + explicit `--indexer filesystem-tree`
 - Expected: `filesystem-tree` runs, python-dependency is NOT invoked
+
+### Results
+- **5/5 test cases passed** (see verdict for evidence_runs)
 
 ### Implementation
 Prototype `discover_indexer(target_path)` function implementing the heuristic mapping above.

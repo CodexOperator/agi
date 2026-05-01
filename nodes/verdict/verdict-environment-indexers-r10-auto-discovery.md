@@ -1,3 +1,17 @@
+---
+confidence: 0.9
+id: "verdict:environment-indexers-r10"
+parents:
+  - hyp:environment-indexers-r10
+status: proved
+tags:
+  - environment-indexers
+  - R10
+  - verdict
+title: "verdict:environment-indexers-r10"
+type: verdict
+---
+
 # verdict:environment-indexers-r10
 
 **type**: verdict
