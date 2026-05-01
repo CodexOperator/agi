@@ -1,6 +1,12 @@
 """schema-registry: pluggable, file-driven node schemas (R1+)."""
 
 from .active_set import ActiveSet, DuplicateActiveSchemaError, build_active_set
+from .cascade import (
+    DiscoveryResult,
+    cascade_step_1,
+    discover_schema,
+    register_extra_step,
+)
 from .dsl import ValidationError, parse_rules, validate
 from .loader import (
     Schema,
@@ -35,4 +41,8 @@ __all__ = [
     "schema_to_meta_node",
     "synthesize_meta_nodes",
     "diff_meta_nodes",
+    "DiscoveryResult",
+    "cascade_step_1",
+    "discover_schema",
+    "register_extra_step",
 ]

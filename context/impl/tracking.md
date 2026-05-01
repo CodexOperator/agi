@@ -177,3 +177,11 @@ Live record of build progress against `context/plans/build-site.md`.
 - **Files:** src/renderers/ascii.py (edit), tests/renderers/test_ascii_summary.py (new)
 - **Validation:** Tests 10/10 PASS (test_ascii.py 6/6, test_ascii_summary.py 4/4). R2.3 footer with Types/Edges lines, alphabetically sorted, omitted for empty graph, edges line omitted when no edges. 200-line budget respected by pre-computing footer size and reserving slots before body rendering.
 - **Notes:** Footer pre-built before body loop so its line count (2–3 lines) is known. Body loop checks `len(lines) + 1 + (1 if more_nodes_remain) + footer_size > MAX_LINES` before emitting each node line; truncation marker emitted when limit hit. Footer appended after body (and after truncation marker when present). Empty graph skips footer entirely.
+
+### Iteration 22 — 2026-05-01T06:30:00Z
+- **Task:** T-025 — Auto-discovery cascade step 1: bracket name match (schema-registry/R5.1)
+- **Tier:** 3
+- **Status:** DONE
+- **Files:** src/schema_registry/cascade.py (new), src/schema_registry/__init__.py (edit), tests/schema_registry/test_cascade_step_1.py (new)
+- **Validation:** Tests 4/4 PASS (test_cascade_step_1.py). R5.1 (bracket-name match short-circuits when active schema exists), no-match fallback, inactive schema rejected, `discover_schema()` calls step 1 first all covered.
+- **Notes:** `cascade_step_1()` matches `Path(directory).name` against `registry.schemas[name]` and only succeeds when `schema.active`. `DiscoveryResult` is a frozen-style dataclass with `schema`, `step` ('bracket' | 'no-match' | future steps), `candidate_score` (1.0 for direct bracket hit). `_extra_steps` list + `register_extra_step()` is the additive extension point T-026 will use to plug in fingerprint similarity. `discover_schema()` chains step 1 → registered extras → no-match.
