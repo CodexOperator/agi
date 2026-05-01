@@ -12,11 +12,20 @@
 
 - ~~**[embeddings] Node2Vec embedding of hypothesis space**~~ — DONE (iter 8: render-embedding-isomorphism-r1 proved, 98.3% neighbor preservation)
 
-- **[schema-registry] Auto-generate verdict node schema from R8 taxonomy**
-  - VerdictState enum already implemented in experiment
-  - Need to port to schema-registry as a bracketed schema
+- ~~**[schema-registry] Auto-generate verdict node schema from R8 taxonomy**~~ — DONE (verdict-schema-auto-gen-r1 proved, 87.5% enforcement, existing nodes need migration)
 
 - ~~**[environment-indexers] CLI invocation detection**~~ — PARTIAL (R10 filesystem-tree indexer proved 7/7, but shell command detection not yet implemented)
+
+## Low Priority / Remaining
+
+- **[multi-agent] 5-agent parallel dispatch smoke test**
+  - Config allows 5 parallel agents
+  - Test the dispatch mechanism end-to-end
+
+- **[chain-extension] Verdict-spawned hypothesis chains**
+  - Current chains: 5 × 8 hops (idea→hyp→exp→verdict→mvp→outcome→bigger_outcome→app_purpose)
+  - To extend beyond 8 hops: verdict → new_hypothesis → new_experiment → ...
+  - Test if verdict nodes can spawn new hypothesis chains
 
 ## Low Priority / Interesting
 
