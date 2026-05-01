@@ -14,7 +14,7 @@ tags:
   - 13th-cycle
   - proved
 next_edges:
-  - "mvp:chain-engine-r1"
+  - "exp:chain-engine-r1-extend14"
 ---
 
 VERDICT: proved. Chain-engine at 13 cycles = 34 hops.
