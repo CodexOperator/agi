@@ -10,8 +10,6 @@ tags:
 testable_claim: Schema as File
 title: "schema-registry/R1: Schema as File"
 type: hypothesis
-next_edges:
-  - "exp:schema-registry-r1"
 ---
 
 **Description:** Each schema is a single file in a known directory of the project's context. Adding, editing, or removing a schema requires only file operations.

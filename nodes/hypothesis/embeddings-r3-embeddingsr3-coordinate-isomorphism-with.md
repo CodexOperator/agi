@@ -1,5 +1,5 @@
 ---
-confidence: 0.95
+confidence: 0.5
 id: "hyp:embeddings-r3"
 parents:
   - idea:domain-embeddings
@@ -15,9 +15,9 @@ type: hypothesis
 **Description:** The `(x, y)` coordinates produced by projection are exactly the `x` and `y` values used by the renderers' shared representation. There is one source of truth.
 
 **Acceptance Criteria:**
-- [x] The renderer's shared representation derives `x` and `y` for each token from the embedding output for the same node id (apply_umap_coords, R3.1)
-- [x] When embeddings are recomputed, the renderer's coordinates change accordingly without separate update steps (R3.4 idempotent)
-- [x] No alternative coordinate source is permitted for nodes that have an embedding (R3.2, only coords dict can set x,y)
-- [x] An integration check confirms that for every node, the renderer-side and embedding-side coordinates are equal (R3.5 full pipeline, 181/181 tokens verified)
+- [ ] The renderer's shared representation derives `x` and `y` for each token from the embedding output for the same node id
+- [ ] When embeddings are recomputed, the renderer's coordinates change accordingly without separate update steps
+- [ ] No alternative coordinate source is permitted for nodes that have an embedding
+- [ ] An integration check confirms that for every node, the renderer-side and embedding-side coordinates are equal
 
 **Dependencies:** renderers (R1)

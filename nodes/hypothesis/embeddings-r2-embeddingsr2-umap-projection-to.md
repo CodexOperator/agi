@@ -10,8 +10,6 @@ tags:
 testable_claim: UMAP Projection to 2D
 title: "embeddings/R2: UMAP Projection to 2D"
 type: hypothesis
-next_edges:
-  - "exp:embeddings-r2"
 ---
 
 **Description:** Per-node vectors are projected to two dimensions using UMAP. Three-dimensional projection is supported via configuration but is not required by default.
