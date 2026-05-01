@@ -133,12 +133,8 @@ def main() -> int:
     print("\n=== Hook: in-project, stale cache (>1 hour) ===")
     old_mtime = inj_touch - 4000  # 4000 seconds ago (> 1 hour)
     os.utime(inj, (old_mtime, old_mtime))
-    # Ensure render-context.py exists at the path the hook expects: PROJECT_ROOT/bin/
-    project_bin = ROOT / "bin"
-    project_bin.mkdir(exist_ok=True)
-    render_target = project_bin / "render-context.py"
-    if not render_target.exists():
-        render_target.symlink_to(RENDER_PY.resolve())
+    # ROOT/bin/render-context.py is the project-local override the hook calls.
+    # It already exists (RENDER_PY = ROOT/bin/render-context.py). No symlink needed.
     rc3, out3, err3 = run_hook(ROOT)
     ok_hook_stale = check(
         "Hook exits 0 with stale cache",
