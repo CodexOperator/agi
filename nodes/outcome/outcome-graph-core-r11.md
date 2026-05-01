@@ -10,4 +10,4 @@ next_edges:
 
 ## Outcome
 
-'next_edges' in frontmatter enables full chain persistence.
+'next_edges' in frontmatter enables full chain persistence for domain-graph-core.

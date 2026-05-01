@@ -10,4 +10,4 @@ next_edges:
 
 ## Bigger Outcome
 
-Capillary DAG chains now persist to disk via frontmatter.
+Capillary DAG chains for graph-core domain now persist to disk via frontmatter.

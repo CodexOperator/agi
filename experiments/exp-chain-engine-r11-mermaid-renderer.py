@@ -118,20 +118,18 @@ def run_tests() -> dict[str, tuple[bool, str]]:
     results = {}
     single_chain = make_multi_chain_chain()[0:1]
 
+    single = make_multi_chain_chain()[0:1]
     tests = [
-        ("R11.1_mermaid_syntax", test_r1_returns_mermaid_syntax),
-        ("R11.2_linear_path", test_r2_linear_path),
-        ("R11.3_multiple_chains", test_r3_multiple_chains),
-        ("R11.4_node_labels", test_r4_node_labels),
-        ("R11.5_valid_mermaid", test_r5_valid_mermaid),
-        ("bonus_max_chains", test_max_chains_limit),
+        ("R11.1_mermaid_syntax",    lambda: test_r1_returns_mermaid_syntax(single)),
+        ("R11.2_linear_path",       lambda: test_r2_linear_path(single)),
+        ("R11.3_multiple_chains",  lambda: test_r3_multiple_chains(make_multi_chain_chain())),
+        ("R11.4_node_labels",       lambda: test_r4_node_labels(single)),
+        ("R11.5_valid_mermaid",     lambda: test_r5_valid_mermaid(single)),
+        ("bonus_max_chains",        test_max_chains_limit),
     ]
 
     for name, fn in tests:
-        if "single" in name or name == "R11.1_mermaid_syntax":
-            passed, detail = fn(single_chain)
-        else:
-            passed, detail = fn()
+        passed, detail = fn()
         results[name] = (passed, detail)
 
     return results

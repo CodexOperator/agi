@@ -10,4 +10,4 @@ next_edges:
 
 ## MVP: chain_persist.py
 
-Script that adds next_edges to frontmatter, verifies cold reload.
+Script that adds next_edges to frontmatter, verifies cold reload with load_directory().

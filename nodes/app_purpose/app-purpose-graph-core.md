@@ -8,4 +8,4 @@ parents:
 
 ## App Purpose
 
-Graph-core with persisted 'next' edges enables longest-chain-attracts.
+Graph-core with persisted 'next' edges enables longest-chain-attracts for all domains.
