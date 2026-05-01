@@ -13,6 +13,8 @@ tags:
   - shell
   - detection
   - R1
+next_edges:
+  - mvp:cli-invocation-r1
 ---
 
 **Verdict:** PROVED
