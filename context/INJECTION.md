@@ -1,10 +1,10 @@
 # autoresearch-tree INJECTION CONTEXT
-_generated 2026-05-01T16:13:11+00:00_
+_generated 2026-05-01T16:14:12+00:00_
 
 ## graph snapshot
-- nodes: 157
+- nodes: 158
 - edges: 148
-- by type: hypothesis=60, idea=7, task=90
+- by type: hypothesis=61, idea=7, task=90
 - longest chain: 0 hops (via next edges)
 - chain count: 0
 
@@ -19,8 +19,8 @@ _generated 2026-05-01T16:13:11+00:00_
 
 ## ASCII view (≤200 lines)
 ```
-# graph: 157 nodes
-# types: hypothesis=60, idea=7, task=90
+# graph: 158 nodes
+# types: hypothesis=61, idea=7, task=90
 #
   hyp:autoresearch-tree-skill-r1 :: hypothesis [spawns->task:t-076, spawns->task:t-088]
   hyp:autoresearch-tree-skill-r2 :: hypothesis [spawns->task:t-077]
@@ -82,6 +82,7 @@ _generated 2026-05-01T16:13:11+00:00_
   hyp:schema-registry-r6 :: hypothesis [spawns->task:t-028]
   hyp:schema-registry-r7 :: hypothesis [spawns->task:t-030]
   hyp:schema-registry-r8 :: hypothesis [spawns->task:t-031]
+hypothesis:a00-8fe3e715-af88f6 :: hypothesis
 idea:domain-autoresearch-tree-skill :: idea [spawns->hyp:autoresearch-tree-skill-r1, spawns->hyp:autoresearch-tree-skill-r2, spawns->hyp:autoresearch-tree-skill-r3 (+6)]
 idea:domain-chain-engine :: idea [spawns->hyp:chain-engine-r1, spawns->hyp:chain-engine-r2, spawns->hyp:chain-engine-r3 (+6)]
 idea:domain-embeddings :: idea [spawns->hyp:embeddings-r1, spawns->hyp:embeddings-r2, spawns->hyp:embeddings-r3 (+4)]
@@ -180,7 +181,7 @@ task:t-090 :: task
     task:t-091 :: task
 task:t-092 :: task
 ----
-Types: hypothesis=60, idea=7, task=90
+Types: hypothesis=61, idea=7, task=90
 Edges: spawns=148
 ```
 
