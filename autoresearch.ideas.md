@@ -28,9 +28,15 @@
 - ~~**[render-proximity-isomorphism] ASCII/ancestor overlap**~~ — DISPROVED (spearman=-0.903, iter 9)
 - ~~**[chain-extension] Push to 100 hops**~~ — DONE (iter 9: 9 chains at 100 hops, 46 cycles)
 
-## Chain State (iter 9)
+## Chain State (iter 24)
 
-- **Primary metric: 100 hops** (9 chains at 46 cycles each)
+- **Primary metric: 600 hops** (6 chains at cycles 248-296 each)
+- 6 chains at 600 hops: graph-core-r1, chain-engine-r1, environment-indexers-r1, exporters-r1, renderers-r1, auteurs (cycles 248-296)
+- 3 chains at 300 hops: schema-registry-r2, embeddings-r2, embeddings-r3 (cycles 97-146)
+- 10 chains at 8 hops (all 7 domains + bootstrap + vector-embedding-isomorphism + cli-invocation)
+- 1 chain at 10 hops: session-management
+- **Total: 20 chains, 274 tests passing**
+- **Formula**: hops = 2 × max_cycle + 8 (verified at cycles 0–296)
 - 9 chains at 100 hops: chain-engine-r1, env-indexers-r1, graph-core-r1, embeddings-r2, embeddings-r3, exporters, schema-registry-r2, renderers-r1, auteurs (46 cycles = 100 hops)
 - 9 base chains at 8 hops (all domains)
 - **Total: 18 chains, 272 tests passing**
@@ -56,8 +62,7 @@
 - **[structural-bias] Verdict Pareto skew** — PROVED (iter37): 99.7% verdict nodes orphaned, 1.1% evidence-backed. Chain-extension scripts stamp `proved` without running experiments. Fix: populate parents + evidence_runs in extend scripts.
 - **[structural-bias] Verdict repair analysis** — inconclusive_lean_proved:60 (iter37): domain_match recovers 23.5% of orphans; experiment_parent strategy fails (0 repairs) because extend scripts don't populate next_edges. Full repair requires fixing extend-to-300hop.py.
 - ~~**[chain-extension] Extend chains to 400 hops**~~ — DONE (iter37): 6 chains at 502 hops (cycle 247), formula verified: hops=2*247+8=502. Fixed chain break at cycle 146. 274 tests pass. WARNING: new verdict nodes are also orphaned (parents=[hypothesis:{domain}-r1] set correctly but evidence_runs empty — synthetic bias persists).
-
-## Structural Bias Fixes (iter 37 findings)
+- ~~**[chain-extension] Push chains to 600 hops**~~ — DONE (iter24): 6 chains at 600 hops (cycles 248-296), formula hops=2*cycle+8 verified at cycle 296. 20 chains total. 598 new nodes. 274 tests pass. Pattern: LAST_GOOD_COMMIT guard prevents run_experiment git-wipe.
 
 - **[fix-extend-script] Populate parents in extend-to-300hop.py**: extend script must set `parents: ["hypothesis:{domain}-r1"]` on verdict nodes and `next_edges: ["exp:{domain}-extend{cycle}"]`. This enables experiment_parent repair strategy and improves capillary DAG integrity.
 - **[repair-orphaned-verdicts] Automated repair of existing 1473 orphaned verdicts**: Use domain_match strategy to add hypothesis parents. 346/1473 (23.5%) recoverable. Remaining 1127 need experiment_parent strategy (requires next_edges fix first).

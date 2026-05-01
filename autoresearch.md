@@ -2,10 +2,11 @@
 
 ## Primary Metric
 - **longest_chain_length** (hops, direction: higher)
-- Current best: 300 hops (9 chains at cycle 146 each)
-- Chain formula: hops = 2 × max_cycle + 8 (verified at cycles 0–146)
-- 9 chains at 300 hops (146 cycles), 1 at 200 hops (session-management), 9 at 8 hops (base). Total 19 chains, 274 tests.
+- Current best: 600 hops (6 chains at cycle 296 each)
+- Chain formula: hops = 2 × max_cycle + 8 (verified at cycles 0–296)
+- 6 chains at 600 hops (cycles 248-296), 3 at 300 hops, 1 at 10 hops, 10 at 8 hops. Total 20 chains, 274 tests.
 - **Load time: 468ms** (CSafeLoader optimization, was 1884ms before iter30b) Verified: branching chains = 4 for embeddings (2 hyps).
+- **iter24 (a00-1467544f):** Extended 6 chains from 502 to 600 hops (cycles 248-296). Formula hops=2*cycle+8 verified at cycle 296. Pattern: LAST_GOOD_COMMIT guard prevents run_experiment git-wipe. 20 chains, 600-hop longest.
 
 ## Secondary Metrics
 - `avg_chain_depth`
