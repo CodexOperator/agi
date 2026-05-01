@@ -10,7 +10,10 @@ tags:
 testable_claim: Chain Definition
 title: "chain-engine/R1: Chain Definition"
 type: hypothesis
+next_edges:
+  - exp:chain-engine-r1
 ---
+
 
 **Description:** A chain is an ordered path through the autoresearch node types: idea, hypothesis (one or more), experiment (one or more), verdict, mvp, outcome, bigger_outcome, app_purpose.
 
