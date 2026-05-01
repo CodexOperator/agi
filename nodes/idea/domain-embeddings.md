@@ -9,7 +9,6 @@ tags:
 title: "Domain: embeddings"
 type: idea
 next_edges:
-  - "hyp:embeddings-r1"
   - "hyp:embeddings-r2"
   - "hyp:embeddings-r3"
 ---

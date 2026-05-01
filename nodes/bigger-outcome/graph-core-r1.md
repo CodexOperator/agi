@@ -1,7 +1,7 @@
 ---
 id: "bigger-outcome:graph-core-r1"
 next_edges:
-  - "app-purpose:graph-core"
+  - "app-purpose:graph-core-domain"
 parents:
   - outcome:graph-core-r1
 subgraph: false
