@@ -53,6 +53,13 @@ Live record of build progress against `context/plans/build-site.md`.
 - **Files:** src/graph_core/persistence/frontmatter.py (append), src/graph_core/persistence/__init__.py (edit), tests/graph_core/test_frontmatter_errors.py
 - **Validation:** Tests 12/12 PASS (5 new T-008 + 7 existing T-006), R4.4 covered
 
+### Iteration 8 — 2026-05-01T01:57:31Z
+- **Task:** T-060 — Shared internal representation (RenderToken)
+- **Tier:** 2
+- **Status:** DONE
+- **Files:** src/renderers/representation.py, tests/renderers/test_representation.py
+- **Validation:** Tests 8/8 PASS, R1.1+R1.2+R1.3+R1.4 covered
+
 ### Iteration 9 — 2026-05-01T01:57:30Z
 - **Task:** T-069 — Per-node Node2Vec vector generation
 - **Tier:** 2
@@ -60,3 +67,10 @@ Live record of build progress against `context/plans/build-site.md`.
 - **Files:** src/embeddings/node2vec.py, src/graph_core/templates/embeddings.toml, tests/embeddings/test_node2vec.py
 - **Validation:** Tests 7/7 PASS, R1.1+R1.2+R1.3+R1.4 covered
 - **Notes:** Stdlib-only impl. v2 may swap in real skip-gram per cavekit out-of-scope.
+
+### Iteration 7 — 2026-05-01T01:57:37Z
+- **Task:** T-019 — Schema as file with naming convention
+- **Tier:** 2
+- **Status:** DONE
+- **Files:** src/schema_registry/__init__.py, src/schema_registry/loader.py, tests/schema_registry/test_schema_files.py, tests/fixtures/schemas/{example.md, [hypothesis].md, example.json}
+- **Validation:** Tests 6/6 PASS, R1.1+R1.2+R1.4 covered (full suite 67/67 PASS)
