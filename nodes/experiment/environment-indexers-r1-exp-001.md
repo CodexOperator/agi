@@ -38,7 +38,7 @@ tests/environment_indexers/test_cli.py::TestRunIndexer::test_runs_only_specified
 tests/environment_indexers/test_cli.py::TestRunIndexer::test_failure_returns_nonzero PASSED
 tests/environment_indexers/test_cli.py::TestRunIndexer::test_unexpected_error_returns_nonzero PASSED
 tests/environment_indexers/test_cli.py::TestCliIntegration::test_list_command PASSED
-tests/environment_indexers/test_cli.py::TestRunIntegration::test_run_command PASSED
+tests/environment_indexers/test_cli.py::TestCliIntegration::test_run_command PASSED
 tests/environment_indexers/test_cli.py::TestCliIntegration::test_run_unknown_exits_nonzero PASSED
 ```
 
