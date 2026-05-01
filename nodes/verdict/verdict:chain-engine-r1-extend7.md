@@ -14,8 +14,8 @@ tags:
   - eighth-cycle
   - proved
 next_edges:
-  - "mvp:chain-engine-r1"
+  - "exp:chain-engine-r1-extend8"
 ---
 
-VERDICT: proved. Chain reached 22 hops via 8 verdict→experiment→verdict cycles.
+VERDICT: proved. Chain reached 22 hops (8 cycles). Adding 9th cycle to reach 24 hops. via 8 verdict→experiment→verdict cycles.
 8 cycles × 2 + 6 = 22 hops.
