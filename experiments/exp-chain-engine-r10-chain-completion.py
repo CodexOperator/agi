@@ -232,10 +232,18 @@ def load_live_graph() -> Graph:
             if nid:
                 graph.add_node(Node(id=nid, type=ntype))
 
+    # PASS 1: Load existing nodes
     load_type("idea", "idea")
     load_type("hypothesis", "hypothesis")
     load_type("task", "task")
-    # Add the new node types with correct type names
+    load_type("experiment", "experiment")
+    load_type("verdict", "verdict")
+    load_type("mvp", "mvp")
+    load_type("outcome", "outcome")
+    load_type("bigger_outcome", "bigger_outcome")
+    load_type("app_purpose", "app_purpose")
+
+    # PASS 2: Add the NEW chain nodes (guaranteed to exist after file writes)
     _ntype_map = {
         "experiment": "experiment",
         "verdict": "verdict",
@@ -247,10 +255,12 @@ def load_live_graph() -> Graph:
     for short_type, node_id in NODES_TO_ADD.items():
         graph.add_node(Node(id=node_id, type=short_type))
 
-    # Add 'next' edges
+    # PASS 3: Add 'next' edges (all targets now exist in graph)
     for edge in NEXT_EDGES:
-        if graph.has_node(edge.source_id) and graph.has_node(edge.target_id):
+        try:
             graph.add_edge(edge)
+        except Exception as exc:
+            print(f"  WARNING: could not add edge {edge.source_id}->{edge.target_id}: {exc}")
 
     return graph
 
@@ -335,16 +345,7 @@ def main():
     print("EXPERIMENT: chain-engine/R10 — chain completion via next edges")
     print("=" * 60)
 
-    # Load live graph
-    print("\n## Loading live graph")
-    graph = load_live_graph()
-    print(f"  Nodes loaded: {len(graph.node_ids)}")
-    next_edges = [e for e in graph.edges if e.relation == "next"]
-    spawns_edges = [e for e in graph.edges if e.relation == "spawns"]
-    print(f"  'next' edges: {len(next_edges)}")
-    print(f"  'spawns' edges: {len(spawns_edges)}")
-
-    # Write node files (persist to disk)
+    # Write node files FIRST (so load_live_graph can find them)
     print("\n## Persisting node files")
     nodes_dir = Path(__file__).parent.parent / "nodes"
     for ntype in ["experiment", "verdict", "mvp", "outcome", "bigger_outcome", "app_purpose"]:
@@ -361,6 +362,15 @@ def main():
         path = subdir_path / f"{filename}.md"
         path.write_text(TEMPLATES[ntype])
         print(f"  Wrote: {path.relative_to(nodes_dir.parent)}")
+
+    # Load live graph (now node files exist on disk)
+    print("\n## Loading live graph")
+    graph = load_live_graph()
+    print(f"  Nodes loaded: {len(graph.node_ids)}")
+    next_edges_list = [e for e in graph.edges if e.relation == "next"]
+    spawns_edges_list = [e for e in graph.edges if e.relation == "spawns"]
+    print(f"  'next' edges: {len(next_edges_list)}")
+    print(f"  'spawns' edges: {len(spawns_edges_list)}")
 
     # Run tests
     print("\n## Running 5 test cases")

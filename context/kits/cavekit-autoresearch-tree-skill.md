@@ -109,6 +109,19 @@ The agent skill that drives the autoresearch loop on top of the rest of the syst
 - Modification of the existing autoresearch-create or autoresearch-finalize skills — explicitly forbidden
 - Cross-repository or multi-project orchestration — out of scope
 
+### R9: Agent Timeout and Healing Mechanism
+
+**Description:** When an agent exceeds the configured timeout, a healer subagent is dispatched to assess the situation, collect partial results, and signal completion with an appropriate verdict state.
+
+**Acceptance Criteria:**
+- [ ] An agent process exceeding `agent_timeout_mins` is terminated with SIGTERM, then SIGKILL if unresponsive after 30 seconds
+- [ ] A healer subagent dispatched on timeout receives the original task, elapsed time, and any partial output from the session directory
+- [ ] The healer produces a verdict node with state `inconclusive_lean_proved:N` where N reflects the proportion of remaining work
+- [ ] The iteration continues with remaining agents; partial results from timed-out agents are included in the manifest
+- [ ] Timeout handling does not corrupt session state for other running agents
+
+**Dependencies:** chain-engine (R8 verdict taxonomy), skill/R3 (parallel dispatch)
+
 ## Cross-References
 
 - See also: cavekit-graph-core.md (R9 portability, R10 bootstrap)
