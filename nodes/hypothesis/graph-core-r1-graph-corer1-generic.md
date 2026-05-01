@@ -3,8 +3,6 @@ confidence: 0.5
 id: "hyp:graph-core-r1"
 parents:
   - idea:domain-graph-core
-children:
-  - exp:graph-core-r1-generic-node-primitive
 subgraph: false
 tags:
   - graph-core

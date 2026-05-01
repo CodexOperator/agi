@@ -6,17 +6,6 @@ status: open
 tags:
   - domain
   - seed
-children:
-  - hyp:environment-indexers-r1
-  - hyp:environment-indexers-r2
-  - hyp:environment-indexers-r3
-  - hyp:environment-indexers-r4
-  - hyp:environment-indexers-r5
-  - hyp:environment-indexers-r6
-  - hyp:environment-indexers-r7
-  - hyp:environment-indexers-r8
-  - hyp:environment-indexers-r9
-  - hyp:environment-indexers-r10
 title: "Domain: environment-indexers"
 type: idea
 ---
