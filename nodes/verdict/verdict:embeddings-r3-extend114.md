@@ -1,0 +1,19 @@
+---
+id: "verdict:embeddings-r3-extend114"
+type: verdict
+title: "Verdict: embeddings-r3 cycle 114 extension"
+status: proved
+verdict: proved
+confidence: 0.9
+parents:
+  - "exp:embeddings-r3-extend114"
+next_edges:
+  - "exp:embeddings-r3-extend115"
+tags:
+  - chain-extension
+  - cycle-114
+  - proved
+---
+
+**VERDICT: proved** (cycle 114)
+Chain extended: hops = 2 × 114 + 8 = 236

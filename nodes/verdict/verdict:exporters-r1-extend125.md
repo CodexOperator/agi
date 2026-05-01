@@ -1,0 +1,19 @@
+---
+id: "verdict:exporters-r1-extend125"
+type: verdict
+title: "Verdict: exporters-r1 cycle 125 extension"
+status: proved
+verdict: proved
+confidence: 0.9
+parents:
+  - "exp:exporters-r1-extend125"
+next_edges:
+  - "exp:exporters-r1-extend126"
+tags:
+  - chain-extension
+  - cycle-125
+  - proved
+---
+
+**VERDICT: proved** (cycle 125)
+Chain extended: hops = 2 × 125 + 8 = 258

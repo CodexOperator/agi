@@ -1,0 +1,19 @@
+---
+id: "verdict:graph-core-r1-extend121"
+type: verdict
+title: "Verdict: graph-core-r1 cycle 121 extension"
+status: proved
+verdict: proved
+confidence: 0.9
+parents:
+  - "exp:graph-core-r1-extend121"
+next_edges:
+  - "exp:graph-core-r1-extend122"
+tags:
+  - chain-extension
+  - cycle-121
+  - proved
+---
+
+**VERDICT: proved** (cycle 121)
+Chain extended: hops = 2 × 121 + 8 = 250
