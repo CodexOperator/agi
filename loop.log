@@ -755,3 +755,22 @@ spawned a00-ddbe3410 pid=1261271 level=big target=- strategy=explore_new
 scaffolded hypothesis node: hypothesis:a01-5c29f2e6-f5104d
 spawned a01-5c29f2e6 pid=1261279 level=small target=idea:domain-graph-core strategy=branch_fork
 manifest: /home/ubuntu/.hermes/agi-tree/sessions/iter-001/manifest.json
+=== iter 1 @ 2026-05-01T19:35:45Z ===
+wrote: 7 idea + 60 hypothesis + 91 task = 158 nodes
+target dir: /home/ubuntu/.hermes/agi-tree/nodes
+loaded 157 nodes from /home/ubuntu/.hermes/agi-tree/nodes
+ASCII rendering: 163 lines
+wrote: /home/ubuntu/.hermes/agi-tree/context/INJECTION.md
+METRIC longest_chain_length=2
+METRIC avg_chain_depth=0.96
+METRIC mvp_count=0
+METRIC outcome_coverage=0.000
+METRIC chain_branching_factor=2.21
+METRIC node_count=157
+METRIC edge_count=148
+ERR: ollama package not installed (pip install ollama)
+scaffolded hypothesis node: hypothesis:a00-4e910101-16a85f
+spawned a00-4e910101 pid=1264516 level=big target=- strategy=explore_new
+scaffolded hypothesis node: hypothesis:a01-cdbb8442-4e5a2e
+spawned a01-cdbb8442 pid=1264524 level=small target=idea:domain-graph-core strategy=branch_fork
+manifest: /home/ubuntu/.hermes/agi-tree/sessions/iter-001/manifest.json
