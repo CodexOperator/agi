@@ -6,6 +6,6 @@ confidence: 0.9
 tags:
   - chain-persistence
 next_edges:
-  - "mvp:embeddings-r2"
+  - "exp:embeddings-r2-extend49"
 ---
 VERDICT: proved. Chain extended to 104 hops via cycle 48.
