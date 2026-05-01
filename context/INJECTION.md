@@ -1,25 +1,25 @@
 # autoresearch-tree INJECTION CONTEXT
-_generated 2026-05-01T05:08:26+00:00_
+_generated 2026-05-01T05:08:50+00:00_
 
 ## graph snapshot
-- nodes: 165
-- edges: 157
-- by type: experiment=2, hypothesis=62, idea=7, task=90, verdict=4
+- nodes: 166
+- edges: 158
+- by type: experiment=2, hypothesis=62, idea=7, task=90, verdict=5
 - longest chain: 2 hops
 
 ## attractive ideas (descendant count, top 10)
 - idea:domain-graph-core :: 30 descendants
 - idea:domain-environment-indexers :: 26 descendants
 - idea:domain-autoresearch-tree-skill :: 25 descendants
-- idea:domain-chain-engine :: 24 descendants
+- idea:domain-chain-engine :: 25 descendants
 - idea:domain-schema-registry :: 21 descendants
 - idea:domain-renderers :: 17 descendants
 - idea:domain-embeddings :: 14 descendants
 
 ## ASCII view (≤200 lines)
 ```
-# graph: 165 nodes
-# types: experiment=2, hypothesis=62, idea=7, task=90, verdict=4
+# graph: 166 nodes
+# types: experiment=2, hypothesis=62, idea=7, task=90, verdict=5
 #
     exp:checkpoint-r9-01 :: experiment
     exp:graph-core-r1-generic-node-primitive :: experiment
@@ -86,7 +86,7 @@ _generated 2026-05-01T05:08:26+00:00_
   hyp:schema-registry-r7 :: hypothesis [spawns->task:t-030]
   hyp:schema-registry-r8 :: hypothesis [spawns->task:t-031]
 idea:domain-autoresearch-tree-skill :: idea [spawns->hyp:autoresearch-tree-skill-r1, spawns->hyp:autoresearch-tree-skill-r2, spawns->hyp:autoresearch-tree-skill-r3 (+7)]
-idea:domain-chain-engine :: idea [spawns->hyp:chain-engine-r1, spawns->hyp:chain-engine-r10, spawns->hyp:chain-engine-r2 (+7)]
+idea:domain-chain-engine :: idea [spawns->hyp:chain-engine-r1, spawns->hyp:chain-engine-r10, spawns->hyp:chain-engine-r2 (+8)]
 idea:domain-embeddings :: idea [spawns->hyp:embeddings-r1, spawns->hyp:embeddings-r2, spawns->hyp:embeddings-r3 (+4)]
 idea:domain-environment-indexers :: idea [spawns->hyp:environment-indexers-r1, spawns->hyp:environment-indexers-r10, spawns->hyp:environment-indexers-r2 (+8)]
 idea:domain-graph-core :: idea [spawns->hyp:graph-core-r1, spawns->hyp:graph-core-r10, spawns->hyp:graph-core-r2 (+7)]
@@ -184,11 +184,12 @@ idea:domain-schema-registry :: idea [spawns->hyp:schema-registry-r1, spawns->hyp
     task:t-090 :: task
     verdict:exp_graph-core-r1-generic-node-p :: verdict
   verdict:hyp_autoresearch-tree-skill-r9 :: verdict
+  verdict:hyp_chain-engine-r10 :: verdict
   verdict:hyp_environment-indexers-r10 :: verdict
 verdict:idea_domain-agent-protocol :: verdict
 ----
-Types: experiment=2, hypothesis=62, idea=7, task=90, verdict=4
-Edges: spawns=157
+Types: experiment=2, hypothesis=62, idea=7, task=90, verdict=5
+Edges: spawns=158
 ```
 
 ## big-vs-small decision
