@@ -80,22 +80,36 @@ def make_body(ntype, domain, chain_def):
     return bodies.get(ntype, "")
 
 
-def fname(node_id):
-    return node_id.replace(":", "-").replace("_", "-") + ".md"
-
-
-def get_hypothesis_path(hyp_id, nodes_root):
-    """Find the hypothesis file matching hyp_id."""
-    hyp_dir = nodes_root / "hypothesis"
-    if not hyp_dir.exists():
-        return None
-    for f in hyp_dir.iterdir():
-        try:
-            nf = load_node_file(f, body=False)
-            if nf.frontmatter.get("id") == hyp_id:
-                return f
-        except Exception:
-            pass
+def find_node_path(node_id, nodes_root, node_type=None):
+    """Find a node file by matching its frontmatter id field.
+    
+    node_type: 'hypothesis', 'idea', 'experiment', 'verdict', 'mvp',
+                'outcome', 'bigger-outcome', 'app-purpose'
+    """
+    type_map = {
+        "hypothesis": "hypothesis",
+        "idea": "idea",
+        "experiment": "experiment",
+        "verdict": "verdict",
+        "mvp": "mvp",
+        "outcome": "outcome",
+        "bigger-outcome": "bigger-outcome",
+        "app-purpose": "app-purpose",
+    }
+    subdir = type_map.get(node_type)
+    search_dirs = [nodes_root / subdir] if subdir else [nodes_root]
+    for d in search_dirs:
+        if not d.exists():
+            continue
+        for f in d.iterdir():
+            if not f.suffix.lower() in (".md", ".json"):
+                continue
+            try:
+                nf = load_node_file(f, body=False)
+                if nf.frontmatter.get("id") == node_id:
+                    return f
+            except Exception:
+                pass
     return None
 
 
@@ -150,15 +164,15 @@ def main():
         ]
 
         for ntype, nid, title, parents, tags, confidence, next_e in chain:
-            path = nodes_root / ntype / fname(nid)
+            path = nodes_root / ntype / (nid.replace(":", "-").replace("_", "-") + ".md")
             verdict_val = "proved" if ntype == "verdict" else None
             fm_text = make_fm(nid, ntype, title, parents, tags, confidence, next_e, verdict=verdict_val)
             body = make_body(ntype, domain, cd)
             path.write_text(fm_text + "\n" + body + "\n")
-            print(f"  Created: {ntype}/{fname(nid)}")
+            print(f"  Created: {ntype}/{nid.replace(':', '-').replace('_', '-')}.md")
 
         # 2. Add next_edges to hypothesis (hyp → experiment)
-        hyp_path = get_hypothesis_path(cd["hyp_id"], nodes_root)
+        hyp_path = find_node_path(cd["hyp_id"], nodes_root, "hypothesis")
         if hyp_path:
             ok = add_next_edges_to_file(hyp_path, cd["exp_id"])
             print(f"  {'Updated' if ok else 'Already has'} next_edges: hypothesis → experiment")
@@ -166,12 +180,12 @@ def main():
             print(f"  WARNING: hypothesis file not found for {cd['hyp_id']}")
 
         # 3. Add next_edges to idea (idea → hypothesis)
-        idea_path = nodes_root / "idea" / fname(cd["idea_id"])
-        if idea_path.exists():
+        idea_path = find_node_path(cd["idea_id"], nodes_root, "idea")
+        if idea_path:
             ok = add_next_edges_to_file(idea_path, cd["hyp_id"])
             print(f"  {'Updated' if ok else 'Already has'} next_edges: idea → hypothesis")
         else:
-            print(f"  WARNING: idea file not found at {idea_path}")
+            print(f"  WARNING: idea file not found for {cd['idea_id']}")
 
     # 4. Verify cold reload
     print("\n--- Cold Reload Verification ---")
