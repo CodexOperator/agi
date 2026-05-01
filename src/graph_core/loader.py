@@ -58,13 +58,13 @@ def _node_from_frontmatter(
 ) -> Node:
     fm = nf.frontmatter
     nid = fm.get("id")
+    type_str = str(fm.get("type", "node")).replace("-", "_")
     if not isinstance(nid, str) or not nid:
         nid = mint_id(
-            type_prefix=str(fm.get("type", "node")),
+            type_prefix=type_str,
             source_text=str(fm.get("title") or source_path.stem),
             registry=registry,
         )
-    type_str = str(fm.get("type", "node"))
     parents = set(fm.get("parents", []) or [])
     children = set(fm.get("children", []) or [])
     tags = set(fm.get("tags", []) or [])

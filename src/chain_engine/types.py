@@ -28,6 +28,7 @@ _VALID_TRANSITIONS: set[tuple[str, str]] = {
     ("hypothesis", "experiment"),
     ("experiment", "experiment"),
     ("experiment", "verdict"),
+    ("verdict", "experiment"),  # Allow verdict → experiment for chain extension
     ("verdict", "mvp"),
     ("mvp", "outcome"),
     ("outcome", "bigger_outcome"),

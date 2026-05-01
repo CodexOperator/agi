@@ -18,27 +18,9 @@
 
 ## Low Priority / Remaining
 
-- **[multi-agent] 5-agent parallel dispatch smoke test**
-  - Config allows 5 parallel agents
-  - Test the dispatch mechanism end-to-end
+- ~~**[multi-agent] 5-agent parallel dispatch smoke test**~~ — DONE (iter 8: multi-agent-dispatch-r1 proved, config valid, dispatch works)
 
 - **[chain-extension] verdict→experiment→verdict pattern**
   - verdict→hypothesis NOT in valid transitions
   - Try verdict → experiment → verdict → ... pattern instead
   - Would allow indefinite chain extension
-
-- ~~**[chain-extension] Verdict-spawned hypothesis chains**~~ — INCONCLUSIVE (verdict→hypothesis not valid, need verdict→experiment→verdict pattern)
-
-## Low Priority / Interesting
-
-- ~~**[renderers] Git-diff renderer for chain evolution**~~ — DONE (R5 proved 5/5)
-
-- **[graph-core] Vector embedding isomorphic to ASCII coords**
-  - UMAP (x,y) → RenderToken.x,y — same underlying representation
-  - Currently only designed, not implemented
-
-- ~~**[autoresearch-tree-skill] SessionStart hook verification**~~ — DONE (R10 proved 15/15)
-
-- **[multi-agent] 5-agent parallel dispatch smoke test**
-  - Config allows 5 parallel agents
-  - Test the dispatch mechanism end-to-end
