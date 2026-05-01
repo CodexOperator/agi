@@ -120,8 +120,8 @@ def _update_node_file(path: Path, node_id: str, vector: list[float]) -> None:
     if not isinstance(fm, dict):
         fm = {}
 
-    # Update embedding_vector
-    fm["embedding_vector"] = vector
+    # Update embedding_vector — convert numpy/Python float types to native float for YAML serialization
+    fm["embedding_vector"] = [float(x) for x in vector]
 
     # Re-emit frontmatter with sorted keys (consistent ordering)
     new_yaml = yaml.safe_dump(fm, sort_keys=True, default_flow_style=False).rstrip("\n")
