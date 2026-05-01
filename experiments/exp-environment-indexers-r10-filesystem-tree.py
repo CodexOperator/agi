@@ -323,10 +323,31 @@ if __name__ == "__main__":
     passed = 0
     failed = 0
 
-    def run_test(name: str, fn: callable) -> None:
-        nonlocal passed, failed
+    # Run sanity tests first
+    sanity_tests = [
+        ("test_module_imports", test_module_imports),
+        ("test_registry_registration", test_registry_registration),
+    ]
+    for name, fn in sanity_tests:
         try:
-            # Each test gets a fresh temp dir
+            fn()
+            print(f"  {name}: PASS")
+            passed += 1
+        except Exception as e:
+            print(f"  {name}: FAIL — {e}")
+            import traceback
+            traceback.print_exc()
+            failed += 1
+
+    # Run R2 criteria tests
+    for name, fn in [
+        ("R2.1 one_node_per_dir_and_file", test_r2_1_one_node_per_dir_and_file),
+        ("R2.2 frontmatter_conforms_to_schema", test_r2_2_frontmatter_conforms_to_schema),
+        ("R2.3 symlink_skipped_with_warning", test_r2_3_symlink_skipped_with_warning),
+        ("R2.3 unreadable_skipped_with_warning", test_r2_3_unreadable_skipped_with_warning),
+        ("R2.4 deterministic_ids", test_r2_4_deterministic_ids),
+    ]:
+        try:
             with tempfile.TemporaryDirectory() as tmp:
                 fn(Path(tmp))
             print(f"  {name}: PASS")
@@ -336,22 +357,8 @@ if __name__ == "__main__":
             import traceback
             traceback.print_exc()
             failed += 1
-
-    # Run sanity tests first
-    run_test("test_module_imports", test_module_imports)
-    run_test("test_registry_registration", test_registry_registration)
-
-    # Run R2 criteria tests
-    run_test("R2.1 one_node_per_dir_and_file", test_r2_1_one_node_per_dir_and_file)
-    cleanup_emitted()
-    run_test("R2.2 frontmatter_conforms_to_schema", test_r2_2_frontmatter_conforms_to_schema)
-    cleanup_emitted()
-    run_test("R2.3 symlink_skipped_with_warning", test_r2_3_symlink_skipped_with_warning)
-    cleanup_emitted()
-    run_test("R2.3 unreadable_skipped_with_warning", test_r2_3_unreadable_skipped_with_warning)
-    cleanup_emitted()
-    run_test("R2.4 deterministic_ids", test_r2_4_deterministic_ids)
-    cleanup_emitted()
+        finally:
+            cleanup_emitted()
 
     print("=" * 60)
     print(f"Results: {passed} passed, {failed} failed")
