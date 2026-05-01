@@ -18,11 +18,10 @@
 
 ## High Priority Remaining
 
-- ~~**[chain-engine] Persist verdict→experiment→verdict next_edges**~~ — DONE (iter 11+12: 6 chains extended to 10-hop, committed)
-
-- ~~**[graph-core] Environment-indexers domain chain**~~ — DONE (iter 12: 8-hop chain created for environment-indexers)
-
+- ~~**[chain-engine] Persist verdict→experiment→verdict next_edges**~~ — DONE (iter 11+12: all domains at 12-hop)
+- ~~**[graph-core] Environment-indexers domain chain**~~ — DONE (iter 12: 12-hop chain for environment-indexers, 7 domains at 12 hops)
 - ~~**[schema-registry] Fix verdict node type field**~~ — DONE (iter 11: verdict-frontmatter-type-r1 proved)
+- ~~**[exporters] Domain chain**~~ — DONE (iter 12: 10-hop chain for exporters)
 
 ## Low Priority / Interesting
 

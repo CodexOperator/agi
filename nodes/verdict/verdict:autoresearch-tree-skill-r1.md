@@ -13,6 +13,7 @@ tags:
   - R1
   - proved
 next_edges:
+  - exp:autoresearch-tree-skill-r1-extend
   - mvp:autoresearch-tree-skill-r1
 ---
 

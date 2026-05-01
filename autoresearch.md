@@ -2,7 +2,7 @@
 
 ## Primary Metric
 - **longest_chain_length** (hops, direction: higher)
-- Current best: 12 hops (iter 11/12: stacked verdict→experiment→verdict cycles; 6 domains at 12 hops, environment-indexers extended to 12 hops)
+- Current best: 12 hops (7 domains at 12-hop via stacked verdict→experiment→verdict cycles; 1 domain at 10-hop; 8 domains at 8-hop)
 
 ## Secondary Metrics
 - `avg_chain_depth`

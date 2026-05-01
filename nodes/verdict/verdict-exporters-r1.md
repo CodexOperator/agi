@@ -13,6 +13,7 @@ tags:
   - R1
   - proved
 next_edges:
+  - exp:exporters-r1-extend
   - mvp:exporters-r1
 ---
 
