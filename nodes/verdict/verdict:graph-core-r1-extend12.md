@@ -13,7 +13,7 @@ tags:
   - 12-cycle
   - proved
 next_edges:
-  - "mvp:graph-core-r1"
+  - "exp:graph-core-r1-extend13"
 ---
 
 VERDICT: proved. graph-core-r1 at 32 hops (12 cycles).

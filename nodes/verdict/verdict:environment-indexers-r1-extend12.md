@@ -13,7 +13,7 @@ tags:
   - 12-cycle
   - proved
 next_edges:
-  - "mvp:environment-indexers-r1"
+  - "exp:environment-indexers-r1-extend13"
 ---
 
 VERDICT: proved. environment-indexers-r1 at 32 hops (12 cycles).
