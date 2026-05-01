@@ -38,3 +38,10 @@ Live record of build progress against `context/plans/build-site.md`.
 - **Status:** DONE
 - **Files:** src/graph_core/persistence/frontmatter.py, tests/graph_core/test_frontmatter.py, tests/fixtures/nodes/sample.{md,json}
 - **Validation:** Tests 7/7 PASS, R4.2+R4.3 covered
+
+### Iteration 6 — 2026-05-01T02:15:00Z
+- **Task:** T-008 — Frontmatter error isolation
+- **Tier:** 2
+- **Status:** DONE
+- **Files:** src/graph_core/persistence/frontmatter.py (append), src/graph_core/persistence/__init__.py (edit), tests/graph_core/test_frontmatter_errors.py
+- **Validation:** Tests 12/12 PASS (5 new T-008 + 7 existing T-006), R4.4 covered

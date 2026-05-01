@@ -125,3 +125,49 @@ def _emit_md(nf: NodeFile) -> str:
 def _emit_json(nf: NodeFile) -> str:
     obj = {"frontmatter": nf.frontmatter, "body": nf.body}
     return json.dumps(obj, indent=2, sort_keys=True, ensure_ascii=False) + "\n"
+
+
+# --- T-008: Directory-level loader with error isolation ---
+
+
+from typing import NamedTuple
+
+
+class LoadError(NamedTuple):
+    """Per-file load failure (T-008 / R4.4)."""
+
+    path: Path
+    reason: str
+
+
+class DirLoadResult(NamedTuple):
+    """Result of `load_node_dir`: nodes loaded + per-file errors."""
+
+    nodes: list[NodeFile]
+    errors: list[LoadError]
+
+
+def load_node_dir(directory: str | Path) -> DirLoadResult:
+    """Load every .md/.json file under ``directory`` (non-recursive).
+
+    Per-file failures are isolated: malformed files produce a structured
+    :class:`LoadError` and the loader continues. Returns both the loaded
+    nodes and the error list (R4.4).
+    """
+    d = Path(directory)
+    nodes: list[NodeFile] = []
+    errors: list[LoadError] = []
+    if not d.is_dir():
+        raise FrontmatterError(f"not a directory: {d}")
+    for p in sorted(d.iterdir()):
+        if not p.is_file():
+            continue
+        if p.suffix.lower() not in {".md", ".json"}:
+            continue
+        try:
+            nodes.append(load_node_file(p))
+        except FrontmatterError as e:
+            errors.append(LoadError(path=p, reason=str(e)))
+        except Exception as e:  # noqa: BLE001
+            errors.append(LoadError(path=p, reason=f"{type(e).__name__}: {e}"))
+    return DirLoadResult(nodes=nodes, errors=errors)

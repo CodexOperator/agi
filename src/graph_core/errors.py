@@ -28,3 +28,9 @@ class CycleError(GraphCoreError):
         super().__init__(
             f"cycle rejected: edge {source_id} -> {target_id} closes path {' -> '.join(path)}"
         )
+
+
+# Re-export FrontmatterError from persistence so callers can `from graph_core.errors import FrontmatterError`
+def _frontmatter_error_proxy():
+    from .persistence.frontmatter import FrontmatterError
+    return FrontmatterError
