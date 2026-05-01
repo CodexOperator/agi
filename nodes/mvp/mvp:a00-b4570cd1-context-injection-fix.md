@@ -1,0 +1,17 @@
+---
+id: "mvp:a00-b4570cd1-context-injection-fix"
+type: mvp
+parents:
+  - "verdict:a00-b4570cd1-0b9427"
+next_edges:
+  - "outcome:a00-b4570cd1-context-injection-fix"
+---
+
+**MVP:** Context injection now reports accurate chain state
+
+**Files changed:**
+- `/home/ubuntu/.hermes/agi-tree/bin/render-context.py` — `_longest_chain_length()` now walks `next_edges` adjacency
+- `/home/ubuntu/autoresearch-tree/extensions/autoresearch-tree/bin/render-context.py` — same fix + uses `find_chains()` for accurate stats
+
+**Before:** `longest chain: 0 hops`
+**After:** `longest chain: 199 hops (via next edges), chain count: 11`

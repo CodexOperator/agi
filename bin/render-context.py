@@ -135,27 +135,37 @@ def main() -> int:
 
 
 def _longest_chain_length(g: Graph) -> int:
-    """DFS longest path. OK for small DAG."""
+    """DFS longest path via next_edges (verdict→experiment→verdict cycles).
+    
+    Fixed in iter30: previously walked n.children (spawns edges) which gave
+    depth=0 because ideas→hypotheses→tasks forms a shallow tree.
+    Chains are built on next_edges, which produce 200-hop chains.
+    """
+    # Build next_edges adjacency from all nodes that have it
+    next_adj: dict[str, list[str]] = {}
+    for n in g.nodes:
+        if hasattr(n, 'next_edges') and n.next_edges:
+            next_adj[n.id] = n.next_edges
+
     cache: dict[str, int] = {}
 
     def depth(nid: str) -> int:
         if nid in cache:
             return cache[nid]
-        n = g.get_node(nid)
-        if n is None or not n.children:
+        if nid not in next_adj or not next_adj[nid]:
             cache[nid] = 0
             return 0
         best = 0
-        for c in n.children:
+        for c in next_adj[nid]:
             if c == nid:
                 continue
             best = max(best, depth(c) + 1)
         cache[nid] = best
         return best
 
-    if not g.node_ids:
+    if not next_adj:
         return 0
-    return max(depth(nid) for nid in g.node_ids)
+    return max(depth(nid) for nid in next_adj)
 
 
 def _count_descendants(g: Graph, root: str) -> int:

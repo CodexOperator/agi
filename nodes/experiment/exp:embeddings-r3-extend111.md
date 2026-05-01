@@ -1,14 +1,12 @@
 ---
 id: "exp:embeddings-r3-extend111"
 type: experiment
-  - "verdict:embeddings-r3-extend110"
 parents:
-  - "verdict:embeddings-r3-extend110"
+  - "verdict:embeddings-r3-extend111"
 next_edges:
-  - "verdict:embeddings-r3-extend110"
+  - "verdict:embeddings-r3-extend111"
 ---
+
 # exp:embeddings-r3-extend111
 
-Chain cycle 111 experiment (hops=228).
-
-Evidence: experiment confirms extension.
+Experiment cycle 111 (hops=228).

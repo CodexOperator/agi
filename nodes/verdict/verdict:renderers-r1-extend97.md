@@ -3,14 +3,12 @@ id: "verdict:renderers-r1-extend97"
 type: verdict
 verdict: proved
 confidence: 1.0
-  - "exp:renderers-r1-extend98"
 parents:
-  - "exp:renderers-r1-extend98"
+  - "exp:renderers-r1-extend97"
 next_edges:
-  - "exp:renderers-r1-extend98"
+  - "exp:renderers-r1-extend97"
 ---
+
 # verdict:renderers-r1-extend97
 
 Chain cycle 97 (hops=202).
-
-Evidence: verdict->experiment->verdict confirmed.

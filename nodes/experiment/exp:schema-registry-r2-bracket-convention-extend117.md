@@ -1,14 +1,12 @@
 ---
 id: "exp:schema-registry-r2-bracket-convention-extend117"
 type: experiment
-  - "verdict:schema-registry-r2-bracket-convention-extend116"
 parents:
-  - "verdict:schema-registry-r2-bracket-convention-extend116"
+  - "verdict:schema-registry-r2-bracket-convention-extend117"
 next_edges:
-  - "verdict:schema-registry-r2-bracket-convention-extend116"
+  - "verdict:schema-registry-r2-bracket-convention-extend117"
 ---
+
 # exp:schema-registry-r2-bracket-convention-extend117
 
-Chain cycle 117 experiment (hops=240).
-
-Evidence: experiment confirms extension.
+Experiment cycle 117 (hops=240).

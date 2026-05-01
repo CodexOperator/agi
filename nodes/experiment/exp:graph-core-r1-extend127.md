@@ -1,14 +1,12 @@
 ---
 id: "exp:graph-core-r1-extend127"
 type: experiment
-  - "verdict:graph-core-r1-extend126"
 parents:
-  - "verdict:graph-core-r1-extend126"
+  - "verdict:graph-core-r1-extend127"
 next_edges:
-  - "verdict:graph-core-r1-extend126"
+  - "verdict:graph-core-r1-extend127"
 ---
+
 # exp:graph-core-r1-extend127
 
-Chain cycle 127 experiment (hops=260).
-
-Evidence: experiment confirms extension.
+Experiment cycle 127 (hops=260).

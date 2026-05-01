@@ -1,14 +1,12 @@
 ---
 id: "exp:chain-engine-r1-extend127"
 type: experiment
-  - "verdict:chain-engine-r1-extend126"
 parents:
-  - "verdict:chain-engine-r1-extend126"
+  - "verdict:chain-engine-r1-extend127"
 next_edges:
-  - "verdict:chain-engine-r1-extend126"
+  - "verdict:chain-engine-r1-extend127"
 ---
+
 # exp:chain-engine-r1-extend127
 
-Chain cycle 127 experiment (hops=260).
-
-Evidence: experiment confirms extension.
+Experiment cycle 127 (hops=260).

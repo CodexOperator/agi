@@ -1,14 +1,12 @@
 ---
 id: "exp:exporters-r1-extend143"
 type: experiment
-  - "verdict:exporters-r1-extend142"
 parents:
-  - "verdict:exporters-r1-extend142"
+  - "verdict:exporters-r1-extend143"
 next_edges:
-  - "verdict:exporters-r1-extend142"
+  - "verdict:exporters-r1-extend143"
 ---
+
 # exp:exporters-r1-extend143
 
-Chain cycle 143 experiment (hops=292).
-
-Evidence: experiment confirms extension.
+Experiment cycle 143 (hops=292).

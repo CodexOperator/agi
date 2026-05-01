@@ -3,14 +3,12 @@ id: "verdict:graph-core-r1-extend114"
 type: verdict
 verdict: proved
 confidence: 1.0
-  - "exp:graph-core-r1-extend115"
 parents:
-  - "exp:graph-core-r1-extend115"
+  - "exp:graph-core-r1-extend114"
 next_edges:
-  - "exp:graph-core-r1-extend115"
+  - "exp:graph-core-r1-extend114"
 ---
+
 # verdict:graph-core-r1-extend114
 
 Chain cycle 114 (hops=236).
-
-Evidence: verdict->experiment->verdict confirmed.

@@ -10,7 +10,6 @@ evidence_runs:
   - exp:session-management-r1
 next_edges:
   - "exp:session-management-r1-extend1"
-  - "exp:session-management-r1-extend1"
 tags:
   - sessions
   - memory

@@ -1,14 +1,12 @@
 ---
 id: "exp:renderers-r1-extend126"
 type: experiment
-  - "verdict:renderers-r1-extend125"
 parents:
-  - "verdict:renderers-r1-extend125"
+  - "verdict:renderers-r1-extend126"
 next_edges:
-  - "verdict:renderers-r1-extend125"
+  - "verdict:renderers-r1-extend126"
 ---
+
 # exp:renderers-r1-extend126
 
-Chain cycle 126 experiment (hops=258).
-
-Evidence: experiment confirms extension.
+Experiment cycle 126 (hops=258).
