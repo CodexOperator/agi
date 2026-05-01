@@ -1,3 +1,9 @@
+# autoresearch-tree iteration 21 — agent a00-2dd75d35
+
+## Zoom Level: BIG
+You are exploring the WHOLE graph. Pick a high-level idea or new chain to extend.
+Bias: introduce a fresh idea, fork an under-explored chain, or seed a new domain.
+
 # autoresearch-tree INJECTION CONTEXT
 _generated 2026-05-01T14:48:37+00:00_
 
@@ -199,3 +205,19 @@ Each iteration MUST first answer: **explore a big idea or small idea?**
 
 ## next-step suggestions
 - pending tasks: 90 (see nodes/task/)
+
+
+## Your Task
+1. Decide: extend longest chain, fork mid-chain, or start fresh idea.
+2. Pick or create one node id (idea/hypothesis/experiment/mvp/outcome).
+3. Run the experiment / implement the MVP / write the outcome.
+4. When done, signal completion:
+   ```
+   python3 <plugin>/bin/cli.py done 21 a00-2dd75d35 \
+     --verdict <proved|disproved|inconclusive_lean_proved:N|inconclusive_lean_disproved:N|pending> \
+     --confidence <0.0-1.0> \
+     --node-id <new_or_extended_node_id> \
+     --notes "<one-line>"
+   ```
+
+If stuck >2 attempts on same approach → write a `pending` verdict and stop.

@@ -332,3 +332,24 @@ METRIC node_count=157
 METRIC edge_count=148
 spawned a00-59eb8a4a pid=1182920 level=big target=-
 manifest: /home/ubuntu/.hermes/agi-tree/sessions/iter-018/manifest.json
+iter 20: 5 agents
+  a00-d4e91e98: status=failed verdict=- pid=1112391
+  a01-2bb7368c: status=failed verdict=- pid=1112406
+  a02-67a7e70c: status=failed verdict=- pid=1112414
+  a03-9c75cd09: status=failed verdict=- pid=1112434
+  a04-31e7e128: status=failed verdict=- pid=1112454
+=== iter 21 @ 2026-05-01T14:48:37Z ===
+wrote: 7 idea + 60 hypothesis + 91 task = 158 nodes
+target dir: /home/ubuntu/.hermes/agi-tree/nodes
+loaded 157 nodes from /home/ubuntu/.hermes/agi-tree/nodes
+ASCII rendering: 163 lines
+wrote: /home/ubuntu/.hermes/agi-tree/context/INJECTION.md
+METRIC longest_chain_length=2
+METRIC avg_chain_depth=0.96
+METRIC mvp_count=0
+METRIC outcome_coverage=0.000
+METRIC chain_branching_factor=2.21
+METRIC node_count=157
+METRIC edge_count=148
+spawned a00-2dd75d35 pid=1187328 level=big target=-
+manifest: /home/ubuntu/.hermes/agi-tree/sessions/iter-021/manifest.json
