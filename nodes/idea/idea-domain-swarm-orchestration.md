@@ -1,6 +1,8 @@
 ---
 confidence: 0.5
 id: "idea:domain-swarm-orchestration"
+next_edges:
+  - "hyp:swarm-orchestration-r1"
 subgraph: false
 tags:
   - swarm-orchestration

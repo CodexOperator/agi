@@ -10,6 +10,7 @@ tags:
   - R1
 testable_claim: Atomic File-Based Node Writes
 title: "swarm-orchestration/R1: Experiment"
+type: experiment
 ---
 
 **Description:** Run swarm-orchestration atomic writes test suite (TC1-TC5).
