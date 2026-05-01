@@ -14,7 +14,7 @@ tags:
   - 6th-cycle
   - proved
 next_edges:
-  - "mvp:embeddings-r3"
+  - "exp:embeddings-r3-extend7"
 ---
 
 VERDICT: proved. embeddings-r3 chain at 6 cycles = 20 hops.

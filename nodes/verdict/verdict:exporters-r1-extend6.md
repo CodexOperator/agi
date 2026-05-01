@@ -14,7 +14,7 @@ tags:
   - 6th-cycle
   - proved
 next_edges:
-  - "mvp:exporters-r1"
+  - "exp:exporters-r1-extend7"
 ---
 
 VERDICT: proved. exporters-r1 chain at 6 cycles = 20 hops.

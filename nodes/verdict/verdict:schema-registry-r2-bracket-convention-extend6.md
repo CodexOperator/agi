@@ -14,7 +14,7 @@ tags:
   - 6th-cycle
   - proved
 next_edges:
-  - "mvp:schema-registry-r2-bracket-convention"
+  - "exp:schema-registry-r2-bracket-convention-extend7"
 ---
 
 VERDICT: proved. schema-registry-r2-bracket-convention chain at 6 cycles = 20 hops.
