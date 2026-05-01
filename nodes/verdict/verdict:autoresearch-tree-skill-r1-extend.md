@@ -12,6 +12,7 @@ tags:
   - chain-extension
   - proved
 next_edges:
+  - exp:autoresearch-tree-skill-r1-extend2
   - mvp:autoresearch-tree-skill-r1
 ---
 
