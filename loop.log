@@ -166,3 +166,23 @@ METRIC node_count=157
 METRIC edge_count=148
 spawned a00-1e5ebcbc pid=1169133 level=big target=-
 manifest: /home/ubuntu/.hermes/agi-tree/sessions/iter-009/manifest.json
+healer: agent a00-1e5ebcbc timed out (pid=1169133), killing + spawning healer
+healer heal-e8935ea9 spawned pid=1169982 for hung agent a00-1e5ebcbc
+all agents terminal
+iter 9: 1 agents
+  a00-1e5ebcbc: status=hung-healed verdict=- pid=1169133
+=== iter 10 @ 2026-05-01T13:14:19Z ===
+wrote: 7 idea + 60 hypothesis + 91 task = 158 nodes
+target dir: /home/ubuntu/.hermes/agi-tree/nodes
+loaded 157 nodes from /home/ubuntu/.hermes/agi-tree/nodes
+ASCII rendering: 163 lines
+wrote: /home/ubuntu/.hermes/agi-tree/context/INJECTION.md
+METRIC longest_chain_length=2
+METRIC avg_chain_depth=0.96
+METRIC mvp_count=0
+METRIC outcome_coverage=0.000
+METRIC chain_branching_factor=2.21
+METRIC node_count=157
+METRIC edge_count=148
+spawned a00-f6fb2456 pid=1170047 level=big target=-
+manifest: /home/ubuntu/.hermes/agi-tree/sessions/iter-010/manifest.json
