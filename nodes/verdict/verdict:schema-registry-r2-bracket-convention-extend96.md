@@ -14,7 +14,7 @@ tags:
   - cycle-96
   - proved
 next_edges:
-  - "exp:schema-registry-r2-bracket-convention-extend97"
+  - "mvp:schema-registry-r2-bracket-convention"
 ---
 
 **VERDICT: proved** — schema-registry-r2-bracket-convention chain extended to FINAL.

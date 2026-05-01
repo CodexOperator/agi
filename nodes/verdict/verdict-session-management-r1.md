@@ -9,7 +9,7 @@ confidence: 0.81
 evidence_runs:
   - exp:session-management-r1
 next_edges:
-  - "exp:session-management-r1-extend1"
+  - mvp:session-management-r1
 tags:
   - sessions
   - memory

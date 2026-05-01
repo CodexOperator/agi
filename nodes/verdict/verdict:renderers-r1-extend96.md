@@ -14,7 +14,7 @@ tags:
   - cycle-96
   - proved
 next_edges:
-  - "exp:renderers-r1-extend97"
+  - "mvp:renderers-r1"
 ---
 
 **VERDICT: proved** — renderers-r1 chain extended to FINAL.
