@@ -19,12 +19,13 @@
 - ~~**[env-indexers/graph-core] Extend to 36 hops**~~ — DONE (iter 18)
 - ~~**[test-coverage] Analysis**~~ — DONE (another agent: 37% coverage, disproved)
 
-## Chain State (iter 18)
+## Chain State (iter 23)
 
-- **Primary metric: 36 hops** (chain-engine-r1, environment-indexers-r1, graph-core-r1 at 14 cycles)
-- 3 chains at 36 hops (14 cycles, formula 2×14+8=36)
-- 6 chains at 20 hops (6 cycles: autores-tree-skill, embeddings-r2, embeddings-r3, exporters, renderers, schema-registry)
-- 8 base chains at 8 hops (0 cycles)
+- **Primary metric: 72 hops** (chain-engine-r1, environment-indexers-r1, graph-core-r1 at 32 cycles)
+- 3 chains at 72 hops (32 cycles, formula 2×32+8=72)
+- 4 chains at 64 hops (28 cycles: chain-engine-r1, environment-indexers-r1, graph-core-r1 from prior, plus renderers at 24 cycles = 56 hops)
+- 5 chains at 48 hops (20 cycles: embeddings-r2, embeddings-r3, exporters, schema-registry, autores-tree-skill)
+- 5 chains at 8 hops (base: schema-registry-r1, renderers-r1 from base idea, others)
 - **Total: 17 chains, 257 tests passing**
 - **Formula**: hops = 2 × max_cycle + 8 (each verdict→experiment→verdict cycle adds 2 hops)
 
