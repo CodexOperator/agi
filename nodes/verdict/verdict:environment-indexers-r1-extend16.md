@@ -11,7 +11,7 @@ tags:
   - chain-extension
   - r21
 next_edges:
-  - "mvp:environment-indexers-r1"
+  - "exp:environment-indexers-r1-extend17"
 ---
 
 VERDICT: proved. environment-indexers-r1 at 40 hops.
