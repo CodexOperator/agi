@@ -4,11 +4,11 @@ type: experiment
 parents:
   - "verdict:graph-core-r1-extend8"
 tags:
-  - graph
+  - graph-core
   - chain-extension
   - 9-cycle
 next_edges:
   - "verdict:graph-core-r1-extend9"
 ---
 
-9th cycle. Pushes graph-core-r1 to 28 hops.
+9th cycle. graph-core-r1 to 28 hops.

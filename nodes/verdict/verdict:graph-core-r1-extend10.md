@@ -8,7 +8,7 @@ parents:
   - "exp:graph-core-r1-extend10"
   - "verdict:graph-core-r1-extend9"
 tags:
-  - graph
+  - graph-core
   - chain-extension
   - 10-cycle
   - proved
