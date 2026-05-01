@@ -3,7 +3,8 @@ id: "experiment:a00-ddbe3410-exp001-graph-core-r1-t001"
 parents:
   - "hypothesis:graph-core-r1"
   - "task:t-001"
-next_edges: []
+next_edges:
+  - "verdict:a00-ddbe3410-verdict001-graph-core-r1-t001"
 status: complete
 tags:
   - bootstrap
