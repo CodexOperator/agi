@@ -11,7 +11,7 @@ tags:
   - chain-extension
   - r18
 next_edges:
-  - "mvp:graph-core-r1"
+  - "exp:graph-core-r1-extend15"
 ---
 
-VERDICT: proved. graph-core-r1 at 36 hops.
+VERDICT: proved. graph-core-r1 at 14 cycles (36 hops). Extending to 15 cycles (38 hops).
