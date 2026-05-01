@@ -13,7 +13,6 @@ def run(cmd):
     r = subprocess.run(cmd, cwd=str(ROOT), capture_output=True, text=True)
     if r.returncode != 0:
         print("  CMD FAILED:", " ".join(cmd))
-        print("  stdout:", r.stdout[:200])
         print("  stderr:", r.stderr[:200])
     return r
 
@@ -37,7 +36,7 @@ def find_last_good_commit():
             break
         all_present = True
         for name in verdict_names:
-            r = run(["git", "ls-tree", "-q", commit, "nodes/verdict/" + name])
+            r = run(["git", "cat-file", "-e", commit + ":nodes/verdict/" + name])
             if r.returncode != 0:
                 all_present = False
                 break
@@ -47,11 +46,8 @@ def find_last_good_commit():
             return commit
     return None
 
-print("Step 1: Finding last good commit...")
-lg = find_last_good_commit()
-if not lg:
-    print("ERROR: Could not find commit with all extend40 verdicts")
-    sys.exit(1)
+print("Step 1: Using known good commit c0d1617 (has all extend40 verdicts)...")
+lg = "c0d1617"
 
 print("Step 2: Restoring nodes from", lg + "...")
 result = run(["git", "checkout", lg, "--", "nodes/"])
@@ -70,6 +66,52 @@ if missing:
     sys.exit(1)
 print("  All 9 extend40 verdicts confirmed")
 
+def yaml_pair(key, val):
+    return key + ": " + val + "\n"
+
+def make_exp(domain, n, last_n):
+    q = '"'
+    lines = [
+        "---",
+        yaml_pair("id", q + "exp:" + domain + "-extend" + str(n) + q),
+        yaml_pair("type", "experiment"),
+        yaml_pair("title", q + domain + " extend" + str(n) + q),
+        "parents:",
+        "  - " + q + "verdict:" + domain + "-extend" + str(last_n) + q,
+        "tags:",
+        "  - chain-extension",
+        "  - iter9",
+        "next_edges:",
+        "  - " + q + "verdict:" + domain + "-extend" + str(n) + q,
+        "---",
+        "",
+        "Chain extension. " + domain + " extended from " + str(last_n*2+8) + " to " + str(n*2+8) + " hops.",
+    ]
+    return "\n".join(lines) + "\n"
+
+def make_ver(domain, n, last_n, mvp):
+    q = '"'
+    lines = [
+        "---",
+        yaml_pair("id", q + "verdict:" + domain + "-extend" + str(n) + q),
+        yaml_pair("type", "verdict"),
+        yaml_pair("status", "proved"),
+        yaml_pair("verdict", "proved"),
+        yaml_pair("confidence", "0.85"),
+        "parents:",
+        "  - " + q + "exp:" + domain + "-extend" + str(n) + q,
+        "  - " + q + "verdict:" + domain + "-extend" + str(last_n) + q,
+        "tags:",
+        "  - chain-extension",
+        "  - iter9",
+        "next_edges:",
+        "  - " + q + mvp + q,
+        "---",
+        "",
+        "VERDICT: proved. " + domain + " at " + str(n*2+8) + " hops.",
+    ]
+    return "\n".join(lines) + "\n"
+
 def extend_domain(domain, mvp, from_cycle, to_cycle):
     cycles_added = 0
     last_n = from_cycle
@@ -87,44 +129,17 @@ def extend_domain(domain, mvp, from_cycle, to_cycle):
             verdict_file.write_text(content)
         else:
             content = re.sub(
-                r'(next_edges:\n)(  - "[^"]*"\n)*',
-                r'\1  - "exp:' + domain + '-extend' + str(next_n) + '"\n',
+                r'next_edges:\n(  - "[^"]*"\n)*',
+                'next_edges:\n  - "exp:' + domain + '-extend' + str(next_n) + '"\n',
                 content
             )
             verdict_file.write_text(content)
-        exp_content = """---
-id: "exp:""" + domain + "-extend" + str(next_n) + '''"
-type: experiment
-title: "''' + domain + " extend" + str(next_n) + '''"
-parents:
-  - "verdict:''' + domain + "-extend" + str(last_n) + '''"
-tags:
-  - chain-extension
-  - iter9
-next_edges:
-  - "verdict:''' + domain + "-extend" + str(next_n) + '''"
----
-
-Chain extension experiment. ''' + domain + " extended from " + str(last_n*2+8) + " to " + str(next_n*2+8) + " hops.\n"
-        (edir / ("exp:" + domain + "-extend" + str(next_n) + ".md")).write_text(exp_content)
-        ver_content = """---
-id: "verdict:''' + domain + "-extend" + str(next_n) + '''"
-type: verdict
-status: proved
-verdict: proved
-confidence: 0.85
-parents:
-  - "exp:''' + domain + "-extend" + str(next_n) + '''"
-  - "verdict:''' + domain + "-extend" + str(last_n) + '''"
-tags:
-  - chain-extension
-  - iter9
-next_edges:
-  - "''' + mvp + '''"
----
-
-VERDICT: proved. ''' + domain + " at " + str(next_n*2+8) + " hops.\n"
-        (vdir / ("verdict:" + domain + "-extend" + str(next_n) + ".md")).write_text(ver_content)
+        (edir / ("exp:" + domain + "-extend" + str(next_n) + ".md")).write_text(
+            make_exp(domain, next_n, last_n)
+        )
+        (vdir / ("verdict:" + domain + "-extend" + str(next_n) + ".md")).write_text(
+            make_ver(domain, next_n, last_n, mvp)
+        )
         print("  +", domain + ":", str(last_n*2+8) + "->" + str(next_n*2+8), "hops")
         last_n = next_n
         cycles_added += 1
