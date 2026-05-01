@@ -1,33 +1,33 @@
+# autoresearch-tree iteration 2 — agent a00-ed91a81f
+
+## Zoom Level: BIG
+You are exploring the WHOLE graph. Pick a high-level idea or new chain to extend.
+Bias: introduce a fresh idea, fork an under-explored chain, or seed a new domain.
+
 # autoresearch-tree INJECTION CONTEXT
-_generated 2026-05-01T12:04:08+00:00_
+_generated 2026-05-01T11:59:02+00:00_
 
 ## graph snapshot
-- nodes: 169
-- edges: 174
-- by type: app_purpose=2, bigger_outcome=2, experiment=2, hypothesis=60, idea=7, mvp=2, outcome=2, task=90, verdict=2
-- longest chain: 8 hops (via next edges)
-- chain count: 2
+- nodes: 157
+- edges: 148
+- by type: hypothesis=60, idea=7, task=90
+- longest chain: 0 hops (via next edges)
+- chain count: 0
 
 ## attractive ideas (descendant count, top 10)
-- idea:domain-graph-core :: 34 descendants
-- idea:domain-schema-registry :: 26 descendants
+- idea:domain-graph-core :: 28 descendants
 - idea:domain-environment-indexers :: 24 descendants
 - idea:domain-autoresearch-tree-skill :: 23 descendants
 - idea:domain-chain-engine :: 22 descendants
+- idea:domain-schema-registry :: 20 descendants
 - idea:domain-renderers :: 17 descendants
 - idea:domain-embeddings :: 14 descendants
 
 ## ASCII view (≤200 lines)
 ```
-# graph: 169 nodes
-# types: app_purpose=2, bigger_outcome=2, experiment=2, hypothesis=60, idea=7, mvp=2, outcome=2, task=90, verdict=2
+# graph: 157 nodes
+# types: hypothesis=60, idea=7, task=90
 #
-              app-purpose:graph-core :: app_purpose
-              app-purpose:schema-registry :: app_purpose
-            bigger-outcome:graph-core-r1 :: bigger_outcome [next->app-purpose:graph-core, spawns->app-purpose:graph-core]
-            bigger-outcome:schema-registry-r1 :: bigger_outcome [next->app-purpose:schema-registry, spawns->app-purpose:schema-registry]
-    exp:graph-core-r1 :: experiment [next->verdict:graph-core-r1, spawns->verdict:graph-core-r1]
-    exp:schema-registry-r1 :: experiment [next->verdict:schema-registry-r1, spawns->verdict:schema-registry-r1]
   hyp:autoresearch-tree-skill-r1 :: hypothesis [spawns->task:t-076, spawns->task:t-088]
   hyp:autoresearch-tree-skill-r2 :: hypothesis [spawns->task:t-077]
   hyp:autoresearch-tree-skill-r3 :: hypothesis [spawns->task:t-078]
@@ -62,7 +62,7 @@ _generated 2026-05-01T12:04:08+00:00_
   hyp:environment-indexers-r7 :: hypothesis [spawns->task:t-042]
   hyp:environment-indexers-r8 :: hypothesis [spawns->task:t-043]
   hyp:environment-indexers-r9 :: hypothesis [spawns->task:t-044, spawns->task:t-045, spawns->task:t-046]
-  hyp:graph-core-r1 :: hypothesis [next->exp:graph-core-r1, spawns->exp:graph-core-r1, spawns->task:t-001 (+1)]
+  hyp:graph-core-r1 :: hypothesis [spawns->task:t-001, spawns->task:t-002]
   hyp:graph-core-r10 :: hypothesis [spawns->task:t-018]
   hyp:graph-core-r2 :: hypothesis [spawns->task:t-003, spawns->task:t-004]
   hyp:graph-core-r3 :: hypothesis [spawns->task:t-005]
@@ -80,7 +80,7 @@ _generated 2026-05-01T12:04:08+00:00_
   hyp:renderers-r6 :: hypothesis [spawns->task:t-066]
   hyp:renderers-r7 :: hypothesis [spawns->task:t-067]
   hyp:renderers-r8 :: hypothesis [spawns->task:t-068]
-  hyp:schema-registry-r1 :: hypothesis [next->exp:schema-registry-r1, spawns->exp:schema-registry-r1, spawns->task:t-091]
+  hyp:schema-registry-r1 :: hypothesis [spawns->task:t-091]
   hyp:schema-registry-r2 :: hypothesis [spawns->task:t-021]
   hyp:schema-registry-r3 :: hypothesis [spawns->task:t-022, spawns->task:t-023]
   hyp:schema-registry-r4 :: hypothesis [spawns->task:t-024]
@@ -92,13 +92,9 @@ idea:domain-autoresearch-tree-skill :: idea [spawns->hyp:autoresearch-tree-skill
 idea:domain-chain-engine :: idea [spawns->hyp:chain-engine-r1, spawns->hyp:chain-engine-r2, spawns->hyp:chain-engine-r3 (+6)]
 idea:domain-embeddings :: idea [spawns->hyp:embeddings-r1, spawns->hyp:embeddings-r2, spawns->hyp:embeddings-r3 (+4)]
 idea:domain-environment-indexers :: idea [spawns->hyp:environment-indexers-r1, spawns->hyp:environment-indexers-r2, spawns->hyp:environment-indexers-r3 (+6)]
-idea:domain-graph-core :: idea [next->hyp:graph-core-r1, spawns->hyp:graph-core-r1, spawns->hyp:graph-core-r10 (+8)]
+idea:domain-graph-core :: idea [spawns->hyp:graph-core-r1, spawns->hyp:graph-core-r10, spawns->hyp:graph-core-r2 (+7)]
 idea:domain-renderers :: idea [spawns->hyp:renderers-r1, spawns->hyp:renderers-r2, spawns->hyp:renderers-r3 (+5)]
-idea:domain-schema-registry :: idea [next->hyp:schema-registry-r1, spawns->hyp:schema-registry-r1, spawns->hyp:schema-registry-r2 (+6)]
-        mvp:graph-core-r1 :: mvp [next->outcome:graph-core-r1, spawns->outcome:graph-core-r1]
-        mvp:schema-registry-r1 :: mvp [next->outcome:schema-registry-r1, spawns->outcome:schema-registry-r1]
-          outcome:graph-core-r1 :: outcome [next->bigger-outcome:graph-core-r1, spawns->bigger-outcome:graph-core-r1]
-          outcome:schema-registry-r1 :: outcome [next->bigger-outcome:schema-registry-r1, spawns->bigger-outcome:schema-registry-r1]
+idea:domain-schema-registry :: idea [spawns->hyp:schema-registry-r1, spawns->hyp:schema-registry-r2, spawns->hyp:schema-registry-r3 (+5)]
     task:t-001 :: task
     task:t-002 :: task
     task:t-003 :: task
@@ -189,11 +185,9 @@ idea:domain-schema-registry :: idea [next->hyp:schema-registry-r1, spawns->hyp:s
 task:t-090 :: task
     task:t-091 :: task
 task:t-092 :: task
-      verdict:graph-core-r1 :: verdict [next->mvp:graph-core-r1, spawns->mvp:graph-core-r1]
-      verdict:schema-registry-r1 :: verdict [next->mvp:schema-registry-r1, spawns->mvp:schema-registry-r1]
 ----
-Types: app_purpose=2, bigger_outcome=2, experiment=2, hypothesis=60, idea=7, mvp=2, outcome=2, task=90, verdict=2
-Edges: next=14, spawns=160
+Types: hypothesis=60, idea=7, task=90
+Edges: spawns=148
 ```
 
 ## big-vs-small decision
@@ -211,3 +205,19 @@ Each iteration MUST first answer: **explore a big idea or small idea?**
 
 ## next-step suggestions
 - pending tasks: 90 (see nodes/task/)
+
+
+## Your Task
+1. Decide: extend longest chain, fork mid-chain, or start fresh idea.
+2. Pick or create one node id (idea/hypothesis/experiment/mvp/outcome).
+3. Run the experiment / implement the MVP / write the outcome.
+4. When done, signal completion:
+   ```
+   python3 <plugin>/bin/cli.py done 2 a00-ed91a81f \
+     --verdict <proved|disproved|inconclusive_lean_proved:N|inconclusive_lean_disproved:N|pending> \
+     --confidence <0.0-1.0> \
+     --node-id <new_or_extended_node_id> \
+     --notes "<one-line>"
+   ```
+
+If stuck >2 attempts on same approach → write a `pending` verdict and stop.

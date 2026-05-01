@@ -1,6 +1,8 @@
 ---
 confidence: 0.5
 id: "hyp:graph-core-r1"
+next_edges:
+  - "exp:graph-core-r1"
 parents:
   - idea:domain-graph-core
 subgraph: false
