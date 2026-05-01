@@ -6,6 +6,6 @@ confidence: 0.9
 tags:
   - chain-persistence
 next_edges:
-  - "mvp:embeddings-r2"
+  - "exp:embeddings-r2-extend82"
 ---
 VERDICT: proved. Chain at 168 hops.
