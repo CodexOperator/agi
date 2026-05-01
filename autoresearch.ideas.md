@@ -46,3 +46,4 @@
 - ~~**[chain-extension verdict→exp→verdict]**~~ — PROVED (8→10 hops, +25%)
 - ~~**[chain-engine-r14 type-normalization]**~~ — PROVED (0→6×8-hop chains; hyphen→underscore in loader._node_from_frontmatter)
 - **iter7 (a00-296dc0dc):** Schema-registry R2 Bracket Convention proved 6/6. Restored 6 chains × 8 hops from git history. Fixed next_edges placement (must be inside YAML frontmatter between --- markers). **Key lesson:** `git checkout HEAD -- nodes/` wipes chain node dirs; must commit next_edges to HEAD to survive.
+- **iter11/12:** Environment-indexers chain extended to 12 hops via two verdict→experiment→verdict cycles. 13 chains total, 6 at 12 hops, 1 at 8 hops. Primary metric: 12 hops (stacked cycles proven).
