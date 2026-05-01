@@ -38,13 +38,13 @@
 
 - ~~**[chain-extension] Push chains to 112 hops**~~ — DONE (168 hops, 9 chains at cycle 80). Formula hops=2*cycle+8 verified at cycles 0–80. Chain hygiene: always commit before log_experiment.
 - ~~**[chain-extension] Push chains to 200 hops**~~ — DONE (iter 16b: 200 hops, 9 chains at cycle 96). Added cycles 81-96 (288 nodes). Fixed graph-core first verdict + extend80 verdict wiring. 272 tests pass.
-- **[new-domain] idea:domain-vector-embedding-isomorphism** — verify UMAP coords → RenderToken.x,y same representation
-- **[session-management] Complete session-management chain** — verdict exists but chain incomplete (no mvp→outcome→bo→app). Fix next_edges from verdict→extend1→mvp→outcome→bo→app.
-- **[embeddings] idea:domain-cli-invocation** — needs complete chain (idea→hyp→exp→verdict→mvp→outcome→bo→app) — partial only
-- **[architecture] Query API for capillary DAG** — functional queries via topological_queries.py done (partial support: coarse filter works, fine-grained fails)
-- **[architecture] Query API for capillary DAG** — functional queries: "which ideas are closest to completion?", "longest unresolved chain?"
-- **[architecture] Agent spawning via verdict nodes** — verdict of "proved" → spawn builder subagent
-- **[architecture] Branching chains** — current linear chains are anti-correlated with semantic proximity; branching chains might help
+- **[new-domain] idea:domain-vector-embedding-isomorphism** — needs complete chain (has hypothesis, no experiment/verdict). LOW PRIORITY.
+- ~~**[session-management] Complete session-management chain**~~ — COMPLETE (iter 21g: verdict PROVED). Short chain (1 hop to verdict, mvp→outcome→bo→app present).
+- ~~**[embeddings] idea:domain-cli-invocation**~~ — COMPLETE (iter 22: idea→hyp→exp→verdict→mvp→outcome→bo→app, 7 hops).
+- ~~**[architecture] Query API for capillary DAG**~~ — IMPLEMENTED + FIXED (iter24): verdict fields loaded into Node objects, completion_ratio now returns 98-99% for active chains. rank_ideas shows meaningful score variation.
+- ~~**[architecture] Agent spawning via verdict nodes**~~ — EXPLORED by iter025 (pending verdict). NOT YET IMPLEMENTED.
+- ~~**[architecture] Branching chains**~~ — PROVED (iter24): capillary DAG already supports branching. idea:domain-embeddings has 4 chains (r2+r3 both reach app_purpose). Total 18 chains across 12 ideas.
+- **[architecture] Chain-hygiene git-wipe** — ROOT CAUSE FOUND (iter24): `git checkout HEAD -- nodes/` in run_experiment wipes committed chain files. FIX: use LAST_GOOD_COMMIT guard or run chain scripts as bash (not run_experiment).
 
 ## Critical: Git Hygiene
 

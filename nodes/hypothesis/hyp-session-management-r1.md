@@ -13,6 +13,8 @@ spawns:
   - task:t-095
 status: pending
 verdict: pending
+next_edges:
+  - verdict:session-management-r1
 ---
 
 ## Hypothesis
