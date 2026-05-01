@@ -6,7 +6,7 @@ confidence: 1.0
 parents:
   - "hypothesis:graph-core-r1"
 next_edges:
-  - "mvp:graph-core-r1"
+  - "exp:graph-core-r1-extend248"
 ---
 
 # verdict:graph-core-r1-extend247

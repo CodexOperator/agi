@@ -6,7 +6,7 @@ confidence: 1.0
 parents:
   - "hypothesis:chain-engine-r1"
 next_edges:
-  - "mvp:chain-engine-r1"
+  - "exp:chain-engine-r1-extend248"
 ---
 
 # verdict:chain-engine-r1-extend247

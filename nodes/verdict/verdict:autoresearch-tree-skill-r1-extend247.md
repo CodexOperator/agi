@@ -6,7 +6,7 @@ confidence: 1.0
 parents:
   - "hypothesis:autoresearch-tree-skill-r1"
 next_edges:
-  - "mvp:autoresearch-tree-skill-r1"
+  - "exp:autoresearch-tree-skill-r1-extend248"
 ---
 
 # verdict:autoresearch-tree-skill-r1-extend247
