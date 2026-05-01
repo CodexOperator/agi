@@ -9,10 +9,10 @@
   "context_file": "/home/ubuntu/.hermes/agi-tree/sessions/iter-001/a00-49913d1f/context.md",
   "log_file": "/home/ubuntu/.hermes/agi-tree/sessions/iter-001/a00-49913d1f/output.log",
   "command": "/home/ubuntu/.npm-global/bin/pi --append-system-prompt @/home/ubuntu/.hermes/agi-tree/sessions/iter-001/a00-49913d1f/context.md --append-system-prompt 'You are agent a00-49913d1f on iteration 1. When complete, run: python3 /home/ubuntu/autoresearch-tree/extensions/autoresearch-tree/bin/cli.py done 1 a00-49913d1f --verdict <state> --confidence <0..1> --node-id <id>. Stay within zoom scope; do NOT wander.' --append-system-prompt @/home/ubuntu/autoresearch-tree/extensions/autoresearch-tree/lib/agent-prompt.md 'Begin iteration 1 as agent a00-49913d1f. Read your zoom context, do the work, signal done.'",
-  "finished_at": 1777636721,
+  "finished_at": 1777638673,
   "verdict": "proved",
   "confidence": 0.95,
-  "node_id": "exp:schema-registry-r1",
+  "node_id": "exp:renderers-r1",
   "parent": null,
-  "notes": "schema-registry R1 proved 41/41 tests + 5/5 criteria, created 8-hop chain for domain-schema-registry"
+  "notes": "renderers R1: proved 31/31 tests + 4/4 criteria, created 8-hop chain for domain-renderers. Also fixed loader _split_type normalization, restored embeddings-r3 chain, confirmed 5 total 8-hop chains. 241 tests pass."
 }
