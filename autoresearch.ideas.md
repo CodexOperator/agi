@@ -18,9 +18,7 @@
   - VerdictState enum already implemented in experiment
   - Need to port to schema-registry as a bracketed schema
 
-- **[environment-indexers] CLI invocation detection**
-  - T-032..T-046 pending for environment-indexers domain
-  - Could index which shell commands are available in the environment
+- ~~**[environment-indexers] CLI invocation detection**~~ — PARTIAL (R10 filesystem-tree indexer proved 7/7, but shell command detection not yet implemented)
 
 ## Low Priority / Interesting
 
