@@ -51,60 +51,70 @@ def find_chains(graph: RenderableGraph) -> list[Chain]:
     ]
 
     for idea_id in sorted(idea_nodes):  # sorted for determinism
-        _traverse_from(idea_id, graph, next_edges, spawns_edges, [], chains)
+        _traverse_iterative(idea_id, graph, next_edges, spawns_edges, [], chains)
 
     return chains
 
 
-def _traverse_from(
-    node_id: str,
+def _traverse_iterative(
+    start_id: str,
     graph: RenderableGraph,
     next_edges: dict[str, list[str]],
     spawns_edges: dict[str, list[str]],
     path: Chain,
     chains: list[Chain],
-    depth: int = 0,
 ) -> None:
-    """DFS traversal from node_id, building valid chain paths.
+    """Iterative traversal from start_id, building valid chain paths.
     
-    When a node has no 'next' successors, falls back to 'spawns' children
-    to enable true capillary branching (one idea → multiple chains).
+    Uses a stack instead of recursion to handle 700+ hop chains.
+    Each stack frame: (node_id, path_so_far, successors_iterator).
     """
-    node = graph.get_node(node_id)
-    if node is None:
-        return
+    # Stack: list of (node_id, current_path, successors_remaining)
+    stack: list[tuple[str, Chain, list[str]]] = [(start_id, path + [start_id], [])]
 
-    new_path = path + [node_id]
+    while stack:
+        node_id, current_path, successors = stack.pop()
 
-    # Check if this completes a full chain (reached app_purpose)
-    if node.type == "app_purpose":
-        chains.append(new_path)
-        return
+        node = graph.get_node(node_id)
+        if node is None:
+            continue
 
-    # Get successors via 'next' edges first (primary path)
-    successors = next_edges.get(node_id, [])
+        # Check if this completes a full chain (reached app_purpose)
+        if node.type == "app_purpose":
+            chains.append(current_path)
+            continue
 
-    # If no 'next' successors, fall back to 'spawns' children for capillary branching
-    # This allows one idea to spawn multiple chains (one per hypothesis)
-    if not successors:
-        successors = spawns_edges.get(node_id, [])
+        # Get successors via 'next' edges first (primary path)
+        if successors:
+            # Continue with remaining successors (non-empty list from previous iteration)
+            pass
+        else:
+            successors = list(reversed(sorted(next_edges.get(node_id, []))))  # LIFO order
+            if not successors:
+                successors = list(reversed(sorted(spawns_edges.get(node_id, []))))
 
-    if not successors:
-        # Dead end — not a complete chain (doesn't reach app_purpose)
-        return
+        if not successors:
+            # Dead end — not a complete chain (doesn't reach app_purpose)
+            continue
 
-    for succ_id in sorted(successors):  # sorted for determinism
+        # Take the first successor and push the rest onto the stack
+        succ_id = successors.pop()
+        if successors:
+            # Push remaining successors back (they'll be processed after the current branch)
+            stack.append((node_id, current_path, successors))
+
         succ_node = graph.get_node(succ_id)
         if succ_node is None:
             continue
 
         # Validate the transition (only for 'next' edges; spawns can jump types)
-        if node_id in next_edges and is_valid_transition(node.type, succ_node.type):
-            _traverse_from(succ_id, graph, next_edges, spawns_edges, new_path, chains, depth + 1)
-        elif node_id not in next_edges:
-            # No 'next' edge from this node — any spawns child is valid
-            _traverse_from(succ_id, graph, next_edges, spawns_edges, new_path, chains, depth + 1)
-        # Invalid transition: skip this successor (path rejected)
+        if node_id in next_edges:
+            if not is_valid_transition(node.type, succ_node.type):
+                continue  # Invalid transition: skip
+        # No 'next' edge from this node — any spawns child is valid (pass through)
+
+        # Push the successor onto the stack with its fresh successors list
+        stack.append((succ_id, current_path + [succ_id], []))
 
 
 def find_chains_from_node(graph: RenderableGraph, start_id: str) -> list[Chain]:
@@ -130,5 +140,5 @@ def find_chains_from_node(graph: RenderableGraph, start_id: str) -> list[Chain]:
     if start_node is None:
         return []
 
-    _traverse_from(start_id, graph, next_edges, spawns_edges, [], chains)
+    _traverse_iterative(start_id, graph, next_edges, spawns_edges, [], chains)
     return chains
