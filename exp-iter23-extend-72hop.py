@@ -25,6 +25,29 @@ def run(cmd):
         print(f"  stderr: {r.stderr[:200]}")
     return r
 
+def find_last_good_commit() -> str | None:
+    """Find the most recent commit containing all 3 extend28 verdict files."""
+    verdict_names = [
+        "verdict:chain-engine-r1-extend28.md",
+        "verdict:environment-indexers-r1-extend28.md",
+        "verdict:graph-core-r1-extend28.md",
+    ]
+    for i in range(80):
+        commit = f"HEAD~{i}"
+        r = run(["git", "rev-parse", "--verify", commit])
+        if r.returncode != 0:
+            break
+        all_present = True
+        for name in verdict_names:
+            r = run(["git", "ls-tree", "-q", commit, f"nodes/verdict/{name}"])
+            if r.returncode != 0:
+                all_present = False
+                break
+        if all_present:
+            print(f"  Found last-good: {commit} ({r.stdout.strip().split()[0][:7]}...)")
+            return commit
+    return None
+
 def git_add_commit(msg):
     run(["git", "add", "nodes/", "autoresearch.ideas.md"])
     r = run(["git", "commit", "-m", msg])
@@ -136,6 +159,15 @@ def update_ideas_backlog():
 
 def main() -> int:
     print("=== iter23: Extend 3 chains 64→72 hops ===")
+    
+    # Find and restore from last-good commit
+    print("\nFinding last-good commit...")
+    last_good = find_last_good_commit()
+    if last_good:
+        print(f"  Restoring nodes/ from {last_good}...")
+        run(["git", "checkout", last_good, "--", "nodes/"])
+    else:
+        print("  WARNING: Could not find last-good commit with extend28 files!")
     
     # Check baseline
     g0, _ = load_directory(ROOT / "nodes")

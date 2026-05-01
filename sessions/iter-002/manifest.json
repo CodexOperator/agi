@@ -1,19 +1,19 @@
 {
   "iter": 2,
-  "started_at": 1777636742,
+  "started_at": 1777648317,
   "timeout_seconds": 600,
   "agents": [
     {
-      "id": "a00-ed91a81f",
+      "id": "a00-8215e934",
       "slot": 0,
       "level": "big",
       "target": null,
-      "pid": 1147775,
-      "started_at": 1777636742,
+      "pid": 1196676,
+      "started_at": 1777648317,
       "status": "running",
-      "context_file": "/home/ubuntu/.hermes/agi-tree/sessions/iter-002/a00-ed91a81f/context.md",
-      "log_file": "/home/ubuntu/.hermes/agi-tree/sessions/iter-002/a00-ed91a81f/output.log",
-      "command": "/home/ubuntu/.npm-global/bin/pi --append-system-prompt @/home/ubuntu/.hermes/agi-tree/sessions/iter-002/a00-ed91a81f/context.md --append-system-prompt 'You are agent a00-ed91a81f on iteration 2. When complete, run: python3 /home/ubuntu/autoresearch-tree/extensions/autoresearch-tree/bin/cli.py done 2 a00-ed91a81f --verdict <state> --confidence <0..1> --node-id <id>. Stay within zoom scope; do NOT wander.' --append-system-prompt @/home/ubuntu/autoresearch-tree/extensions/autoresearch-tree/lib/agent-prompt.md 'Begin iteration 2 as agent a00-ed91a81f. Read your zoom context, do the work, signal done.'"
+      "context_file": "/home/ubuntu/.hermes/agi-tree/sessions/iter-002/a00-8215e934/context.md",
+      "log_file": "/home/ubuntu/.hermes/agi-tree/sessions/iter-002/a00-8215e934/output.log",
+      "command": "/home/ubuntu/.npm-global/bin/pi --append-system-prompt @/home/ubuntu/.hermes/agi-tree/sessions/iter-002/a00-8215e934/context.md --append-system-prompt 'You are agent a00-8215e934 on iteration 2. Your job: fill in the scaffolded node file below, then signal done.' --append-system-prompt 'SCAFFOLDED NODE FILE: /home/ubuntu/.hermes/agi-tree/nodes/hypothesis/a00-8215e934-67fdb1.md\nNode type: hypothesis  Node ID: hypothesis:a00-8215e934-67fdb1  Parent: \nFILL IN the body of that file. Do NOT rewrite frontmatter.\nWhen done, run: python3 /home/ubuntu/autoresearch-tree/extensions/autoresearch-tree/bin/cli.py done 2 a00-8215e934 --verdict <state> --confidence <0..1> --node-id hypothesis:a00-8215e934-67fdb1 --parent ' --append-system-prompt @/home/ubuntu/autoresearch-tree/extensions/autoresearch-tree/lib/agent-prompt.md 'Begin iteration 2 as agent a00-8215e934. Read your zoom context, do the work, signal done.'"
     }
   ]
 }
