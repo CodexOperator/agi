@@ -2,9 +2,9 @@
 
 ## Primary Metric
 - **longest_chain_length** (hops, direction: higher)
-- Current best: 708 hops (9 chains at cycle 350 each)
-- Chain formula: hops = 2 × max_cycle + 8 (verified at cycles 0–350)
-- 9 chains at 708 hops (cycles 350), 1 at 300 hops, 13 at 8 hops. Total 23 chains, 274 tests.
+- Current best: 1000 hops (9 chains at cycle 496 each)
+- Chain formula: hops = 2 × max_cycle + 8 (verified at cycles 0–496)
+- 9 chains at 1000 hops (cycle 496), 1 at 300 hops, 13 at 8 hops. Total 23 chains, 274 tests.
 - **Load time: 468ms** (CSafeLoader optimization)
 - **iter24 (a01-7031af17):** Fixed chain shortcut bugs: verdict:extendN→mvp instead of verdict:extendN→exp:extendN+1. Extended 9 chains from 300→708 hops. Session-management: extend1→mvp shortcut fixed. Formula 708=2*350+8 verified. 274 tests.
 
