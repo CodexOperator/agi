@@ -1,25 +1,26 @@
 # autoresearch-tree INJECTION CONTEXT
-_generated 2026-05-01T07:15:24+00:00_
+_generated 2026-05-01T07:20:10+00:00_
 
 ## graph snapshot
-- nodes: 175
-- edges: 183
-- by type: app_purpose=2, bigger_outcome=3, experiment=2, hypothesis=62, idea=7, mvp=3, outcome=3, task=90, verdict=3
+- nodes: 187
+- edges: 201
+- by type: app_purpose=2, bigger_outcome=3, experiment=4, hypothesis=65, idea=8, mvp=3, outcome=3, task=93, verdict=6
 - longest chain: 7 hops
 
 ## attractive ideas (descendant count, top 10)
-- idea:domain-chain-engine :: 33 descendants
+- idea:domain-chain-engine :: 34 descendants
 - idea:domain-graph-core :: 31 descendants
 - idea:domain-autoresearch-tree-skill :: 29 descendants
 - idea:domain-environment-indexers :: 24 descendants
 - idea:domain-schema-registry :: 20 descendants
 - idea:domain-renderers :: 17 descendants
 - idea:domain-embeddings :: 14 descendants
+- idea:domain-chain-composition :: 10 descendants
 
 ## ASCII view (≤200 lines)
 ```
-# graph: 175 nodes
-# types: app_purpose=2, bigger_outcome=3, experiment=2, hypothesis=62, idea=7, mvp=3, outcome=3, task=90, verdict=3
+# graph: 187 nodes
+# types: app_purpose=2, bigger_outcome=3, experiment=4, hypothesis=65, idea=8, mvp=3, outcome=3, task=93, verdict=6
 #
               app-purpose:autoresearch-tree-skill :: app_purpose
               app-purpose:graph-core :: app_purpose
@@ -27,8 +28,10 @@ _generated 2026-05-01T07:15:24+00:00_
           bigger-outcome:chain-engine-r10 :: bigger_outcome
             bigger-outcome:graph-core-r11 :: bigger_outcome [next->app-purpose:graph-core, spawns->app-purpose:graph-core]
     exp:autoresearch-tree-skill-r1 :: experiment [next->verdict:autoresearch-tree-skill-r1, spawns->verdict:autoresearch-tree-skill-r1]
+    exp:chain-composition-r1 :: experiment [next->verdict:chain-composition-r1, spawns->verdict:chain-composition-r1]
+    exp:chain-composition-r2 :: experiment [next->verdict:chain-composition-r2, spawns->verdict:chain-composition-r2]
     exp:graph-core-r11 :: experiment [next->verdict:graph-core-r11, spawns->verdict:graph-core-r11]
-  hyp:autoresearch-tree-skill-r1 :: hypothesis [spawns->exp:autoresearch-tree-skill-r1, spawns->task:t-076, spawns->task:t-088]
+  hyp:autoresearch-tree-skill-r1 :: hypothesis [next->exp:autoresearch-tree-skill-r1, spawns->exp:autoresearch-tree-skill-r1, spawns->task:t-076 (+1)]
   hyp:autoresearch-tree-skill-r2 :: hypothesis [spawns->task:t-077]
   hyp:autoresearch-tree-skill-r3 :: hypothesis [spawns->task:t-078]
   hyp:autoresearch-tree-skill-r4 :: hypothesis [spawns->task:t-079, spawns->task:t-080]
@@ -37,11 +40,14 @@ _generated 2026-05-01T07:15:24+00:00_
   hyp:autoresearch-tree-skill-r7 :: hypothesis [spawns->task:t-085, spawns->task:t-086]
   hyp:autoresearch-tree-skill-r8 :: hypothesis [spawns->task:t-087]
   hyp:autoresearch-tree-skill-r9 :: hypothesis [spawns->task:t-089]
+  hyp:chain-composition-r1 :: hypothesis [next->exp:chain-composition-r1, spawns->exp:chain-composition-r1, spawns->task:t-093]
+  hyp:chain-composition-r2 :: hypothesis [next->exp:chain-composition-r2, spawns->exp:chain-composition-r2, spawns->task:t-094]
+  hyp:chain-composition-r3 :: hypothesis [spawns->task:t-095]
   hyp:chain-engine-r1 :: hypothesis [spawns->task:t-047]
   hyp:chain-engine-r10 :: hypothesis [next->exp:graph-core-r11, spawns->exp:graph-core-r11, spawns->verdict:chain-engine-r10]
   hyp:chain-engine-r2 :: hypothesis [spawns->task:t-048]
   hyp:chain-engine-r3 :: hypothesis [spawns->task:t-049]
-  hyp:chain-engine-r4 :: hypothesis [spawns->task:t-050]
+  hyp:chain-engine-r4 :: hypothesis [spawns->task:t-050, spawns->verdict:chain-engine-r4]
   hyp:chain-engine-r5 :: hypothesis [spawns->task:t-051]
   hyp:chain-engine-r6 :: hypothesis [spawns->task:t-052]
   hyp:chain-engine-r7 :: hypothesis [spawns->task:t-053]
@@ -90,7 +96,8 @@ _generated 2026-05-01T07:15:24+00:00_
   hyp:schema-registry-r6 :: hypothesis [spawns->task:t-028]
   hyp:schema-registry-r7 :: hypothesis [spawns->task:t-030]
   hyp:schema-registry-r8 :: hypothesis [spawns->task:t-031]
-idea:domain-autoresearch-tree-skill :: idea [spawns->hyp:autoresearch-tree-skill-r1, spawns->hyp:autoresearch-tree-skill-r2, spawns->hyp:autoresearch-tree-skill-r3 (+6)]
+idea:domain-autoresearch-tree-skill :: idea [next->hyp:autoresearch-tree-skill-r1, spawns->hyp:autoresearch-tree-skill-r1, spawns->hyp:autoresearch-tree-skill-r2 (+7)]
+idea:domain-chain-composition :: idea [next->hyp:chain-composition-r1, spawns->hyp:chain-composition-r1, spawns->hyp:chain-composition-r2 (+1)]
 idea:domain-chain-engine :: idea [spawns->hyp:chain-engine-r1, next->hyp:chain-engine-r10, spawns->hyp:chain-engine-r10 (+8)]
 idea:domain-embeddings :: idea [spawns->hyp:embeddings-r1, spawns->hyp:embeddings-r2, spawns->hyp:embeddings-r3 (+4)]
 idea:domain-environment-indexers :: idea [spawns->hyp:environment-indexers-r1, spawns->hyp:environment-indexers-r2, spawns->hyp:environment-indexers-r3 (+6)]
@@ -193,12 +200,18 @@ idea:domain-schema-registry :: idea [spawns->hyp:schema-registry-r1, spawns->hyp
     task:t-090 :: task
     task:t-091 :: task
     task:t-092 :: task
+    task:t-093 :: task
+    task:t-094 :: task
+    task:t-095 :: task
       verdict:autoresearch-tree-skill-r1 :: verdict [next->mvp:autoresearch-tree-skill-r1, spawns->mvp:autoresearch-tree-skill-r1]
+      verdict:chain-composition-r1 :: verdict
+      verdict:chain-composition-r2 :: verdict
     verdict:chain-engine-r10 :: verdict [next->mvp:chain-engine-r10-next-edges-persist, spawns->mvp:chain-engine-r10-next-edges-persist]
+    verdict:chain-engine-r4 :: verdict
       verdict:graph-core-r11 :: verdict [next->mvp:graph-core-r11-chain-persist, spawns->mvp:graph-core-r11-chain-persist]
 ----
-Types: app_purpose=2, bigger_outcome=3, experiment=2, hypothesis=62, idea=7, mvp=3, outcome=3, task=90, verdict=3
-Edges: next=15, spawns=168
+Types: app_purpose=2, bigger_outcome=3, experiment=4, hypothesis=65, idea=8, mvp=3, outcome=3, task=93, verdict=6
+Edges: next=22, spawns=179
 ```
 
 ## big-vs-small decision
@@ -215,4 +228,4 @@ Each iteration MUST first answer: **explore a big idea or small idea?**
 - new ideas spawn from any node type (idea/hypothesis/experiment/verdict)
 
 ## next-step suggestions
-- pending tasks: 90 (see nodes/task/)
+- pending tasks: 93 (see nodes/task/)
