@@ -14,7 +14,7 @@ tags:
   - second-cycle
   - proved
 next_edges:
-  - "mvp:schema-registry-r2-bracket-convention"
+  - "exp:schema-registry-r2-bracket-convention-extend3"
 ---
 
 VERDICT: proved. Chain extended from 10 to 12 hops via second verdict→experiment→verdict cycle.

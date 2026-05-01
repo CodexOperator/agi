@@ -5,7 +5,7 @@ type: outcome
 parents:
   - mvp:schema-registry-r2-bracket-convention
 next_edges:
-  - bigger-outcome:schema-registry-r2
+  - bigger-outcome:schema-registry-r1
 ---
 
 **outcome** node for schema-registry R2: Bracket Convention.
