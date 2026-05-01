@@ -1,20 +1,24 @@
 ---
-acceptance_criteria: ['R6.2 (subdirectory loaded as subgraph node whose type resolved through schema-registry)', 'R6.3 (files not matching any schema load as generic with warning listing them)']
-blocked_by: ['task:t-011', 'task:t-019', 'task:t-020']
-cavekit_req: 'graph-core/R6'
-effort: 'M'
-id: 'task:t-012'
-parents: ['hyp:graph-core-r6']
-status: 'pending'
-tags: ['M', 'tier--1']
+acceptance_criteria:
+  - R6.2 (subdirectory loaded as subgraph node whose type resolved through schema-registry)
+  - R6.3 (files not matching any schema load as generic with warning listing them)
+blocked_by:
+  - task:t-011
+  - task:t-019
+  - task:t-020
+cavekit_req: graph-core/R6
+effort: M
+id: "task:t-012"
+parents:
+  - hyp:graph-core-r6
+status: pending
+tags:
+  - M
+  - tier--1
 tier: -1
-title: 'T-012: Subdirectory→subgraph node resolution via schema-registry'
-type: 'task'
-claimed_by: 'new-agent-42'
-claimed_at: 1777662500
+title: "T-012: Subdirectory→subgraph node resolution via schema-registry"
+type: task
 ---
-
-
 
 **Description:** When loader encounters a subdirectory, it asks the schema-registry to resolve the directory name into a node type. Falls back to generic node type when no match. Emits a single aggregated warning naming each unmatched file.
 

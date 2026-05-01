@@ -686,3 +686,53 @@ ERR: ollama package not installed (pip install ollama)
 scaffolded hypothesis node: hypothesis:a00-6414af82-f1b9dd
 spawned a00-6414af82 pid=1248336 level=big target=- strategy=explore_new
 manifest: /home/ubuntu/.hermes/agi-tree/sessions/iter-002/manifest.json
+all agents terminal
+[post_wire] iter=2
+  nodes updated: 0
+  edges added: 0
+  graph snapshot: /home/ubuntu/.hermes/agi-tree/sessions/iter-002/iter-002-graph.json
+iter 2: 1 agents
+  a00-6414af82: status=done verdict=proved pid=1248336
+=== iter 3 @ 2026-05-01T19:10:05Z ===
+wrote: 7 idea + 60 hypothesis + 91 task = 158 nodes
+target dir: /home/ubuntu/.hermes/agi-tree/nodes
+loaded 157 nodes from /home/ubuntu/.hermes/agi-tree/nodes
+ASCII rendering: 163 lines
+wrote: /home/ubuntu/.hermes/agi-tree/context/INJECTION.md
+METRIC longest_chain_length=2
+METRIC avg_chain_depth=0.96
+METRIC mvp_count=0
+METRIC outcome_coverage=0.000
+METRIC chain_branching_factor=2.21
+METRIC node_count=157
+METRIC edge_count=148
+ERR: ollama package not installed (pip install ollama)
+scaffolded hypothesis node: hypothesis:a00-2c6ccbe8-d1eab7
+spawned a00-2c6ccbe8 pid=1252267 level=big target=- strategy=explore_new
+manifest: /home/ubuntu/.hermes/agi-tree/sessions/iter-003/manifest.json
+all agents terminal
+[post_wire] iter=3
+  nodes updated: 0
+  edges added: 0
+  graph snapshot: /home/ubuntu/.hermes/agi-tree/sessions/iter-003/iter-003-graph.json
+iter 3: 1 agents
+  a00-2c6ccbe8: status=done verdict=pending pid=1252267
+=== iter 1 @ 2026-05-01T19:20:17Z ===
+wrote: 7 idea + 60 hypothesis + 91 task = 158 nodes
+target dir: /home/ubuntu/.hermes/agi-tree/nodes
+loaded 157 nodes from /home/ubuntu/.hermes/agi-tree/nodes
+ASCII rendering: 163 lines
+wrote: /home/ubuntu/.hermes/agi-tree/context/INJECTION.md
+METRIC longest_chain_length=2
+METRIC avg_chain_depth=0.96
+METRIC mvp_count=0
+METRIC outcome_coverage=0.000
+METRIC chain_branching_factor=2.21
+METRIC node_count=157
+METRIC edge_count=148
+ERR: ollama package not installed (pip install ollama)
+scaffolded hypothesis node: hypothesis:a00-1467544f-aaaa25
+spawned a00-1467544f pid=1259541 level=big target=- strategy=explore_new
+scaffolded hypothesis node: hypothesis:a01-7031af17-449ecb
+spawned a01-7031af17 pid=1259549 level=small target=idea:domain-graph-core strategy=branch_fork
+manifest: /home/ubuntu/.hermes/agi-tree/sessions/iter-001/manifest.json
