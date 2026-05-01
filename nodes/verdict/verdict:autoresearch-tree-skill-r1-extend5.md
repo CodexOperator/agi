@@ -14,7 +14,7 @@ tags:
   - fifth-cycle
   - proved
 next_edges:
-  - "mvp:autoresearch-tree-skill-r1"
+  - "exp:autoresearch-tree-skill-r1-extend6"
 ---
 
 VERDICT: proved. Chain fully closed at 16 hops:
