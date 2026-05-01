@@ -14,6 +14,7 @@ next_edges:
   - exp:embeddings-r3
 ---
 
+
 **Description:** The `(x, y)` coordinates produced by projection are exactly the `x` and `y` values used by the renderers' shared representation. There is one source of truth.
 
 **Acceptance Criteria:**

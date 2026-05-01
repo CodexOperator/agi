@@ -18,6 +18,8 @@
 
 ## Low Priority / Remaining
 
+- **[chain-engine] Persist verdict→experiment→verdict next_edges** — prior run 5 showed 10-hop chains in-memory but edges NOT persisted to node files. Need to add verdict→exp next_edges to verdict node frontmatter to make 10-hop chains survive cold reload.
+
 - ~~**[multi-agent] 5-agent parallel dispatch smoke test**~~ — DONE (iter 8: multi-agent-dispatch-r1 proved, config valid, dispatch works)
 
 ## Done This Session
@@ -27,3 +29,4 @@
 - ~~**[verdict-schema-auto-gen-r1]**~~ — PROVED (87.5% enforcement)
 - ~~**[multi-agent-dispatch-r1]**~~ — PROVED (config valid, dispatch works)
 - ~~**[chain-extension verdict→exp→verdict]**~~ — PROVED (8→10 hops, +25%)
+- ~~**[chain-engine-r14 type-normalization]**~~ — PROVED (0→6×8-hop chains; hyphen→underscore in loader._node_from_frontmatter)

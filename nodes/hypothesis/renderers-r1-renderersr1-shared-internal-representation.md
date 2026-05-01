@@ -14,6 +14,7 @@ next_edges:
   - exp:renderers-r1
 ---
 
+
 **Description:** All renderers operate over a uniform representation: a sequence of render tokens, where each token carries identity, label, type, depth, two-dimensional coordinates, and outgoing edges.
 
 **Acceptance Criteria:**
