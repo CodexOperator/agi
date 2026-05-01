@@ -14,7 +14,7 @@ tags:
   - 12th-cycle
   - proved
 next_edges:
-  - "mvp:renderers-r1"
+  - "exp:renderers-r1-extend13"
 ---
 
 VERDICT: proved. renderers-r1 chain at 12 cycles = 32 hops. Formula N→2N+8: 12→32 hops verified. Now matching environment-indexers and graph-core at 32 hops. 4 domains at 32+ hops.
