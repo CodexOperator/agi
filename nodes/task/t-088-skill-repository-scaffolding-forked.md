@@ -7,7 +7,7 @@ effort: S
 id: "task:t-088"
 parents:
   - hyp:autoresearch-tree-skill-r1
-status: pending
+status: done
 tags:
   - S
   - tier--1

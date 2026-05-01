@@ -194,6 +194,15 @@ Live record of build progress against `context/plans/build-site.md`.
 - **Validation:** Tests 5/5 PASS (test_cascade_step_2.py); full schema_registry suite 41/41 PASS; full repo suite 167/167 PASS. R5.2 (fingerprint Jaccard match against active schemas, threshold default 0.7), end-to-end discover_schema chains step 1 → step 2, sub-threshold misses fall through, jaccard/collect_fingerprint helpers verified.
 - **Notes:** `collect_fingerprint()` unions frontmatter keys across .md/.json files in a directory using `load_node_file(p, body=False)` (skips body parse — keys only). `schema_field_keys()` excludes `name`, `fields`, `validation` from the comparison set so a schema with explicit `fields:` plus a `name:` header doesn't artificially deflate Jaccard against node-level frontmatter. `cascade_step_2()` only scores ACTIVE schemas, returns the highest scorer iff its score ≥ threshold else `no-match` carrying `candidate_score` for diagnostics. Module-level `register_extra_step(cascade_step_2)` self-registers at import — `from .fingerprint import ...` in package `__init__.py` triggers registration so `discover_schema()` chains step 1 → step 2 with no manual wiring.
 
+### Iteration 25 — 2026-05-01T08:00:00Z
+- **Task:** T-047 — Chain definition and ordered-type traversal (chain-engine/R1)
+- **Tier:** 1 (was -1, resolved via T-004 + T-031)
+- **Status:** DONE
+- **Files:** src/chain_engine/types.py, src/chain_engine/chains.py, src/chain_engine/__init__.py, tests/chain_engine/test_chain_definition.py
+- **Validation:** Tests 12/12 PASS; full suite 203/203 PASS. R1.1+R1.2+R1.3+R1.4 all covered.
+- **Notes:** Chain defined as list[str] of node ids. find_chains() DFS traverses from idea nodes via 'next' edges. Valid transition rules in types.py allow consecutive hypothesis/experiment nodes. Shared prefixes preserved (not deduplicated). Deterministic via sorted traversal.
+- **Next:** T-048 (chains virtual — no persistence), T-049 (longest-chain ranking) — both blocked by graph-core/T-004 (done).
+
 ### Iteration 24 — 2026-05-01T07:30:00Z
 - **Task:** T-032 — Indexer invocation command (environment-indexers/R1)
 - **Tier:** 5
