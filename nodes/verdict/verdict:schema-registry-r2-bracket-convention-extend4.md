@@ -14,7 +14,7 @@ tags:
   - fourth-cycle
   - proved
 next_edges:
-  - "mvp:schema-registry-r2-bracket-convention"
+  - "exp:schema-registry-r2-bracket-convention-extend5"
 ---
 
 VERDICT: proved. Chain reached 14 hops: idea → hyp → exp → verdict → exp-extend → verdict-extend → exp-extend2 → verdict-extend2 → exp-extend3 → verdict-extend3 → exp-extend4 → verdict-extend4 → mvp → outcome → bigger → app_purpose.

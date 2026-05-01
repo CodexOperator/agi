@@ -14,7 +14,7 @@ tags:
   - fourth-cycle
   - proved
 next_edges:
-  - "mvp:exporters-r1"
+  - "exp:exporters-r1-extend5"
 ---
 
 VERDICT: proved. Chain reached 16 hops via fourth verdict→experiment→verdict cycle.

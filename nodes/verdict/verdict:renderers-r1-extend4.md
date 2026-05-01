@@ -14,7 +14,7 @@ tags:
   - fourth-cycle
   - proved
 next_edges:
-  - "mvp:renderers-r1"
+  - "exp:renderers-r1-extend5"
 ---
 
 VERDICT: proved. Chain reached 14 hops: idea → hyp → exp → verdict → exp-extend → verdict-extend → exp-extend2 → verdict-extend2 → exp-extend3 → verdict-extend3 → exp-extend4 → verdict-extend4 → mvp → outcome → bigger → app_purpose.
