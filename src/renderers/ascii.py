@@ -41,10 +41,12 @@ def render_ascii(representation: Representation) -> str:
 
     # Body: one line per token, indented by depth.
     rendered_count = 0
+    truncated = False
     for t in tokens:
         if len(lines) >= MAX_LINES - 1:
             remaining = len(tokens) - rendered_count
             lines.append(_truncate_line(TRUNC_MARKER_FMT.format(n=remaining)))
+            truncated = True
             break
         indent = "  " * max(t.depth, 0)
         edge_summary = ""
@@ -55,6 +57,40 @@ def render_ascii(representation: Representation) -> str:
         line = f"{indent}{t.label} :: {t.type}{edge_summary}"
         lines.append(_truncate_line(line))
         rendered_count += 1
+
+    # Footer: type counts and edge counts (omitted for empty graph).
+    if tokens:
+        # Collect edge relation counts across all tokens.
+        edge_counts: dict[str, int] = defaultdict(int)
+        for t in tokens:
+            for _tgt, rel in t.edges:
+                edge_counts[rel] += 1
+
+        footer_lines: list[str] = [
+            "----",
+            "Types: " + ", ".join(f"{k}={v}" for k, v in sorted(type_counts.items())),
+        ]
+        if edge_counts:
+            footer_lines.append(
+                "Edges: " + ", ".join(f"{k}={v}" for k, v in sorted(edge_counts.items()))
+            )
+
+        # If body was truncated, drop the truncation marker and place footer last.
+        if truncated:
+            lines.pop()
+
+        # Append footer if it fits within MAX_LINES; if not, still append (footer wins).
+        for fl in footer_lines:
+            lines.append(_truncate_line(fl))
+
+        # If we exceed MAX_LINES after adding footer, trim body lines to make room.
+        while len(lines) > MAX_LINES:
+            # Remove the line just before the footer block (index = len - footer_lines).
+            footer_start = len(lines) - len(footer_lines)
+            if footer_start > 0:
+                lines.pop(footer_start - 1)
+            else:
+                break
 
     return "\n".join(lines) + "\n"
 
