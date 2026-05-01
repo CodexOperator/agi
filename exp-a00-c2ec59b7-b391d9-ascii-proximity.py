@@ -28,7 +28,7 @@ for node_id in graph.node_ids:
 
 # Filter to nodes with at least 1 descendant
 nodes_with_desc = [n for n in graph.node_ids if descendants.get(n)]
-print(f"Total nodes: {len(graph.nodes)}, nodes with descendants: {len(nodes_with_desc)}")
+print(f"Total nodes: {len(graph.node_ids)}, nodes with descendants: {len(nodes_with_desc)}")
 
 # Sample 30 node pairs (A, B) where A != B
 import random
@@ -66,7 +66,7 @@ print(f"ASCII render: {len(lines)} lines")
 # Extract line numbers for each node ID
 node_line = {}  # node_id -> line number (0-indexed)
 for row, line in enumerate(lines):
-    for node_id in sorted(graph.nodes):
+    for node_id in sorted(graph.node_ids):
         short = node_id.split(':')[-1] if ':' in node_id else node_id[:16]
         if short in line:
             if node_id not in node_line:
