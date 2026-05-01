@@ -11,7 +11,7 @@ tags:
   - chain-extension
   - r21b
 next_edges:
-  - "mvp:chain-engine-r1"
+  - "exp:chain-engine-r1-extend19"
 ---
 
 VERDICT: proved. chain-engine-r1 at 44 hops.
