@@ -6,6 +6,6 @@ confidence: 0.9
 tags:
   - chain-persistence
 next_edges:
-  - "mvp:chain-engine-r1"
+  - "exp:chain-engine-r1-extend53"
 ---
 VERDICT: proved. Chain at 112 hops.
