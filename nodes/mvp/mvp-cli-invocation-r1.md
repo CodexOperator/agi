@@ -12,7 +12,5 @@ tags:
   - shell
   - detection
 ---
-## MVP: CLI Shell Detection
-
-detect_shell() -> (shell_type: str, confidence: float)
-Covers bash/zsh/fish/cmd on Unix/Windows.
+detect_shell() -> (shell_type, confidence). Covers bash/zsh/fish/cmd.
+Implementation: environment_indexers/cli.py
