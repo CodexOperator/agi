@@ -1,11 +1,12 @@
 ---
-id: "verdict:graph-core-r1-extend80"
-type: verdict
-verdict: proved
 confidence: 0.9
-tags:
-  - chain-persistence
+id: "verdict:graph-core-r1-extend80"
 next_edges:
-  - "mvp:graph-core-r1"
+  - "exp:graph-core-r1-extend81"
+tags:
+  - "chain-persistence"
+  - "extended"
+type: "verdict"
+verdict: "proved"
 ---
-VERDICT: proved. Chain at 168 hops.
+VERDICT: proved. Chain at 168 hops. Extended to 200 hops (cycles 81→96).
