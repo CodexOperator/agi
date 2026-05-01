@@ -27,6 +27,7 @@ from graph_core import Node
 from graph_core.edge import Edge
 from graph_core.graph import Graph
 from graph_core.loader import load_directory
+from chain_engine.chains import find_chains
 from renderers import build_representation, render_ascii
 
 
@@ -64,8 +65,13 @@ def main() -> int:
     for n in g.nodes:
         by_type[n.type] += 1
 
-    # Chain stats: longest path through idea -> hyp -> task
-    longest_len = _longest_chain_length(g)
+    # Chain stats: use find_chains() for chain-based longest path (via 'next' edges)
+    chains = find_chains(g)
+    longest_len = max((len(c) for c in chains), default=0)
+    chain_count = len(chains)
+    
+    # Also compute spawns-based longest chain for comparison
+    spawns_longest = _longest_chain_length(g)
 
     # Attractive chains: ideas sorted by descendant count
     idea_attract = []
@@ -84,7 +90,8 @@ def main() -> int:
         f"- nodes: {len(g)}",
         f"- edges: {g.edge_count}",
         "- by type: " + ", ".join(f"{k}={v}" for k, v in sorted(by_type.items())),
-        f"- longest chain: {longest_len} hops",
+        f"- longest chain: {longest_len} hops (via next edges)",
+        f"- chain count: {chain_count}",
         "",
         "## attractive ideas (descendant count, top 10)",
     ]
