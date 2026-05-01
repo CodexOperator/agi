@@ -1,13 +1,9 @@
 ---
-confidence: 1.0
 id: "idea:domain-chain-engine"
-scale: big
-status: open
-tags:
-  - domain
-  - seed
-title: "Domain: chain-engine"
+title: "idea:domain-chain-engine"
 type: idea
+next_edges:
+  - "hyp:chain-engine-r10"
 ---
 
-The autoresearch-specific layer that sits on top of graph-core. It defines what a chain is, how chains are scored and selected, how agents join, fork, or hop between them, and what verdicts look like. It contains all the autoresearch semantics so graph-core can remain a generic substrate. Chains are virtual: they are computed from the underlying graph rather than stored as separate first-class objects.
+Domain idea node for chain-engine persistence test.
