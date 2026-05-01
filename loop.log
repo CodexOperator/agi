@@ -502,3 +502,15 @@ spawned a02-905498e1 pid=1090132 level=small target=idea:domain-environment-inde
 spawned a03-42290479 pid=1090158 level=small target=idea:domain-autoresearch-tree-skill
 spawned a04-6de253b0 pid=1090193 level=small target=idea:domain-chain-engine
 manifest: /home/ubuntu/.hermes/agi-tree/sessions/iter-008/manifest.json
+agent a01-daa5541d marked failed (pid 1090123 gone)
+agent a02-905498e1 marked failed (pid 1090132 gone)
+healer: agent a00-2f912182 timed out (pid=1090114), killing + spawning healer
+healer heal-9ddfcd18 spawned pid=1094113 for hung agent a00-2f912182
+all agents terminal
+iter 8: 5 agents
+  a00-2f912182: status=hung-healed verdict=- pid=1090114
+  a01-daa5541d: status=failed verdict=- pid=1090123
+  a02-905498e1: status=failed verdict=- pid=1090132
+  a03-42290479: status=done verdict=proved pid=1090158
+  a04-6de253b0: status=done verdict=proved pid=1090193
+[driver] sleeping 2m before iter 9...
