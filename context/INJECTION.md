@@ -1,28 +1,71 @@
 # autoresearch-tree INJECTION CONTEXT
-_generated 2026-05-01T13:39:23+00:00_
+_generated 2026-05-01T13:46:39+00:00_
 
 ## graph snapshot
-- nodes: 157
-- edges: 148
-- by type: hypothesis=60, idea=7, task=90
-- longest chain: 0 hops (via next edges)
-- chain count: 0
+- nodes: 249
+- edges: 374
+- by type: app_purpose=8, bigger_outcome=10, experiment=24, hypothesis=61, idea=8, mvp=10, node=2, outcome=10, task=90, verdict=26
+- longest chain: 12 hops (via next edges)
+- chain count: 15
 
 ## attractive ideas (descendant count, top 10)
-- idea:domain-graph-core :: 28 descendants
-- idea:domain-environment-indexers :: 24 descendants
-- idea:domain-autoresearch-tree-skill :: 23 descendants
-- idea:domain-chain-engine :: 22 descendants
-- idea:domain-schema-registry :: 20 descendants
-- idea:domain-renderers :: 17 descendants
-- idea:domain-embeddings :: 14 descendants
+- idea:domain-graph-core :: 38 descendants
+- idea:domain-environment-indexers :: 36 descendants
+- idea:domain-schema-registry :: 35 descendants
+- idea:domain-embeddings :: 33 descendants
+- idea:domain-chain-engine :: 32 descendants
+- idea:domain-autoresearch-tree-skill :: 29 descendants
+- idea:domain-renderers :: 27 descendants
+- idea:domain-exporters :: 7 descendants
 
 ## ASCII view (≤200 lines)
 ```
-# graph: 157 nodes
-# types: hypothesis=60, idea=7, task=90
+# graph: 249 nodes
+# types: app_purpose=8, bigger_outcome=10, experiment=24, hypothesis=61, idea=8, mvp=10, node=2, outcome=10, task=90, verdict=26
 #
-  hyp:autoresearch-tree-skill-r1 :: hypothesis [spawns->task:t-076, spawns->task:t-088]
+        app-purpose:autoresearch-tree-skill :: app_purpose
+              app-purpose:chain-engine :: app_purpose
+              app-purpose:embeddings :: app_purpose
+        app-purpose:environment-indexers :: app_purpose
+            app-purpose:exporters :: app_purpose
+              app-purpose:graph-core :: app_purpose
+              app-purpose:renderers :: app_purpose
+              app-purpose:schema-registry :: app_purpose
+        bigger-outcome:autoresearch-tree-skill-r :: bigger_outcome [next->app-purpose:autoresearch-tree-skill, spawns->app-purpose:autoresearch-tree-skill]
+            bigger-outcome:chain-engine-r1 :: bigger_outcome [next->app-purpose:chain-engine, spawns->app-purpose:chain-engine]
+            bigger-outcome:embeddings-r2 :: bigger_outcome [next->app-purpose:embeddings, spawns->app-purpose:embeddings]
+            bigger-outcome:embeddings-r3 :: bigger_outcome [next->app-purpose:embeddings]
+        bigger-outcome:environment-indexers-r1 :: bigger_outcome [next->app-purpose:environment-indexers, spawns->app-purpose:environment-indexers]
+          bigger-outcome:exporters-r1 :: bigger_outcome [next->app-purpose:exporters, spawns->app-purpose:exporters]
+            bigger-outcome:graph-core-r1 :: bigger_outcome [next->app-purpose:graph-core, spawns->app-purpose:graph-core]
+            bigger-outcome:renderers-r1 :: bigger_outcome [next->app-purpose:renderers, spawns->app-purpose:renderers]
+            bigger-outcome:schema-registry-r1 :: bigger_outcome [next->app-purpose:schema-registry, spawns->app-purpose:schema-registry]
+            bigger-outcome:schema-registry-r2 :: bigger_outcome [next->app-purpose:schema-registry]
+    exp:autoresearch-tree-skill-r1 :: experiment [spawns->mvp:autoresearch-tree-skill-r1, next->verdict:autoresearch-tree-skill-r1, spawns->verdict:autoresearch-tree-skill-r1]
+    exp:chain-engine-r1 :: experiment [next->verdict:chain-engine-r1, spawns->verdict:chain-engine-r1]
+    exp:chain-engine-r1-extend :: experiment [next->verdict:chain-engine-r1-extend, spawns->verdict:chain-engine-r1-extend]
+        exp:chain-engine-r1-extend2 :: experiment [next->verdict:chain-engine-r1-extend2, spawns->verdict:chain-engine-r1-extend2]
+    exp:embeddings-r2 :: experiment [next->verdict:embeddings-r2, spawns->verdict:embeddings-r2]
+    exp:embeddings-r2-extend :: experiment [next->verdict:embeddings-r2-extend, spawns->verdict:embeddings-r2-extend]
+        exp:embeddings-r2-extend2 :: experiment [next->verdict:embeddings-r2-extend2, spawns->verdict:embeddings-r2-extend2]
+    exp:embeddings-r3 :: experiment [next->verdict:embeddings-r3, spawns->verdict:embeddings-r3]
+    exp:embeddings-r3-extend :: experiment [next->verdict:embeddings-r3-extend, spawns->verdict:embeddings-r3-extend]
+        exp:embeddings-r3-extend2 :: experiment [next->verdict:embeddings-r3-extend2, spawns->verdict:embeddings-r3-extend2]
+    exp:environment-indexers-r1 :: experiment [spawns->mvp:environment-indexers-r1, next->verdict:environment-indexers-r1, spawns->verdict:environment-indexers-r1]
+    exp:environment-indexers-r1-extend :: experiment [next->verdict:environment-indexers-r1-extend, spawns->verdict:environment-indexers-r1-extend]
+        exp:environment-indexers-r1-extend2 :: experiment [spawns->verdict:environment-indexers-r1-chain-extension, next->verdict:environment-indexers-r1-extend2, spawns->verdict:enviro ... [line cut]
+  exp:exporters-r1 :: experiment [next->verdict:exporters-r1, spawns->verdict:exporters-r1]
+    exp:graph-core-r1 :: experiment [next->verdict:graph-core-r1, spawns->verdict:graph-core-r1]
+    exp:graph-core-r1-extend :: experiment [next->verdict:graph-core-r1-extend, spawns->verdict:graph-core-r1-extend]
+        exp:graph-core-r1-extend2 :: experiment [next->verdict:graph-core-r1-extend2, spawns->verdict:graph-core-r1-extend2]
+    exp:renderers-r1 :: experiment [next->verdict:renderers-r1, spawns->verdict:renderers-r1]
+    exp:renderers-r1-extend :: experiment [next->verdict:renderers-r1-extend, spawns->verdict:renderers-r1-extend]
+        exp:renderers-r1-extend2 :: experiment [next->verdict:renderers-r1-extend2, spawns->verdict:renderers-r1-extend2]
+    exp:schema-registry-r1 :: experiment [next->verdict:schema-registry-r1, spawns->verdict:schema-registry-r1]
+    exp:schema-registry-r2 :: experiment [next->verdict:schema-registry-r2, spawns->verdict:schema-registry-r2]
+    exp:schema-registry-r2-extend :: experiment [next->verdict:schema-registry-r2-extend, spawns->verdict:schema-registry-r2-extend]
+        exp:schema-registry-r2-extend2 :: experiment [next->verdict:schema-registry-r2-extend2, spawns->verdict:schema-registry-r2-extend2]
+  hyp:autoresearch-tree-skill-r1 :: hypothesis [next->exp:autoresearch-tree-skill-r1, spawns->exp:autoresearch-tree-skill-r1, spawns->task:t-076 (+2)]
   hyp:autoresearch-tree-skill-r2 :: hypothesis [spawns->task:t-077]
   hyp:autoresearch-tree-skill-r3 :: hypothesis [spawns->task:t-078]
   hyp:autoresearch-tree-skill-r4 :: hypothesis [spawns->task:t-079, spawns->task:t-080]
@@ -31,7 +74,7 @@ _generated 2026-05-01T13:39:23+00:00_
   hyp:autoresearch-tree-skill-r7 :: hypothesis [spawns->task:t-085, spawns->task:t-086]
   hyp:autoresearch-tree-skill-r8 :: hypothesis [spawns->task:t-087]
   hyp:autoresearch-tree-skill-r9 :: hypothesis [spawns->task:t-089]
-  hyp:chain-engine-r1 :: hypothesis [spawns->task:t-047]
+  hyp:chain-engine-r1 :: hypothesis [next->exp:chain-engine-r1, spawns->exp:chain-engine-r1, spawns->exp:chain-engine-r1-extend (+1)]
   hyp:chain-engine-r2 :: hypothesis [spawns->task:t-048]
   hyp:chain-engine-r3 :: hypothesis [spawns->task:t-049]
   hyp:chain-engine-r4 :: hypothesis [spawns->task:t-050]
@@ -41,13 +84,14 @@ _generated 2026-05-01T13:39:23+00:00_
   hyp:chain-engine-r8 :: hypothesis [spawns->task:t-054, spawns->task:t-055]
   hyp:chain-engine-r9 :: hypothesis [spawns->task:t-056, spawns->task:t-057, spawns->task:t-058 (+1)]
   hyp:embeddings-r1 :: hypothesis [spawns->task:t-069]
-  hyp:embeddings-r2 :: hypothesis [spawns->task:t-070]
-  hyp:embeddings-r3 :: hypothesis [spawns->task:t-071]
+  hyp:embeddings-r2 :: hypothesis [next->exp:embeddings-r2, spawns->exp:embeddings-r2, spawns->exp:embeddings-r2-extend (+1)]
+  hyp:embeddings-r3 :: hypothesis [next->exp:embeddings-r3, spawns->exp:embeddings-r3, spawns->exp:embeddings-r3-extend (+1)]
   hyp:embeddings-r4 :: hypothesis [spawns->task:t-072]
   hyp:embeddings-r5 :: hypothesis [spawns->task:t-073]
   hyp:embeddings-r6 :: hypothesis [spawns->task:t-074]
   hyp:embeddings-r7 :: hypothesis [spawns->task:t-075]
-  hyp:environment-indexers-r1 :: hypothesis [spawns->task:t-032]
+  hyp:environment-indexers-r1 :: hypothesis [next->exp:environment-indexers-r1, spawns->exp:environment-indexers-r1, spawns->exp:environment-indexers-r1-extend (+2)]
+  hyp:environment-indexers-r1-chain-extens :: node
   hyp:environment-indexers-r2 :: hypothesis [spawns->task:t-033]
   hyp:environment-indexers-r3 :: hypothesis [spawns->task:t-034, spawns->task:t-035, spawns->task:t-036]
   hyp:environment-indexers-r4 :: hypothesis [spawns->task:t-037, spawns->task:t-038]
@@ -56,7 +100,8 @@ _generated 2026-05-01T13:39:23+00:00_
   hyp:environment-indexers-r7 :: hypothesis [spawns->task:t-042]
   hyp:environment-indexers-r8 :: hypothesis [spawns->task:t-043]
   hyp:environment-indexers-r9 :: hypothesis [spawns->task:t-044, spawns->task:t-045, spawns->task:t-046]
-  hyp:graph-core-r1 :: hypothesis [spawns->task:t-001, spawns->task:t-002]
+  hyp:exporters-r1 :: hypothesis [next->exp:exporters-r1, spawns->exp:exporters-r1, spawns->verdict:exporters-r1]
+  hyp:graph-core-r1 :: hypothesis [next->exp:graph-core-r1, spawns->exp:graph-core-r1, spawns->exp:graph-core-r1-extend (+2)]
   hyp:graph-core-r10 :: hypothesis [spawns->task:t-018]
   hyp:graph-core-r2 :: hypothesis [spawns->task:t-003, spawns->task:t-004]
   hyp:graph-core-r3 :: hypothesis [spawns->task:t-005]
@@ -66,7 +111,7 @@ _generated 2026-05-01T13:39:23+00:00_
   hyp:graph-core-r7 :: hypothesis [spawns->task:t-013, spawns->task:t-014]
   hyp:graph-core-r8 :: hypothesis [spawns->task:t-015]
   hyp:graph-core-r9 :: hypothesis [spawns->task:t-016, spawns->task:t-017]
-  hyp:renderers-r1 :: hypothesis [spawns->task:t-060]
+  hyp:renderers-r1 :: hypothesis [next->exp:renderers-r1, spawns->exp:renderers-r1, spawns->exp:renderers-r1-extend (+1)]
   hyp:renderers-r2 :: hypothesis [spawns->task:t-061, spawns->task:t-062]
   hyp:renderers-r3 :: hypothesis [spawns->task:t-063]
   hyp:renderers-r4 :: hypothesis [spawns->task:t-064]
@@ -74,21 +119,42 @@ _generated 2026-05-01T13:39:23+00:00_
   hyp:renderers-r6 :: hypothesis [spawns->task:t-066]
   hyp:renderers-r7 :: hypothesis [spawns->task:t-067]
   hyp:renderers-r8 :: hypothesis [spawns->task:t-068]
-  hyp:schema-registry-r1 :: hypothesis [spawns->task:t-091]
-  hyp:schema-registry-r2 :: hypothesis [spawns->task:t-021]
+  hyp:schema-registry-r1 :: hypothesis [spawns->exp:schema-registry-r1, spawns->task:t-091]
+  hyp:schema-registry-r2 :: hypothesis [next->exp:schema-registry-r2, spawns->exp:schema-registry-r2, spawns->exp:schema-registry-r2-extend (+1)]
   hyp:schema-registry-r3 :: hypothesis [spawns->task:t-022, spawns->task:t-023]
   hyp:schema-registry-r4 :: hypothesis [spawns->task:t-024]
   hyp:schema-registry-r5 :: hypothesis [spawns->task:t-025, spawns->task:t-026, spawns->task:t-027 (+1)]
   hyp:schema-registry-r6 :: hypothesis [spawns->task:t-028]
   hyp:schema-registry-r7 :: hypothesis [spawns->task:t-030]
   hyp:schema-registry-r8 :: hypothesis [spawns->task:t-031]
-idea:domain-autoresearch-tree-skill :: idea [spawns->hyp:autoresearch-tree-skill-r1, spawns->hyp:autoresearch-tree-skill-r2, spawns->hyp:autoresearch-tree-skill-r3 (+6)]
-idea:domain-chain-engine :: idea [spawns->hyp:chain-engine-r1, spawns->hyp:chain-engine-r2, spawns->hyp:chain-engine-r3 (+6)]
-idea:domain-embeddings :: idea [spawns->hyp:embeddings-r1, spawns->hyp:embeddings-r2, spawns->hyp:embeddings-r3 (+4)]
-idea:domain-environment-indexers :: idea [spawns->hyp:environment-indexers-r1, spawns->hyp:environment-indexers-r2, spawns->hyp:environment-indexers-r3 (+6)]
-idea:domain-graph-core :: idea [spawns->hyp:graph-core-r1, spawns->hyp:graph-core-r10, spawns->hyp:graph-core-r2 (+7)]
-idea:domain-renderers :: idea [spawns->hyp:renderers-r1, spawns->hyp:renderers-r2, spawns->hyp:renderers-r3 (+5)]
-idea:domain-schema-registry :: idea [spawns->hyp:schema-registry-r1, spawns->hyp:schema-registry-r2, spawns->hyp:schema-registry-r3 (+5)]
+idea:domain-autoresearch-tree-skill :: idea [next->hyp:autoresearch-tree-skill-r1, spawns->hyp:autoresearch-tree-skill-r1, spawns->hyp:autoresearch-tree-skill-r2 (+7)]
+idea:domain-chain-engine :: idea [next->hyp:chain-engine-r1, spawns->hyp:chain-engine-r1, spawns->hyp:chain-engine-r2 (+7)]
+idea:domain-embeddings :: idea [spawns->hyp:embeddings-r1, next->hyp:embeddings-r2, spawns->hyp:embeddings-r2 (+6)]
+idea:domain-environment-indexers :: idea [next->hyp:environment-indexers-r1, spawns->hyp:environment-indexers-r1, spawns->hyp:environment-indexers-r1-chain-extension (+8)]
+idea:domain-exporters :: idea [spawns->exp:exporters-r1, next->hyp:exporters-r1, spawns->hyp:exporters-r1]
+idea:domain-graph-core :: idea [next->hyp:graph-core-r1, spawns->hyp:graph-core-r1, spawns->hyp:graph-core-r10 (+8)]
+idea:domain-renderers :: idea [next->hyp:renderers-r1, spawns->hyp:renderers-r1, spawns->hyp:renderers-r2 (+6)]
+idea:domain-schema-registry :: idea [spawns->hyp:schema-registry-r1, next->hyp:schema-registry-r2, spawns->hyp:schema-registry-r2 (+6)]
+      mvp:autoresearch-tree-skill-r1 :: mvp [spawns->bigger-outcome:autoresearch-tree-skill-r1, next->outcome:autoresearch-tree-skill-r1, spawns->outcome:autoresearch-tree-skill-r1]
+        mvp:chain-engine-r1 :: mvp [next->outcome:chain-engine-r1, spawns->outcome:chain-engine-r1]
+        mvp:embeddings-r2 :: mvp [next->outcome:embeddings-r2, spawns->outcome:embeddings-r2]
+        mvp:embeddings-r3 :: mvp [next->outcome:embeddings-r3, spawns->outcome:embeddings-r3]
+      mvp:environment-indexers-r1 :: mvp [spawns->bigger-outcome:environment-indexers-r1, next->outcome:environment-indexers-r1, spawns->outcome:environment-indexers-r1]
+      mvp:exporters-r1 :: mvp [next->outcome:exporters-r1, spawns->outcome:exporters-r1]
+        mvp:graph-core-r1 :: mvp [next->outcome:graph-core-r1, spawns->outcome:graph-core-r1]
+        mvp:renderers-r1 :: mvp [next->outcome:renderers-r1, spawns->outcome:renderers-r1]
+        mvp:schema-registry-r1 :: mvp [next->outcome:schema-registry-r1, spawns->outcome:schema-registry-r1]
+        mvp:schema-registry-r2-bracket-conventio :: mvp [next->outcome:schema-registry-r2-bracket-convention, spawns->outcome:schema-registry-r2-bracket-convention]
+      outcome:autoresearch-tree-skill-r1 :: outcome [spawns->app-purpose:autoresearch-tree-skill, next->bigger-outcome:autoresearch-tree-skill-r1, spawns->bigger-outcome:autoresearch-tree-skill-r1]
+          outcome:chain-engine-r1 :: outcome [next->bigger-outcome:chain-engine-r1, spawns->bigger-outcome:chain-engine-r1]
+          outcome:embeddings-r2 :: outcome [next->bigger-outcome:embeddings-r2, spawns->bigger-outcome:embeddings-r2]
+          outcome:embeddings-r3 :: outcome [next->bigger-outcome:embeddings-r3, spawns->bigger-outcome:embeddings-r3]
+      outcome:environment-indexers-r1 :: outcome [spawns->app-purpose:environment-indexers, next->bigger-outcome:environment-indexers-r1, spawns->bigger-outcome:environment-indexers-r1]
+        outcome:exporters-r1 :: outcome [next->bigger-outcome:exporters-r1, spawns->bigger-outcome:exporters-r1]
+          outcome:graph-core-r1 :: outcome [next->bigger-outcome:graph-core-r1, spawns->bigger-outcome:graph-core-r1]
+          outcome:renderers-r1 :: outcome [next->bigger-outcome:renderers-r1, spawns->bigger-outcome:renderers-r1]
+          outcome:schema-registry-r1 :: outcome [next->bigger-outcome:schema-registry-r1, spawns->bigger-outcome:schema-registry-r1]
+          outcome:schema-registry-r2-bracket-conve :: outcome [next->bigger-outcome:schema-registry-r2, spawns->bigger-outcome:schema-registry-r2]
     task:t-001 :: task
     task:t-002 :: task
     task:t-003 :: task
@@ -150,38 +216,10 @@ idea:domain-schema-registry :: idea [spawns->hyp:schema-registry-r1, spawns->hyp
     task:t-061 :: task
     task:t-062 :: task
     task:t-063 :: task
-    task:t-064 :: task
-    task:t-065 :: task
-    task:t-066 :: task
-    task:t-067 :: task
-    task:t-068 :: task
-    task:t-069 :: task
-    task:t-070 :: task
-    task:t-071 :: task
-    task:t-072 :: task
-    task:t-073 :: task
-    task:t-074 :: task
-    task:t-075 :: task
-    task:t-076 :: task
-    task:t-077 :: task
-    task:t-078 :: task
-    task:t-079 :: task
-    task:t-080 :: task
-    task:t-081 :: task
-    task:t-082 :: task
-    task:t-083 :: task
-    task:t-084 :: task
-    task:t-085 :: task
-    task:t-086 :: task
-    task:t-087 :: task
-    task:t-088 :: task
-    task:t-089 :: task
-task:t-090 :: task
-    task:t-091 :: task
-task:t-092 :: task
+... [truncated, 56 more nodes]
 ----
-Types: hypothesis=60, idea=7, task=90
-Edges: spawns=148
+Types: app_purpose=8, bigger_outcome=10, experiment=24, hypothesis=61, idea=8, mvp=10, node=2, outcome=10, task=90, verdict=26
+Edges: next=103, spawns=271
 ```
 
 ## big-vs-small decision
