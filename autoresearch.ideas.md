@@ -10,9 +10,7 @@
 
 - ~~**[renderers] Mermaid renderer for chain visualization**~~ — DONE (R11 proved 6/6, commit 026a988)
 
-- **[embeddings] Node2Vec embedding of hypothesis space**
-  - Currently only 7 idea nodes have 14 descendants each
-  - Embedding would reveal similarity between hypothesis nodes across domains
+- ~~**[embeddings] Node2Vec embedding of hypothesis space**~~ — DONE (iter 8: render-embedding-isomorphism-r1 proved, 98.3% neighbor preservation)
 
 - **[schema-registry] Auto-generate verdict node schema from R8 taxonomy**
   - VerdictState enum already implemented in experiment
