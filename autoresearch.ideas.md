@@ -20,6 +20,8 @@
 - ~~**[chain-engine] Extend 4 chains to 72 hops**~~ — DONE (iter 23b: embeddings-r2/r3, exporters, schema-registry)
 - ~~**[chain-engine] Push to 88 hops**~~ — DONE (iter 23e: 88 hops, 9 chains at 40 cycles)
 - ~~**[auteurs-chain-fix] Fix next_edges gaps (extend1→exp3 skip, extend2→mvp shortcut)**~~ — DONE (iter 23d: 70→72 hops)
+- ~~**[session-management] Extend to 200 hops**~~ — DONE (iter 27: 10 chains at 200 hops, session-management 8→200 hops)
+- ~~**[task_attractiveness] 4x domain diversity vs longest-chain**~~ — DONE (iter 27: inconclusive_lean_proved:60)
 - ~~**[cli-invocation] Complete full 8-hop chain**~~ — DONE (iter 22: idea→hyp→exp→verdict→mvp→outcome→bo→app)
 - ~~**[session-management] R1 PROVED at 100% fidelity**~~ — DONE (iter 21g)
 - ~~**[test-coverage] Analysis**~~ — DISPROVED (37% coverage, not worth improving)
@@ -38,6 +40,7 @@
 
 - ~~**[chain-extension] Push chains to 112 hops**~~ — DONE (168 hops, 9 chains at cycle 80). Formula hops=2*cycle+8 verified at cycles 0–80. Chain hygiene: always commit before log_experiment.
 - ~~**[chain-extension] Push chains to 200 hops**~~ — DONE (iter 16b: 200 hops, 9 chains at cycle 96). Added cycles 81-96 (288 nodes). Fixed graph-core first verdict + extend80 verdict wiring. 272 tests pass.
+- ~~**[chain-extension] Push chains to 300 hops**~~ — DONE (iter30b: 300 hops, 9 chains at cycle 146). 909 new files (450 exp + 450 verdict). Load time 1873ms. 274 tests pass.
 - **[new-domain] idea:domain-vector-embedding-isomorphism** — needs complete chain (has hypothesis, no experiment/verdict). LOW PRIORITY.
 - ~~**[session-management] Complete session-management chain**~~ — COMPLETE (iter 21g: verdict PROVED). Short chain (1 hop to verdict, mvp→outcome→bo→app present).
 - ~~**[embeddings] idea:domain-cli-invocation**~~ — COMPLETE (iter 22: idea→hyp→exp→verdict→mvp→outcome→bo→app, 7 hops).
