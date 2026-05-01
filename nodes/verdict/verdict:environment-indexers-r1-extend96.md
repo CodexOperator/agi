@@ -14,7 +14,7 @@ tags:
   - cycle-96
   - proved
 next_edges:
-  - "mvp:environment-indexers-r1"
+  - "exp:environment-indexers-r1-extend97"
 ---
 
 **VERDICT: proved** — environment-indexers-r1 chain extended to FINAL.

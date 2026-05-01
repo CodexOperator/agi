@@ -14,7 +14,7 @@ tags:
   - cycle-96
   - proved
 next_edges:
-  - "mvp:autoresearch-tree-skill-r1"
+  - "exp:autoresearch-tree-skill-r1-extend97"
 ---
 
 **VERDICT: proved** — autoresearch-tree-skill-r1 chain extended to FINAL.

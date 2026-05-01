@@ -14,7 +14,7 @@ tags:
   - cycle-96
   - proved
 next_edges:
-  - "mvp:graph-core-r1"
+  - "exp:graph-core-r1-extend97"
 ---
 
 **VERDICT: proved** — graph-core-r1 chain extended to FINAL.

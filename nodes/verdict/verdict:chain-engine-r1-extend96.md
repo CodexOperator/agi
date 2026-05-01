@@ -14,7 +14,7 @@ tags:
   - cycle-96
   - proved
 next_edges:
-  - "mvp:chain-engine-r1"
+  - "exp:chain-engine-r1-extend97"
 ---
 
 **VERDICT: proved** — chain-engine-r1 chain extended to FINAL.

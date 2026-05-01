@@ -14,7 +14,7 @@ tags:
   - cycle-96
   - proved
 next_edges:
-  - "mvp:exporters-r1"
+  - "exp:exporters-r1-extend97"
 ---
 
 **VERDICT: proved** — exporters-r1 chain extended to FINAL.

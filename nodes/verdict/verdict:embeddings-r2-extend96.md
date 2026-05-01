@@ -14,7 +14,7 @@ tags:
   - cycle-96
   - proved
 next_edges:
-  - "mvp:embeddings-r2"
+  - "exp:embeddings-r2-extend97"
 ---
 
 **VERDICT: proved** — embeddings-r2 chain extended to FINAL.
