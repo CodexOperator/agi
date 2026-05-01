@@ -3,6 +3,8 @@ id: "verdict:session-management-r1"
 title: "R1: Session state capture and restore fidelity"
 type: verdict
 parent_hypothesis: hyp:session-management-r1
+parents:
+  - exp:session-management-r1
 domain: session-management
 status: inconclusive_lean_proved
 confidence: 0.81

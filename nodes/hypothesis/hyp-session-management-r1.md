@@ -14,7 +14,7 @@ spawns:
 status: pending
 verdict: pending
 next_edges:
-  - verdict:session-management-r1
+  - exp:session-management-r1
 ---
 
 ## Hypothesis
