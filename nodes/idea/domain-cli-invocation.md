@@ -9,7 +9,7 @@ tags:
   - command
   - execution
   - environment
-spawns:
+next_edges:
   - hyp:cli-invocation-r1
 ---
 
