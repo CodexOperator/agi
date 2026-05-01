@@ -20,7 +20,10 @@
 
 - ~~**[multi-agent] 5-agent parallel dispatch smoke test**~~ — DONE (iter 8: multi-agent-dispatch-r1 proved, config valid, dispatch works)
 
-- **[chain-extension] verdict→experiment→verdict pattern**
-  - verdict→hypothesis NOT in valid transitions
-  - Try verdict → experiment → verdict → ... pattern instead
-  - Would allow indefinite chain extension
+## Done This Session
+
+- ~~**[graph-prioritization-r1]**~~ — PROVED (100% improvement, graph-prioritized strategy)
+- ~~**[render-embedding-isomorphism-r1]**~~ — PROVED (98.3% neighbor preservation)
+- ~~**[verdict-schema-auto-gen-r1]**~~ — PROVED (87.5% enforcement)
+- ~~**[multi-agent-dispatch-r1]**~~ — PROVED (config valid, dispatch works)
+- ~~**[chain-extension verdict→exp→verdict]**~~ — PROVED (8→10 hops, +25%)

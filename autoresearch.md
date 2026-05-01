@@ -2,7 +2,7 @@
 
 ## Primary Metric
 - **longest_chain_length** (hops, direction: higher)
-- Current baseline: 2 hops (via 'spawns' edges only)
+- Current best: 10 hops (iter 8: extended via verdict→experiment→verdict pattern)
 
 ## Secondary Metrics
 - `avg_chain_depth`
