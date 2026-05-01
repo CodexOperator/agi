@@ -13,6 +13,7 @@ tags:
 spawns:
   - hyp:vector-embedding-isomorphism-r1
   - hypothesis:a00-324837df-2546ce
+  - hypothesis:a00-324837df-2546ce-r3
 ---
 
 # Domain: Vector Embedding Isomorphism

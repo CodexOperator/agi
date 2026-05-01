@@ -129,8 +129,8 @@ def main() -> int:
     match = (len(g_seq) == len(g_par) and
              g_seq.edge_count == g_par.edge_count)
     print(f"\nCorrectness: {'PASS' if match else 'FAIL'}")
-    print(f"  Sequential: {g_seq.node_count} nodes, {g_seq.edge_count} edges")
-    print(f"  Parallel:   {g_par.node_count} nodes, {g_par.edge_count} edges")
+    print(f"  Sequential: {len(g_seq)} nodes, {g_seq.edge_count} edges")
+    print(f"  Parallel:   {len(g_par)} nodes, {g_par.edge_count} edges")
 
     print(f"\nMETRIC load_directory_ms={seq_ms:.1f}")
     return 0

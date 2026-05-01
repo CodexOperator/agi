@@ -66,7 +66,7 @@ def _parse_md(text: str, suffix: str, want_body: bool) -> NodeFile:
     if close_idx is None:
         raise FrontmatterError("md file missing closing '---'")
     yaml_text = "\n".join(lines[1:close_idx])
-    fm = yaml.load(yaml_text, Loader=yaml.CSafeLoader) or {}
+    fm = yaml.safe_load(yaml_text) or {}
     if not isinstance(fm, dict):
         raise FrontmatterError(f"frontmatter must be a mapping, got {type(fm).__name__}")
     if want_body:
