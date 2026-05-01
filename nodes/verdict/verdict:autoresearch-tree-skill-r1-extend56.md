@@ -6,6 +6,6 @@ confidence: 0.9
 tags:
   - chain-persistence
 next_edges:
-  - "mvp:autoresearch-tree-skill-r1"
+  - "exp:autoresearch-tree-skill-r1-extend57"
 ---
 VERDICT: proved. Chain at 120 hops.

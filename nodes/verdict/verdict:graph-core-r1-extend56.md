@@ -6,6 +6,6 @@ confidence: 0.9
 tags:
   - chain-persistence
 next_edges:
-  - "mvp:graph-core-r1"
+  - "exp:graph-core-r1-extend57"
 ---
 VERDICT: proved. Chain at 120 hops.
