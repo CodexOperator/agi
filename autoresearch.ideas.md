@@ -24,9 +24,7 @@
 
 ## Low Priority / Interesting
 
-- **[renderers] Git-diff renderer for chain evolution**
-  - Compare chain state between experiment runs
-  - Would help track incremental progress
+- ~~**[renderers] Git-diff renderer for chain evolution**~~ — DONE (R5 proved 5/5)
 
 - **[graph-core] Vector embedding isomorphic to ASCII coords**
   - UMAP (x,y) → RenderToken.x,y — same underlying representation

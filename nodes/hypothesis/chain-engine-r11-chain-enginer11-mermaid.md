@@ -12,6 +12,8 @@ tags:
 testable_claim: Mermaid Chain Renderer
 title: "chain-engine/R11: Mermaid Chain Renderer"
 type: hypothesis
+next_edges:
+  - "verdict:chain-engine-r11"
 ---
 
 **Description:** A Mermaid flowchart renderer produces valid Mermaid code from chain data, enabling visualization of capillary DAG chains as `flowchart TD` diagrams.

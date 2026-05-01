@@ -108,8 +108,8 @@ def _write_node(
 def _walk(root: Path):
     """Sorted top-down walk yielding (dir_abs, [sorted_files]).
 
-    os.walk with topdown=True already visits each directory once.
-    We sort each level for deterministic ordering (R2.4).
+    os.walk with topdown=True visits each directory once, sorted entries.
+    Deterministic ordering required by R2.4.
     """
     for dir_abs, subdirs, files in os.walk(root):
         subdirs.sort()
@@ -148,10 +148,22 @@ def index_filesystem(
     registry = IdRegistry()
     emitted: list[str] = []
 
+    # Track dir_abs → node_id so subdirectories can reference their parent
+    dir_id_map: dict[Path, str] = {}
+    root_rel = Path(".")
+
     for dir_abs, files in _walk(root):
-        # Emit the directory node (one node per directory — R2.1)
         dir_rel = _resolve_relative(dir_abs, root)
         dir_id = registry.mint(_TYPE_PREFIX_DIR, str(dir_rel))
+        dir_id_map[dir_abs] = dir_id
+
+        # Determine parent ids for this directory
+        if dir_abs == root:
+            dir_parents: list[str] = []
+        else:
+            parent_abs = dir_abs.parent
+            dir_parents = [dir_id_map[parent_abs]]
+
         _write_node(
             dir_id,
             "directory",
@@ -159,14 +171,12 @@ def index_filesystem(
             dir_abs,
             dir_rel,
             size_bytes=0,
-            parent_ids=[],  # root has no parent; subdirs have parents set via parent's iteration
+            parent_ids=dir_parents,
             warn_stream=warn_stream,
         )
         emitted.append(dir_id)
 
-        # For files in this dir, use this dir as parent
-        parent_ids_for_files = [dir_id]
-
+        # Files in this directory have this directory as parent
         for fname in files:
             f_abs = dir_abs / fname
             try:
@@ -177,9 +187,10 @@ def index_filesystem(
                         root,
                         f_abs,
                         f_abs.relative_to(root),
+                        size_bytes=None,
                         skipped=True,
                         skipped_reason="symlink",
-                        parent_ids=parent_ids_for_files,
+                        parent_ids=[dir_id],
                         warn_stream=warn_stream,
                     )
                     continue
@@ -195,12 +206,12 @@ def index_filesystem(
                     f_abs,
                     f_rel,
                     size_bytes=f_stat.st_size,
-                    parent_ids=parent_ids_for_files,
+                    parent_ids=[dir_id],
                     warn_stream=warn_stream,
                 )
                 emitted.append(file_id)
 
-            except PermissionError as e:
+            except PermissionError:
                 msg = f"SKIP: {f_abs} (permission denied)"
                 print(msg, file=warn_stream or sys.stderr)
             except OSError as e:
