@@ -1,19 +1,23 @@
 ---
-id: "verdict:autoresearch-tree-skill-r1-extend110"
+id: verdict:autoresearch-tree-skill-r1-extend110
 type: verdict
-title: "Verdict: autoresearch-tree-skill-r1 cycle 110 extension"
+title: 'Verdict: autoresearch-tree-skill-r1 cycle 110 extension'
 status: proved
 verdict: proved
 confidence: 0.9
 parents:
-  - "exp:autoresearch-tree-skill-r1-extend110"
+- exp:autoresearch-tree-skill-r1-extend110
 next_edges:
-  - "exp:autoresearch-tree-skill-r1-extend111"
+- exp:autoresearch-tree-skill-r1-extend111
 tags:
-  - chain-extension
-  - cycle-110
-  - proved
+- chain-extension
+- cycle-110
+- proved
+synthetic: true
+evidence_runs:
+- synthetic
 ---
+
 
 **VERDICT: proved** (cycle 110)
 Chain extended: hops = 2 × 110 + 8 = 228

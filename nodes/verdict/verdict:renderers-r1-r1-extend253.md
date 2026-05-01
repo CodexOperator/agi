@@ -10,7 +10,11 @@ next_edges:
 tags:
 - renderers-r1-r1
 - chain-extension
+synthetic: true
+evidence_runs:
+- synthetic
 ---
+
 # verdict:renderers-r1-r1-extend253
 
 Chain extension cycle 253 (hops = 2*253+8 = 514).

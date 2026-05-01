@@ -10,7 +10,11 @@ next_edges:
 tags:
 - environment-indexers-r1-r1
 - chain-extension
+synthetic: true
+evidence_runs:
+- synthetic
 ---
+
 # verdict:environment-indexers-r1-r1-extend325
 
 Chain extension cycle 325 (hops = 2*325+8 = 658).

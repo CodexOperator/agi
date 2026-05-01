@@ -10,7 +10,11 @@ next_edges:
 tags:
 - schema-registry-r2-bracket-convention
 - chain-extension
+synthetic: true
+evidence_runs:
+- synthetic
 ---
+
 # verdict:schema-registry-r2-bracket-convention-extend173
 
 Chain extension cycle 173 (hops = 2*173+8 = 354).

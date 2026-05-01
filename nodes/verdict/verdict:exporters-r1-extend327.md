@@ -1,18 +1,16 @@
 ---
-id: verdict:exporters-r1-extend327
-type: verdict
-verdict: proved
 confidence: 1.0
-parents:
-- exp:exporters-r1-r1
+id: verdict:exporters-r1-extend327
 next_edges:
 - exp:exporters-r1-extend327
+parents:
+- hypothesis:exporters-r1
 tags:
 - exporters-r1
 - chain-extension
+type: verdict
+verdict: proved
 ---
 # verdict:exporters-r1-extend327
 
-Chain extension cycle 327 (hops = 2*327+8 = 662).
-
-Evidence: verdict->experiment->verdict cycle confirmed.
+Cycle 327.

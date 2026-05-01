@@ -1,18 +1,16 @@
 ---
-id: verdict:environment-indexers-r1-extend348
-type: verdict
-verdict: proved
 confidence: 1.0
-parents:
-- exp:environment-indexers-r1-r1
+id: verdict:environment-indexers-r1-extend348
 next_edges:
 - exp:environment-indexers-r1-extend348
+parents:
+- hypothesis:environment-indexers-r1
 tags:
 - environment-indexers-r1
 - chain-extension
+type: verdict
+verdict: proved
 ---
 # verdict:environment-indexers-r1-extend348
 
-Chain extension cycle 348 (hops = 2*348+8 = 704).
-
-Evidence: verdict->experiment->verdict cycle confirmed.
+Cycle 348.

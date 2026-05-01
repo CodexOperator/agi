@@ -1,19 +1,23 @@
 ---
-id: "verdict:autoresearch-tree-skill-r1-extend138"
+id: verdict:autoresearch-tree-skill-r1-extend138
 type: verdict
-title: "Verdict: autoresearch-tree-skill-r1 cycle 138 extension"
+title: 'Verdict: autoresearch-tree-skill-r1 cycle 138 extension'
 status: proved
 verdict: proved
 confidence: 0.9
 parents:
-  - "exp:autoresearch-tree-skill-r1-extend138"
+- exp:autoresearch-tree-skill-r1-extend138
 next_edges:
-  - "exp:autoresearch-tree-skill-r1-extend139"
+- exp:autoresearch-tree-skill-r1-extend139
 tags:
-  - chain-extension
-  - cycle-138
-  - proved
+- chain-extension
+- cycle-138
+- proved
+synthetic: true
+evidence_runs:
+- synthetic
 ---
+
 
 **VERDICT: proved** (cycle 138)
 Chain extended: hops = 2 × 138 + 8 = 284

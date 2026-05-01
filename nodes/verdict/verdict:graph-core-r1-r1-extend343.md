@@ -10,7 +10,11 @@ next_edges:
 tags:
 - graph-core-r1-r1
 - chain-extension
+synthetic: true
+evidence_runs:
+- synthetic
 ---
+
 # verdict:graph-core-r1-r1-extend343
 
 Chain extension cycle 343 (hops = 2*343+8 = 694).

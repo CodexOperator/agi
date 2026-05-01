@@ -10,7 +10,11 @@ next_edges:
 tags:
 - schema-registry-r2
 - chain-extension
+synthetic: true
+evidence_runs:
+- synthetic
 ---
+
 # verdict:schema-registry-r2-extend64
 
 Chain extension cycle 64 (hops = 2*64+8 = 136).

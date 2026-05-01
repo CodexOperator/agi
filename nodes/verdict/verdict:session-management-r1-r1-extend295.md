@@ -10,7 +10,11 @@ next_edges:
 tags:
 - session-management-r1-r1
 - chain-extension
+synthetic: true
+evidence_runs:
+- synthetic
 ---
+
 # verdict:session-management-r1-r1-extend295
 
 Chain extension cycle 295 (hops = 2*295+8 = 598).

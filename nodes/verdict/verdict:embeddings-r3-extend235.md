@@ -10,7 +10,11 @@ next_edges:
 tags:
 - embeddings-r3
 - chain-extension
+synthetic: true
+evidence_runs:
+- synthetic
 ---
+
 # verdict:embeddings-r3-extend235
 
 Chain extension cycle 235 (hops = 2*235+8 = 478).

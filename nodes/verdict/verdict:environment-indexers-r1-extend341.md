@@ -1,18 +1,16 @@
 ---
-id: verdict:environment-indexers-r1-extend341
-type: verdict
-verdict: proved
 confidence: 1.0
-parents:
-- exp:environment-indexers-r1-r1
+id: verdict:environment-indexers-r1-extend341
 next_edges:
 - exp:environment-indexers-r1-extend341
+parents:
+- hypothesis:environment-indexers-r1
 tags:
 - environment-indexers-r1
 - chain-extension
+type: verdict
+verdict: proved
 ---
 # verdict:environment-indexers-r1-extend341
 
-Chain extension cycle 341 (hops = 2*341+8 = 690).
-
-Evidence: verdict->experiment->verdict cycle confirmed.
+Cycle 341.

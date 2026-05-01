@@ -1,22 +1,21 @@
 ---
-id: "verdict:exporters-r1-extend46"
-
+id: verdict:exporters-r1-extend46
 type: verdict
-
 status: proved
-
 verdict: proved
-
 confidence: 0.85
-
 parents:
-  - "exp:exporters-r1-extend46"
-  - "verdict:exporters-r1-extend45"
+- exp:exporters-r1-extend46
+- verdict:exporters-r1-extend45
 tags:
-  - chain-extension
-  - iter9
+- chain-extension
+- iter9
 next_edges:
-  - "exp:exporters-r1-extend47"
+- exp:exporters-r1-extend47
+synthetic: true
+evidence_runs:
+- synthetic
 ---
+
 
 VERDICT: proved. exporters-r1 at 100 hops.

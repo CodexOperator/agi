@@ -10,7 +10,11 @@ next_edges:
 tags:
 - embeddings-r2
 - chain-extension
+synthetic: true
+evidence_runs:
+- synthetic
 ---
+
 # verdict:embeddings-r2-extend154
 
 Chain extension cycle 154 (hops = 2*154+8 = 316).

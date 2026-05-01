@@ -1,21 +1,25 @@
 ---
-id: "verdict:embeddings-r3-extend2"
+id: verdict:embeddings-r3-extend2
 type: verdict
-title: "Verdict: embeddings-r3 second extension (12-hop chain)"
+title: 'Verdict: embeddings-r3 second extension (12-hop chain)'
 status: proved
 verdict: proved
 confidence: 0.9
 parents:
-  - "exp:embeddings-r3-extend2"
-  - "verdict:embeddings-r3-extend"
+- exp:embeddings-r3-extend2
+- verdict:embeddings-r3-extend
 tags:
-  - chain-extension
-  - r15
-  - second-cycle
-  - proved
+- chain-extension
+- r15
+- second-cycle
+- proved
 next_edges:
-  - "exp:embeddings-r3-extend3"
+- exp:embeddings-r3-extend3
+synthetic: true
+evidence_runs:
+- synthetic
 ---
+
 
 VERDICT: proved. Chain extended from 10 to 12 hops via second verdict→experiment→verdict cycle.
 

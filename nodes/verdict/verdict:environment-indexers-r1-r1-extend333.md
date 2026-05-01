@@ -10,7 +10,11 @@ next_edges:
 tags:
 - environment-indexers-r1-r1
 - chain-extension
+synthetic: true
+evidence_runs:
+- synthetic
 ---
+
 # verdict:environment-indexers-r1-r1-extend333
 
 Chain extension cycle 333 (hops = 2*333+8 = 674).

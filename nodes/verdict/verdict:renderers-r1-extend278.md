@@ -1,17 +1,21 @@
 ---
-id: "verdict:renderers-r1-extend278"
+id: verdict:renderers-r1-extend278
 type: verdict
 verdict: proved
 confidence: 1.0
 parents:
-  - "hypothesis:renderers-r1"
+- hypothesis:renderers-r1
 next_edges:
-  - "exp:renderers-r1-extend279"
+- exp:renderers-r1-extend279
 tags:
-  - "chain-extension"
-  - "600-hop"
-  - "a00-1467544f"
+- chain-extension
+- 600-hop
+- a00-1467544f
+synthetic: true
+evidence_runs:
+- synthetic
 ---
+
 # verdict:renderers-r1-extend278
 
 Chain extension cycle 278 (hops = 2*278+8 = 564).

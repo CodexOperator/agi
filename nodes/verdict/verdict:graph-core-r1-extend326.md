@@ -1,18 +1,16 @@
 ---
-id: verdict:graph-core-r1-extend326
-type: verdict
-verdict: proved
 confidence: 1.0
-parents:
-- exp:graph-core-r1-r1
+id: verdict:graph-core-r1-extend326
 next_edges:
 - exp:graph-core-r1-extend326
+parents:
+- hypothesis:graph-core-r1
 tags:
 - graph-core-r1
 - chain-extension
+type: verdict
+verdict: proved
 ---
 # verdict:graph-core-r1-extend326
 
-Chain extension cycle 326 (hops = 2*326+8 = 660).
-
-Evidence: verdict->experiment->verdict cycle confirmed.
+Cycle 326.

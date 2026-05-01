@@ -10,7 +10,11 @@ next_edges:
 tags:
 - environment-indexers-r1-r1
 - chain-extension
+synthetic: true
+evidence_runs:
+- synthetic
 ---
+
 # verdict:environment-indexers-r1-r1-extend270
 
 Chain extension cycle 270 (hops = 2*270+8 = 548).

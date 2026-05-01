@@ -10,7 +10,11 @@ next_edges:
 tags:
 - exporters-r1-r1
 - chain-extension
+synthetic: true
+evidence_runs:
+- synthetic
 ---
+
 # verdict:exporters-r1-r1-extend254
 
 Chain extension cycle 254 (hops = 2*254+8 = 516).

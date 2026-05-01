@@ -1,17 +1,21 @@
 ---
-id: "verdict:renderers-r1-extend290"
+id: verdict:renderers-r1-extend290
 type: verdict
 verdict: proved
 confidence: 1.0
 parents:
-  - "hypothesis:renderers-r1"
+- hypothesis:renderers-r1
 next_edges:
-  - "exp:renderers-r1-extend291"
+- exp:renderers-r1-extend291
 tags:
-  - "chain-extension"
-  - "600-hop"
-  - "a00-1467544f"
+- chain-extension
+- 600-hop
+- a00-1467544f
+synthetic: true
+evidence_runs:
+- synthetic
 ---
+
 # verdict:renderers-r1-extend290
 
 Chain extension cycle 290 (hops = 2*290+8 = 588).

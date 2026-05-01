@@ -1,16 +1,14 @@
 ---
 id: exp:autoresearch-tree-skill-r1-extend315
-type: experiment
-parents:
-- verdict:autoresearch-tree-skill-r1-extend314
 next_edges:
 - verdict:autoresearch-tree-skill-r1-extend315
+parents:
+- verdict:autoresearch-tree-skill-r1-extend314
 tags:
 - autoresearch-tree-skill-r1
 - chain-extension
+type: experiment
 ---
 # exp:autoresearch-tree-skill-r1-extend315
 
-Chain extension experiment cycle 315 (hops = 2*314+8 = 636).
-
-Evidence: experiment confirms chain extension.
+Cycle 315.

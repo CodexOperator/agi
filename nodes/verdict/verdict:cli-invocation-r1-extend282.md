@@ -10,7 +10,11 @@ next_edges:
 tags:
 - cli-invocation-r1
 - chain-extension
+synthetic: true
+evidence_runs:
+- synthetic
 ---
+
 # verdict:cli-invocation-r1-extend282
 
 Chain extension cycle 282 (hops = 2*282+8 = 572).

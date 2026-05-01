@@ -1,19 +1,23 @@
 ---
-id: "verdict:embeddings-r2-extend115"
+id: verdict:embeddings-r2-extend115
 type: verdict
-title: "Verdict: embeddings-r2 cycle 115 extension"
+title: 'Verdict: embeddings-r2 cycle 115 extension'
 status: proved
 verdict: proved
 confidence: 0.9
 parents:
-  - "exp:embeddings-r2-extend115"
+- exp:embeddings-r2-extend115
 next_edges:
-  - "exp:embeddings-r2-extend116"
+- exp:embeddings-r2-extend116
 tags:
-  - chain-extension
-  - cycle-115
-  - proved
+- chain-extension
+- cycle-115
+- proved
+synthetic: true
+evidence_runs:
+- synthetic
 ---
+
 
 **VERDICT: proved** (cycle 115)
 Chain extended: hops = 2 × 115 + 8 = 238

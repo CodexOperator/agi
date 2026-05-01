@@ -1,16 +1,14 @@
 ---
 id: exp:exporters-r1-extend325
-type: experiment
-parents:
-- verdict:exporters-r1-extend324
 next_edges:
 - verdict:exporters-r1-extend325
+parents:
+- verdict:exporters-r1-extend324
 tags:
 - exporters-r1
 - chain-extension
+type: experiment
 ---
 # exp:exporters-r1-extend325
 
-Chain extension experiment cycle 325 (hops = 2*324+8 = 656).
-
-Evidence: experiment confirms chain extension.
+Cycle 325.

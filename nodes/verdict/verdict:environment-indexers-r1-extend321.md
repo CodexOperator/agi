@@ -1,18 +1,16 @@
 ---
-id: verdict:environment-indexers-r1-extend321
-type: verdict
-verdict: proved
 confidence: 1.0
-parents:
-- exp:environment-indexers-r1-r1
+id: verdict:environment-indexers-r1-extend321
 next_edges:
 - exp:environment-indexers-r1-extend321
+parents:
+- hypothesis:environment-indexers-r1
 tags:
 - environment-indexers-r1
 - chain-extension
+type: verdict
+verdict: proved
 ---
 # verdict:environment-indexers-r1-extend321
 
-Chain extension cycle 321 (hops = 2*321+8 = 650).
-
-Evidence: verdict->experiment->verdict cycle confirmed.
+Cycle 321.

@@ -10,7 +10,11 @@ next_edges:
 tags:
 - schema-registry-r1
 - chain-extension
+synthetic: true
+evidence_runs:
+- synthetic
 ---
+
 # verdict:schema-registry-r1-extend308
 
 Chain extension cycle 308 (hops = 2*308+8 = 624).

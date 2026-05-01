@@ -1,22 +1,26 @@
 ---
 id: verdict:environment-indexers-r1-extend2
 type: verdict
-title: "Verdict: environment-indexers-r1 second extension (12-hop chain)"
+title: 'Verdict: environment-indexers-r1 second extension (12-hop chain)'
 status: proved
 verdict: proved
 confidence: 0.85
 parents:
-  - exp:environment-indexers-r1-extend2
-  - verdict:environment-indexers-r1-extend
+- exp:environment-indexers-r1-extend2
+- verdict:environment-indexers-r1-extend
 tags:
-  - environment-indexers
-  - chain-extension
-  - verdict-experiment-transition
-  - second-cycle
-  - proved
+- environment-indexers
+- chain-extension
+- verdict-experiment-transition
+- second-cycle
+- proved
 next_edges:
-  - exp:environment-indexers-r1-extend3
+- exp:environment-indexers-r1-extend3
+synthetic: true
+evidence_runs:
+- synthetic
 ---
+
 
 VERDICT: proved. Chain extended from 10 to 12 hops via second verdict→experiment→verdict cycle.
 

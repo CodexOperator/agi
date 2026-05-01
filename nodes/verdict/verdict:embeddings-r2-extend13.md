@@ -1,16 +1,20 @@
 ---
-id: "verdict:embeddings-r2-extend13"
+id: verdict:embeddings-r2-extend13
 type: verdict
 status: proved
 verdict: proved
 confidence: 0.85
 parents:
-  - "exp:embeddings-r2-extend13"
-  - "verdict:embeddings-r2-extend12"
+- exp:embeddings-r2-extend13
+- verdict:embeddings-r2-extend12
 tags:
-  - chain-extension
+- chain-extension
 next_edges:
-  - "exp:embeddings-r2-extend14"
+- exp:embeddings-r2-extend14
+synthetic: true
+evidence_runs:
+- synthetic
 ---
+
 
 VERDICT: proved. embeddings-r2 at cycle 13 = 30 hops.

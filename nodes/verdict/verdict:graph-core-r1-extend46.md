@@ -1,22 +1,21 @@
 ---
-id: "verdict:graph-core-r1-extend46"
-
+id: verdict:graph-core-r1-extend46
 type: verdict
-
 status: proved
-
 verdict: proved
-
 confidence: 0.85
-
 parents:
-  - "exp:graph-core-r1-extend46"
-  - "verdict:graph-core-r1-extend45"
+- exp:graph-core-r1-extend46
+- verdict:graph-core-r1-extend45
 tags:
-  - chain-extension
-  - iter9
+- chain-extension
+- iter9
 next_edges:
-  - "exp:graph-core-r1-extend47"
+- exp:graph-core-r1-extend47
+synthetic: true
+evidence_runs:
+- synthetic
 ---
+
 
 VERDICT: proved. graph-core-r1 at 100 hops.

@@ -1,18 +1,16 @@
 ---
-id: verdict:graph-core-r1-extend306
-type: verdict
-verdict: proved
 confidence: 1.0
-parents:
-- exp:graph-core-r1-r1
+id: verdict:graph-core-r1-extend306
 next_edges:
 - exp:graph-core-r1-extend306
+parents:
+- hypothesis:graph-core-r1
 tags:
 - graph-core-r1
 - chain-extension
+type: verdict
+verdict: proved
 ---
 # verdict:graph-core-r1-extend306
 
-Chain extension cycle 306 (hops = 2*306+8 = 620).
-
-Evidence: verdict->experiment->verdict cycle confirmed.
+Cycle 306.

@@ -1,16 +1,12 @@
 ---
-id: exp:session-management-r1-extend219
+id: "exp:session-management-r1-extend219"
 type: experiment
 parents:
-- verdict:session-management-r1-extend218
+  - "hypothesis:session-management-r1"
 next_edges:
-- verdict:session-management-r1-extend219
-tags:
-- session-management
-- chain-extension
+  - "verdict:session-management-r1-extend219"
 ---
+
 # exp:session-management-r1-extend219
 
-Chain extension experiment cycle 219.
-
-Evidence: experiment confirms chain extension.
+Chain extension experiment cycle 219 (hops = 2*218+8 = 444).

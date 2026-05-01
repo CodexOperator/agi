@@ -10,7 +10,11 @@ next_edges:
 tags:
 - renderers-r1-r1
 - chain-extension
+synthetic: true
+evidence_runs:
+- synthetic
 ---
+
 # verdict:renderers-r1-r1-extend301
 
 Chain extension cycle 301 (hops = 2*301+8 = 610).

@@ -1,16 +1,20 @@
 ---
-id: "verdict:schema-registry-r2-bracket-convention-extend7"
+id: verdict:schema-registry-r2-bracket-convention-extend7
 type: verdict
 status: proved
 verdict: proved
 confidence: 0.85
 parents:
-  - "exp:schema-registry-r2-bracket-convention-extend7"
-  - "verdict:schema-registry-r2-bracket-convention-extend6"
+- exp:schema-registry-r2-bracket-convention-extend7
+- verdict:schema-registry-r2-bracket-convention-extend6
 tags:
-  - chain-extension
+- chain-extension
 next_edges:
-  - "exp:schema-registry-r2-bracket-convention-extend8"
+- exp:schema-registry-r2-bracket-convention-extend8
+synthetic: true
+evidence_runs:
+- synthetic
 ---
+
 
 VERDICT: proved. schema-registry-r2-bracket-convention at cycle 7 = 18 hops.

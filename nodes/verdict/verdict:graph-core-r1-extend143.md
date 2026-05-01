@@ -1,19 +1,23 @@
 ---
-id: "verdict:graph-core-r1-extend143"
+id: verdict:graph-core-r1-extend143
 type: verdict
-title: "Verdict: graph-core-r1 cycle 143 extension"
+title: 'Verdict: graph-core-r1 cycle 143 extension'
 status: proved
 verdict: proved
 confidence: 0.9
 parents:
-  - "exp:graph-core-r1-extend143"
+- exp:graph-core-r1-extend143
 next_edges:
-  - "exp:graph-core-r1-extend144"
+- exp:graph-core-r1-extend144
 tags:
-  - chain-extension
-  - cycle-143
-  - proved
+- chain-extension
+- cycle-143
+- proved
+synthetic: true
+evidence_runs:
+- synthetic
 ---
+
 
 **VERDICT: proved** (cycle 143)
 Chain extended: hops = 2 × 143 + 8 = 294

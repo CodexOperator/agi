@@ -1,16 +1,14 @@
 ---
 id: exp:chain-engine-r1-extend341
-type: experiment
-parents:
-- verdict:chain-engine-r1-extend340
 next_edges:
 - verdict:chain-engine-r1-extend341
+parents:
+- verdict:chain-engine-r1-extend340
 tags:
 - chain-engine-r1
 - chain-extension
+type: experiment
 ---
 # exp:chain-engine-r1-extend341
 
-Chain extension experiment cycle 341 (hops = 2*340+8 = 688).
-
-Evidence: experiment confirms chain extension.
+Cycle 341.

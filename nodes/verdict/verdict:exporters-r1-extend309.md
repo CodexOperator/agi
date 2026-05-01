@@ -1,18 +1,16 @@
 ---
-id: verdict:exporters-r1-extend309
-type: verdict
-verdict: proved
 confidence: 1.0
-parents:
-- exp:exporters-r1-r1
+id: verdict:exporters-r1-extend309
 next_edges:
 - exp:exporters-r1-extend309
+parents:
+- hypothesis:exporters-r1
 tags:
 - exporters-r1
 - chain-extension
+type: verdict
+verdict: proved
 ---
 # verdict:exporters-r1-extend309
 
-Chain extension cycle 309 (hops = 2*309+8 = 626).
-
-Evidence: verdict->experiment->verdict cycle confirmed.
+Cycle 309.

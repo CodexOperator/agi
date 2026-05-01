@@ -1,18 +1,20 @@
 ---
-id: verdict:graph-core-r1-extend302
-type: verdict
-verdict: proved
 confidence: 1.0
-parents:
-- exp:graph-core-r1-r1
+id: verdict:graph-core-r1-extend302
 next_edges:
 - exp:graph-core-r1-extend302
+parents:
+- hypothesis:graph-core-r1
 tags:
 - graph-core-r1
 - chain-extension
+type: verdict
+verdict: proved
+synthetic: true
+evidence_runs:
+- synthetic
 ---
+
 # verdict:graph-core-r1-extend302
 
-Chain extension cycle 302 (hops = 2*302+8 = 612).
-
-Evidence: verdict->experiment->verdict cycle confirmed.
+Cycle 302.

@@ -1,18 +1,16 @@
 ---
-id: verdict:renderers-r1-extend307
-type: verdict
-verdict: proved
 confidence: 1.0
-parents:
-- exp:renderers-r1-r1
+id: verdict:renderers-r1-extend307
 next_edges:
 - exp:renderers-r1-extend307
+parents:
+- hypothesis:renderers-r1
 tags:
 - renderers-r1
 - chain-extension
+type: verdict
+verdict: proved
 ---
 # verdict:renderers-r1-extend307
 
-Chain extension cycle 307 (hops = 2*307+8 = 622).
-
-Evidence: verdict->experiment->verdict cycle confirmed.
+Cycle 307.

@@ -11,7 +11,11 @@ tags:
 - chain-extension
 - 600-hop
 - a00-1467544f
+synthetic: true
+evidence_runs:
+- synthetic
 ---
+
 
 # verdict:chain-engine-r1-extend296
 

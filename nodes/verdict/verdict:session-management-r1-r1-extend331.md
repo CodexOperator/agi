@@ -10,7 +10,11 @@ next_edges:
 tags:
 - session-management-r1-r1
 - chain-extension
+synthetic: true
+evidence_runs:
+- synthetic
 ---
+
 # verdict:session-management-r1-r1-extend331
 
 Chain extension cycle 331 (hops = 2*331+8 = 670).

@@ -1,16 +1,20 @@
 ---
-id: "verdict:renderers-r1-extend15"
+id: verdict:renderers-r1-extend15
 type: verdict
 status: proved
 verdict: proved
 confidence: 0.85
 parents:
-  - "exp:renderers-r1-extend15"
-  - "verdict:renderers-r1-extend14"
+- exp:renderers-r1-extend15
+- verdict:renderers-r1-extend14
 tags:
-  - chain-extension
+- chain-extension
 next_edges:
-  - "exp:renderers-r1-extend16"
+- exp:renderers-r1-extend16
+synthetic: true
+evidence_runs:
+- synthetic
 ---
+
 
 VERDICT: proved. renderers-r1 at 34 hops.

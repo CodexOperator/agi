@@ -10,7 +10,11 @@ next_edges:
 tags:
 - chain-engine-r1-r1
 - chain-extension
+synthetic: true
+evidence_runs:
+- synthetic
 ---
+
 # verdict:chain-engine-r1-r1-extend264
 
 Chain extension cycle 264 (hops = 2*264+8 = 536).

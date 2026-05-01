@@ -10,7 +10,11 @@ next_edges:
 tags:
 - autoresearch-tree-skill-r1-r1
 - chain-extension
+synthetic: true
+evidence_runs:
+- synthetic
 ---
+
 # verdict:autoresearch-tree-skill-r1-r1-extend338
 
 Chain extension cycle 338 (hops = 2*338+8 = 684).

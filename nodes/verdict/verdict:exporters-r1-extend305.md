@@ -1,18 +1,16 @@
 ---
-id: verdict:exporters-r1-extend305
-type: verdict
-verdict: proved
 confidence: 1.0
-parents:
-- exp:exporters-r1-r1
+id: verdict:exporters-r1-extend305
 next_edges:
 - exp:exporters-r1-extend305
+parents:
+- hypothesis:exporters-r1
 tags:
 - exporters-r1
 - chain-extension
+type: verdict
+verdict: proved
 ---
 # verdict:exporters-r1-extend305
 
-Chain extension cycle 305 (hops = 2*305+8 = 618).
-
-Evidence: verdict->experiment->verdict cycle confirmed.
+Cycle 305.

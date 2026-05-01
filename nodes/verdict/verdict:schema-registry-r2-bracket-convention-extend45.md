@@ -1,22 +1,21 @@
 ---
-id: "verdict:schema-registry-r2-bracket-convention-extend45"
-
+id: verdict:schema-registry-r2-bracket-convention-extend45
 type: verdict
-
 status: proved
-
 verdict: proved
-
 confidence: 0.85
-
 parents:
-  - "exp:schema-registry-r2-bracket-convention-extend45"
-  - "verdict:schema-registry-r2-bracket-convention-extend44"
+- exp:schema-registry-r2-bracket-convention-extend45
+- verdict:schema-registry-r2-bracket-convention-extend44
 tags:
-  - chain-extension
-  - iter9
+- chain-extension
+- iter9
 next_edges:
-  - "exp:schema-registry-r2-bracket-convention-extend46"
+- exp:schema-registry-r2-bracket-convention-extend46
+synthetic: true
+evidence_runs:
+- synthetic
 ---
+
 
 VERDICT: proved. schema-registry-r2-bracket-convention at 98 hops.

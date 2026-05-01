@@ -1,21 +1,25 @@
 ---
-id: "verdict:environment-indexers-r1-extend87"
+id: verdict:environment-indexers-r1-extend87
 type: verdict
-title: "Verdict: environment-indexers-r1 extend cycle 87/96"
+title: 'Verdict: environment-indexers-r1 extend cycle 87/96'
 status: proved
 verdict: proved
 confidence: 0.9
 parents:
-  - "exp:environment-indexers-r1-extend87"
-  - "verdict:environment-indexers-r1-extend86"
+- exp:environment-indexers-r1-extend87
+- verdict:environment-indexers-r1-extend86
 tags:
-  - chain-extension
-  - r16
-  - cycle-87
-  - proved
+- chain-extension
+- r16
+- cycle-87
+- proved
 next_edges:
-  - "exp:environment-indexers-r1-extend88"
+- exp:environment-indexers-r1-extend88
+synthetic: true
+evidence_runs:
+- synthetic
 ---
+
 
 **VERDICT: proved** — environment-indexers-r1 chain extended to cycle 87/96.
 

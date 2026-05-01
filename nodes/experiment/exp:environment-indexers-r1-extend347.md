@@ -1,16 +1,14 @@
 ---
 id: exp:environment-indexers-r1-extend347
-type: experiment
-parents:
-- verdict:environment-indexers-r1-extend346
 next_edges:
 - verdict:environment-indexers-r1-extend347
+parents:
+- verdict:environment-indexers-r1-extend346
 tags:
 - environment-indexers-r1
 - chain-extension
+type: experiment
 ---
 # exp:environment-indexers-r1-extend347
 
-Chain extension experiment cycle 347 (hops = 2*346+8 = 700).
-
-Evidence: experiment confirms chain extension.
+Cycle 347.

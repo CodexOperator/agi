@@ -1,17 +1,21 @@
 ---
-id: "verdict:graph-core-r1-extend250"
+id: verdict:graph-core-r1-extend250
 type: verdict
 verdict: proved
 confidence: 1.0
 parents:
-  - "hypothesis:graph-core-r1"
+- hypothesis:graph-core-r1
 next_edges:
-  - "exp:graph-core-r1-extend251"
+- exp:graph-core-r1-extend251
 tags:
-  - "chain-extension"
-  - "600-hop"
-  - "a00-1467544f"
+- chain-extension
+- 600-hop
+- a00-1467544f
+synthetic: true
+evidence_runs:
+- synthetic
 ---
+
 # verdict:graph-core-r1-extend250
 
 Chain extension cycle 250 (hops = 2*250+8 = 508).

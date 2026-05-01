@@ -1,18 +1,16 @@
 ---
-id: verdict:environment-indexers-r1-extend312
-type: verdict
-verdict: proved
 confidence: 1.0
-parents:
-- exp:environment-indexers-r1-r1
+id: verdict:environment-indexers-r1-extend312
 next_edges:
 - exp:environment-indexers-r1-extend312
+parents:
+- hypothesis:environment-indexers-r1
 tags:
 - environment-indexers-r1
 - chain-extension
+type: verdict
+verdict: proved
 ---
 # verdict:environment-indexers-r1-extend312
 
-Chain extension cycle 312 (hops = 2*312+8 = 632).
-
-Evidence: verdict->experiment->verdict cycle confirmed.
+Cycle 312.

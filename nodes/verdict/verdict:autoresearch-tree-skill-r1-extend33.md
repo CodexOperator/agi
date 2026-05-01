@@ -1,17 +1,21 @@
 ---
-id: "verdict:autoresearch-tree-skill-r1-extend33"
+id: verdict:autoresearch-tree-skill-r1-extend33
 type: verdict
 status: proved
 verdict: proved
 confidence: 0.85
 parents:
-  - "exp:autoresearch-tree-skill-r1-extend33"
-  - "verdict:autoresearch-tree-skill-r1-extend32"
+- exp:autoresearch-tree-skill-r1-extend33
+- verdict:autoresearch-tree-skill-r1-extend32
 tags:
-  - chain-extension
-  - iter23e
+- chain-extension
+- iter23e
 next_edges:
-  - "exp:autoresearch-tree-skill-r1-extend34"
+- exp:autoresearch-tree-skill-r1-extend34
+synthetic: true
+evidence_runs:
+- synthetic
 ---
+
 
 VERDICT: proved. autoresearch-tree-skill-r1 at 74 hops.

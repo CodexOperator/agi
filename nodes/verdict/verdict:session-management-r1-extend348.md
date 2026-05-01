@@ -10,7 +10,11 @@ next_edges:
 tags:
 - session-management
 - chain-extension
+synthetic: true
+evidence_runs:
+- synthetic
 ---
+
 # verdict:session-management-r1-extend348
 
 Chain extension cycle 348.

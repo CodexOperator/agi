@@ -1,21 +1,25 @@
 ---
-id: "verdict:graph-core-r1-extend96"
+id: verdict:graph-core-r1-extend96
 type: verdict
-title: "Verdict: graph-core-r1 extend FINAL"
+title: 'Verdict: graph-core-r1 extend FINAL'
 status: proved
 verdict: proved
 confidence: 0.9
 parents:
-  - "exp:graph-core-r1-extend96"
-  - "verdict:graph-core-r1-extend95"
+- exp:graph-core-r1-extend96
+- verdict:graph-core-r1-extend95
 tags:
-  - chain-extension
-  - r16
-  - cycle-96
-  - proved
+- chain-extension
+- r16
+- cycle-96
+- proved
 next_edges:
-  - "exp:graph-core-r1-extend97"
+- exp:graph-core-r1-extend97
+synthetic: true
+evidence_runs:
+- synthetic
 ---
+
 
 **VERDICT: proved** — graph-core-r1 chain extended to FINAL.
 

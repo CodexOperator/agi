@@ -1,19 +1,23 @@
 ---
-id: "verdict:chain-engine-r1-extend130"
+id: verdict:chain-engine-r1-extend130
 type: verdict
-title: "Verdict: chain-engine-r1 cycle 130 extension"
+title: 'Verdict: chain-engine-r1 cycle 130 extension'
 status: proved
 verdict: proved
 confidence: 0.9
 parents:
-  - "exp:chain-engine-r1-extend130"
+- exp:chain-engine-r1-extend130
 next_edges:
-  - "exp:chain-engine-r1-extend131"
+- exp:chain-engine-r1-extend131
 tags:
-  - chain-extension
-  - cycle-130
-  - proved
+- chain-extension
+- cycle-130
+- proved
+synthetic: true
+evidence_runs:
+- synthetic
 ---
+
 
 **VERDICT: proved** (cycle 130)
 Chain extended: hops = 2 × 130 + 8 = 268

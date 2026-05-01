@@ -1,19 +1,23 @@
 ---
-id: "verdict:autoresearch-tree-skill-r1-extend141"
+id: verdict:autoresearch-tree-skill-r1-extend141
 type: verdict
-title: "Verdict: autoresearch-tree-skill-r1 cycle 141 extension"
+title: 'Verdict: autoresearch-tree-skill-r1 cycle 141 extension'
 status: proved
 verdict: proved
 confidence: 0.9
 parents:
-  - "exp:autoresearch-tree-skill-r1-extend141"
+- exp:autoresearch-tree-skill-r1-extend141
 next_edges:
-  - "exp:autoresearch-tree-skill-r1-extend142"
+- exp:autoresearch-tree-skill-r1-extend142
 tags:
-  - chain-extension
-  - cycle-141
-  - proved
+- chain-extension
+- cycle-141
+- proved
+synthetic: true
+evidence_runs:
+- synthetic
 ---
+
 
 **VERDICT: proved** (cycle 141)
 Chain extended: hops = 2 × 141 + 8 = 290

@@ -1,16 +1,13 @@
 ---
-id: exp:session-management-r1-extend88
+id: "exp:session-management-r1-extend88"
 type: experiment
+title: "session-management-r1 extend cycle 88"
 parents:
-- verdict:session-management-r1-extend87
+  - "verdict:session-management-r1-extend87"
 next_edges:
-- verdict:session-management-r1-extend88
-tags:
-- session-management
-- chain-extension
+  - "verdict:session-management-r1-extend88"
 ---
+
 # exp:session-management-r1-extend88
 
-Chain extension experiment cycle 88.
-
-Evidence: experiment confirms chain extension.
+Chain extension cycle 88 for session-management-r1.

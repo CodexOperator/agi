@@ -1,18 +1,16 @@
 ---
-id: verdict:environment-indexers-r1-extend303
-type: verdict
-verdict: proved
 confidence: 1.0
-parents:
-- exp:environment-indexers-r1-r1
+id: verdict:environment-indexers-r1-extend303
 next_edges:
 - exp:environment-indexers-r1-extend303
+parents:
+- hypothesis:environment-indexers-r1
 tags:
 - environment-indexers-r1
 - chain-extension
+type: verdict
+verdict: proved
 ---
 # verdict:environment-indexers-r1-extend303
 
-Chain extension cycle 303 (hops = 2*303+8 = 614).
-
-Evidence: verdict->experiment->verdict cycle confirmed.
+Cycle 303.

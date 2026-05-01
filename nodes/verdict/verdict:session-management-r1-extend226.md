@@ -1,18 +1,14 @@
 ---
-id: verdict:session-management-r1-extend226
+id: "verdict:session-management-r1-extend226"
 type: verdict
 verdict: proved
 confidence: 1.0
 parents:
-- hypothesis:session-management-r1
+  - "hypothesis:session-management-r1"
 next_edges:
-- exp:session-management-r1-extend227
-tags:
-- session-management
-- chain-extension
+  - "exp:session-management-r1-extend227"
 ---
+
 # verdict:session-management-r1-extend226
 
-Chain extension cycle 226.
-
-Evidence: verdict->experiment->verdict cycle confirmed.
+Chain extension cycle 226 (hops = 2*226+8 = 460).

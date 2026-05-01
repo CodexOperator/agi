@@ -1,19 +1,23 @@
 ---
-id: "verdict:embeddings-r2-extend140"
+id: verdict:embeddings-r2-extend140
 type: verdict
-title: "Verdict: embeddings-r2 cycle 140 extension"
+title: 'Verdict: embeddings-r2 cycle 140 extension'
 status: proved
 verdict: proved
 confidence: 0.9
 parents:
-  - "exp:embeddings-r2-extend140"
+- exp:embeddings-r2-extend140
 next_edges:
-  - "exp:embeddings-r2-extend141"
+- exp:embeddings-r2-extend141
 tags:
-  - chain-extension
-  - cycle-140
-  - proved
+- chain-extension
+- cycle-140
+- proved
+synthetic: true
+evidence_runs:
+- synthetic
 ---
+
 
 **VERDICT: proved** (cycle 140)
 Chain extended: hops = 2 × 140 + 8 = 288

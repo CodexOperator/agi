@@ -1,16 +1,20 @@
 ---
-id: "verdict:exporters-r1-extend12"
+id: verdict:exporters-r1-extend12
 type: verdict
 status: proved
 verdict: proved
 confidence: 0.85
 parents:
-  - "exp:exporters-r1-extend12"
-  - "verdict:exporters-r1-extend11"
+- exp:exporters-r1-extend12
+- verdict:exporters-r1-extend11
 tags:
-  - chain-extension
+- chain-extension
 next_edges:
-  - "exp:exporters-r1-extend13"
+- exp:exporters-r1-extend13
+synthetic: true
+evidence_runs:
+- synthetic
 ---
+
 
 VERDICT: proved. exporters-r1 at cycle 12 = 28 hops.

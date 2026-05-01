@@ -1,18 +1,16 @@
 ---
-id: verdict:graph-core-r1-extend318
-type: verdict
-verdict: proved
 confidence: 1.0
-parents:
-- exp:graph-core-r1-r1
+id: verdict:graph-core-r1-extend318
 next_edges:
 - exp:graph-core-r1-extend318
+parents:
+- hypothesis:graph-core-r1
 tags:
 - graph-core-r1
 - chain-extension
+type: verdict
+verdict: proved
 ---
 # verdict:graph-core-r1-extend318
 
-Chain extension cycle 318 (hops = 2*318+8 = 644).
-
-Evidence: verdict->experiment->verdict cycle confirmed.
+Cycle 318.

@@ -1,18 +1,20 @@
 ---
-id: verdict:chain-engine-r1-extend329
-type: verdict
-verdict: proved
 confidence: 1.0
-parents:
-- exp:chain-engine-r1-r1
+id: verdict:chain-engine-r1-extend329
 next_edges:
 - exp:chain-engine-r1-extend329
+parents:
+- hypothesis:chain-engine-r1
 tags:
 - chain-engine-r1
 - chain-extension
+type: verdict
+verdict: proved
+synthetic: true
+evidence_runs:
+- synthetic
 ---
+
 # verdict:chain-engine-r1-extend329
 
-Chain extension cycle 329 (hops = 2*329+8 = 666).
-
-Evidence: verdict->experiment->verdict cycle confirmed.
+Cycle 329.

@@ -1,18 +1,16 @@
 ---
-id: verdict:chain-engine-r1-extend324
-type: verdict
-verdict: proved
 confidence: 1.0
-parents:
-- exp:chain-engine-r1-r1
+id: verdict:chain-engine-r1-extend324
 next_edges:
 - exp:chain-engine-r1-extend324
+parents:
+- hypothesis:chain-engine-r1
 tags:
 - chain-engine-r1
 - chain-extension
+type: verdict
+verdict: proved
 ---
 # verdict:chain-engine-r1-extend324
 
-Chain extension cycle 324 (hops = 2*324+8 = 656).
-
-Evidence: verdict->experiment->verdict cycle confirmed.
+Cycle 324.

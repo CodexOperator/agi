@@ -1,21 +1,25 @@
 ---
-id: "verdict:renderers-r1-extend96"
+id: verdict:renderers-r1-extend96
 type: verdict
-title: "Verdict: renderers-r1 extend FINAL"
+title: 'Verdict: renderers-r1 extend FINAL'
 status: proved
 verdict: proved
 confidence: 0.9
 parents:
-  - "exp:renderers-r1-extend96"
-  - "verdict:renderers-r1-extend95"
+- exp:renderers-r1-extend96
+- verdict:renderers-r1-extend95
 tags:
-  - chain-extension
-  - r16
-  - cycle-96
-  - proved
+- chain-extension
+- r16
+- cycle-96
+- proved
 next_edges:
-  - "exp:renderers-r1-extend97"
+- exp:renderers-r1-extend97
+synthetic: true
+evidence_runs:
+- synthetic
 ---
+
 
 **VERDICT: proved** — renderers-r1 chain extended to FINAL.
 

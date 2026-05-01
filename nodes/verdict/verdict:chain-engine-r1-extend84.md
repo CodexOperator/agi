@@ -1,21 +1,25 @@
 ---
-id: "verdict:chain-engine-r1-extend84"
+id: verdict:chain-engine-r1-extend84
 type: verdict
-title: "Verdict: chain-engine-r1 extend cycle 84/96"
+title: 'Verdict: chain-engine-r1 extend cycle 84/96'
 status: proved
 verdict: proved
 confidence: 0.9
 parents:
-  - "exp:chain-engine-r1-extend84"
-  - "verdict:chain-engine-r1-extend83"
+- exp:chain-engine-r1-extend84
+- verdict:chain-engine-r1-extend83
 tags:
-  - chain-extension
-  - r16
-  - cycle-84
-  - proved
+- chain-extension
+- r16
+- cycle-84
+- proved
 next_edges:
-  - "exp:chain-engine-r1-extend85"
+- exp:chain-engine-r1-extend85
+synthetic: true
+evidence_runs:
+- synthetic
 ---
+
 
 **VERDICT: proved** — chain-engine-r1 chain extended to cycle 84/96.
 

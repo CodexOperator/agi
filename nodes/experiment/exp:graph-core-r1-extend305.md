@@ -1,16 +1,14 @@
 ---
 id: exp:graph-core-r1-extend305
-type: experiment
-parents:
-- verdict:graph-core-r1-extend304
 next_edges:
 - verdict:graph-core-r1-extend305
+parents:
+- verdict:graph-core-r1-extend304
 tags:
 - graph-core-r1
 - chain-extension
+type: experiment
 ---
 # exp:graph-core-r1-extend305
 
-Chain extension experiment cycle 305 (hops = 2*304+8 = 616).
-
-Evidence: experiment confirms chain extension.
+Cycle 305.

@@ -10,7 +10,11 @@ next_edges:
 tags:
 - chain-engine-r1-r1
 - chain-extension
+synthetic: true
+evidence_runs:
+- synthetic
 ---
+
 # verdict:chain-engine-r1-r1-extend261
 
 Chain extension cycle 261 (hops = 2*261+8 = 530).

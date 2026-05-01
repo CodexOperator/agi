@@ -1,21 +1,25 @@
 ---
-id: "verdict:graph-core-r1-extend84"
+id: verdict:graph-core-r1-extend84
 type: verdict
-title: "Verdict: graph-core-r1 extend cycle 84/96"
+title: 'Verdict: graph-core-r1 extend cycle 84/96'
 status: proved
 verdict: proved
 confidence: 0.9
 parents:
-  - "exp:graph-core-r1-extend84"
-  - "verdict:graph-core-r1-extend83"
+- exp:graph-core-r1-extend84
+- verdict:graph-core-r1-extend83
 tags:
-  - chain-extension
-  - r16
-  - cycle-84
-  - proved
+- chain-extension
+- r16
+- cycle-84
+- proved
 next_edges:
-  - "exp:graph-core-r1-extend85"
+- exp:graph-core-r1-extend85
+synthetic: true
+evidence_runs:
+- synthetic
 ---
+
 
 **VERDICT: proved** — graph-core-r1 chain extended to cycle 84/96.
 

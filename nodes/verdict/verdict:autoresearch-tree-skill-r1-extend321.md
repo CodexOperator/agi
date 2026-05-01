@@ -1,18 +1,20 @@
 ---
-id: verdict:autoresearch-tree-skill-r1-extend321
-type: verdict
-verdict: proved
 confidence: 1.0
-parents:
-- exp:autoresearch-tree-skill-r1-r1
+id: verdict:autoresearch-tree-skill-r1-extend321
 next_edges:
 - exp:autoresearch-tree-skill-r1-extend321
+parents:
+- hypothesis:autoresearch-tree-skill-r1
 tags:
 - autoresearch-tree-skill-r1
 - chain-extension
+type: verdict
+verdict: proved
+synthetic: true
+evidence_runs:
+- synthetic
 ---
+
 # verdict:autoresearch-tree-skill-r1-extend321
 
-Chain extension cycle 321 (hops = 2*321+8 = 650).
-
-Evidence: verdict->experiment->verdict cycle confirmed.
+Cycle 321.

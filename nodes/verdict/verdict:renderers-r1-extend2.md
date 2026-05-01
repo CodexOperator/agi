@@ -1,21 +1,25 @@
 ---
-id: "verdict:renderers-r1-extend2"
+id: verdict:renderers-r1-extend2
 type: verdict
-title: "Verdict: renderers-r1 second extension (12-hop chain)"
+title: 'Verdict: renderers-r1 second extension (12-hop chain)'
 status: proved
 verdict: proved
 confidence: 0.9
 parents:
-  - "exp:renderers-r1-extend2"
-  - "verdict:renderers-r1-extend"
+- exp:renderers-r1-extend2
+- verdict:renderers-r1-extend
 tags:
-  - chain-extension
-  - r15
-  - second-cycle
-  - proved
+- chain-extension
+- r15
+- second-cycle
+- proved
 next_edges:
-  - "exp:renderers-r1-extend3"
+- exp:renderers-r1-extend3
+synthetic: true
+evidence_runs:
+- synthetic
 ---
+
 
 VERDICT: proved. Chain extended from 10 to 12 hops via second verdict→experiment→verdict cycle.
 

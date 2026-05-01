@@ -1,18 +1,16 @@
 ---
-id: verdict:graph-core-r1-extend341
-type: verdict
-verdict: proved
 confidence: 1.0
-parents:
-- exp:graph-core-r1-r1
+id: verdict:graph-core-r1-extend341
 next_edges:
 - exp:graph-core-r1-extend341
+parents:
+- hypothesis:graph-core-r1
 tags:
 - graph-core-r1
 - chain-extension
+type: verdict
+verdict: proved
 ---
 # verdict:graph-core-r1-extend341
 
-Chain extension cycle 341 (hops = 2*341+8 = 690).
-
-Evidence: verdict->experiment->verdict cycle confirmed.
+Cycle 341.

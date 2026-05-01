@@ -1,18 +1,16 @@
 ---
-id: verdict:chain-engine-r1-extend330
-type: verdict
-verdict: proved
 confidence: 1.0
-parents:
-- exp:chain-engine-r1-r1
+id: verdict:chain-engine-r1-extend330
 next_edges:
 - exp:chain-engine-r1-extend330
+parents:
+- hypothesis:chain-engine-r1
 tags:
 - chain-engine-r1
 - chain-extension
+type: verdict
+verdict: proved
 ---
 # verdict:chain-engine-r1-extend330
 
-Chain extension cycle 330 (hops = 2*330+8 = 668).
-
-Evidence: verdict->experiment->verdict cycle confirmed.
+Cycle 330.

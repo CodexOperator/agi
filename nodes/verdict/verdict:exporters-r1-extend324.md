@@ -1,18 +1,16 @@
 ---
-id: verdict:exporters-r1-extend324
-type: verdict
-verdict: proved
 confidence: 1.0
-parents:
-- exp:exporters-r1-r1
+id: verdict:exporters-r1-extend324
 next_edges:
 - exp:exporters-r1-extend324
+parents:
+- hypothesis:exporters-r1
 tags:
 - exporters-r1
 - chain-extension
+type: verdict
+verdict: proved
 ---
 # verdict:exporters-r1-extend324
 
-Chain extension cycle 324 (hops = 2*324+8 = 656).
-
-Evidence: verdict->experiment->verdict cycle confirmed.
+Cycle 324.

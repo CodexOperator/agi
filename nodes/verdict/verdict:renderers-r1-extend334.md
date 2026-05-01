@@ -1,18 +1,20 @@
 ---
-id: verdict:renderers-r1-extend334
-type: verdict
-verdict: proved
 confidence: 1.0
-parents:
-- exp:renderers-r1-r1
+id: verdict:renderers-r1-extend334
 next_edges:
 - exp:renderers-r1-extend334
+parents:
+- hypothesis:renderers-r1
 tags:
 - renderers-r1
 - chain-extension
+type: verdict
+verdict: proved
+synthetic: true
+evidence_runs:
+- synthetic
 ---
+
 # verdict:renderers-r1-extend334
 
-Chain extension cycle 334 (hops = 2*334+8 = 676).
-
-Evidence: verdict->experiment->verdict cycle confirmed.
+Cycle 334.

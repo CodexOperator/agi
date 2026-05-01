@@ -1,18 +1,16 @@
 ---
-id: verdict:environment-indexers-r1-extend315
-type: verdict
-verdict: proved
 confidence: 1.0
-parents:
-- exp:environment-indexers-r1-r1
+id: verdict:environment-indexers-r1-extend315
 next_edges:
 - exp:environment-indexers-r1-extend315
+parents:
+- hypothesis:environment-indexers-r1
 tags:
 - environment-indexers-r1
 - chain-extension
+type: verdict
+verdict: proved
 ---
 # verdict:environment-indexers-r1-extend315
 
-Chain extension cycle 315 (hops = 2*315+8 = 638).
-
-Evidence: verdict->experiment->verdict cycle confirmed.
+Cycle 315.

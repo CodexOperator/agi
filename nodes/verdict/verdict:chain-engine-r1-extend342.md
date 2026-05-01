@@ -1,18 +1,16 @@
 ---
-id: verdict:chain-engine-r1-extend342
-type: verdict
-verdict: proved
 confidence: 1.0
-parents:
-- exp:chain-engine-r1-r1
+id: verdict:chain-engine-r1-extend342
 next_edges:
 - exp:chain-engine-r1-extend342
+parents:
+- hypothesis:chain-engine-r1
 tags:
 - chain-engine-r1
 - chain-extension
+type: verdict
+verdict: proved
 ---
 # verdict:chain-engine-r1-extend342
 
-Chain extension cycle 342 (hops = 2*342+8 = 692).
-
-Evidence: verdict->experiment->verdict cycle confirmed.
+Cycle 342.

@@ -1,17 +1,21 @@
 ---
-id: "verdict:embeddings-r2-extend22"
+id: verdict:embeddings-r2-extend22
 type: verdict
 status: proved
 verdict: proved
 confidence: 0.85
 parents:
-  - "exp:embeddings-r2-extend22"
-  - "verdict:embeddings-r2-extend21"
+- exp:embeddings-r2-extend22
+- verdict:embeddings-r2-extend21
 tags:
-  - chain-extension
-  - iter23b
+- chain-extension
+- iter23b
 next_edges:
-  - "exp:embeddings-r2-extend23"
+- exp:embeddings-r2-extend23
+synthetic: true
+evidence_runs:
+- synthetic
 ---
+
 
 VERDICT: proved. embeddings-r2 at 52 hops.

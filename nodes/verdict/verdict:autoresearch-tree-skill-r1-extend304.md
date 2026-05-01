@@ -1,18 +1,16 @@
 ---
-id: verdict:autoresearch-tree-skill-r1-extend304
-type: verdict
-verdict: proved
 confidence: 1.0
-parents:
-- exp:autoresearch-tree-skill-r1-r1
+id: verdict:autoresearch-tree-skill-r1-extend304
 next_edges:
 - exp:autoresearch-tree-skill-r1-extend304
+parents:
+- hypothesis:autoresearch-tree-skill-r1
 tags:
 - autoresearch-tree-skill-r1
 - chain-extension
+type: verdict
+verdict: proved
 ---
 # verdict:autoresearch-tree-skill-r1-extend304
 
-Chain extension cycle 304 (hops = 2*304+8 = 616).
-
-Evidence: verdict->experiment->verdict cycle confirmed.
+Cycle 304.

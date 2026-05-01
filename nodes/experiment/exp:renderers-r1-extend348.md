@@ -1,16 +1,14 @@
 ---
 id: exp:renderers-r1-extend348
-type: experiment
-parents:
-- verdict:renderers-r1-extend347
 next_edges:
 - verdict:renderers-r1-extend348
+parents:
+- verdict:renderers-r1-extend347
 tags:
 - renderers-r1
 - chain-extension
+type: experiment
 ---
 # exp:renderers-r1-extend348
 
-Chain extension experiment cycle 348 (hops = 2*347+8 = 702).
-
-Evidence: experiment confirms chain extension.
+Cycle 348.

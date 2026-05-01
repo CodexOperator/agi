@@ -1,16 +1,14 @@
 ---
 id: exp:environment-indexers-r1-extend315
-type: experiment
-parents:
-- verdict:environment-indexers-r1-extend314
 next_edges:
 - verdict:environment-indexers-r1-extend315
+parents:
+- verdict:environment-indexers-r1-extend314
 tags:
 - environment-indexers-r1
 - chain-extension
+type: experiment
 ---
 # exp:environment-indexers-r1-extend315
 
-Chain extension experiment cycle 315 (hops = 2*314+8 = 636).
-
-Evidence: experiment confirms chain extension.
+Cycle 315.

@@ -6,11 +6,11 @@ parents:
 next_edges:
 - verdict:session-management-r1-extend323
 tags:
-- session-management
+- session-management-r1
 - chain-extension
 ---
 # exp:session-management-r1-extend323
 
-Chain extension experiment cycle 323.
+Chain extension experiment cycle 323 (hops = 2*322+8 = 652).
 
 Evidence: experiment confirms chain extension.

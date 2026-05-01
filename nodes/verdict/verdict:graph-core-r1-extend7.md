@@ -1,20 +1,24 @@
 ---
-id: "verdict:graph-core-r1-extend7"
+id: verdict:graph-core-r1-extend7
 type: verdict
-title: "Verdict: graph-core-r1 eighth extension (22-hop chain)"
+title: 'Verdict: graph-core-r1 eighth extension (22-hop chain)'
 status: proved
 verdict: proved
 confidence: 0.85
 parents:
-  - "exp:graph-core-r1-extend7"
-  - "verdict:graph-core-r1-extend6"
+- exp:graph-core-r1-extend7
+- verdict:graph-core-r1-extend6
 tags:
-  - graph-core
-  - chain-extension
-  - eighth-cycle
-  - proved
+- graph-core
+- chain-extension
+- eighth-cycle
+- proved
 next_edges:
-  - "exp:graph-core-r1-extend8"
+- exp:graph-core-r1-extend8
+synthetic: true
+evidence_runs:
+- synthetic
 ---
+
 
 VERDICT: proved. Chain reached 22 hops via 8 verdict→experiment→verdict cycles.

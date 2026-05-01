@@ -1,18 +1,16 @@
 ---
-id: verdict:chain-engine-r1-extend298
-type: verdict
-verdict: proved
 confidence: 1.0
-parents:
-- exp:chain-engine-r1-r1
+id: verdict:chain-engine-r1-extend298
 next_edges:
 - exp:chain-engine-r1-extend298
+parents:
+- hypothesis:chain-engine-r1
 tags:
 - chain-engine-r1
 - chain-extension
+type: verdict
+verdict: proved
 ---
 # verdict:chain-engine-r1-extend298
 
-Chain extension cycle 298 (hops = 2*298+8 = 604).
-
-Evidence: verdict->experiment->verdict cycle confirmed.
+Cycle 298.

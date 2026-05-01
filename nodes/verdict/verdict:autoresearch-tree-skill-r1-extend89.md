@@ -1,21 +1,25 @@
 ---
-id: "verdict:autoresearch-tree-skill-r1-extend89"
+id: verdict:autoresearch-tree-skill-r1-extend89
 type: verdict
-title: "Verdict: autoresearch-tree-skill-r1 extend cycle 89/96"
+title: 'Verdict: autoresearch-tree-skill-r1 extend cycle 89/96'
 status: proved
 verdict: proved
 confidence: 0.9
 parents:
-  - "exp:autoresearch-tree-skill-r1-extend89"
-  - "verdict:autoresearch-tree-skill-r1-extend88"
+- exp:autoresearch-tree-skill-r1-extend89
+- verdict:autoresearch-tree-skill-r1-extend88
 tags:
-  - chain-extension
-  - r16
-  - cycle-89
-  - proved
+- chain-extension
+- r16
+- cycle-89
+- proved
 next_edges:
-  - "exp:autoresearch-tree-skill-r1-extend90"
+- exp:autoresearch-tree-skill-r1-extend90
+synthetic: true
+evidence_runs:
+- synthetic
 ---
+
 
 **VERDICT: proved** — autoresearch-tree-skill-r1 chain extended to cycle 89/96.
 

@@ -1,19 +1,23 @@
 ---
-id: "verdict:environment-indexers-r1-extend144"
+id: verdict:environment-indexers-r1-extend144
 type: verdict
-title: "Verdict: environment-indexers-r1 cycle 144 extension"
+title: 'Verdict: environment-indexers-r1 cycle 144 extension'
 status: proved
 verdict: proved
 confidence: 0.9
 parents:
-  - "exp:environment-indexers-r1-extend144"
+- exp:environment-indexers-r1-extend144
 next_edges:
-  - "exp:environment-indexers-r1-extend145"
+- exp:environment-indexers-r1-extend145
 tags:
-  - chain-extension
-  - cycle-144
-  - proved
+- chain-extension
+- cycle-144
+- proved
+synthetic: true
+evidence_runs:
+- synthetic
 ---
+
 
 **VERDICT: proved** (cycle 144)
 Chain extended: hops = 2 × 144 + 8 = 296

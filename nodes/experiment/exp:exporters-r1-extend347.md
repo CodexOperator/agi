@@ -1,16 +1,14 @@
 ---
 id: exp:exporters-r1-extend347
-type: experiment
-parents:
-- verdict:exporters-r1-extend346
 next_edges:
 - verdict:exporters-r1-extend347
+parents:
+- verdict:exporters-r1-extend346
 tags:
 - exporters-r1
 - chain-extension
+type: experiment
 ---
 # exp:exporters-r1-extend347
 
-Chain extension experiment cycle 347 (hops = 2*346+8 = 700).
-
-Evidence: experiment confirms chain extension.
+Cycle 347.
