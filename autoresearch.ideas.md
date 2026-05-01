@@ -34,7 +34,7 @@
 - **[new-domain] idea:domain-vector-embedding-isomorphism** — UMAP (x,y) → RenderToken.x,y — same underlying representation
 - **[new-domain] idea:domain-test-coverage** — improve test coverage from 37% to 80%+ (currently disproved)
 - **[chain] idea:domain-session-management** — new domain about the session system (pi-memory-md)
-- **[chain-extension] Push chains to 40+ hops** — add more verdict→experiment→verdict cycles
+- **[chain-extension] Push chains to 40+ hops** — ✅ DONE (iter 21: 40 hops, 3 chains, formula verified hops=2*cycle+8)
 
 ## Critical: Git Hygiene
 
