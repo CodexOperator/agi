@@ -11,7 +11,7 @@ tags:
   - chain-extension
   - iter23e
 next_edges:
-  - "mvp:exporters-r1"
+  - "exp:exporters-r1-extend41"
 ---
 
 VERDICT: proved. exporters-r1 at 88 hops.

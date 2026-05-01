@@ -11,7 +11,7 @@ tags:
   - chain-extension
   - iter23e
 next_edges:
-  - "mvp:graph-core-r1"
+  - "exp:graph-core-r1-extend41"
 ---
 
 VERDICT: proved. graph-core-r1 at 88 hops.

@@ -1,8 +1,17 @@
 ---
 id: "exp:renderers-r1-extend43"
+
 type: experiment
-parent: verdict:renderers-r1-extend42
+
+title: "renderers-r1 extend43"
+
+parents:
+  - "verdict:renderers-r1-extend42"
+tags:
+  - chain-extension
+  - iter9
 next_edges:
   - "verdict:renderers-r1-extend43"
 ---
-# Experiment: renderers chain cycle 43
+
+Chain extension. renderers-r1 extended from 92 to 94 hops.

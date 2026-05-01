@@ -11,7 +11,7 @@ tags:
   - chain-extension
   - iter23e
 next_edges:
-  - "mvp:environment-indexers-r1"
+  - "exp:environment-indexers-r1-extend41"
 ---
 
 VERDICT: proved. environment-indexers-r1 at 88 hops.

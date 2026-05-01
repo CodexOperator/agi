@@ -11,7 +11,7 @@ tags:
   - chain-extension
   - iter23e
 next_edges:
-  - "mvp:chain-engine-r1"
+  - "exp:chain-engine-r1-extend41"
 ---
 
 VERDICT: proved. chain-engine-r1 at 88 hops.

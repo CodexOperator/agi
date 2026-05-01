@@ -1,11 +1,22 @@
 ---
 id: "verdict:renderers-r1-extend43"
+
 type: verdict
+
+status: proved
+
 verdict: proved
-confidence: 0.9
+
+confidence: 0.85
+
+parents:
+  - "exp:renderers-r1-extend43"
+  - "verdict:renderers-r1-extend42"
 tags:
-  - chain-persistence
+  - chain-extension
+  - iter9
 next_edges:
   - "exp:renderers-r1-extend44"
 ---
-VERDICT: proved. Chain extended to 94 hops via cycle 43.
+
+VERDICT: proved. renderers-r1 at 94 hops.
