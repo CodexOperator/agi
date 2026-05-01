@@ -3,15 +3,14 @@ id: "verdict:session-management-r1"
 title: "R1: Session state capture and restore fidelity"
 type: verdict
 parent_hypothesis: hyp:session-management-r1
-parents:
-  - exp:session-management-r1
 domain: session-management
 status: inconclusive_lean_proved
 confidence: 0.81
 evidence_runs:
   - exp:session-management-r1
 next_edges:
-  - mvp:session-management-r1
+  - "exp:session-management-r1-extend1"
+  - "exp:session-management-r1-extend1"
 tags:
   - sessions
   - memory

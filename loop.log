@@ -434,3 +434,43 @@ METRIC edge_count=148
 scaffolded hypothesis node: hypothesis:a00-a4ab8de0-bbc27a
 spawned a00-a4ab8de0 pid=1217042 level=big target=-
 manifest: /home/ubuntu/.hermes/agi-tree/sessions/iter-028/manifest.json
+healer: agent a00-a4ab8de0 timed out (pid=1217042), killing + spawning healer
+healer heal-9a9529b1 spawned pid=1219418 for hung agent a00-a4ab8de0
+all agents terminal
+iter 28: 1 agents
+  a00-a4ab8de0: status=hung-healed verdict=- pid=1217042
+=== iter 29 @ 2026-05-01T17:10:52Z ===
+wrote: 7 idea + 60 hypothesis + 91 task = 158 nodes
+target dir: /home/ubuntu/.hermes/agi-tree/nodes
+loaded 157 nodes from /home/ubuntu/.hermes/agi-tree/nodes
+ASCII rendering: 163 lines
+wrote: /home/ubuntu/.hermes/agi-tree/context/INJECTION.md
+METRIC longest_chain_length=2
+METRIC avg_chain_depth=0.96
+METRIC mvp_count=0
+METRIC outcome_coverage=0.000
+METRIC chain_branching_factor=2.21
+METRIC node_count=157
+METRIC edge_count=148
+scaffolded hypothesis node: hypothesis:a00-d868e0cd-efc97d
+spawned a00-d868e0cd pid=1219517 level=big target=-
+manifest: /home/ubuntu/.hermes/agi-tree/sessions/iter-029/manifest.json
+all agents terminal
+iter 29: 1 agents
+  a00-d868e0cd: status=done verdict=inconclusive_lean_disproved:75 pid=1219517
+=== iter 30 @ 2026-05-01T17:14:23Z ===
+wrote: 7 idea + 60 hypothesis + 91 task = 158 nodes
+target dir: /home/ubuntu/.hermes/agi-tree/nodes
+loaded 157 nodes from /home/ubuntu/.hermes/agi-tree/nodes
+ASCII rendering: 163 lines
+wrote: /home/ubuntu/.hermes/agi-tree/context/INJECTION.md
+METRIC longest_chain_length=2
+METRIC avg_chain_depth=0.96
+METRIC mvp_count=0
+METRIC outcome_coverage=0.000
+METRIC chain_branching_factor=2.21
+METRIC node_count=157
+METRIC edge_count=148
+scaffolded hypothesis node: hypothesis:a00-b4570cd1-0b9427
+spawned a00-b4570cd1 pid=1219838 level=big target=-
+manifest: /home/ubuntu/.hermes/agi-tree/sessions/iter-030/manifest.json
