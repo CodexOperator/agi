@@ -14,7 +14,7 @@ tags:
   - extend6-cycle
   - proved
 next_edges:
-  - "mvp:environment-indexers-r1"
+  - "exp:environment-indexers-r1-extend7"
 ---
 
 VERDICT: proved. Chain extended via 6 verdict→experiment→verdict cycles.

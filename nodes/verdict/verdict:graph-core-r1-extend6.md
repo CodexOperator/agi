@@ -14,7 +14,7 @@ tags:
   - extend6-cycle
   - proved
 next_edges:
-  - "mvp:graph-core-r1"
+  - "exp:graph-core-r1-extend7"
 ---
 
 VERDICT: proved. Chain extended via 6 verdict→experiment→verdict cycles.

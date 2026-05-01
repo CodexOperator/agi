@@ -14,7 +14,7 @@ tags:
   - ninth-cycle
   - proved
 next_edges:
-  - "mvp:chain-engine-r1"
+  - "exp:chain-engine-r1-extend9"
 ---
 
 VERDICT: proved. Chain reached 24 hops via 9 verdict→experiment→verdict cycles.
