@@ -125,7 +125,7 @@ def _parse_subgraph_body(
 
 def _split_type(node_id: str) -> str:
     if ":" in node_id:
-        return node_id.split(":", 1)[0]
+        return node_id.split(":", 1)[0].replace("-", "_")
     return "node"
 
 
