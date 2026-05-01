@@ -2,10 +2,11 @@
 id: "exp:environment-indexers-r1-test"
 parents:
   - hyp:environment-indexers-r1
-children: []
+children:
+  - verdict:environment-indexers-r1
 run_id: "run-001"
-verdict: "pending"
-confidence: 0.0
+verdict: "proved"
+confidence: 1.0
 evidence_runs:
   - run-001
 contradicts: []
