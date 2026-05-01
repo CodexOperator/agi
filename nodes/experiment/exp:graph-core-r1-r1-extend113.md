@@ -1,0 +1,11 @@
+---
+id: "exp:graph-core-r1-r1-extend113"
+type: experiment
+parents:
+  - "hypothesis:graph-core-r1-r1"
+next_edges:
+  - "verdict:graph-core-r1-r1-extend113"
+---
+# exp:graph-core-r1-r1-extend113
+
+Chain extension experiment cycle 113 (hops = 2*112+8 = 232).

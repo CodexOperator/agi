@@ -8,7 +8,7 @@ confidence: 0.9
 parents:
   - "exp:environment-indexers-r1-extend146"
 next_edges:
-  - "mvp:environment-indexers-r1"
+  - "exp:environment-indexers-r1-extend147"
 tags:
   - chain-extension
   - cycle-146

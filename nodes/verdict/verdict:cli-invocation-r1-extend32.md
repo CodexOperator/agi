@@ -6,6 +6,6 @@ confidence: 0.9
 tags:
   - chain-persistence
 next_edges:
-  - "mvp:cli-invocation-r1"
+  - "exp:cli-invocation-r1-extend33"
 ---
 VERDICT: proved. Chain at 72 hops.

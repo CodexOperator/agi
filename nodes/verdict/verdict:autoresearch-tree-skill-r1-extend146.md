@@ -8,7 +8,7 @@ confidence: 0.9
 parents:
   - "exp:autoresearch-tree-skill-r1-extend146"
 next_edges:
-  - "mvp:autoresearch-tree-skill-r1"
+  - "exp:autoresearch-tree-skill-r1-extend147"
 tags:
   - chain-extension
   - cycle-146

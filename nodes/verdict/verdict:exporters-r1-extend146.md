@@ -8,7 +8,7 @@ confidence: 0.9
 parents:
   - "exp:exporters-r1-extend146"
 next_edges:
-  - "mvp:exporters-r1"
+  - "exp:exporters-r1-extend147"
 tags:
   - chain-extension
   - cycle-146

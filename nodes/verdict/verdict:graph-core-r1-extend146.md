@@ -8,7 +8,7 @@ confidence: 0.9
 parents:
   - "exp:graph-core-r1-extend146"
 next_edges:
-  - "mvp:graph-core-r1"
+  - "exp:graph-core-r1-extend147"
 tags:
   - chain-extension
   - cycle-146

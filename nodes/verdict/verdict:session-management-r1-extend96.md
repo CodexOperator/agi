@@ -9,7 +9,7 @@ parents:
   - "exp:session-management-r1-extend96"
   - "verdict:session-management-r1-extend95"
 next_edges:
-  - "mvp:session-management-r1"
+  - "exp:session-management-r1-extend97"
 ---
 
 # verdict:session-management-r1-extend96
