@@ -10,6 +10,8 @@ tags:
 testable_claim: Generic Node Primitive
 title: "graph-core/R1: Generic Node Primitive"
 type: hypothesis
+next_edges:
+  - exp:graph-core-r1
 ---
 
 **Description:** A node is a typed, identified record with an optional payload reference, parent and child links, and free-form tags. Node type does not constrain payload; payload meaning is delegated to the schema-registry.

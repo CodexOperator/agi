@@ -10,6 +10,8 @@ tags:
 testable_claim: Indexer Invocation Command
 title: "environment-indexers/R1: Indexer Invocation Command"
 type: hypothesis
+next_edges:
+  - exp:environment-indexers-r1
 ---
 
 **Description:** A single command runs a chosen indexer over a chosen path and writes results into the graph.
