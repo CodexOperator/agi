@@ -1,23 +1,16 @@
 ---
+confidence: 1.0
 id: verdict:embeddings-r2-extend145
-type: verdict
-title: 'Verdict: embeddings-r2 cycle 145 extension'
-status: proved
-verdict: proved
-confidence: 0.9
-parents:
-- exp:embeddings-r2-extend145
 next_edges:
-- exp:embeddings-r2-extend146
+- exp:embeddings-r2-extend145
+parents:
+- hypothesis:embeddings-r2
 tags:
+- embeddings-r2
 - chain-extension
-- cycle-145
-- proved
-synthetic: true
-evidence_runs:
-- synthetic
+type: verdict
+verdict: proved
 ---
+# verdict:embeddings-r2-extend145
 
-
-**VERDICT: proved** (cycle 145)
-Chain extended: hops = 2 × 145 + 8 = 298
+Cycle 145.

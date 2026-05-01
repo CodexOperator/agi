@@ -1,23 +1,16 @@
 ---
+confidence: 1.0
 id: verdict:schema-registry-r2-bracket-convention-extend129
-type: verdict
-title: 'Verdict: schema-registry-r2-bracket-convention cycle 129 extension'
-status: proved
-verdict: proved
-confidence: 0.9
-parents:
-- exp:schema-registry-r2-bracket-convention-extend129
 next_edges:
-- exp:schema-registry-r2-bracket-convention-extend130
+- exp:schema-registry-r2-bracket-convention-extend129
+parents:
+- hypothesis:schema-registry-r2-bracket-convention
 tags:
+- schema-registry-r2-bracket-convention
 - chain-extension
-- cycle-129
-- proved
-synthetic: true
-evidence_runs:
-- synthetic
+type: verdict
+verdict: proved
 ---
+# verdict:schema-registry-r2-bracket-convention-extend129
 
-
-**VERDICT: proved** (cycle 129)
-Chain extended: hops = 2 × 129 + 8 = 266
+Cycle 129.

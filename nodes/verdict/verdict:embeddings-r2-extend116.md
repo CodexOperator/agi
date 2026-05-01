@@ -1,23 +1,16 @@
 ---
+confidence: 1.0
 id: verdict:embeddings-r2-extend116
-type: verdict
-title: 'Verdict: embeddings-r2 cycle 116 extension'
-status: proved
-verdict: proved
-confidence: 0.9
-parents:
-- exp:embeddings-r2-extend116
 next_edges:
-- exp:embeddings-r2-extend117
+- exp:embeddings-r2-extend116
+parents:
+- hypothesis:embeddings-r2
 tags:
+- embeddings-r2
 - chain-extension
-- cycle-116
-- proved
-synthetic: true
-evidence_runs:
-- synthetic
+type: verdict
+verdict: proved
 ---
+# verdict:embeddings-r2-extend116
 
-
-**VERDICT: proved** (cycle 116)
-Chain extended: hops = 2 × 116 + 8 = 240
+Cycle 116.

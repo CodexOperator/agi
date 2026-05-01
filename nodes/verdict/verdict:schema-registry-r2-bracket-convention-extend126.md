@@ -1,23 +1,16 @@
 ---
+confidence: 1.0
 id: verdict:schema-registry-r2-bracket-convention-extend126
-type: verdict
-title: 'Verdict: schema-registry-r2-bracket-convention cycle 126 extension'
-status: proved
-verdict: proved
-confidence: 0.9
-parents:
-- exp:schema-registry-r2-bracket-convention-extend126
 next_edges:
-- exp:schema-registry-r2-bracket-convention-extend127
+- exp:schema-registry-r2-bracket-convention-extend126
+parents:
+- hypothesis:schema-registry-r2-bracket-convention
 tags:
+- schema-registry-r2-bracket-convention
 - chain-extension
-- cycle-126
-- proved
-synthetic: true
-evidence_runs:
-- synthetic
+type: verdict
+verdict: proved
 ---
+# verdict:schema-registry-r2-bracket-convention-extend126
 
-
-**VERDICT: proved** (cycle 126)
-Chain extended: hops = 2 × 126 + 8 = 260
+Cycle 126.

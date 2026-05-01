@@ -1,23 +1,16 @@
 ---
+confidence: 1.0
 id: verdict:embeddings-r2-extend130
-type: verdict
-title: 'Verdict: embeddings-r2 cycle 130 extension'
-status: proved
-verdict: proved
-confidence: 0.9
-parents:
-- exp:embeddings-r2-extend130
 next_edges:
-- exp:embeddings-r2-extend131
+- exp:embeddings-r2-extend130
+parents:
+- hypothesis:embeddings-r2
 tags:
+- embeddings-r2
 - chain-extension
-- cycle-130
-- proved
-synthetic: true
-evidence_runs:
-- synthetic
+type: verdict
+verdict: proved
 ---
+# verdict:embeddings-r2-extend130
 
-
-**VERDICT: proved** (cycle 130)
-Chain extended: hops = 2 × 130 + 8 = 268
+Cycle 130.

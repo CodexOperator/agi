@@ -1,22 +1,16 @@
 ---
-id: verdict:schema-registry-r2-bracket-convention-extend237
-type: verdict
-verdict: proved
 confidence: 1.0
-parents:
-- exp:schema-registry-r2-bracket-convention-r1
+id: verdict:schema-registry-r2-bracket-convention-extend237
 next_edges:
 - exp:schema-registry-r2-bracket-convention-extend237
+parents:
+- hypothesis:schema-registry-r2-bracket-convention
 tags:
 - schema-registry-r2-bracket-convention
 - chain-extension
-synthetic: true
-evidence_runs:
-- synthetic
+type: verdict
+verdict: proved
 ---
-
 # verdict:schema-registry-r2-bracket-convention-extend237
 
-Chain extension cycle 237 (hops = 2*237+8 = 482).
-
-Evidence: verdict->experiment->verdict cycle confirmed.
+Cycle 237.

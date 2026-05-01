@@ -1,11 +1,14 @@
 ---
-id: "exp:schema-registry-r2-bracket-convention-extend127"
-type: experiment
-title: "chain extension: schema-registry-r2-bracket-convention cycle 127"
-parents:
-  - "verdict:schema-registry-r2-bracket-convention-extend126"
+id: exp:schema-registry-r2-bracket-convention-extend127
 next_edges:
-  - "verdict:schema-registry-r2-bracket-convention-extend127"
+- verdict:schema-registry-r2-bracket-convention-extend127
+parents:
+- verdict:schema-registry-r2-bracket-convention-extend126
+tags:
+- schema-registry-r2-bracket-convention
+- chain-extension
+type: experiment
 ---
+# exp:schema-registry-r2-bracket-convention-extend127
 
-**Experiment:** Cycle 127 extension for schema-registry-r2-bracket-convention chain.
+Cycle 127.

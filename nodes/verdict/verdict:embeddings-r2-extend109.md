@@ -1,23 +1,16 @@
 ---
+confidence: 1.0
 id: verdict:embeddings-r2-extend109
-type: verdict
-title: 'Verdict: embeddings-r2 cycle 109 extension'
-status: proved
-verdict: proved
-confidence: 0.9
-parents:
-- exp:embeddings-r2-extend109
 next_edges:
-- exp:embeddings-r2-extend110
+- exp:embeddings-r2-extend109
+parents:
+- hypothesis:embeddings-r2
 tags:
+- embeddings-r2
 - chain-extension
-- cycle-109
-- proved
-synthetic: true
-evidence_runs:
-- synthetic
+type: verdict
+verdict: proved
 ---
+# verdict:embeddings-r2-extend109
 
-
-**VERDICT: proved** (cycle 109)
-Chain extended: hops = 2 × 109 + 8 = 226
+Cycle 109.

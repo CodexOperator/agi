@@ -1,23 +1,16 @@
 ---
+confidence: 1.0
 id: verdict:schema-registry-r2-bracket-convention-extend135
-type: verdict
-title: 'Verdict: schema-registry-r2-bracket-convention cycle 135 extension'
-status: proved
-verdict: proved
-confidence: 0.9
-parents:
-- exp:schema-registry-r2-bracket-convention-extend135
 next_edges:
-- exp:schema-registry-r2-bracket-convention-extend136
+- exp:schema-registry-r2-bracket-convention-extend135
+parents:
+- hypothesis:schema-registry-r2-bracket-convention
 tags:
+- schema-registry-r2-bracket-convention
 - chain-extension
-- cycle-135
-- proved
-synthetic: true
-evidence_runs:
-- synthetic
+type: verdict
+verdict: proved
 ---
+# verdict:schema-registry-r2-bracket-convention-extend135
 
-
-**VERDICT: proved** (cycle 135)
-Chain extended: hops = 2 × 135 + 8 = 278
+Cycle 135.

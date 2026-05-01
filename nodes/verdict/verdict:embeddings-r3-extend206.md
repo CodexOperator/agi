@@ -1,22 +1,16 @@
 ---
-id: verdict:embeddings-r3-extend206
-type: verdict
-verdict: proved
 confidence: 1.0
-parents:
-- exp:embeddings-r3-r1
+id: verdict:embeddings-r3-extend206
 next_edges:
 - exp:embeddings-r3-extend206
+parents:
+- hypothesis:embeddings-r3
 tags:
 - embeddings-r3
 - chain-extension
-synthetic: true
-evidence_runs:
-- synthetic
+type: verdict
+verdict: proved
 ---
-
 # verdict:embeddings-r3-extend206
 
-Chain extension cycle 206 (hops = 2*206+8 = 420).
-
-Evidence: verdict->experiment->verdict cycle confirmed.
+Cycle 206.

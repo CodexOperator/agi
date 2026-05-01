@@ -1,16 +1,14 @@
 ---
 id: exp:embeddings-r2-extend234
-type: experiment
-parents:
-- verdict:embeddings-r2-extend233
 next_edges:
 - verdict:embeddings-r2-extend234
+parents:
+- verdict:embeddings-r2-extend233
 tags:
 - embeddings-r2
 - chain-extension
+type: experiment
 ---
 # exp:embeddings-r2-extend234
 
-Chain extension experiment cycle 234 (hops = 2*233+8 = 474).
-
-Evidence: experiment confirms chain extension.
+Cycle 234.

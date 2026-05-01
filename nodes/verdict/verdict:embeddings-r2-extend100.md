@@ -1,23 +1,16 @@
 ---
+confidence: 1.0
 id: verdict:embeddings-r2-extend100
-type: verdict
-title: 'Verdict: embeddings-r2 cycle 100 extension'
-status: proved
-verdict: proved
-confidence: 0.9
-parents:
-- exp:embeddings-r2-extend100
 next_edges:
-- exp:embeddings-r2-extend101
+- exp:embeddings-r2-extend100
+parents:
+- hypothesis:embeddings-r2
 tags:
+- embeddings-r2
 - chain-extension
-- cycle-100
-- proved
-synthetic: true
-evidence_runs:
-- synthetic
+type: verdict
+verdict: proved
 ---
+# verdict:embeddings-r2-extend100
 
-
-**VERDICT: proved** (cycle 100)
-Chain extended: hops = 2 × 100 + 8 = 208
+Cycle 100.

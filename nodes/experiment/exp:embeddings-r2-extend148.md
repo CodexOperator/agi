@@ -1,16 +1,14 @@
 ---
 id: exp:embeddings-r2-extend148
-type: experiment
-parents:
-- verdict:embeddings-r2-extend147
 next_edges:
 - verdict:embeddings-r2-extend148
+parents:
+- verdict:embeddings-r2-extend147
 tags:
 - embeddings-r2
 - chain-extension
+type: experiment
 ---
 # exp:embeddings-r2-extend148
 
-Chain extension experiment cycle 148 (hops = 2*147+8 = 302).
-
-Evidence: experiment confirms chain extension.
+Cycle 148.

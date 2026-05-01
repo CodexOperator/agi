@@ -1,23 +1,16 @@
 ---
+confidence: 1.0
 id: verdict:embeddings-r2-extend143
-type: verdict
-title: 'Verdict: embeddings-r2 cycle 143 extension'
-status: proved
-verdict: proved
-confidence: 0.9
-parents:
-- exp:embeddings-r2-extend143
 next_edges:
-- exp:embeddings-r2-extend144
+- exp:embeddings-r2-extend143
+parents:
+- hypothesis:embeddings-r2
 tags:
+- embeddings-r2
 - chain-extension
-- cycle-143
-- proved
-synthetic: true
-evidence_runs:
-- synthetic
+type: verdict
+verdict: proved
 ---
+# verdict:embeddings-r2-extend143
 
-
-**VERDICT: proved** (cycle 143)
-Chain extended: hops = 2 × 143 + 8 = 294
+Cycle 143.

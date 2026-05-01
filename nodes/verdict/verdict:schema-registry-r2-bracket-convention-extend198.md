@@ -1,22 +1,16 @@
 ---
-id: verdict:schema-registry-r2-bracket-convention-extend198
-type: verdict
-verdict: proved
 confidence: 1.0
-parents:
-- exp:schema-registry-r2-bracket-convention-r1
+id: verdict:schema-registry-r2-bracket-convention-extend198
 next_edges:
 - exp:schema-registry-r2-bracket-convention-extend198
+parents:
+- hypothesis:schema-registry-r2-bracket-convention
 tags:
 - schema-registry-r2-bracket-convention
 - chain-extension
-synthetic: true
-evidence_runs:
-- synthetic
+type: verdict
+verdict: proved
 ---
-
 # verdict:schema-registry-r2-bracket-convention-extend198
 
-Chain extension cycle 198 (hops = 2*198+8 = 404).
-
-Evidence: verdict->experiment->verdict cycle confirmed.
+Cycle 198.

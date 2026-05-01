@@ -1,15 +1,14 @@
 ---
-id: "exp:embeddings-r2-extend83"
-type: experiment
-title: "Experiment: embeddings-r2 extend cycle 83"
-parents:
-  - "verdict:embeddings-r2-extend82"
+id: exp:embeddings-r2-extend83
 next_edges:
-  - "verdict:embeddings-r2-extend83"
+- verdict:embeddings-r2-extend83
+parents:
+- verdict:embeddings-r2-extend82
+tags:
+- embeddings-r2
+- chain-extension
+type: experiment
 ---
-
 # exp:embeddings-r2-extend83
 
-**Extend cycle 83/96** — pushing embeddings-r2 chain toward 200 hops.
-
-Chain: idea → ... → verdict-extend82 → **exp-extend83** → verdict-extend83 → ...
+Cycle 83.

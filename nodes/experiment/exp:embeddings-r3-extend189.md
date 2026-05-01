@@ -1,16 +1,14 @@
 ---
 id: exp:embeddings-r3-extend189
-type: experiment
-parents:
-- verdict:embeddings-r3-extend188
 next_edges:
 - verdict:embeddings-r3-extend189
+parents:
+- verdict:embeddings-r3-extend188
 tags:
 - embeddings-r3
 - chain-extension
+type: experiment
 ---
 # exp:embeddings-r3-extend189
 
-Chain extension experiment cycle 189 (hops = 2*188+8 = 384).
-
-Evidence: experiment confirms chain extension.
+Cycle 189.

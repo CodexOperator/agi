@@ -1,11 +1,14 @@
 ---
-id: "exp:embeddings-r2-extend144"
-type: experiment
-title: "chain extension: embeddings-r2 cycle 144"
-parents:
-  - "verdict:embeddings-r2-extend143"
+id: exp:embeddings-r2-extend144
 next_edges:
-  - "verdict:embeddings-r2-extend144"
+- verdict:embeddings-r2-extend144
+parents:
+- verdict:embeddings-r2-extend143
+tags:
+- embeddings-r2
+- chain-extension
+type: experiment
 ---
+# exp:embeddings-r2-extend144
 
-**Experiment:** Cycle 144 extension for embeddings-r2 chain.
+Cycle 144.

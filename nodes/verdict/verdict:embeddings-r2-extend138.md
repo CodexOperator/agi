@@ -1,23 +1,16 @@
 ---
+confidence: 1.0
 id: verdict:embeddings-r2-extend138
-type: verdict
-title: 'Verdict: embeddings-r2 cycle 138 extension'
-status: proved
-verdict: proved
-confidence: 0.9
-parents:
-- exp:embeddings-r2-extend138
 next_edges:
-- exp:embeddings-r2-extend139
+- exp:embeddings-r2-extend138
+parents:
+- hypothesis:embeddings-r2
 tags:
+- embeddings-r2
 - chain-extension
-- cycle-138
-- proved
-synthetic: true
-evidence_runs:
-- synthetic
+type: verdict
+verdict: proved
 ---
+# verdict:embeddings-r2-extend138
 
-
-**VERDICT: proved** (cycle 138)
-Chain extended: hops = 2 × 138 + 8 = 284
+Cycle 138.

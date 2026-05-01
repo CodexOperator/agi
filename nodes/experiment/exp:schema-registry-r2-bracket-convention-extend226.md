@@ -1,16 +1,14 @@
 ---
 id: exp:schema-registry-r2-bracket-convention-extend226
-type: experiment
-parents:
-- verdict:schema-registry-r2-bracket-convention-extend225
 next_edges:
 - verdict:schema-registry-r2-bracket-convention-extend226
+parents:
+- verdict:schema-registry-r2-bracket-convention-extend225
 tags:
 - schema-registry-r2-bracket-convention
 - chain-extension
+type: experiment
 ---
 # exp:schema-registry-r2-bracket-convention-extend226
 
-Chain extension experiment cycle 226 (hops = 2*225+8 = 458).
-
-Evidence: experiment confirms chain extension.
+Cycle 226.

@@ -1,22 +1,16 @@
 ---
-id: verdict:embeddings-r3-extend178
-type: verdict
-verdict: proved
 confidence: 1.0
-parents:
-- exp:embeddings-r3-r1
+id: verdict:embeddings-r3-extend178
 next_edges:
 - exp:embeddings-r3-extend178
+parents:
+- hypothesis:embeddings-r3
 tags:
 - embeddings-r3
 - chain-extension
-synthetic: true
-evidence_runs:
-- synthetic
+type: verdict
+verdict: proved
 ---
-
 # verdict:embeddings-r3-extend178
 
-Chain extension cycle 178 (hops = 2*178+8 = 364).
-
-Evidence: verdict->experiment->verdict cycle confirmed.
+Cycle 178.

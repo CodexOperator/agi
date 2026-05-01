@@ -1,22 +1,16 @@
 ---
-id: verdict:embeddings-r2-extend231
-type: verdict
-verdict: proved
 confidence: 1.0
-parents:
-- exp:embeddings-r2-r1
+id: verdict:embeddings-r2-extend231
 next_edges:
 - exp:embeddings-r2-extend231
+parents:
+- hypothesis:embeddings-r2
 tags:
 - embeddings-r2
 - chain-extension
-synthetic: true
-evidence_runs:
-- synthetic
+type: verdict
+verdict: proved
 ---
-
 # verdict:embeddings-r2-extend231
 
-Chain extension cycle 231 (hops = 2*231+8 = 470).
-
-Evidence: verdict->experiment->verdict cycle confirmed.
+Cycle 231.

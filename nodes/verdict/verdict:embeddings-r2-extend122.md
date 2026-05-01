@@ -1,23 +1,16 @@
 ---
+confidence: 1.0
 id: verdict:embeddings-r2-extend122
-type: verdict
-title: 'Verdict: embeddings-r2 cycle 122 extension'
-status: proved
-verdict: proved
-confidence: 0.9
-parents:
-- exp:embeddings-r2-extend122
 next_edges:
-- exp:embeddings-r2-extend123
+- exp:embeddings-r2-extend122
+parents:
+- hypothesis:embeddings-r2
 tags:
+- embeddings-r2
 - chain-extension
-- cycle-122
-- proved
-synthetic: true
-evidence_runs:
-- synthetic
+type: verdict
+verdict: proved
 ---
+# verdict:embeddings-r2-extend122
 
-
-**VERDICT: proved** (cycle 122)
-Chain extended: hops = 2 × 122 + 8 = 252
+Cycle 122.
