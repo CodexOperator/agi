@@ -24,3 +24,10 @@ Live record of build progress against `context/plans/build-site.md`.
 - **Validation:** YAML parse PASS, originals (`autoresearch-create`/`autoresearch-finalize`) untouched PASS
 - **Notes:** Full skill body lands under T-076..T-087.
 - **Next:** T-076 (R1 main impl) — but blocked until tier-2/3 land
+
+### Iteration 3 — 2026-05-01T01:50:48Z
+- **Task:** T-005 — Identity scheme (mint_id + IdRegistry)
+- **Tier:** 1
+- **Status:** DONE
+- **Files:** src/graph_core/identity.py, tests/graph_core/test_identity.py
+- **Validation:** Tests 7/7 PASS, R3.1+R3.2+R3.3+R3.4 covered

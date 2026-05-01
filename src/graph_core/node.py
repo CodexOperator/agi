@@ -38,3 +38,31 @@ class Node:
     def is_leaf(self) -> bool:
         """A node with no children is a leaf (R1.2)."""
         return not self.children
+
+    def add_parent(self, parent_id: str) -> None:
+        """Add a parent id with self-loop guard (T-002 / R1.3).
+
+        Set semantics absorb duplicates silently.
+        Self-loop raises :class:`SelfLoopError`.
+        """
+        from .errors import SelfLoopError
+
+        if parent_id == self.id:
+            raise SelfLoopError(self.id, "parents")
+        self.parents.add(parent_id)
+
+    def add_child(self, child_id: str) -> None:
+        """Add a child id with self-loop guard (T-002 / R1.3).
+
+        Set semantics absorb duplicates silently.
+        Self-loop raises :class:`SelfLoopError`.
+        """
+        from .errors import SelfLoopError
+
+        if child_id == self.id:
+            raise SelfLoopError(self.id, "children")
+        self.children.add(child_id)
+
+    def add_tag(self, tag: str) -> None:
+        """Add a tag (independent of typed links — R1.4)."""
+        self.tags.add(tag)
