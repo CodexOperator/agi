@@ -18,10 +18,20 @@
 - ~~**[chain-engine] Push to 28, 30, 32, 34, 36 hops**~~ — DONE (iter 18: 36 hops)
 - ~~**[chain-engine] Push to 40, 44, 48, 50, 56, 60, 64 hops**~~ — DONE (iter 21-22: 64 hops)
 - ~~**[chain-engine] Push to 72 hops**~~ — DONE (iter 23: 72 hops)
+- ~~**[chain-engine] Extend 4 chains to 72 hops**~~ — DONE (iter 23b: embeddings-r2/r3, exporters, schema-registry at 72 hops)
+- ~~**[cli-invocation] Complete full 8-hop chain**~~ — DONE (iter 22: idea→app-purpose)
 - ~~**[env-indexers/graph-core] Extend to 36 hops**~~ — DONE (iter 18)
 - ~~**[test-coverage] Analysis**~~ — DONE (another agent: 37% coverage, disproved)
 
-## Chain State (iter 23)
+## Chain State (iter 23b)
+
+- **Primary metric: 72 hops** (7 chains: chain-engine-r1, env-indexers-r1, graph-core-r1, embeddings-r2, embeddings-r3, exporters, schema-registry at 32 cycles)
+- 1 chain at 56 hops (renderers: 24 cycles)
+- 1 chain at 46 hops (autores-tree-skill: 19 cycles, needs extend to 72)
+- 1 chain at 8 hops (cli-invocation: complete)
+- 8 base chains at 8 hops (all domains)
+- **Total: 18 chains, 9 at 40+ hops, 257 tests passing**
+- **Formula**: hops = 2 × max_cycle + 8 (each verdict→experiment→verdict cycle adds 2 hops)
 
 - **Primary metric: 72 hops** (chain-engine-r1, environment-indexers-r1, graph-core-r1 at 32 cycles)
 - 3 chains at 72 hops (32 cycles, formula 2×32+8=72)
