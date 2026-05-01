@@ -1,11 +1,11 @@
 # autoresearch-tree INJECTION CONTEXT
-_generated 2026-05-01T16:22:37+00:00_
+_generated 2026-05-01T16:40:55+00:00_
 
 ## graph snapshot
-- nodes: 1785
-- edges: 3112
-- by type: app_purpose=11, bigger_outcome=12, experiment=770, hypothesis=75, idea=12, mvp=13, node=2, outcome=13, task=94, verdict=783
-- longest chain: 168 hops (via next edges)
+- nodes: 2077
+- edges: 3836
+- by type: app_purpose=11, bigger_outcome=12, experiment=915, hypothesis=77, idea=12, mvp=13, node=2, outcome=13, task=94, verdict=928
+- longest chain: 200 hops (via next edges)
 - chain count: 18
 
 ## attractive ideas (descendant count, top 10)
@@ -22,8 +22,8 @@ _generated 2026-05-01T16:22:37+00:00_
 
 ## ASCII view (≤200 lines)
 ```
-# graph: 1785 nodes
-# types: app_purpose=11, bigger_outcome=12, experiment=770, hypothesis=75, idea=12, mvp=13, node=2, outcome=13, task=94, verdict=783
+# graph: 2077 nodes
+# types: app_purpose=11, bigger_outcome=12, experiment=915, hypothesis=77, idea=12, mvp=13, node=2, outcome=13, task=94, verdict=928
 #
         app-purpose:autoresearch-tree-skill :: app_purpose
               app-purpose:chain-engine :: app_purpose
@@ -48,6 +48,7 @@ _generated 2026-05-01T16:22:37+00:00_
             bigger-outcome:schema-registry-r1 :: bigger_outcome [next->app-purpose:schema-registry, spawns->app-purpose:schema-registry]
             bigger-outcome:schema-registry-r2 :: bigger_outcome [next->app-purpose:schema-registry]
         bigger-outcome:session-management-r1 :: bigger_outcome [next->app-purpose:session-management, spawns->app-purpose:session-management, spawns->app-purpose:session-management-r1]
+  exp:a00-8636e255-bf1a6c :: experiment [next->verdict:a00-8636e255-bf1a6c, spawns->verdict:a00-8636e255-bf1a6c]
   exp:a00-c2ec59b7-b391d9 :: experiment [next->verdict:a00-c2ec59b7-b391d9, spawns->verdict:a00-c2ec59b7-b391d9]
     exp:autoresearch-tree-skill-r1 :: experiment [spawns->mvp:autoresearch-tree-skill-r1, next->verdict:autoresearch-tree-skill-r1, spawns->verdict:autoresearch-tree-skill-r1]
       exp:autoresearch-tree-skill-r1-extend :: experiment [next->verdict:autoresearch-tree-skill-r1-extend, spawns->verdict:autoresearch-tree-skill-r1-extend]
@@ -129,7 +130,23 @@ _generated 2026-05-01T16:22:37+00:00_
                                                                                                                                                                                           ... [line cut]
                   exp:autoresearch-tree-skill-r1-extend8 :: experiment [next->verdict:autoresearch-tree-skill-r1-extend8, spawns->verdict:autoresearch-tree-skill-r1-extend8]
                                                                                                                                                                                           ... [line cut]
+                                                                                                                                                                                          ... [line cut]
+                                                                                                                                                                                          ... [line cut]
+                                                                                                                                                                                          ... [line cut]
+                                                                                                                                                                                          ... [line cut]
+                                                                                                                                                                                          ... [line cut]
+                                                                                                                                                                                          ... [line cut]
+                                                                                                                                                                                          ... [line cut]
+                                                                                                                                                                                          ... [line cut]
+                                                                                                                                                                                          ... [line cut]
                     exp:autoresearch-tree-skill-r1-extend9 :: experiment [next->verdict:autoresearch-tree-skill-r1-extend9, spawns->verdict:autoresearch-tree-skill-r1-extend9]
+                                                                                                                                                                                          ... [line cut]
+                                                                                                                                                                                          ... [line cut]
+                                                                                                                                                                                          ... [line cut]
+                                                                                                                                                                                          ... [line cut]
+                                                                                                                                                                                          ... [line cut]
+                                                                                                                                                                                          ... [line cut]
+                                                                                                                                                                                          ... [line cut]
 exp:autoresearch-tree-skill-r1:extend8 :: experiment
     exp:chain-engine-r1 :: experiment [next->verdict:chain-engine-r1, spawns->verdict:chain-engine-r1]
     exp:chain-engine-r1-extend :: experiment [next->verdict:chain-engine-r1-extend, spawns->verdict:chain-engine-r1-extend]
@@ -201,27 +218,10 @@ exp:autoresearch-tree-skill-r1:extend8 :: experiment
                   exp:chain-engine-r1-extend7 :: experiment [next->verdict:chain-engine-r1-extend7, spawns->verdict:chain-engine-r1-extend7]
                                                                                                                                                                                           ... [line cut]
                                                                                                                                                                                           ... [line cut]
-                                                                                                                                                                                          ... [line cut]
-                                                                                                                                                                                          ... [line cut]
-                                                                                                                                                                                          ... [line cut]
-                                                                                                                                                                                          ... [line cut]
-                                                                                                                                                                                          ... [line cut]
-                                                                                                                                                                                          ... [line cut]
-                                                                                                                                                                                          ... [line cut]
-                                                                                                                                                                                          ... [line cut]
-                    exp:chain-engine-r1-extend8 :: experiment [next->verdict:chain-engine-r1-extend8, spawns->verdict:chain-engine-r1-extend8]
-                                                                                                                                                                                          ... [line cut]
-                      exp:chain-engine-r1-extend9 :: experiment [next->verdict:chain-engine-r1-extend9, spawns->verdict:chain-engine-r1-extend9]
-    exp:cli-invocation-r1 :: experiment [next->verdict:cli-invocation-r1]
-exp:cli-invocation-r1-extend1 :: experiment [next->verdict:cli-invocation-r1-extend1]
-                                    exp:cli-invocation-r1-extend10 :: experiment [next->verdict:cli-invocation-r1-extend10]
-                                        exp:cli-invocation-r1-extend11 :: experiment [next->verdict:cli-invocation-r1-extend11]
-                                            exp:cli-invocation-r1-extend12 :: experiment [next->verdict:cli-invocation-r1-extend12]
-                                                exp:cli-invocation-r1-extend13 :: experiment [next->verdict:cli-invocation-r1-extend13]
-... [truncated, 1592 more nodes]
+... [truncated, 1884 more nodes]
 ----
-Types: app_purpose=11, bigger_outcome=12, experiment=770, hypothesis=75, idea=12, mvp=13, node=2, outcome=13, task=94, verdict=783
-Edges: next=1605, spawns=1507
+Types: app_purpose=11, bigger_outcome=12, experiment=915, hypothesis=77, idea=12, mvp=13, node=2, outcome=13, task=94, verdict=928
+Edges: next=1894, spawns=1942
 ```
 
 ## big-vs-small decision

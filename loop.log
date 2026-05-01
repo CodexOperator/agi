@@ -206,3 +206,117 @@ METRIC edge_count=148
 scaffolded hypothesis node: hypothesis:a00-8fe3e715-af88f6
 spawned a00-8fe3e715 pid=1210000 level=big target=-
 manifest: /home/ubuntu/.hermes/agi-tree/sessions/iter-016/manifest.json
+all agents terminal
+iter 16: 1 agents
+  a00-8fe3e715: status=done verdict=proved pid=1210000
+=== iter 17 @ 2026-05-01T16:23:42Z ===
+wrote: 7 idea + 60 hypothesis + 91 task = 158 nodes
+target dir: /home/ubuntu/.hermes/agi-tree/nodes
+loaded 157 nodes from /home/ubuntu/.hermes/agi-tree/nodes
+ASCII rendering: 163 lines
+wrote: /home/ubuntu/.hermes/agi-tree/context/INJECTION.md
+METRIC longest_chain_length=2
+METRIC avg_chain_depth=0.96
+METRIC mvp_count=0
+METRIC outcome_coverage=0.000
+METRIC chain_branching_factor=2.21
+METRIC node_count=157
+METRIC edge_count=148
+scaffolded hypothesis node: hypothesis:a00-bf83fbde-7d013c
+spawned a00-bf83fbde pid=1211078 level=big target=-
+manifest: /home/ubuntu/.hermes/agi-tree/sessions/iter-017/manifest.json
+all agents terminal
+iter 17: 1 agents
+  a00-bf83fbde: status=done verdict=proved pid=1211078
+=== iter 18 @ 2026-05-01T16:29:42Z ===
+wrote: 7 idea + 60 hypothesis + 91 task = 158 nodes
+target dir: /home/ubuntu/.hermes/agi-tree/nodes
+loaded 157 nodes from /home/ubuntu/.hermes/agi-tree/nodes
+ASCII rendering: 163 lines
+wrote: /home/ubuntu/.hermes/agi-tree/context/INJECTION.md
+METRIC longest_chain_length=2
+METRIC avg_chain_depth=0.96
+METRIC mvp_count=0
+METRIC outcome_coverage=0.000
+METRIC chain_branching_factor=2.21
+METRIC node_count=157
+METRIC edge_count=148
+scaffolded hypothesis node: hypothesis:a00-ffc62953-720017
+spawned a00-ffc62953 pid=1211875 level=big target=-
+manifest: /home/ubuntu/.hermes/agi-tree/sessions/iter-018/manifest.json
+all agents terminal
+iter 18: 1 agents
+  a00-ffc62953: status=done verdict=pending pid=1211875
+=== iter 19 @ 2026-05-01T16:30:43Z ===
+wrote: 7 idea + 60 hypothesis + 91 task = 158 nodes
+target dir: /home/ubuntu/.hermes/agi-tree/nodes
+loaded 157 nodes from /home/ubuntu/.hermes/agi-tree/nodes
+ASCII rendering: 163 lines
+wrote: /home/ubuntu/.hermes/agi-tree/context/INJECTION.md
+METRIC longest_chain_length=2
+METRIC avg_chain_depth=0.96
+METRIC mvp_count=0
+METRIC outcome_coverage=0.000
+METRIC chain_branching_factor=2.21
+METRIC node_count=157
+METRIC edge_count=148
+scaffolded hypothesis node: hypothesis:a00-45022506-395d88
+spawned a00-45022506 pid=1212010 level=big target=-
+manifest: /home/ubuntu/.hermes/agi-tree/sessions/iter-019/manifest.json
+all agents terminal
+iter 19: 1 agents
+  a00-45022506: status=done verdict=proved pid=1212010
+=== iter 20 @ 2026-05-01T16:33:14Z ===
+wrote: 7 idea + 60 hypothesis + 91 task = 158 nodes
+target dir: /home/ubuntu/.hermes/agi-tree/nodes
+loaded 157 nodes from /home/ubuntu/.hermes/agi-tree/nodes
+ASCII rendering: 163 lines
+wrote: /home/ubuntu/.hermes/agi-tree/context/INJECTION.md
+METRIC longest_chain_length=2
+METRIC avg_chain_depth=0.96
+METRIC mvp_count=0
+METRIC outcome_coverage=0.000
+METRIC chain_branching_factor=2.21
+METRIC node_count=157
+METRIC edge_count=148
+scaffolded hypothesis node: hypothesis:a00-3901802e-4e03b8
+spawned a00-3901802e pid=1212188 level=big target=-
+manifest: /home/ubuntu/.hermes/agi-tree/sessions/iter-020/manifest.json
+all agents terminal
+iter 20: 1 agents
+  a00-3901802e: status=done verdict=pending pid=1212188
+=== iter 21 @ 2026-05-01T16:35:44Z ===
+wrote: 7 idea + 60 hypothesis + 91 task = 158 nodes
+target dir: /home/ubuntu/.hermes/agi-tree/nodes
+loaded 157 nodes from /home/ubuntu/.hermes/agi-tree/nodes
+ASCII rendering: 163 lines
+wrote: /home/ubuntu/.hermes/agi-tree/context/INJECTION.md
+METRIC longest_chain_length=2
+METRIC avg_chain_depth=0.96
+METRIC mvp_count=0
+METRIC outcome_coverage=0.000
+METRIC chain_branching_factor=2.21
+METRIC node_count=157
+METRIC edge_count=148
+scaffolded hypothesis node: hypothesis:a00-8636e255-bf1a6c
+spawned a00-8636e255 pid=1212404 level=big target=-
+manifest: /home/ubuntu/.hermes/agi-tree/sessions/iter-021/manifest.json
+all agents terminal
+iter 21: 1 agents
+  a00-8636e255: status=done verdict=proved pid=1212404
+=== iter 22 @ 2026-05-01T16:40:15Z ===
+wrote: 7 idea + 60 hypothesis + 91 task = 158 nodes
+target dir: /home/ubuntu/.hermes/agi-tree/nodes
+loaded 157 nodes from /home/ubuntu/.hermes/agi-tree/nodes
+ASCII rendering: 163 lines
+wrote: /home/ubuntu/.hermes/agi-tree/context/INJECTION.md
+METRIC longest_chain_length=2
+METRIC avg_chain_depth=0.96
+METRIC mvp_count=0
+METRIC outcome_coverage=0.000
+METRIC chain_branching_factor=2.21
+METRIC node_count=157
+METRIC edge_count=148
+scaffolded hypothesis node: hypothesis:a00-e07eb43f-0ae7b3
+spawned a00-e07eb43f pid=1212876 level=big target=-
+manifest: /home/ubuntu/.hermes/agi-tree/sessions/iter-022/manifest.json
