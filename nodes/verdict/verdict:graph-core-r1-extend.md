@@ -13,7 +13,7 @@ tags:
   - verdict-experiment-transition
   - proved
 next_edges:
-  - mvp:graph-core-r1
+  - exp:graph-core-r1-extend2
 ---
 
 VERDICT: proved. Chain extended from 8 to 10 hops.

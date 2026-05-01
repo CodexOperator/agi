@@ -12,6 +12,7 @@ tags:
   - chain-extension
   - proved
 next_edges:
+  - exp:schema-registry-r2-extend2
   - mvp:schema-registry-r2-bracket-convention
 ---
 

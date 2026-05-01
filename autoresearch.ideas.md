@@ -18,11 +18,11 @@
 
 ## High Priority Remaining
 
-- **[chain-engine] Persist verdict→experiment→verdict next_edges** — prior run 5 showed 10-hop chains in-memory but edges NOT persisted to node files. Need to add verdict→exp next_edges to verdict node frontmatter to make 10-hop chains survive cold reload.
+- ~~**[chain-engine] Persist verdict→experiment→verdict next_edges**~~ — DONE (iter 11+12: 6 chains extended to 10-hop, committed)
 
 - **[graph-core] Environment-indexers domain chain** — environment-indexers has 9 hypothesis nodes (r1-r9) but no chain nodes. Prove R9 (Indexer Documentation) by adding upgrade markers to indexer source files, then create full 8-hop chain. Would add 7th domain chain.
 
-- **[schema-registry] Fix verdict node type field** — Many verdict node files are missing `type: verdict` in frontmatter, causing loader to default to `type: node`. Another agent created verdict-frontmatter-type-r1 hypothesis to fix this.
+- ~~**[schema-registry] Fix verdict node type field**~~ — DONE (iter 11: verdict-frontmatter-type-r1 proved)
 
 ## Low Priority / Interesting
 

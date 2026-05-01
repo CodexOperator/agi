@@ -12,7 +12,7 @@ tags:
   - chain-extension
   - proved
 next_edges:
-  - mvp:renderers-r1
+  - exp:renderers-r1-extend2
 ---
 
 VERDICT: proved. Chain extended from 8 to 10 hops.
