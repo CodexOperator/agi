@@ -114,3 +114,11 @@ Live record of build progress against `context/plans/build-site.md`.
 - **Files:** src/graph_core/loader.py (formalized), tests/graph_core/test_recursive_bodies.py (new), tests/fixtures/nested/top.md, tests/fixtures/nested/level_a/outer.md, tests/fixtures/nested/level_a/level_b/middle.md, tests/fixtures/nested/level_a/level_b/level_c/leaf.md
 - **Validation:** Tests 4/4 PASS (test_recursive_bodies.py); full suite 96/96 PASS. R5.1 (subgraph: true loads inner graph), R5.2 (≥3 nesting levels via load_directory), R5.4 (outer queries opaque to inner) covered.
 - **Notes:** `load_node_with_subgraph()` returns `LoadedNode` containing `node`, `body`, optional `subgraph`. When frontmatter has `subgraph: true`, body is parsed via `_SUBGRAPH_LINE_RE` into a child Graph; cycles silently dropped. Same loader recursion through `load_directory()` walks `.md`/`.json` files deterministically.
+
+### Iteration 15 — 2026-05-01T03:30:00Z
+- **Task:** T-073 — Similarity query API top-k cosine (embeddings/R5)
+- **Tier:** 3
+- **Status:** DONE
+- **Files:** src/embeddings/similarity.py (new), src/embeddings/__init__.py (edit), tests/embeddings/test_similarity.py (new)
+- **Validation:** Tests 9/9 PASS. R5.1 (top-k descending), R5.2 (missing embedding → [] + UserWarning, no raise), R5.3 (scores ∈ [-1.0, 1.0] with float-drift clamp), R5.4 (deterministic via (-score, id) tie-break) covered.
+- **Notes:** `cosine()` handles dim mismatch (raise), zero-vectors (return 0.0), and clamps tiny float drift outside [-1, 1]. `similar_to()` excludes self, deterministic lexicographic tie-break, no-op on `k <= 0`. UserWarning carries node id for diagnostic clarity.
