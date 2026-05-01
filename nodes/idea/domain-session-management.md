@@ -10,6 +10,8 @@ tags:
   - agent
 spawns:
   - hyp:session-management-r1
+next_edges:
+  - hyp:session-management-r1
 ---
 
 # Domain: Session Management
