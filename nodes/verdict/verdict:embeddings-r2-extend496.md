@@ -2,7 +2,7 @@
 confidence: 1.0
 id: verdict:embeddings-r2-extend496
 next_edges:
-- mvp:embeddings-r2
+- exp:embeddings-r2-extend497
 parents:
 - hypothesis:embeddings-r2
 tags:
