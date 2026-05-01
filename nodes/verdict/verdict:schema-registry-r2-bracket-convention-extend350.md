@@ -2,7 +2,7 @@
 confidence: 1.0
 id: verdict:schema-registry-r2-bracket-convention-extend350
 next_edges:
-- mvp:schema-registry-r2-bracket-convention
+- exp:schema-registry-r2-bracket-convention-extend351
 parents:
 - hypothesis:schema-registry-r2-bracket-convention
 tags:

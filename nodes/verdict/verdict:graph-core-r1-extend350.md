@@ -2,7 +2,7 @@
 confidence: 1.0
 id: verdict:graph-core-r1-extend350
 next_edges:
-- mvp:graph-core-r1
+- exp:graph-core-r1-extend351
 parents:
 - hypothesis:graph-core-r1
 tags:

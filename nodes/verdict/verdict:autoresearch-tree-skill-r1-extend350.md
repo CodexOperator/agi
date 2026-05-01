@@ -2,7 +2,7 @@
 confidence: 1.0
 id: verdict:autoresearch-tree-skill-r1-extend350
 next_edges:
-- mvp:autoresearch-tree-skill-r1
+- exp:autoresearch-tree-skill-r1-extend351
 parents:
 - hypothesis:autoresearch-tree-skill-r1
 tags:

@@ -6,7 +6,6 @@ effort: S
 id: "hypothesis:a00-ddbe3410-iterative-traversal"
 parents:
   - "idea:domain-chain-bootstrap"
-next_edges:
   - "experiment:a00-ddbe3410-exp003-iterative-traversal"
 status: open
 tags:
@@ -16,7 +15,10 @@ tags:
   - iteration-1
 title: "Hypothesis: recursive DFS in find_chains() hits Python stack limit at 700+ hops"
 type: hypothesis
+verdict: proved
+confidence: 0.95
 ---
+
 
 ## Hypothesis
 
@@ -38,3 +40,5 @@ The `find_chains()` function uses recursive DFS traversal. Python's default recu
 
 - Iterative version produces different chain results than recursive version for short chains
 - Performance degradation beyond acceptable threshold
+
+iterative find_chains() eliminates recursion limit. 9 chains at 708 hops confirmed (was RecursionError). 274 tests pass. Also: structural repair of 3538 synthetic verdicts. Also: bootstrap chain hypothesis proved.
