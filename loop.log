@@ -785,3 +785,33 @@ all agents terminal
 iter 1: 2 agents
   a00-4e910101: status=done verdict=pending pid=1264516
   a01-cdbb8442: status=done verdict=pending pid=1264524
+=== iter 1 @ 2026-05-01T19:37:16Z ===
+wrote: 7 idea + 60 hypothesis + 91 task = 158 nodes
+target dir: /home/ubuntu/.hermes/agi-tree/nodes
+loaded 157 nodes from /home/ubuntu/.hermes/agi-tree/nodes
+ASCII rendering: 163 lines
+wrote: /home/ubuntu/.hermes/agi-tree/context/INJECTION.md
+METRIC longest_chain_length=2
+METRIC avg_chain_depth=0.96
+METRIC mvp_count=0
+METRIC outcome_coverage=0.000
+METRIC chain_branching_factor=2.21
+METRIC node_count=157
+METRIC edge_count=148
+ERR: ollama package not installed (pip install ollama)
+scaffolded hypothesis node: hypothesis:a00-1d3d51b5-36990a
+spawned a00-1d3d51b5 pid=1264970 level=big target=- strategy=explore_new
+scaffolded hypothesis node: hypothesis:a01-8444c4b6-92d465
+spawned a01-8444c4b6 pid=1264978 level=small target=idea:domain-graph-core strategy=branch_fork
+manifest: /home/ubuntu/.hermes/agi-tree/sessions/iter-001/manifest.json
+all agents terminal
+[post_wire] iter=1
+  nodes updated: 2
+    - hypothesis:a00-1d3d51b5-36990a
+    - hypothesis:a01-8444c4b6-92d465
+  edges added: 1
+    - idea:domain-graph-core -> hypothesis:a01-8444c4b6-92d465 [branch_fork]
+  graph snapshot: /home/ubuntu/.hermes/agi-tree/sessions/iter-001/iter-001-graph.json
+iter 1: 2 agents
+  a00-1d3d51b5: status=done verdict=pending pid=1264970
+  a01-8444c4b6: status=done verdict=pending pid=1264978
