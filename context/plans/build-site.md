@@ -1448,3 +1448,21 @@ Once T-001 completes, Tier 1's four tasks (T-002, T-003, T-005, T-006) become el
 - No task crosses kit boundaries beyond the explicit `Dependencies:` declared in each kit; the tier ordering enforces this.
 - Tasks marked `[CONDITIONAL]` or `[DYNAMIC]` are not present in this plan; all 88 tasks have determinate scope.
 - Tier 3 widths (9 tasks) and Tier 4 widths (9 tasks) are the prime parallelization opportunities; the 5-builder pool can pull continuously from those tiers.
+
+### Domain: graph-core (11 R, 44 criteria, T-001..T-020)
+
+#### T-019: BFS/DFS traversal primitives
+- **Cavekit Requirement:** graph-core/R11
+- **Acceptance Criteria Mapped:** R11.1 (traverse_bfs), R11.2 (traverse_dfs), R11.8 (cycle detection utility)
+- **blockedBy:** T-004
+- **Effort:** M
+- **Description:** Implement `traverse_bfs(start_id)` and `traverse_dfs(start_id)` as lazy generators yielding node ids in traversal order. Also expose a `detect_cycle(node_id)` utility that runs DFS from that node and reports any found cycle path. Use the existing Graph container from T-004.
+- **Files:** `src/graph_core/traversal.py`, `tests/graph_core/test_traversal.py`
+
+#### T-020: Query API and path finding
+- **Cavekit Requirement:** graph-core/R11
+- **Acceptance Criteria Mapped:** R11.3 (find_paths), R11.4 (find_ancestors), R11.5 (find_descendants), R11.6 (query filters), R11.7 (lazy iterators)
+- **blockedBy:** T-019
+- **Effort:** M
+- **Description:** Implement `find_paths(source_id, target_id)` returning all simple paths via DFS backtracking. Implement `find_ancestors(node_id)` and `find_descendants(node_id)` using BFS. Implement `query(type=None, tags=None, has_parent=None, has_child=None)` filtering nodes by criteria without loading bodies. All return lazy generators.
+- **Files:** `src/graph_core/query.py`, `tests/graph_core/test_query.py`
