@@ -12,18 +12,18 @@ title: "graph-core/R1: Outcome"
 type: outcome
 ---
 
-**Input:** No input required — graph-core primitives are foundational.
+**Input:** Node id strings, type strings, optional body text
 
-**Output:** Graph object with nodes and edges supporting full DAG semantics.
+**Output:** Graph with nodes + edges, DAG-validated
 
 **Behavior:**
-- `Node(id, type, payload_ref, parents, children, tags)` — typed record
-- `Edge(source_id, target_id, relation)` — directed relationship
-- `Graph.add_node()` — rejects duplicates, enforces invariants
-- `Graph.add_edge()` — rejects cycles, self-loops
+- Node(id=..., type=...) creates a node record
+- Edge(source_id=..., target_id=..., relation=...) creates edge
+- Graph.add_node() / add_edge() update graph state
+- DAG invariant enforced: no cycles, no self-loops
+- Frontmatter persistence: nodes stored as YAML-frontmatter .md files
 
 **Edge cases:**
-- Self-loop → GraphCycleError
-- Cycle via edge → GraphCycleError
-- Duplicate node → ValueError
-- Missing parent node → still allowed (orphan is valid)
+- Duplicate node ids → Graph.add_node is idempotent (last-write-wins by id)
+- Self-loop edges → rejected by DAG invariant
+- Cycle-creating edges → rejected by DAG invariant

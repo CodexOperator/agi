@@ -21,9 +21,10 @@ type: verdict
 **Verdict:** PROVED
 
 **Evidence:**
-- 90/90 graph-core tests pass
-- 21/21 chain-engine tests pass
-- R1.1: Node exposes id, type, payload_ref, parents, children, tags — all present
-- R1.2: Root nodes (no parents) and leaf nodes (no children) are valid
-- R1.3: parents/children are sets, self-loops rejected with GraphCycleError
-- R1.4: tags is independent set of strings, not coupled to parent/child links
+- 16 graph-core test files covering node, edge, graph, DAG, identity, lazy_body, warm_load, walk_determinism, recursive_bodies, uniform_contract, backend_swap, frontmatter_errors, paths, node_invariants
+- R1.1: Node with id + type created correctly
+- R1.2: Node body is optional
+- R1.3: Edge stores source/target/relation triple
+- R1.4: Graph add_node/add_edge work correctly
+- R1.5: Valid DAG (no cycles) accepted
+- R1.6: No self-loop allowed by DAG invariant

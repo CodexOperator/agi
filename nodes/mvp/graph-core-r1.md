@@ -13,25 +13,25 @@ title: "graph-core/R1: MVP"
 type: mvp
 ---
 
-**MVP:** Generic Node primitive in `src/graph_core/node.py`.
+**MVP:** Generic Node Primitive
 
 ```python
 from graph_core.node import Node
+from graph_core.edge import Edge
+from graph_core.graph import Graph
 
-node = Node(
-    id="hyp:example",
-    type="hypothesis",
-    payload_ref=None,
-    parents=set(),
-    children=set(),
-    tags={"graph-core", "example"},
-)
-assert node.id == "hyp:example"
-assert node.type == "hypothesis"
-assert node.parents == set()
+# Node: id + type + optional body
+n = Node(id="my:id", type="hypothesis")
+# Edge: source + target + relation
+e = Edge(source_id="a", target_id="b", relation="spawns")
+# Graph: container for nodes + edges
+g = Graph()
+g.add_node(n)
+g.add_edge(e)
 ```
 
 **Key files:**
-- `src/graph_core/node.py` — Node class with id, type, payload_ref, parents, children, tags
-- `src/graph_core/edge.py` — Edge class with source_id, target_id, relation
-- `src/graph_core/graph.py` — Graph class, add_node/add_edge with DAG invariant checks
+- `src/graph_core/node.py` — Node dataclass
+- `src/graph_core/edge.py` — Edge dataclass
+- `src/graph_core/graph.py` — Graph container + DAG invariants
+- `src/graph_core/persistence.py` — file-based frontmatter persistence

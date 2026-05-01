@@ -16,9 +16,6 @@ type: experiment
 **Description:** Run graph-core test suite + validate R1 acceptance criteria.
 
 **Method:**
-- Run pytest on tests/graph_core/ (all tests)
-- Validate R1.1–R1.4 programmatically:
-  - R1.1: Node exposes id, type, payload_ref, parents, children, tags
-  - R1.2: Root and leaf nodes are valid
-  - R1.3: parents/children are sets, self-loops rejected
-  - R1.4: tags is independent set of strings
+- Run pytest on tests/graph_core/ (16 test files)
+- Validate R1.1–R1.6 programmatically
+- Create 8-hop chain nodes
