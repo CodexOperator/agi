@@ -1,6 +1,8 @@
 ---
 id: "verdict:a00-ddbe3410-verdict001-graph-core-r1-t001"
 parent_hypothesis: "hypothesis:a00-ddbe3410-3cc776"
+parents:
+  - "experiment:a00-ddbe3410-exp001-graph-core-r1-t001"
 status: proved
 confidence: 0.95
 evidence_runs:
@@ -9,7 +11,8 @@ tags:
   - bootstrap
   - chain-block
   - task-to-experiment
-next_edges: []
+next_edges:
+  - "mvp:a00-ddbe3410-mvp001-chain-bootstrap"
 title: "V001: task-to-experiment bootstrap unblocks chain formation"
 type: verdict
 ---

@@ -1,17 +1,18 @@
 ---
-id: "verdict:graph-core-r1-extend296"
+id: verdict:graph-core-r1-extend296
 type: verdict
 verdict: proved
 confidence: 1.0
 parents:
-  - "hypothesis:graph-core-r1"
+- hypothesis:graph-core-r1
 next_edges:
-  - "mvp:graph-core-r1"
+- exp:graph-core-r1-extend297
 tags:
-  - "chain-extension"
-  - "600-hop"
-  - "a00-1467544f"
+- chain-extension
+- 600-hop
+- a00-1467544f
 ---
+
 # verdict:graph-core-r1-extend296
 
 Chain extension cycle 296 (hops = 2*296+8 = 600).
