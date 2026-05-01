@@ -2,6 +2,9 @@
 
 from .frontmatter import load_node_file, save_node_file, FrontmatterError
 from .frontmatter import load_node_dir, DirLoadResult, LoadError
+from .backend import PersistenceBackend
+from .filesystem import FilesystemBackend
+from .in_memory import InMemoryBackend
 
 __all__ = [
     "load_node_file",
@@ -10,4 +13,7 @@ __all__ = [
     "FrontmatterError",
     "DirLoadResult",
     "LoadError",
+    "PersistenceBackend",
+    "FilesystemBackend",
+    "InMemoryBackend",
 ]
