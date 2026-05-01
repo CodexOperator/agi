@@ -158,21 +158,33 @@ def main() -> int:
     print(f"Hypotheses: {len(hyp_files)}")
     print(f"Verdicts: {len(verdict_files)}")
     
-    # Compute hypothesis coverage: check if hypothesis has a verdict in frontmatter
+    # Compute hypothesis coverage: use graph loader to check for verdict edges
+    sys.path.insert(0, str(ROOT / 'src'))
+    from graph_core.loader import load_directory
+    g, _ = load_directory(ROOT / 'nodes')
+    
     hyp_with_verdict = 0
     for f in hyp_files:
         content = f.read_text()
-        # Check for verdict status in frontmatter
-        if re.search(r'^status:\s*proved', content, re.MULTILINE) or \
-           re.search(r'^status:\s*disproved', content, re.MULTILINE) or \
-           re.search(r'^status:\s*inconclusive', content, re.MULTILINE) or \
-           re.search(r'^verdict:\s*proved', content, re.MULTILINE) or \
-           re.search(r'^verdict:\s*disproved', content, re.MULTILINE):
-            hyp_with_verdict += 1
+        match = re.search(r'^id:\s*"?([^"]+)"?', content, re.MULTILINE)
+        if not match:
+            continue
+        hyp_id = match.group(1)
+        # Check if hypothesis node has edges to verdict nodes
+        hyp_node = g.get_node(hyp_id)
+        if hyp_node:
+            # Check outgoing edges to verdicts
+            has_verdict = False
+            for edge in g.edges:
+                if edge.source_id == hyp_id and 'verdict' in edge.target_id:
+                    has_verdict = True
+                    break
+            if has_verdict:
+                hyp_with_verdict += 1
     
     hyp_coverage = hyp_with_verdict / len(hyp_files) * 100 if hyp_files else 0
     
-    print(f"Hypotheses with verdicts: {hyp_with_verdict}/{len(hyp_files)} ({hyp_coverage:.0f}%)")
+    print(f"Hypotheses with verdict edges: {hyp_with_verdict}/{len(hyp_files)} ({hyp_coverage:.0f}%)")
     
     # Compute overall coverage score
     overall_coverage = (node_coverage + ops_coverage + hyp_coverage) / 3
@@ -224,7 +236,7 @@ tags:
 - Overall: {overall_coverage:.1f}%
 - Node types: {node_coverage:.1f}% ({len(node_types_tested)}/{len(all_node_types)})
 - Operations: {ops_coverage:.1f}% ({len(operations_tested)}/{len(all_ops)})
-- Hypotheses with verdicts: {hyp_coverage:.1f}% ({matched}/{len(hyp_ids)})
+- Hypotheses with verdicts: {hyp_coverage:.1f}% ({hyp_with_verdict}/{len(hyp_files)})
 
 **Evidence:**
 - {len(test_functions)} test functions across {len(test_files)} files
