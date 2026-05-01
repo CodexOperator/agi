@@ -21,8 +21,12 @@
   "agent_dispatch": {
     "claude_max_parallel": 5,
     "ollama_max_parallel": 0,
-    "ollama_model": "qwen3:4b"
+    "ollama_model": "qwen3:4b",
+    "provider": "anthropic",
+    "model": "claude-opus-4-7",
+    "max_turns": 30
   },
+  "agent_timeout_mins": 10,
   "delay_mins": 0,
   "max_iters": 1,
   "injection_file": "context/INJECTION.md"
