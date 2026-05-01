@@ -10,7 +10,7 @@ parents:
 tags:
   - chain-extension
 next_edges:
-  - "mvp:renderers-r1"
+  - "exp:renderers-r1-extend21"
 ---
 
 VERDICT: proved. renderers-r1 at 44 hops.
