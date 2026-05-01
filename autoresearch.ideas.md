@@ -26,6 +26,8 @@
 
 ## Low Priority / Interesting
 
+- **[chain-engine] Push chains beyond 12 hops** — Add more verdict→experiment→verdict cycles to existing extend chains. 14-hop, 16-hop chains would prove scalability.
+
 - **[graph-core] Vector embedding isomorphic to ASCII coords** — UMAP (x,y) → RenderToken.x,y — same underlying representation
 
 - ~~**[multi-agent] 5-agent parallel dispatch smoke test**~~ — DONE (iter 8: multi-agent-dispatch-r1 proved, config valid, dispatch works)
@@ -47,3 +49,4 @@
 - ~~**[chain-engine-r14 type-normalization]**~~ — PROVED (0→6×8-hop chains; hyphen→underscore in loader._node_from_frontmatter)
 - **iter7 (a00-296dc0dc):** Schema-registry R2 Bracket Convention proved 6/6. Restored 6 chains × 8 hops from git history. Fixed next_edges placement (must be inside YAML frontmatter between --- markers). **Key lesson:** `git checkout HEAD -- nodes/` wipes chain node dirs; must commit next_edges to HEAD to survive.
 - **iter11/12:** Environment-indexers chain extended to 12 hops via two verdict→experiment→verdict cycles. 13 chains total, 6 at 12 hops, 1 at 8 hops. Primary metric: 12 hops (stacked cycles proven).
+- **iter12 (final):** All 8 domain chains restored and fixed. 15 chains total, longest 12-hop. 12-hop chains achieved via stacked verdict→experiment→verdict cycles.
