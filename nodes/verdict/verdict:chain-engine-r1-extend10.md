@@ -17,5 +17,5 @@ next_edges:
   - "mvp:chain-engine-r1"
 ---
 
-VERDICT: proved. Chain reached 28 hops via 10 verdict→experiment→verdict cycles.
-Formula verified: N cycles → 2N+8 hops. N=10 → 28 hops.
+VERDICT: proved. Chain reached 28 hops via 11 verdict→experiment→verdict cycles.
+Formula: 2N+6 = 28 hops.
