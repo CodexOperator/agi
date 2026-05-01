@@ -567,3 +567,36 @@ METRIC edge_count=148
 scaffolded hypothesis node: hypothesis:a00-407fa689-3a4948
 spawned a00-407fa689 pid=1233169 level=big target=-
 manifest: /home/ubuntu/.hermes/agi-tree/sessions/iter-037/manifest.json
+all agents terminal
+iter 37: 1 agents
+  a00-407fa689: status=done verdict=proved pid=1233169
+=== iter 38 @ 2026-05-01T17:58:28Z ===
+wrote: 7 idea + 60 hypothesis + 91 task = 158 nodes
+target dir: /home/ubuntu/.hermes/agi-tree/nodes
+loaded 157 nodes from /home/ubuntu/.hermes/agi-tree/nodes
+ASCII rendering: 163 lines
+wrote: /home/ubuntu/.hermes/agi-tree/context/INJECTION.md
+METRIC longest_chain_length=2
+METRIC avg_chain_depth=0.96
+METRIC mvp_count=0
+METRIC outcome_coverage=0.000
+METRIC chain_branching_factor=2.21
+METRIC node_count=157
+METRIC edge_count=148
+Traceback (most recent call last):
+  File "/home/ubuntu/autoresearch-tree/extensions/autoresearch-tree/bin/dispatch.py", line 407, in <module>
+    sys.exit(main())
+             ^^^^^^
+  File "/home/ubuntu/autoresearch-tree/extensions/autoresearch-tree/bin/dispatch.py", line 84, in main
+    targets = _pick_targets(root, n)
+              ^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/ubuntu/autoresearch-tree/extensions/autoresearch-tree/bin/dispatch.py", line 235, in _pick_targets
+    diversity = _type_diversity(node_id)
+                ^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/ubuntu/autoresearch-tree/extensions/autoresearch-tree/bin/dispatch.py", line 215, in _type_diversity
+    types |= {_type_diversity(c, seen) > 0}  # just presence flag
+              ^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/ubuntu/autoresearch-tree/extensions/autoresearch-tree/bin/dispatch.py", line 228, in _type_diversity
+    return len(sub_types) / max(len(g.nodes), 1)
+                                ^^^^^^^^^^^^
+TypeError: object of type 'dict_valueiterator' has no len()
