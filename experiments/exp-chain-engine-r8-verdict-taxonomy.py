@@ -120,53 +120,49 @@ def parse_verdict_from_string(state_str: str) -> tuple[str, Optional[int]]:
 # --- Test Cases ---
 
 def run_tests() -> dict[str, dict]:
-    """Run 12 test cases. Returns dict of results."""
+    """Run 13 test cases. Returns dict of results."""
     results = {}
     
-    # Helper to run single test
-    def test(name: str, state_str: str, confidence: float, should_pass: bool, 
-             expected_lean: Optional[int] = None) -> bool:
+    # Helper to run single test with pre-parsed state and lean
+    def test_parsed(name: str, state: str, confidence: float, lean: Optional[int], should_pass: bool) -> bool:
         try:
-            state, lean = parse_verdict_from_string(state_str)
             v = validate_verdict(state, confidence, lean)
             passed = should_pass
-            if passed and expected_lean is not None:
-                passed = v.lean_strength == expected_lean
-            results[name] = {"pass": passed, "expected": "valid" if should_pass else "invalid", "got": "valid" if passed else "INVALID"}
+            results[name] = {"pass": passed, "expected": "valid" if should_pass else "invalid", "got": "valid" if passed else "invalid"}
             return passed
         except VerdictValidationError as e:
             results[name] = {"pass": not should_pass, "expected": "valid" if should_pass else "invalid", "got": "invalid", "error": str(e)}
             return not should_pass
     
     # Test 1: Valid proved
-    t1 = test("T1_proved_valid", "proved", 0.95, should_pass=True)
+    test_parsed("T1_proved_valid", "proved", 0.95, None, should_pass=True)
     
     # Test 2: Valid disproved
-    t2 = test("T2_disproved_valid", "disproved", 0.90, should_pass=True)
+    test_parsed("T2_disproved_valid", "disproved", 0.90, None, should_pass=True)
     
     # Test 3: Valid pending
-    t3 = test("T3_pending_valid", "pending", 0.50, should_pass=True)
+    test_parsed("T3_pending_valid", "pending", 0.50, None, should_pass=True)
     
-    # Test 4: Valid inconclusive_lean_proved with N
-    t4 = test("T4_lean_proved_valid", "inconclusive_lean_proved", 0.65, should_pass=True, expected_lean=None)
+    # Test 4: Valid inconclusive_lean_proved with N=65
+    test_parsed("T4_lean_proved_valid", "inconclusive_lean_proved", 0.65, 65, should_pass=True)
     
-    # Test 5: Valid inconclusive_lean_disproved with N
-    t5 = test("T5_lean_disproved_valid", "inconclusive_lean_disproved", 0.55, should_pass=True)
+    # Test 5: Valid inconclusive_lean_disproved with N=45
+    test_parsed("T5_lean_disproved_valid", "inconclusive_lean_disproved", 0.55, 45, should_pass=True)
     
     # Test 6: Invalid state
-    t6 = test("T6_invalid_state", "maybe", 0.50, should_pass=False)
+    test_parsed("T6_invalid_state", "maybe", 0.50, None, should_pass=False)
     
     # Test 7: Invalid confidence too high
-    t7 = test("T7_confidence_too_high", "proved", 1.5, should_pass=False)
+    test_parsed("T7_confidence_too_high", "proved", 1.5, None, should_pass=False)
     
     # Test 8: Invalid confidence too low
-    t8 = test("T8_confidence_too_low", "proved", -0.1, should_pass=False)
+    test_parsed("T8_confidence_too_low", "proved", -0.1, None, should_pass=False)
     
     # Test 9: Inconclusive without lean_strength
-    t9 = test("T9_inconclusive_no_lean", "inconclusive_lean_proved", 0.55, should_pass=False)
+    test_parsed("T9_inconclusive_no_lean", "inconclusive_lean_proved", 0.55, None, should_pass=False)
     
     # Test 10: Non-inconclusive with lean_strength (should fail)
-    t10 = test("T10_proved_with_lean", "proved", 0.95, should_pass=False)
+    test_parsed("T10_proved_with_lean", "proved", 0.95, 50, should_pass=False)
     
     # Test 11: Lean out of range high
     state, _ = parse_verdict_from_string("inconclusive_lean_proved:150")
@@ -183,11 +179,13 @@ def run_tests() -> dict[str, dict]:
     except VerdictValidationError:
         results["T12_lean_too_low"] = {"pass": True, "expected": "invalid", "got": "invalid"}
     
-    # Parse-string tests
-    state, lean = parse_verdict_from_string("inconclusive_lean_proved:75")
-    t_ps = test("T13_parse_string", state, 0.7, should_pass=True, expected_lean=75)
-    if "T13_parse_string" not in results:
-        results["T13_parse_string"] = {"pass": lean == 75, "expected": 75, "got": lean}
+    # Test 13: Parse-string extracts lean correctly
+    state13, lean13 = parse_verdict_from_string("inconclusive_lean_proved:75")
+    try:
+        v13 = validate_verdict(state13, 0.7, lean13)
+        results["T13_parse_string"] = {"pass": lean13 == 75 and v13.lean_strength == 75, "expected": 75, "got": lean13}
+    except VerdictValidationError as e:
+        results["T13_parse_string"] = {"pass": False, "expected": 75, "got": lean13, "error": str(e)}
     
     return results
 
