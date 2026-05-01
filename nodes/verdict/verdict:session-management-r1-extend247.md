@@ -1,12 +1,12 @@
 ---
-id: "verdict:session-management-r1-extend247"
+id: verdict:session-management-r1-extend247
 type: verdict
 verdict: proved
 confidence: 1.0
 parents:
-  - "hypothesis:session-management-r1"
+- hypothesis:session-management-r1
 next_edges:
-  - "mvp:session-management-r1"
+- exp:session-management-r1-extend248
 ---
 
 # verdict:session-management-r1-extend247

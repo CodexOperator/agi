@@ -6,7 +6,8 @@ effort: L
 id: "hypothesis:a00-ddbe3410-structural-repair"
 parents:
   - "idea:domain-chain-bootstrap"
-next_edges: []
+next_edges:
+  - "experiment:a00-ddbe3410-exp002-structural-repair"
 status: open
 tags:
   - structural-bias
