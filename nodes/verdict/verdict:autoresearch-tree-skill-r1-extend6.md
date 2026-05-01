@@ -14,7 +14,7 @@ tags:
   - 6th-cycle
   - proved
 next_edges:
-  - "mvp:autoresearch-tree-skill-r1"
+  - "exp:autoresearch-tree-skill-r1-extend7"
 ---
 
 VERDICT: proved. autoresearch-tree-skill-r1 chain at 6 cycles = 18 hops.
