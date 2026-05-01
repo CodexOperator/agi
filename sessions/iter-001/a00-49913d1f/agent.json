@@ -1,0 +1,12 @@
+{
+  "id": "a00-49913d1f",
+  "slot": 0,
+  "level": "big",
+  "target": null,
+  "pid": 1147285,
+  "started_at": 1777636321,
+  "status": "running",
+  "context_file": "/home/ubuntu/.hermes/agi-tree/sessions/iter-001/a00-49913d1f/context.md",
+  "log_file": "/home/ubuntu/.hermes/agi-tree/sessions/iter-001/a00-49913d1f/output.log",
+  "command": "/home/ubuntu/.npm-global/bin/pi --append-system-prompt @/home/ubuntu/.hermes/agi-tree/sessions/iter-001/a00-49913d1f/context.md --append-system-prompt 'You are agent a00-49913d1f on iteration 1. When complete, run: python3 /home/ubuntu/autoresearch-tree/extensions/autoresearch-tree/bin/cli.py done 1 a00-49913d1f --verdict <state> --confidence <0..1> --node-id <id>. Stay within zoom scope; do NOT wander.' --append-system-prompt @/home/ubuntu/autoresearch-tree/extensions/autoresearch-tree/lib/agent-prompt.md 'Begin iteration 1 as agent a00-49913d1f. Read your zoom context, do the work, signal done.'"
+}

@@ -19,7 +19,7 @@
     "mvp_count": 0.2
   },
   "agent_dispatch": {
-    "claude_max_parallel": 5,
+    "claude_max_parallel": 1,
     "ollama_max_parallel": 0,
     "ollama_model": "qwen3:4b",
     "provider": "anthropic",
@@ -28,6 +28,6 @@
   },
   "agent_timeout_mins": 10,
   "delay_mins": 0,
-  "max_iters": 1,
+  "max_iters": 55,
   "injection_file": "context/INJECTION.md"
 }
