@@ -14,7 +14,7 @@ tags:
   - eighth-cycle
   - proved
 next_edges:
-  - "mvp:environment-indexers-r1"
+  - "exp:environment-indexers-r1-extend8"
 ---
 
 VERDICT: proved. Chain reached 22 hops via 8 verdict→experiment→verdict cycles.
