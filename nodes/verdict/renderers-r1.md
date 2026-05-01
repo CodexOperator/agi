@@ -5,7 +5,8 @@ evidence_runs:
   - exp:renderers-r1
 id: "verdict:renderers-r1"
 next_edges:
-  - "mvp:renderers-r1"
+  - exp:renderers-r1-extend
+  - mvp:renderers-r1
 parents:
   - exp:renderers-r1
 status: proved
