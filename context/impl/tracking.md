@@ -82,3 +82,27 @@ Live record of build progress against `context/plans/build-site.md`.
 - **Files:** src/renderers/mermaid.py, src/renderers/__init__.py (edit), tests/renderers/test_mermaid.py
 - **Validation:** Tests 6/6 PASS, R3.1+R3.2+R3.3+R3.4 covered
 - **Notes:** flowchart TD; sanitizes ":" to "_" in mermaid ids; dedups nodes by id and edges by (src,tgt,relation); deterministic byte-equal across runs; classDef per-type for tooling.
+
+### Iteration 11 — 2026-05-01T00:00:00Z
+- **Task:** T-021 — Bracket convention for active schemas (schema-registry/R2)
+- **Tier:** 3
+- **Status:** DONE
+- **Files:** src/schema_registry/active_set.py (new), src/schema_registry/__init__.py (edit), tests/schema_registry/test_brackets.py (new)
+- **Validation:** Tests 4/4 PASS (test_brackets.py); full schema_registry suite 14/14 PASS. R2.1 (bracketed -> active), R2.2 (unbracketed -> inactive), R2.3 (rename activates), R2.4 (DuplicateActiveSchemaError) covered.
+- **Notes:** `build_active_set()` partitions registry; re-walks the source dir to detect duplicates the loader silently overrode. `DuplicateActiveSchemaError` exposes `name` and `paths` (both bracketed sources).
+
+### Iteration 12 — 2026-05-01T02:10:00Z
+- **Task:** T-011 — Directory walk determinism tests (graph-core/R6)
+- **Tier:** 3
+- **Status:** DONE
+- **Files:** tests/graph_core/test_walk_determinism.py (new), tests/fixtures/walk_test/file_top.md, tests/fixtures/walk_test/a/file_a.md, tests/fixtures/walk_test/b/file_b.md, tests/fixtures/walk_test/b/file_c.md
+- **Validation:** Tests 5/5 PASS against T-009's `walk_node_files` + `load_directory`. R6.1 (file-per-node) + R6.4 (deterministic ordering) covered.
+- **Notes:** Companion tests for T-009 (loader.py landed during this iteration). Asserts within-dir sort (file_b before file_c), byte-equal walks across two runs, .md/.json filter, stable id sequence on repeat load, and node count == file count (4).
+
+### Iteration 13 — 2026-05-01T02:30:00Z
+- **Task:** T-061 — ASCII renderer bounded 200x200 (renderers/R2)
+- **Tier:** 2
+- **Status:** DONE
+- **Files:** src/renderers/ascii.py (new), src/renderers/__init__.py (edit), tests/renderers/test_ascii.py (new)
+- **Validation:** Tests 6/6 PASS, R2.1+R2.2+R2.4 covered (200-line/200-col bounds, truncation markers, byte-equal determinism, depth indent, header summary).
+- **Notes:** Hierarchical depth-driven layout; truncate column at 200 with " ... [line cut]" suffix; truncate line at 200 with "... [truncated, N more nodes]" final line; deterministic over sorted-by-id Representation.
