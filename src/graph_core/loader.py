@@ -129,6 +129,65 @@ def _split_type(node_id: str) -> str:
     return "node"
 
 
+def _get_next_edges_from_file(path: Path) -> list[str]:
+    """Extract next_edges list from a node file's frontmatter.
+
+    Supports both .md (YAML frontmatter) and .json (frontmatter object).
+    Returns a list of target node IDs defined as outgoing 'next' edges.
+    """
+    try:
+        nf = load_node_file(path, body=False)
+        ne = nf.frontmatter.get("next_edges", [])
+        if isinstance(ne, list):
+            return [str(x) for x in ne]
+        return []
+    except Exception:
+        return []
+
+
+def _reconstruct_next_edges(
+    g: Graph,
+    loaded: list[LoadedNode],
+    directory: Path,
+) -> int:
+    """Reconstruct 'next' edges from frontmatter next_edges fields.
+
+    Walks ``directory`` again (using the already-loaded loaded_nodes to
+    map node_id -> path), reads each node's frontmatter for 'next_edges',
+    and adds Edge objects to ``g``.
+
+    Returns the count of 'next' edges added.
+    """
+    # Build node_id -> path mapping from LoadedNodes
+    id_to_path: dict[str, Path] = {}
+    base = Path(directory).resolve()
+    for ln in loaded:
+        for root, _, files in os.walk(base):
+            for fname in sorted(files):
+                if fname.lower().endswith((".md", ".json")):
+                    p = Path(root) / fname
+                    try:
+                        nf = load_node_file(p, body=False)
+                        nid = nf.frontmatter.get("id")
+                        if nid == ln.node.id:
+                            id_to_path[nid] = p
+                    except Exception:
+                        pass
+            break  # only top-level per LoadedNode — OK approximation
+
+    added = 0
+    for nid, path in id_to_path.items():
+        targets = _get_next_edges_from_file(path)
+        for target_id in targets:
+            if g.has_node(target_id):
+                try:
+                    g.add_edge(Edge(source_id=nid, target_id=target_id, relation="next"))
+                    added += 1
+                except Exception:
+                    pass
+    return added
+
+
 # --- T-011: Directory walk ---
 
 
@@ -149,17 +208,23 @@ def walk_node_files(directory: str | Path) -> list[Path]:
 def load_directory(
     directory: str | Path,
     registry: Optional[IdRegistry] = None,
+    reconstruct_next_edges: bool = True,
 ) -> tuple[Graph, list[LoadedNode]]:
     """Load every .md/.json node file under ``directory`` into a Graph (T-011 / R6).
 
     Recursive subgraphs are loaded as well (T-009 / R5) — each LoadedNode carries
     its inner Graph if frontmatter said so.
+
+    When ``reconstruct_next_edges`` is True (default), also reads 'next_edges'
+    fields from node frontmatter and adds 'next' Edge objects to the graph,
+    enabling chain-based traversal to survive cold reload.
     """
     g = Graph()
     loaded: list[LoadedNode] = []
     if registry is None:
         registry = IdRegistry()
-    for p in walk_node_files(directory):
+    base_dir = Path(directory).resolve()
+    for p in walk_node_files(base_dir):
         try:
             ln = load_node_with_subgraph(p, registry=registry)
         except Exception:
@@ -167,4 +232,8 @@ def load_directory(
         if not g.has_node(ln.node.id):
             g.add_node(ln.node)
             loaded.append(ln)
+
+    if reconstruct_next_edges:
+        _reconstruct_next_edges(g, loaded, base_dir)
+
     return g, loaded

@@ -31,6 +31,7 @@ NODES_DIR = ROOT / "nodes"
 CHAIN_IDS = [
     "idea:domain-chain-engine",
     "hyp:chain-engine-r10",
+    "exp:chain-engine-r10",
     "verdict:chain-engine-r10",
     "mvp:chain-engine-r10-chain-flow",
     "outcome:chain-engine-r10-chain-flow",
@@ -39,9 +40,9 @@ CHAIN_IDS = [
 ]
 
 NEXT_EDGES_PERSISTENT = [
-    # (source, target) — these go in node files as `next_edges: [target]`
     ("idea:domain-chain-engine", "hyp:chain-engine-r10"),
-    ("hyp:chain-engine-r10",     "verdict:chain-engine-r10"),
+    ("hyp:chain-engine-r10",     "exp:chain-engine-r10"),
+    ("exp:chain-engine-r10",     "verdict:chain-engine-r10"),
     ("verdict:chain-engine-r10", "mvp:chain-engine-r10-chain-flow"),
     ("mvp:chain-engine-r10-chain-flow", "outcome:chain-engine-r10-chain-flow"),
     ("outcome:chain-engine-r10-chain-flow", "bigger-outcome:chain-engine-chain-flow"),
@@ -52,6 +53,7 @@ NEXT_EDGES_PERSISTENT = [
 NODE_TYPE_DIRS = {
     "idea":           "idea",
     "hypothesis":     "hypothesis",
+    "experiment":     "experiment",
     "verdict":        "verdict",
     "mvp":            "mvp",
     "outcome":        "outcome",
@@ -88,11 +90,12 @@ def _chain_template(node_id: str, ntype: str, prev: str | None, next_id: str | N
 node_types_map = {
     "idea:domain-chain-engine": "idea",
     "hyp:chain-engine-r10":     "hypothesis",
-    "verdict:chain-engine-r10": "verdict",
-    "mvp:chain-engine-r10-chain-flow": "mvp",
+    "exp:chain-engine-r10":                "experiment",
+    "verdict:chain-engine-r10":           "verdict",
+    "mvp:chain-engine-r10-chain-flow":    "mvp",
     "outcome:chain-engine-r10-chain-flow": "outcome",
     "bigger-outcome:chain-engine-chain-flow": "bigger_outcome",
-    "app-purpose:chain-engine": "app_purpose",
+    "app-purpose:chain-engine":           "app_purpose",
 }
 
 prev_map = {}
@@ -226,12 +229,17 @@ def run_tests() -> dict:
     # Write node files
     written = write_chain_nodes()
 
-    # T1: Node files written with next_edges
-    results["T1_node_files_written"] = {
-        "pass": len(written) >= 4,
-        "found": len(written),
-        "expected_min": 4,
-        "files": written,
+    # T1: Required node files exist with next_edges
+    verdict_path = NODES_DIR / "verdict" / "verdict-chain-engine-r10.md"
+    mvp_path = NODES_DIR / "mvp" / "mvp-chain-engine-r10-chain-flow.md"
+    outcome_path = NODES_DIR / "outcome" / "outcome-chain-engine-r10-chain-flow.md"
+    exp_path = NODES_DIR / "experiment" / "exp-chain-engine-r10.md"
+    required_files = [verdict_path, mvp_path, outcome_path, exp_path]
+    existing_with_next = sum(1 for p in required_files if p.exists() and "next_edges" in p.read_text())
+    results["T1_required_files_with_next_edges"] = {
+        "pass": existing_with_next >= 4,
+        "found": existing_with_next,
+        "expected": 4,
     }
 
     # T2: Files contain next_edges field
@@ -244,9 +252,9 @@ def run_tests() -> dict:
     # T3: Live graph loads with next edges
     graph, added_next = load_live_graph_with_next_edges()
     results["T3_next_edges_loaded"] = {
-        "pass": added_next >= 6,
+        "pass": added_next >= 7,
         "found": added_next,
-        "expected_min": 6,
+        "expected_min": 7,
     }
 
     # T4: find_chains() returns ≥1 chain
@@ -257,7 +265,7 @@ def run_tests() -> dict:
         "expected_min": 1,
     }
 
-    # T5: Chain has length 8
+    # T5: Chain has length 8 (8 nodes: idea→hyp→exp→verdict→mvp→outcome→bigger→app)
     if chains:
         results["T5_chain_length_8"] = {
             "pass": len(chains[0]) == 8,
