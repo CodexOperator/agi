@@ -11,7 +11,7 @@ tags:
   - chain-extension
   - iter23b
 next_edges:
-  - "mvp:embeddings-r2"
+  - "exp:embeddings-r2-extend33"
 ---
 
 VERDICT: proved. embeddings-r2 at 72 hops.

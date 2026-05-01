@@ -1,35 +1,33 @@
 #!/usr/bin/env python3
 """Test ASCII render proximity vs graph descendant overlap isomorphism."""
-import sys, os
-sys.path.insert(0, '/home/ubuntu/.hermes/agi-tree/src')
-os.chdir('/home/ubuntu/.hermes/agi-tree')
+import sys
+from pathlib import Path
+sys.path.insert(0, str(Path(__file__).parent / "src"))
 
-from graph_core.loader import GraphLoader
-from renderers.ascii import render_ascii
-from renderers.representation import build_representation
+from graph_core.loader import load_directory as load_graph
+from renderers import render_ascii, build_representation
 
 NODES_DIR = '/home/ubuntu/.hermes/agi-tree/nodes'
 
-loader = GraphLoader(NODES_DIR)
-graph = loader.load()
+graph, _ = load_graph(NODES_DIR)
 
-# Build descendant sets (BFS from each node)
+# Build descendant sets (BFS from each node via graph._out)
 descendants = {}
-for node_id in graph.nodes:
+for node_id in graph.node_ids:
     desc = set()
-    queue = list(graph.children.get(node_id, []))
+    queue = list(graph._out.get(node_id, set()))
     seen = set(queue)
     while queue:
         cur = queue.pop(0)
         desc.add(cur)
-        for child in graph.children.get(cur, []):
+        for child in graph._out.get(cur, set()):
             if child not in seen:
                 seen.add(child)
                 queue.append(child)
     descendants[node_id] = desc
 
 # Filter to nodes with at least 1 descendant
-nodes_with_desc = [n for n in graph.nodes if descendants.get(n)]
+nodes_with_desc = [n for n in graph.node_ids if descendants.get(n)]
 print(f"Total nodes: {len(graph.nodes)}, nodes with descendants: {len(nodes_with_desc)}")
 
 # Sample 30 node pairs (A, B) where A != B
@@ -66,21 +64,10 @@ lines = ascii_output.split('\n')
 print(f"ASCII render: {len(lines)} lines")
 
 # Extract line numbers for each node ID
-# The ASCII render format: "{indent}{label} :: {type}[ edge_summary]"
-# We need to map node IDs to their render line numbers
-# Strategy: look for the short ID or label in each line
-
 node_line = {}  # node_id -> line number (0-indexed)
-
-# Get all nodes as sorted list for predictable ordering
-sorted_nodes = sorted(graph.nodes)
-
 for row, line in enumerate(lines):
-    # Check if this line contains a node reference
-    for node_id in sorted_nodes:
-        # Match short form of ID
+    for node_id in sorted(graph.nodes):
         short = node_id.split(':')[-1] if ':' in node_id else node_id[:16]
-        # Also try full ID or last 20 chars
         if short in line:
             if node_id not in node_line:
                 node_line[node_id] = row
@@ -93,23 +80,21 @@ for a, b, jaccard in overlaps:
     if a in node_line and b in node_line:
         line_diff = abs(node_line[a] - node_line[b])
         distances.append((a, b, jaccard, line_diff))
-    else:
-        distances.append((a, b, jaccard, None))
 
-# Spearman correlation between Jaccard overlap and proximity (1 / (1 + line_diff))
-valid = [(a, b, j, d) for a, b, j, d in distances if d is not None]
-print(f"Pairs with position data: {len(valid)}/{len(distances)}")
+# Spearman correlation between Jaccard overlap and proximity
+valid = [(a, b, j, d) for a, b, j, d in distances]
+print(f"Pairs with position data: {len(valid)}/{len(overlaps)}")
 
 if len(valid) >= 10:
-    # Spearman: rank by jaccard, rank by proximity (inverse of line_diff)
+    # Sort by Jaccard (ascending)
     sorted_by_j = sorted(valid, key=lambda x: x[2])
-    sorted_by_d = sorted(valid, key=lambda x: x[3])  # lower dist = higher rank
+    # Sort by line_diff (ascending = closer = higher proximity rank)
+    sorted_by_d = sorted(valid, key=lambda x: x[3])
     
     n = len(valid)
     d_sq = 0
     for i, (a, b, j, d) in enumerate(sorted_by_j):
-        # Find rank in distance-sorted (1 = closest = highest rank)
-        rank_d = next((j for j, (aa, bb, jj, dd) in enumerate(sorted_by_d)), 0)
+        rank_d = next((jj for jj, (aa, bb, jjj, dd) in enumerate(sorted_by_d)), 0)
         rank_j = i
         d_sq += (rank_j - rank_d) ** 2
     
@@ -120,15 +105,18 @@ if len(valid) >= 10:
     top5 = sorted(overlaps, key=lambda x: x[2], reverse=True)[:5]
     print(f"\nTop-5 overlapping pairs (render line distance):")
     total_line_diff = 0
+    known = 0
     for a, b, j in top5:
         if a in node_line and b in node_line:
             ld = abs(node_line[a] - node_line[b])
             total_line_diff += ld
+            known += 1
             print(f"  {a[-30:]} <-> {b[-30:]}: Jaccard={j:.3f}, line_diff={ld}")
         else:
             print(f"  {a[-30:]} <-> {b[-30:]}: Jaccard={j:.3f}, pos=UNKNOWN")
-    avg_line_diff = total_line_diff / 5 if top5 else None
-    print(f"Top-5 avg line diff: {avg_line_diff:.1f}")
+    avg_line_diff = total_line_diff / known if known else None
+    if avg_line_diff is not None:
+        print(f"Top-5 avg line diff: {avg_line_diff:.1f}")
     
     # Threshold check
     if spearman >= 0.5 and avg_line_diff and avg_line_diff < 5:
@@ -139,7 +127,8 @@ if len(valid) >= 10:
         print(f"\nVERDICT: INCONCLUSIVE (spearman={spearman:.3f} between 0.2 and 0.5)")
     
     print(f"\nMETRIC spearman={spearman:.3f}")
-    print(f"METRIC top5_avg_line_diff={avg_line_diff:.1f}" if avg_line_diff else "METRIC top5_avg_line_diff=N/A")
+    if avg_line_diff is not None:
+        print(f"METRIC top5_avg_line_diff={avg_line_diff:.1f}")
 else:
     print("Insufficient pairs with position data")
     print("METRIC spearman=N/A")
