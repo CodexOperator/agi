@@ -10,9 +10,10 @@ tags:
   - r1
   - gensim
   - skip-gram
-confidence: 0.95
 verdict: proved
+confidence: 0.95
 ---
+
 
 # hypothesis:a00-2e2ed561-embeddings-r1-gensim
 ## Hypothesis: Embeddings R1 — Gensim Skip-Gram Integration
@@ -24,3 +25,5 @@ verdict: proved
 **Verdict**: PROVED (confidence: 0.95) — gensim spearman=0.8552, k-NN=0.494 vs hash spearman=0.8355, k-NN=0.479. Both exceed thresholds. Key fix: storage.py numpy float → native float for YAML serialization.
 
 **Would disprove it:** Gensim integration fails due to dependency/performance issues, or the production pipeline can't be updated without breaking existing tests.
+
+R1 gensim production integration PROVED. Spearman=0.8552, k-NN=0.494 vs hash=0.8355/0.479. Critical fix: storage.py numpy float to native float for YAML. 274 tests pass.
