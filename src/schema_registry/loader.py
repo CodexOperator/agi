@@ -9,6 +9,7 @@ Naming convention:
 from __future__ import annotations
 
 import re
+import warnings
 from dataclasses import dataclass, field
 from pathlib import Path
 from typing import Any
@@ -17,6 +18,7 @@ from graph_core.persistence import load_node_file, FrontmatterError
 
 
 _BRACKET_RE = re.compile(r"^\[(.+)\]$")
+GENERIC_SCHEMA_NAME = "__generic__"
 
 
 def is_bracketed(stem: str) -> bool:
@@ -43,12 +45,24 @@ class Schema:
     frontmatter: dict[str, Any] = field(default_factory=dict)
 
 
+def _generic_schema() -> Schema:
+    return Schema(
+        name=GENERIC_SCHEMA_NAME,
+        active=True,
+        fields={},
+        source_path=Path("__generic__"),
+        frontmatter={"name": GENERIC_SCHEMA_NAME, "generic": True},
+    )
+
+
 @dataclass
 class SchemaRegistry:
     """Registry of loaded schemas, keyed by canonical name."""
 
     schemas: dict[str, Schema] = field(default_factory=dict)
     errors: list[tuple[Path, str]] = field(default_factory=list)
+    # T-020: track missing schemas so warnings stay one-shot per name.
+    missing_warned: set[str] = field(default_factory=set)
 
     def get(self, name: str) -> Schema | None:
         return self.schemas.get(name)
@@ -61,6 +75,44 @@ class SchemaRegistry:
 
     def active(self) -> dict[str, Schema]:
         return {n: s for n, s in self.schemas.items() if s.active}
+
+    def resolve(self, type_name: str) -> Schema:
+        """Return the schema for a node type, falling back to generic on miss (T-020 / R1.3).
+
+        Emits a single :class:`UserWarning` per missing schema name across the
+        registry's lifetime.
+        """
+        schema = self.schemas.get(type_name)
+        if schema is not None:
+            return schema
+        if type_name not in self.missing_warned:
+            self.missing_warned.add(type_name)
+            warnings.warn(
+                f"schema '{type_name}' not found; falling back to generic",
+                UserWarning,
+                stacklevel=2,
+            )
+        return _generic_schema()
+
+
+def reload_schemas(
+    directory: str | Path,
+    previous: SchemaRegistry | None = None,
+) -> SchemaRegistry:
+    """Reload schemas, carrying forward `missing_warned` and warning on disappearances (T-020)."""
+    new_reg = load_schemas_from_dir(directory)
+    if previous is not None:
+        new_reg.missing_warned = set(previous.missing_warned)
+        gone = previous.names() - new_reg.names()
+        for name in sorted(gone):
+            if name not in new_reg.missing_warned:
+                new_reg.missing_warned.add(name)
+                warnings.warn(
+                    f"schema '{name}' removed; nodes of this type will use generic fallback",
+                    UserWarning,
+                    stacklevel=2,
+                )
+    return new_reg
 
 
 def load_schemas_from_dir(directory: str | Path) -> SchemaRegistry:

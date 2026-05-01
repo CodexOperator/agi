@@ -1,11 +1,12 @@
 """schema-registry: pluggable, file-driven node schemas (R1+)."""
 
+from .active_set import ActiveSet, DuplicateActiveSchemaError, build_active_set
 from .loader import (
     Schema,
     SchemaRegistry,
-    load_schemas_from_dir,
-    is_bracketed,
     canonical_name,
+    is_bracketed,
+    load_schemas_from_dir,
 )
 
 __all__ = [
@@ -14,4 +15,7 @@ __all__ = [
     "load_schemas_from_dir",
     "is_bracketed",
     "canonical_name",
+    "ActiveSet",
+    "DuplicateActiveSchemaError",
+    "build_active_set",
 ]

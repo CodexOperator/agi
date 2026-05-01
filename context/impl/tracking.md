@@ -74,3 +74,11 @@ Live record of build progress against `context/plans/build-site.md`.
 - **Status:** DONE
 - **Files:** src/schema_registry/__init__.py, src/schema_registry/loader.py, tests/schema_registry/test_schema_files.py, tests/fixtures/schemas/{example.md, [hypothesis].md, example.json}
 - **Validation:** Tests 6/6 PASS, R1.1+R1.2+R1.4 covered (full suite 67/67 PASS)
+
+### Iteration 10 — 2026-05-01T02:05:34Z
+- **Task:** T-063 — Mermaid renderer (renderers/R3)
+- **Tier:** 3
+- **Status:** DONE
+- **Files:** src/renderers/mermaid.py, src/renderers/__init__.py (edit), tests/renderers/test_mermaid.py
+- **Validation:** Tests 6/6 PASS, R3.1+R3.2+R3.3+R3.4 covered
+- **Notes:** flowchart TD; sanitizes ":" to "_" in mermaid ids; dedups nodes by id and edges by (src,tgt,relation); deterministic byte-equal across runs; classDef per-type for tooling.
