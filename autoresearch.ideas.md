@@ -22,10 +22,12 @@
   - Config allows 5 parallel agents
   - Test the dispatch mechanism end-to-end
 
-- **[chain-extension] Verdict-spawned hypothesis chains**
-  - Current chains: 5 × 8 hops (idea→hyp→exp→verdict→mvp→outcome→bigger_outcome→app_purpose)
-  - To extend beyond 8 hops: verdict → new_hypothesis → new_experiment → ...
-  - Test if verdict nodes can spawn new hypothesis chains
+- **[chain-extension] verdict→experiment→verdict pattern**
+  - verdict→hypothesis NOT in valid transitions
+  - Try verdict → experiment → verdict → ... pattern instead
+  - Would allow indefinite chain extension
+
+- ~~**[chain-extension] Verdict-spawned hypothesis chains**~~ — INCONCLUSIVE (verdict→hypothesis not valid, need verdict→experiment→verdict pattern)
 
 ## Low Priority / Interesting
 
