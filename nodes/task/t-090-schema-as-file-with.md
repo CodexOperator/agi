@@ -7,7 +7,7 @@ blocked_by:
   - task:t-006
 cavekit_req: schema-registry/R1
 effort: M
-id: "task:t-019"
+id: "task:t-090"
 parents:
   - hyp:schema-registry-r1
 status: pending
@@ -15,7 +15,7 @@ tags:
   - M
   - tier--1
 tier: -1
-title: "T-019: Schema as file with naming convention"
+title: "T-090: Schema as file with naming convention"
 type: task
 ---
 

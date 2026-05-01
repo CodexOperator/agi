@@ -5,7 +5,7 @@ blocked_by:
   - task:t-019
 cavekit_req: schema-registry/R1
 effort: S
-id: "task:t-020"
+id: "task:t-091"
 parents:
   - hyp:schema-registry-r1
 status: pending
@@ -13,7 +13,7 @@ tags:
   - S
   - tier--1
 tier: -1
-title: "T-020: Schema removal handling with generic fallback warning"
+title: "T-091: Schema removal handling with generic fallback warning"
 type: task
 ---
 

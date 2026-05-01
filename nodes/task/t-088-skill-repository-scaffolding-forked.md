@@ -54,9 +54,9 @@ type: task
 
 - T-011: Directory-walking loader (blockedBy: T-006, T-005)
 
-- T-020: Schema removal handling (blockedBy: T-019)
+- T-020: Schema removal handling (blockedBy: T-090)
 
-- T-021: Bracket convention for active schemas (blockedBy: T-019)
+- T-021: Bracket convention for active schemas (blockedBy: T-090)
 
 - T-061: ASCII renderer — bounded 200x200 (blockedBy: T-060)
 
