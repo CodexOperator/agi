@@ -1,0 +1,29 @@
+{
+  "metric_primary": "longest_chain_length",
+  "metric_unit": "hops",
+  "best_direction": "higher",
+  "secondary_metrics": [
+    "avg_chain_depth",
+    "mvp_count",
+    "outcome_coverage",
+    "chain_branching_factor"
+  ],
+  "chain_min_join_length": 3,
+  "mid_chain_join_prob": 0.3,
+  "fresh_start_prob": 0.15,
+  "big_idea_vs_small_idea_split": 0.3,
+  "attractiveness_weights": {
+    "length": 0.4,
+    "depth": 0.2,
+    "recency": 0.2,
+    "mvp_count": 0.2
+  },
+  "agent_dispatch": {
+    "claude_max_parallel": 5,
+    "ollama_max_parallel": 0,
+    "ollama_model": "qwen3:4b"
+  },
+  "delay_mins": 0,
+  "max_iters": 1,
+  "injection_file": "context/INJECTION.md"
+}

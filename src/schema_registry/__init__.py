@@ -8,6 +8,8 @@ from .cascade import (
     register_extra_step,
 )
 from .dsl import ValidationError, parse_rules, validate
+from .fingerprint import cascade_step_2, collect_fingerprint, jaccard
+from .hooks import HookResult, LanguageModelHook, NoneHook, load_hook_from_config
 from .loader import (
     Schema,
     SchemaRegistry,
@@ -45,4 +47,11 @@ __all__ = [
     "cascade_step_1",
     "discover_schema",
     "register_extra_step",
+    "cascade_step_2",
+    "collect_fingerprint",
+    "jaccard",
+    "HookResult",
+    "LanguageModelHook",
+    "NoneHook",
+    "load_hook_from_config",
 ]

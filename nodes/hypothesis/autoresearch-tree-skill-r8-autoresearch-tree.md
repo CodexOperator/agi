@@ -1,0 +1,40 @@
+---
+confidence: 0.5
+id: "hyp:autoresearch-tree-skill-r8"
+parents:
+  - idea:domain-autoresearch-tree-skill
+subgraph: false
+tags:
+  - autoresearch-tree-skill
+  - R8
+testable_claim: Drop-In Portability
+title: "autoresearch-tree-skill/R8: Drop-In Portability"
+type: hypothesis
+---
+
+**Description:** The skill is portable: dropping the project context directory into any repository should be sufficient to run the skill there.
+
+**Acceptance Criteria:**
+- [ ] A self-test runs the skill in a fresh empty repository where only the project context directory has been copied in, and the first iteration completes successfully
+- [ ] No code path inside the skill assumes the repository name, host path, or any environment beyond an optional model selector
+- [ ] Removing the project context directory from a repository removes all skill-managed state from that repository
+- [ ] The skill's documentation states the portability contract and the self-test command
+
+**Dependencies:** graph-core (R9 portability)
+
+## Out of Scope
+
+- Ollama-based agent dispatch — deferred to v2
+- An in-memory database backend (sqlite or duckdb) for swarm-scale read-write — deferred
+- Domain-specific verdict-judging logic beyond emitting taxonomy-conformant values — out of scope
+- Modification of the existing autoresearch-create or autoresearch-finalize skills — explicitly forbidden
+- Cross-repository or multi-project orchestration — out of scope
+
+## Cross-References
+
+- See also: cavekit-graph-core.md (R9 portability, R10 bootstrap)
+- See also: cavekit-schema-registry.md (R4 validation, R8 built-in schemas)
+- See also: cavekit-environment-indexers.md (invoked as part of the loop)
+- See also: cavekit-chain-engine.md (R3, R4, R6, R7, R8, R9 — chain ranking, queries, taxonomy, configuration)
+- See also: cavekit-renderers.md (selected per iteration to brief agents and humans)
+- See also: cavekit-embeddings.md (optional similarity input for dispatch)
