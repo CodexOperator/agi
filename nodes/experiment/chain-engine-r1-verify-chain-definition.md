@@ -1,9 +1,11 @@
 ---
 confidence: 0.5
 id: "exp:chain-engine-r1-verify-chain-definition"
+next_edges:
+  - verdict:chain-engine-r1
 parents:
   - hyp:chain-engine-r1
-status: pending
+status: proved
 tags:
   - chain-engine
   - R1
