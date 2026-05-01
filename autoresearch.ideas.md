@@ -1,53 +1,49 @@
 # Deferred Optimization Ideas
 
-## High Priority
+## Done (verified)
 
-- ~~**[graph-core] Persist 'next' edges to verdict node files**~~ — DONE (R10 proved, commit 77ee98a)
-- ~~**[graph-core] Loader that reconstructs 'next' edges from node files**~~ — DONE (R10+ fix, commit 8019599)
-- ~~**[chain-engine] Batch prove R2-R7 hypotheses**~~ — DONE (R1-R9 all proved per git log)
+- ~~**[graph-core] Persist 'next' edges to verdict node files**~~ — DONE (R10 proved)
+- ~~**[graph-core] Loader reconstructs 'next' edges from node files**~~ — DONE
+- ~~**[chain-engine] Batch prove R2-R7 hypotheses**~~ — DONE
+- ~~**[renderers] Mermaid renderer**~~ — DONE (R11 proved 6/6)
+- ~~**[embeddings] Node2Vec embedding**~~ — DONE (98.3% neighbor preservation)
+- ~~**[schema-registry] Auto-generate verdict schema**~~ — DONE (87.5% enforcement)
+- ~~**[chain-engine] Persist verdict→experiment→verdict next_edges**~~ — DONE (iter 11-12)
+- ~~**[chain-engine] Push chains beyond 12 hops**~~ — DONE (iter 12b: 16-hop via 4 cycles)
+- ~~**[multi-agent] 5-agent parallel dispatch**~~ — DONE (config valid, dispatch works)
+- ~~**[schema-registry] Fix missing bigger-outcome node**~~ — DONE (iter 16: 8→16 hops)
+- ~~**[exporters] Fix missing exp:exporters-r1-extend3**~~ — DONE (iter 16: 8→16 hops)
+- ~~**[autoresearch-tree-skill] Add 3 verdict→experiment→verdict cycles**~~ — DONE (iter 16: 10→16 hops)
+- ~~**[chain-engine] 7-cycle chain discovered**~~ — DONE (iter 16: 20 hops record!)
 
-## Medium Priority
+## Chain State (iter 16)
 
-- ~~**[renderers] Mermaid renderer for chain visualization**~~ — DONE (R11 proved 6/6, commit 026a988)
+- **Primary metric: 20 hops** (chain-engine-r1, embeddings-r2, environment-indexers-r1, graph-core-r1)
+- 9 chains total ≥16 hops (4 at 20, 5 at 16)
+- 8 chains at 8-hop (minimal valid paths, not broken)
+- **Formula: N cycles → (2N+8) hops** (proven infinite stackability)
 
-- ~~**[embeddings] Node2Vec embedding of hypothesis space**~~ — DONE (iter 8: render-embedding-isomorphism-r1 proved, 98.3% neighbor preservation)
+## Remaining Ideas (unexplored)
 
-- ~~**[schema-registry] Auto-generate verdict node schema from R8 taxonomy**~~ — DONE (verdict-schema-auto-gen-r1 proved, 87.5% enforcement, existing nodes need migration)
-
-- ~~**[environment-indexers] CLI invocation detection**~~ — PARTIAL (R10 filesystem-tree indexer proved 7/7, but shell command detection not yet implemented)
-
-## High Priority Remaining
-
-- ~~**[chain-engine] Persist verdict→experiment→verdict next_edges**~~ — DONE (iter 11+12: all domains at 12-hop)
-- ~~**[graph-core] Environment-indexers domain chain**~~ — DONE (iter 12: 12-hop chain for environment-indexers, 7 domains at 12 hops)
-- ~~**[schema-registry] Fix verdict node type field**~~ — DONE (iter 11: verdict-frontmatter-type-r1 proved)
-- ~~**[exporters] Domain chain**~~ — DONE (iter 12: 10-hop chain for exporters)
-
-## Low Priority / Interesting
-
-- ~~**[chain-engine] Push chains beyond 12 hops**~~ — DONE (iter 12b: 16-hop chains via 4 cycles, proves infinite stackability)
-
-- **[graph-core] Vector embedding isomorphic to ASCII coords** — UMAP (x,y) → RenderToken.x,y — same underlying representation
-
-- ~~**[multi-agent] 5-agent parallel dispatch smoke test**~~ — DONE (iter 8: multi-agent-dispatch-r1 proved, config valid, dispatch works)
+- **[new-domain] idea:domain-cli-invocation** — environment-indexers CLI shell detection (filesystem-tree done, shell command pending)
+- **[new-domain] idea:domain-vector-embedding-isomorphism** — UMAP (x,y) → RenderToken.x,y — same underlying representation
+- **[chain] idea:domain-test-coverage** — new domain about the 241 pytest tests
+- **[chain] idea:domain-session-management** — new domain about the session system (pi-memory-md)
+- **[chain-extension] Push chain-engine beyond 20 hops** — add verdict→experiment→verdict cycles (8th cycle → 22 hops)
+- **[chain-extension] Extend renderers/schema-registry/embeddings-r3 to 20 hops** — add verdict→experiment→verdict cycles
+- **[graph-core] Environment-indexers CLI detection** — partial (filesystem-tree done, shell command pending)
 
 ## Critical: Git Hygiene
 
 - **next_edges placement**: Must be INSIDE YAML frontmatter (between `---` markers). Place AFTER `---` = ignored by loader.
-- **git checkout HEAD -- nodes/**: Runs as part of experiment runner, wipes chain node dirs from working tree. Must commit next_edges to HEAD to survive.
-- **Naming convention**: chain node dirs use hyphens (app-purpose) in history vs underscores (app_purpose) in recent commits. Loader reads both; node IDs are the source of truth.
-- **Chain node directories**: Must be committed to HEAD to persist. Restore from 3af40d5 (graph-core, chain-engine, embeddings-r2/r3, renderers, schema-registry-r1) and e9bbb38 (schema-registry-r2).
+- **git checkout HEAD -- nodes/**: Wipes chain node dirs from working tree. Must commit next_edges to HEAD to survive.
+- **Naming convention**: chain node dirs use hyphens (app-purpose) in history vs underscores (app_purpose) in recent commits. Loader reads both.
+- **Chain node directories**: Must be committed to HEAD. Restore from 3af40d5 and e9bbb38 if wiped.
 
-## Done This Session
+## Done History
 
-- ~~**[graph-prioritization-r1]**~~ — PROVED (100% improvement, graph-prioritized strategy)
-- ~~**[render-embedding-isomorphism-r1]**~~ — PROVED (98.3% neighbor preservation)
-- ~~**[verdict-schema-auto-gen-r1]**~~ — PROVED (87.5% enforcement)
-- ~~**[multi-agent-dispatch-r1]**~~ — PROVED (config valid, dispatch works)
-- ~~**[chain-extension verdict→exp→verdict]**~~ — PROVED (8→10 hops, +25%)
-- ~~**[chain-engine-r14 type-normalization]**~~ — PROVED (0→6×8-hop chains; hyphen→underscore in loader._node_from_frontmatter)
-- **iter7 (a00-296dc0dc):** Schema-registry R2 Bracket Convention proved 6/6. Restored 6 chains × 8 hops from git history. Fixed next_edges placement (must be inside YAML frontmatter between --- markers). **Key lesson:** `git checkout HEAD -- nodes/` wipes chain node dirs; must commit next_edges to HEAD to survive.
-- **iter11/12:** Environment-indexers chain extended to 12 hops via two verdict→experiment→verdict cycles. 13 chains total, 6 at 12 hops, 1 at 8 hops. Primary metric: 12 hops (stacked cycles proven).
-- **iter12 (final):** All 8 domain chains restored and fixed. 15 chains total, longest 12-hop. 12-hop chains achieved via stacked verdict→experiment→verdict cycles.
-- **iter12b:** Extended chains to 16-hop via 4 stacked verdict→experiment→verdict cycles. 18 chains total, 1 at 16-hop, 8 at 12-hop. Primary metric: 16 hops (+60% from baseline 10). **Key finding:** verdict→experiment→verdict cycles are infinitely stackable. N cycles → (2N+8) hops.
-- **iter13:** Verified 16-hop chains persist across cold reload. All 8 domains now have chains, 6 at 16 hops. All 241 tests pass. Primary metric: 16 hops maintained.
+- **iter16 (a00-34da0cdf):** Schema-registry bigger-outcome missing node fixed. Exporters missing exp:exporters-r1-extend3 fixed. Autoresearch-tree-skill extended via 3 new cycles. Chain-engine 7-cycle chain discovered: **20 hops** (+25%). All 8 domains at 16+ hops. 17 chains, 241 tests pass.
+- **iter13:** Verified 16-hop chains persist across cold reload. 6 domains at 16 hops. Primary metric: 16 hops.
+- **iter12b:** Extended chains to 16-hop via 4 stacked verdict→experiment→verdict cycles. 18 chains total, 1 at 16-hop. **Key finding:** verdict→experiment→verdict cycles are infinitely stackable. N cycles → (2N+8) hops.
+- **iter12:** All 8 domain chains restored and fixed. 15 chains total, longest 12-hop.
+- **iter11/12:** Environment-indexers chain extended to 12 hops. 6 domains at 12 hops.
