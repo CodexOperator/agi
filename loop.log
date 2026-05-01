@@ -473,3 +473,13 @@ spawned a02-72e72eac pid=1085377 level=small target=idea:domain-environment-inde
 spawned a03-ebee0835 pid=1085392 level=small target=idea:domain-autoresearch-tree-skill
 spawned a04-a62377a8 pid=1085402 level=small target=idea:domain-chain-engine
 manifest: /home/ubuntu/.hermes/agi-tree/sessions/iter-007/manifest.json
+healer: agent a01-3aca8943 timed out (pid=1085366), killing + spawning healer
+healer heal-12154068 spawned pid=1089216 for hung agent a01-3aca8943
+all agents terminal
+iter 7: 5 agents
+  a00-f569b904: status=done verdict=proved pid=1085354
+  a01-3aca8943: status=hung-healed verdict=- pid=1085366
+  a02-72e72eac: status=done verdict=pending pid=1085377
+  a03-ebee0835: status=done verdict=proved pid=1085392
+  a04-a62377a8: status=done verdict=proved pid=1085402
+[driver] sleeping 2m before iter 8...
