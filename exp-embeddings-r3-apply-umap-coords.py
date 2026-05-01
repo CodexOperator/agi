@@ -17,7 +17,9 @@ import sys
 sys.path.insert(0, "src")
 
 from embeddings import EmbeddingConfig, embed_graph, project, ProjectionConfig
-from graph_core import Node, Edge, Graph
+from graph_core.node import Node
+from graph_core.edge import Edge
+from graph_core.graph import Graph
 from renderers import build_representation, Representation
 
 
