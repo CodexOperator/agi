@@ -225,3 +225,57 @@ spawned a02-1611fbd9 pid=1057291 level=small target=idea:domain-environment-inde
 spawned a03-c622a61a pid=1057300 level=small target=idea:domain-chain-engine
 spawned a04-238427a7 pid=1057309 level=small target=idea:domain-autoresearch-tree-skill
 manifest: /home/ubuntu/.hermes/agi-tree/sessions/iter-003/manifest.json
+all agents terminal
+iter 3: 5 agents
+  a00-f61938c6: status=done verdict=proved pid=1057275
+  a01-3bc9ebd8: status=done verdict=pending pid=1057283
+  a02-1611fbd9: status=done verdict=pending pid=1057291
+  a03-c622a61a: status=done verdict=pending pid=1057300
+  a04-238427a7: status=done verdict=pending pid=1057309
+=== iter 1 @ 2026-05-01T05:38:54Z ===
+wrote: 7 idea + 59 hypothesis + 88 task = 154 nodes
+target dir: /home/ubuntu/.hermes/agi-tree/nodes
+loaded 154 nodes from /home/ubuntu/.hermes/agi-tree/nodes
+ASCII rendering: 160 lines
+wrote: /home/ubuntu/.hermes/agi-tree/context/INJECTION.md
+METRIC longest_chain_length=2
+METRIC avg_chain_depth=0.95
+METRIC mvp_count=0
+METRIC outcome_coverage=0.000
+METRIC chain_branching_factor=2.23
+METRIC node_count=154
+METRIC edge_count=147
+[smoke] skipping agent dispatch + heal
+=== iter 1 @ 2026-05-01T05:39:34Z ===
+wrote: 7 idea + 59 hypothesis + 88 task = 154 nodes
+target dir: /home/ubuntu/.hermes/agi-tree/nodes
+loaded 154 nodes from /home/ubuntu/.hermes/agi-tree/nodes
+ASCII rendering: 160 lines
+wrote: /home/ubuntu/.hermes/agi-tree/context/INJECTION.md
+METRIC longest_chain_length=2
+METRIC avg_chain_depth=0.95
+METRIC mvp_count=0
+METRIC outcome_coverage=0.000
+METRIC chain_branching_factor=2.23
+METRIC node_count=154
+METRIC edge_count=147
+[smoke] skipping agent dispatch + heal
+=== iter 1 @ 2026-05-01T05:58:03Z ===
+wrote: 7 idea + 59 hypothesis + 88 task = 154 nodes
+target dir: /home/ubuntu/.hermes/agi-tree/nodes
+loaded 154 nodes from /home/ubuntu/.hermes/agi-tree/nodes
+ASCII rendering: 160 lines
+wrote: /home/ubuntu/.hermes/agi-tree/context/INJECTION.md
+METRIC longest_chain_length=2
+METRIC avg_chain_depth=0.95
+METRIC mvp_count=0
+METRIC outcome_coverage=0.000
+METRIC chain_branching_factor=2.23
+METRIC node_count=154
+METRIC edge_count=147
+spawned a00-f52b1b9f pid=1064228 level=big target=-
+spawned a01-3a591c5f pid=1064236 level=small target=idea:domain-graph-core
+spawned a02-1de884a0 pid=1064244 level=small target=idea:domain-environment-indexers
+spawned a03-e99787db pid=1064253 level=small target=idea:domain-chain-engine
+spawned a04-57418249 pid=1064269 level=small target=idea:domain-autoresearch-tree-skill
+manifest: /home/ubuntu/.hermes/agi-tree/sessions/iter-001/manifest.json
