@@ -14,8 +14,8 @@ Contract for consumers:
     Each `RenderToken` is uniquely identified by `id`. `label` is a short
     human-readable string (≤40 chars target). `type` is the schema type.
     `depth` is BFS distance from a root, computed deterministically by
-    sorting node ids before traversal. `x, y` default to 0.0 and may be
-    overwritten by `embeddings.apply_umap_coords(repr, coords)`.
+    sorting node ids before traversal. `x, y` default to 0.0 and are
+    overwritten by :func:`embeddings.apply_umap_coords` after UMAP projection.
     `edges` is a list of `(target_id, relation)` tuples.
 """
 

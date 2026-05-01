@@ -89,3 +89,41 @@ def _project_random(vectors: dict[str, list[float]], cfg: ProjectionConfig) -> d
             coords.append(v)
         out[nid] = tuple(coords)
     return out
+
+
+def apply_umap_coords(
+    repr_: "Representation",
+    coords: dict[str, tuple[float, ...]],
+) -> "Representation":
+    """Update RenderToken x, y from UMAP-projected coords in-place (embeddings/R3).
+
+    Bridge: takes a ``Representation`` (built by ``build_representation``) whose
+    tokens have x=0.0, y=0.0 by default, and overwrites those fields from
+    ``coords`` produced by :func:`project`.
+
+    Acceptance criteria (R3):
+    - R3.1: every node_id in coords → token.x, token.y updated in-place
+    - R3.2: nodes not in coords → x, y remain at their prior values
+    - R3.3: coords with < 2 dims → ValueError
+    - R3.4: idempotent — same coords produce same state regardless of prior calls
+
+    Args:
+        repr_: Representation with tokens whose x, y to overwrite.
+        coords: ``{node_id: (x, y[, z])}`` from :func:`project`.
+
+    Returns:
+        The same ``repr_`` object (modified in-place for efficiency).
+
+    Raises:
+        ValueError: if any coord tuple has fewer than 2 dimensions.
+    """
+    for token in repr_.tokens:
+        if token.id in coords:
+            c = coords[token.id]
+            if len(c) < 2:
+                raise ValueError(
+                    f"coords for {token.id} has only {len(c)} dims; need >= 2"
+                )
+            token.x = float(c[0])
+            token.y = float(c[1])
+    return repr_
