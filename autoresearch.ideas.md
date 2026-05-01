@@ -36,10 +36,11 @@
 
 ## Remaining Ideas (unexplored)
 
-- **[chain-extension] Push chains to 112 hops** — add 6 more cycles to all 9 chains (46→52 cycles = 100→112 hops)
+- ~~**[chain-extension] Push chains to 112 hops**~~ — DONE (168 hops, 9 chains at cycle 80). Formula hops=2*cycle+8 verified at cycles 0–80. Chain hygiene: always commit before log_experiment.
 - **[new-domain] idea:domain-vector-embedding-isomorphism** — verify UMAP coords → RenderToken.x,y same representation
-- **[new-domain] idea:domain-session-management** — only verdict exists, needs full chain (exp/mvp/outcome/bo/ap)
-- **[embeddings] idea:domain-cli-invocation** — filesystem-tree done, shell command pending
+- **[session-management] Complete session-management chain** — verdict exists but chain incomplete (no mvp→outcome→bo→app). Fix next_edges from verdict→extend1→mvp→outcome→bo→app.
+- **[embeddings] idea:domain-cli-invocation** — needs complete chain (idea→hyp→exp→verdict→mvp→outcome→bo→app) — partial only
+- **[architecture] Query API for capillary DAG** — functional queries via topological_queries.py done (partial support: coarse filter works, fine-grained fails)
 - **[architecture] Query API for capillary DAG** — functional queries: "which ideas are closest to completion?", "longest unresolved chain?"
 - **[architecture] Agent spawning via verdict nodes** — verdict of "proved" → spawn builder subagent
 - **[architecture] Branching chains** — current linear chains are anti-correlated with semantic proximity; branching chains might help
@@ -63,6 +64,6 @@
 - **iter18 (a00-6be6d554):** Extended chain-engine to 34→36 hops, env-indexers/graph-core to 36 hops, 6 domains to 20 hops. Fixed chain hygiene.
 - **iter17 (a00-6be6d554):** 4 domains at 20 hops. 17 chains, 241 tests pass.
 - **iter16:** Schema-registry/Exporters chains fixed. Autores-tree-skill extended. Chain-engine at 20 hops record.
-- **iter12b:** 16-hop chains via 4 stacked verdict→experiment→verdict cycles.
-- **iter12:** All 8 domain chains restored and fixed. 15 chains, longest 12-hop.
+- **iter12b (a00-c2d7dbcc):** Chain confirmed at 168 hops (9 chains, cycle 80). Topological queries: topology=perfect coarse filter (100% set match), fails fine-grained (Match@5=40%, Spearman=0.604). topological_queries.py implemented. CRITICAL: log_experiment git-wipe nearly destroyed nodes/ — always commit before log_experiment.
+- **iter12 (a00-c2d7dbcc):** topology-only DAG queries for task-selection: inconclusive_lean_proved:65. Graph state: 157 nodes, 7 idea domains. Topological ranking matches expert for all 7 domains but cannot resolve fine-grained priority.
 - **iter11/12:** Environment-indexers chain extended to 12 hops. 6 domains at 12 hops.
