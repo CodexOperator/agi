@@ -41,3 +41,17 @@ METRIC node_count=154
 METRIC edge_count=147
 [smoke] skipping agent dispatch + heal
 === iter 1 @ 2026-05-01T04:17:43Z ===
+=== iter 1 @ 2026-05-01T04:30:19Z ===
+wrote: 7 idea + 59 hypothesis + 88 task = 154 nodes
+target dir: /home/ubuntu/.hermes/agi-tree/nodes
+loaded 154 nodes from /home/ubuntu/.hermes/agi-tree/nodes
+ASCII rendering: 160 lines
+wrote: /home/ubuntu/.hermes/agi-tree/context/INJECTION.md
+METRIC longest_chain_length=2
+METRIC avg_chain_depth=0.95
+METRIC mvp_count=0
+METRIC outcome_coverage=0.000
+METRIC chain_branching_factor=2.23
+METRIC node_count=154
+METRIC edge_count=147
+[smoke] skipping agent dispatch + heal
