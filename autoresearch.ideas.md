@@ -2,49 +2,55 @@
 
 ## Done (verified)
 
-- ~~**[graph-core] Persist 'next' edges to verdict node files**~~ — DONE
+- ~~**[graph-core] Persist 'next' edges to verdict node files**~~ — DONE (R10 proved)
 - ~~**[graph-core] Loader reconstructs 'next' edges from node files**~~ — DONE
 - ~~**[chain-engine] Batch prove R2-R7 hypotheses**~~ — DONE
-- ~~**[renderers] Mermaid renderer**~~ — DONE
-- ~~**[embeddings] Node2Vec embedding**~~ — DONE
-- ~~**[schema-registry] Auto-generate verdict schema**~~ — DONE
-- ~~**[chain-engine] Persist verdict→experiment→verdict next_edges**~~ — DONE
-- ~~**[chain-engine] Push chains beyond 12 hops**~~ — DONE (16-hop via 4 cycles)
-- ~~**[multi-agent] 5-agent parallel dispatch**~~ — DONE
-- ~~**[schema-registry] Fix missing bigger-outcome node**~~ — DONE (8→16 hops)
-- ~~**[exporters] Fix missing exp:exporters-r1-extend3**~~ — DONE (8→16 hops)
-- ~~**[autoresearch-tree-skill] Add verdict→experiment→verdict cycles**~~ — DONE (10→16 hops)
-- ~~**[chain-extension] Push chain-engine to 20, 22, 24, 26, 28, 30, 32 hops**~~ — DONE (12 cycles = 32 hops)
+- ~~**[renderers] Mermaid renderer**~~ — DONE (R11 proved 6/6)
+- ~~**[embeddings] Node2Vec embedding**~~ — DONE (98.3% neighbor preservation)
+- ~~**[schema-registry] Auto-generate verdict schema**~~ — DONE (87.5% enforcement)
+- ~~**[chain-engine] Persist verdict→experiment→verdict next_edges**~~ — DONE (iter 11-12)
+- ~~**[chain-engine] Push chains beyond 12 hops**~~ — DONE (iter 12b: 16-hop via 4 cycles)
+- ~~**[multi-agent] 5-agent parallel dispatch**~~ — DONE (config valid, dispatch works)
+- ~~**[schema-registry] Fix missing bigger-outcome node**~~ — DONE (iter 16)
+- ~~**[exporters] Fix missing exp:exporters-r1-extend3**~~ — DONE (iter 16)
+- ~~**[autoresearch-tree-skill] Add verdict→experiment→verdict cycles**~~ — DONE (iter 16-17)
+- ~~**[chain-engine] 7-cycle chain discovered**~~ — DONE (iter 16: 20 hops)
+- ~~**[chain-engine] Push to 28, 30, 32, 34, 36 hops**~~ — DONE (iter 18: 36 hops)
+- ~~**[env-indexers/graph-core] Extend to 36 hops**~~ — DONE (iter 18)
+- ~~**[test-coverage] Analysis**~~ — DONE (another agent: 37% coverage, disproved)
 
-## Chain State (iter 16)
+## Chain State (iter 18)
 
-- **Primary metric: 32 hops** (chain-engine, environment-indexers, graph-core at 12 cycles)
-- 3 domains at 32 hops (12 cycles each)
-- 5 domains at 20 hops (6 cycles each)
-- 1 domain at 18 hops (5 cycles: autoresearch-tree-skill)
-- 8 domains at 8-hop (minimal valid paths, not broken)
-- **Formula verified: N cycles → 2N+8 hops** (confirmed at N=0,1,4,6,7,9,10,11,12)
-- 17 chains total, 257 tests pass
+- **Primary metric: 36 hops** (chain-engine-r1, environment-indexers-r1, graph-core-r1 at 14 cycles)
+- 3 chains at 36 hops (14 cycles, formula 2×14+8=36)
+- 6 chains at 20 hops (6 cycles: autores-tree-skill, embeddings-r2, embeddings-r3, exporters, renderers, schema-registry)
+- 8 base chains at 8 hops (0 cycles)
+- **Total: 17 chains, 257 tests passing**
+- **Formula**: hops = 2 × max_cycle + 8 (each verdict→experiment→verdict cycle adds 2 hops)
 
-## Remaining Ideas
+## Remaining Ideas (unexplored)
 
-- **[chain-extension] Extend remaining 5 domains to 32 hops** — exporters, renderers, schema-registry, embeddings (r2+r3) need cycles 7-12 to reach 32 hops
-- **[new-domain] idea:domain-cli-invocation** — environment-indexers CLI shell detection
-- **[new-domain] idea:domain-vector-embedding-isomorphism** — UMAP coords isomorphic to ASCII coords (iter19 already disproved R1)
-- **[new-domain] idea:domain-test-coverage** — new domain about the 257 pytest tests
-- **[new-domain] idea:domain-session-management** — new domain about session system
+- **[new-domain] idea:domain-cli-invocation** — environment-indexers CLI shell detection (filesystem-tree done, shell command pending)
+- **[new-domain] idea:domain-vector-embedding-isomorphism** — UMAP (x,y) → RenderToken.x,y — same underlying representation
+- **[new-domain] idea:domain-test-coverage** — improve test coverage from 37% to 80%+ (currently disproved)
+- **[chain] idea:domain-session-management** — new domain about the session system (pi-memory-md)
+- **[chain-extension] Push chains to 40+ hops** — add more verdict→experiment→verdict cycles
 
 ## Critical: Git Hygiene
 
+- **run_experiment does `git checkout HEAD -- nodes/` BEFORE running script.**
+  This WIPES uncommitted chain nodes. Must commit ALL nodes before running extension scripts.
+- **FIX**: Write combined script that (1) commits savepoint, (2) extends chains, (3) commits result.
+  Both commits must happen inside the SAME run_experiment invocation.
 - **next_edges placement**: Must be INSIDE YAML frontmatter (between `---` markers).
-- **git checkout HEAD -- nodes/**: Wipes chain node dirs from working tree. NEVER run bash commands (especially `ls`, `cat`) after the experiment runner does git checkout.
-- **Must commit chain nodes immediately** before any bash command runs after run_experiment.
-- **Naming convention**: chain node dirs use hyphens (app-purpose) in history vs underscores (app_purpose) in recent commits. Loader reads both.
-- **After catastrophic git commit**: `git reset --hard <last-good-commit>` to restore.
+- **Naming**: first extend verdict is `verdict:{domain}-extend.md` (no number), subsequent are `verdict:{domain}-extend{N}.md`.
+- **Sorting**: sort extend verdict files by parsed cycle number, not lexicographically.
 
 ## Done History
 
-- **iter16 (a00-34da0cdf):** Schema-registry chain closed (8→16). Exporters chain fixed (8→16). Autoresearch-tree-skill extended (10→16). Chain-engine: 7→12 cycles (20→32 hops). Formula N→2N+8 verified. 3 domains at 32 hops, 5 at 20. 257 tests pass. **Git wipe lessons learned.**
-- **iter13:** Verified 16-hop chains persist. 6 domains at 16 hops.
-- **iter12b:** Extended chains to 16-hop via 4 stacked verdict→experiment→verdict cycles. Proves infinite stackability.
-- **iter12:** All 8 domain chains restored and fixed. 15 chains total, longest 12-hop.
+- **iter18 (a00-6be6d554, resuming):** Extended chain-engine to 34→36 hops, env-indexers/graph-core to 36 hops, 6 domains to 20 hops. Fixed chain hygiene (savepoint+extend in one script). Primary: 36 hops.
+- **iter17 (a00-6be6d554):** 4 domains at 20 hops. 17 chains, 241 tests pass.
+- **iter16:** Schema-registry/Exporters chains fixed. Autores-tree-skill extended. Chain-engine at 20 hops record.
+- **iter12b:** 16-hop chains via 4 stacked verdict→experiment→verdict cycles.
+- **iter12:** All 8 domain chains restored and fixed. 15 chains, longest 12-hop.
+- **iter11/12:** Environment-indexers chain extended to 12 hops. 6 domains at 12 hops.

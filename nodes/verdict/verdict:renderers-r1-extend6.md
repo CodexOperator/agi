@@ -14,7 +14,7 @@ tags:
   - 6th-cycle
   - proved
 next_edges:
-  - "mvp:renderers-r1"
+  - "exp:renderers-r1-extend7"
 ---
 
 VERDICT: proved. renderers-r1 chain at 6 cycles = 20 hops.

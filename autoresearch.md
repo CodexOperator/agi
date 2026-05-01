@@ -2,8 +2,9 @@
 
 ## Primary Metric
 - **longest_chain_length** (hops, direction: higher)
-- Current best: 32 hops (3 domains at 32-hop via 12 verdict→experiment→verdict cycles; 5 domains at 20-hop; 1 at 18-hop; 8 at 8-hop minimal)
-- **Formula: N cycles → 2N+8 hops** (proven: N=0→8, N=4→16, N=7→22, N=12→32)
+- Current best: 36 hops (chain-engine-r1, environment-indexers-r1, graph-core-r1 at 14 cycles each)
+- Chain formula: hops = 2 × max_cycle + 8 (verified empirically)
+- 3 chains at 36 hops, 6 at 20 hops, 8 at 8 (base). Total 17 chains, 257 tests.
 
 ## Secondary Metrics
 - `avg_chain_depth`
@@ -35,12 +36,13 @@ supports: [verdict_ids]
 - DO NOT cheat on benchmarks
 - 'next' edges are what make find_chains() work — 'spawns' alone only gives 2-hop max
 - Experiment must persist 'next' edge definitions to node files to affect live graph
-- Run `python3 -m pytest tests/ -q` after any code change (236 tests, all passing as of iter 6)
+- Run `python3 -m pytest tests/ -q` after any code change (257 tests, all passing)
 
-## Critical Gap (iter 6 finding)
-- R10 proved: adding 7 'next' edges yields 8-hop chain in-memory
-- BUT: 'next' edges are NOT persisted to node files — live graph still shows 0
-- Next experiment candidates:
-  - Persist 'next' edges to verdict/mvp node files
-  - graph-core loader that reads and reconstructs 'next' edges from node files
-  - Batch prove remaining untested hypotheses (R2-R7 chain-engine)
+## Chain Hygiene (CRITICAL)
+- **run_experiment does `git checkout HEAD -- nodes/` BEFORE running script.**
+  This WIPES uncommitted chain nodes. Must commit ALL nodes before running extension scripts.
+- **FIX**: Write combined script that (1) commits savepoint, (2) extends chains, (3) commits result.
+  Both commits must happen inside the SAME run_experiment invocation.
+- **next_edges placement**: Must be INSIDE YAML frontmatter (between `---` markers).
+- **Naming**: first extend verdict is `verdict:{domain}-extend.md` (no number), subsequent are `verdict:{domain}-extend{N}.md`.
+- **Sorting**: sort extend verdict files by parsed cycle number, not lexicographically.

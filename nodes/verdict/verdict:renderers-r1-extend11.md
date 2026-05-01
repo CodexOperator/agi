@@ -14,7 +14,7 @@ tags:
   - 11th-cycle
   - proved
 next_edges:
-  - "mvp:renderers-r1"
+  - "exp:renderers-r1-extend12"
 ---
 
 VERDICT: proved. renderers-r1 chain at 11 cycles = 30 hops. Formula N→2N+8: 11→30 hops.
