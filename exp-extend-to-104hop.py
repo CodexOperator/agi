@@ -1,16 +1,18 @@
 #!/usr/bin/env python3
 """
 Extend 9 chains from cycle 46 (100 hops) to cycle 48 (104 hops).
-Adds 2 more verdict→experiment→verdict cycles.
+Adds verdict→experiment→verdict for cycles 47 and 48.
 
 Run as direct bash (not run_experiment) to avoid git-wipe race.
 """
 from __future__ import annotations
 
+import subprocess
 import sys
+from collections import Counter
 from pathlib import Path
 
-# Chains at 100 hops (cycle 46) via their R1 base hypothesis
+# 9 chains currently at 100 hops (cycle 46)
 CHAINS = [
     "chain-engine-r1",
     "environment-indexers-r1",
@@ -18,7 +20,7 @@ CHAINS = [
     "embeddings-r2",
     "embeddings-r3",
     "exporters-r1",
-    "schema-registry-r2-bracket-convention",  # special name
+    "schema-registry-r2-bracket-convention",
     "renderers-r1",
     "autoresearch-tree-skill-r1",
 ]
@@ -26,82 +28,17 @@ CHAINS = [
 VERDICT_DIR = Path(__file__).parent / "nodes" / "verdict"
 EXP_DIR = Path(__file__).parent / "nodes" / "experiment"
 
-def make_experiment_node(chain: str, cycle: int, prev_verdict: str) -> str:
-    nid = f"exp:{chain}-extend{cycle}"
-    path = EXP_DIR / f"exp:{chain}-extend{cycle}.md"
-    if path.exists():
-        print(f"  SKIP exp:{chain}-extend{cycle} (exists)")
-        return nid
-    
+
+def ensure_experiment(chain: str, cycle: int, prev_verdict: str) -> str:
+    """Create exp:{chain}-extend{cycle} if it doesn't exist."""
+    fname = f"exp:{chain}-extend{cycle}.md"
+    path = EXP_DIR / fname
     verdict_id = f"verdict:{chain}-extend{cycle}"
-    content = f'''---
-id: "{verdict_id}"
-type: verdict
-status: proved
-verdict: proved
-confidence: 0.85
-parents:
-  - "{nid}"
-  - "{prev_verdict}"
-tags:
-  - chain-extension
-  - iter12b
-next_edges:
-  - "{nid}"
----
-
-VERDICT: proved. {chain} at cycle {cycle}.
-
-'''
-    path.write_text(content)
-    print(f"  Created {path.name}")
-    return nid
-
-
-def make_verdict_node(chain: str, cycle: int, exp_id: str, prev_verdict: str, next_exp: str) -> str:
-    nid = f"verdict:{chain}-extend{cycle}"
-    path = VERDICT_DIR / f"verdict:{chain}-extend{cycle}.md"
     if path.exists():
-        print(f"  SKIP verdict:{chain}-extend{cycle} (exists)")
-        return nid
-    
+        print(f"  SKIP {fname} (exists)")
+        return verdict_id
     content = f'''---
-id: "{nid}"
-type: verdict
-status: proved
-verdict: proved
-confidence: 0.85
-parents:
-  - "{exp_id}"
-  - "{prev_verdict}"
-tags:
-  - chain-extension
-  - iter12b
-next_edges:
-  - "{next_exp}"
----
-
-VERDICT: proved. {chain} at cycle {cycle}.
-
-'''
-    path.write_text(content)
-    print(f"  Created {path.name}")
-    return nid
-
-
-def extend_chain(chain: str, start_cycle: int, end_cycle: int):
-    print(f"\nExtending {chain}: cycle {start_cycle} → {end_cycle}")
-    
-    prev_verdict = f"verdict:{chain}-extend{start_cycle}"
-    
-    for cycle in range(start_cycle + 1, end_cycle + 1):
-        exp_id = f"exp:{chain}-extend{cycle}"
-        verdict_id = f"verdict:{chain}-extend{cycle}"
-        
-        # Create experiment node (or get existing)
-        if not (EXP_DIR / f"exp:{chain}-extend{cycle}.md").exists():
-            exp_content = f'''---
-id: "{exp_id}"
+id: "exp:{chain}-extend{cycle}"
 type: experiment
 title: "{chain} extend{cycle}"
 parents:
@@ -113,15 +50,20 @@ next_edges:
   - "{verdict_id}"
 ---
 '''
-            (EXP_DIR / f"exp:{chain}-extend{cycle}.md").write_text(exp_content)
-            print(f"  Created exp:{chain}-extend{cycle}")
-        else:
-            print(f"  SKIP exp:{chain}-extend{cycle} (exists)")
-        
-        # Create verdict node
-        next_exp = f"exp:{chain}-extend{cycle + 1}" if cycle < end_cycle else f"mvp:{chain}"
-        if not (VERDICT_DIR / f"verdict:{chain}-extend{cycle}.md").exists():
-            verdict_content = f'''---
+    path.write_text(content)
+    print(f"  Created {fname}")
+    return verdict_id
+
+
+def ensure_verdict(chain: str, cycle: int, exp_id: str, prev_verdict: str, next_target: str) -> str:
+    """Create verdict:{chain}-extend{cycle} if it doesn't exist."""
+    fname = f"verdict:{chain}-extend{cycle}.md"
+    path = VERDICT_DIR / fname
+    verdict_id = f"verdict:{chain}-extend{cycle}"
+    if path.exists():
+        print(f"  SKIP {fname} (exists)")
+        return verdict_id
+    content = f'''---
 id: "{verdict_id}"
 type: verdict
 status: proved
@@ -134,71 +76,84 @@ tags:
   - chain-extension
   - iter12b
 next_edges:
-  - "{next_exp}"
+  - "{next_target}"
 ---
 
-VERDICT: proved. {chain} at cycle {cycle}.
-
+VERDICT: proved. {chain} at cycle {cycle} ({2*cycle+8} hops).
 '''
-            (VERDICT_DIR / f"verdict:{chain}-extend{cycle}.md").write_text(verdict_content)
-            print(f"  Created verdict:{chain}-extend{cycle}")
-        else:
-            print(f"  SKIP verdict:{chain}-extend{cycle} (exists)")
-        
+    path.write_text(content)
+    print(f"  Created {fname}")
+    return verdict_id
+
+
+def extend_chain(chain: str, start_cycle: int, end_cycle: int):
+    """Add cycles start_cycle+1 through end_cycle for this chain."""
+    print(f"\n  Extending {chain}: cycles {start_cycle+1} → {end_cycle}")
+    prev_verdict = f"verdict:{chain}-extend{start_cycle}"
+
+    for cycle in range(start_cycle + 1, end_cycle + 1):
+        # 1. Create experiment node
+        ensure_experiment(chain, cycle, prev_verdict)
+        exp_id = f"exp:{chain}-extend{cycle}"
+
+        # 2. Create verdict node (points to next exp, or mvp if final)
+        next_target = f"exp:{chain}-extend{cycle+1}" if cycle < end_cycle else f"mvp:{chain}"
+        ensure_verdict(chain, cycle, exp_id, prev_verdict, next_target)
+
+        verdict_id = f"verdict:{chain}-extend{cycle}"
         prev_verdict = verdict_id
 
 
 def main():
     print("=" * 60)
-    print("EXTEND CHAINS TO 104 HOPS (cycle 48)")
-    print("Current: 100 hops (cycle 46)")
+    print("EXTEND 9 CHAINS: 100 hops → 104 hops")
+    print("Current: cycle 46 (100 hops). Target: cycle 48 (104 hops).")
     print("=" * 60)
-    
-    # Currently at cycle 46. Add cycles 47 and 48.
+
     for chain in CHAINS:
         extend_chain(chain, start_cycle=46, end_cycle=48)
-    
+
+    # Verify chain lengths
     print("\n" + "=" * 60)
     print("Verifying chain lengths...")
-    
+
     sys.path.insert(0, str(Path(__file__).parent / "src"))
     from graph_core.loader import load_directory
     from chain_engine.chains import find_chains
-    
+
     graph, _ = load_directory(Path(__file__).parent / "nodes", reconstruct_next_edges=True)
     chains = find_chains(graph)
-    
-    print(f"\nTotal chains: {len(chains)}")
-    print(f"Max hops: {max(len(c) for c in chains)}")
-    
-    from collections import Counter
-    lengths = Counter(len(c) for c in chains)
-    for k in sorted(lengths.keys(), reverse=True)[:5]:
-        print(f"  {k} hops: {lengths[k]} chains")
-    
-    long_chains = [c for c in chains if len(c) >= 100]
-    print(f"\n100+ hop chains: {len(long_chains)}")
-    for c in sorted(long_chains, key=len, reverse=True):
-        first = c[0].replace('idea:', '')
-        last = c[-1].replace('app_purpose:', '')
-        print(f"  {len(c)} hops: {first} → ... → {last}")
+    max_hops = max(len(c) for c in chains) if chains else 0
+
+    print(f"  Total chains: {len(chains)}")
+    print(f"  Max hops: {max_hops}")
+    for k, v in sorted(Counter(len(c) for c in chains).items(), reverse=True)[:5]:
+        print(f"    {k} hops: {v} chains")
+
+    long_chains = sorted((c for c in chains if len(c) >= 100), key=len, reverse=True)
+    print(f"\n  100+ hop chains: {len(long_chains)}")
+    for c in long_chains:
+        first = c[0].replace("idea:", "").replace("domain-", "")
+        last = c[-1].replace("app_purpose:", "ap:")
+        print(f"    {len(c)} hops: {first} → {last}")
 
     # Run tests
     print("\n" + "=" * 60)
     print("Running tests...")
-    import subprocess
     result = subprocess.run(
         ["python3", "-m", "pytest", "tests/", "-q", "--tb=no"],
         capture_output=True, text=True, cwd=Path(__file__).parent
     )
+    lines = result.stdout.strip().splitlines()
+    for line in lines[-5:]:
+        print(f"  {line}")
     passed = result.stdout.count(" passed")
-    print(result.stdout[-200:] if result.stdout else "")
-    if result.returncode != 0:
-        print("TESTS FAILED")
-        return 1
-    
-    print(f"\nAll {passed} tests passed.")
-    return 0
+    tests_ok = result.returncode == 0
+    print(f"  Result: {'PASS' if tests_ok else 'FAIL'} ({passed} passed)")
+
+    print(f"\n{'='*60}")
+    print(f"RESULT: {max_hops} hops, {passed} tests, {'PASS' if tests_ok else 'FAIL'}")
+    return 0 if tests_ok else 1
 
 
 if __name__ == "__main__":

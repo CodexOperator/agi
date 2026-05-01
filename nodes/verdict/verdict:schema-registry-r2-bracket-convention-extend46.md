@@ -16,7 +16,7 @@ tags:
   - chain-extension
   - iter9
 next_edges:
-  - "mvp:schema-registry-r2-bracket-convention"
+  - "exp:schema-registry-r2-bracket-convention-extend47"
 ---
 
 VERDICT: proved. schema-registry-r2-bracket-convention at 100 hops.

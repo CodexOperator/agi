@@ -78,15 +78,15 @@ def task_attractiveness(
     outgoing = _build_outgoing(graph)
     verdict_children = [
         e.target_id for e in graph.edges
-        if e.source_id == parent and "verdict" in e.target_id.lower()
+        if e.source_id == parent and ("verdict" in e.target_id.lower() or e.target_id.startswith("verdict:"))
     ]
     experiment_children = [
         e.target_id for e in graph.edges
-        if e.source_id == parent and "experiment" in e.target_id.lower()
+        if e.source_id == parent and (e.target_id.startswith("exp:") or e.target_id.startswith("experiment:"))
     ]
     task_children = [
         e.target_id for e in graph.edges
-        if e.source_id == parent and ("task" in e.target_id.lower() or e.target_id.startswith("task:"))
+        if e.source_id == parent and e.target_id.startswith("task:")
     ]
 
     parent_chain_signal = 0.0
@@ -136,8 +136,8 @@ def _bfs_descendants(node_id: str, graph: "RenderableGraph") -> set[str]:
 def chain_gaps(domain: str, graph: "RenderableGraph") -> list[tuple[str, str]]:
     """Return hypothesis nodes in a domain that have no verdict yet (Q2).
 
-    Filters hypothesis nodes whose id starts with ``{domain}-r`` and returns
-    those with no verdict child (via 'next' edge or 'spawns' edge).
+    Filters hypothesis nodes matching the domain and returns those with no verdict child.
+    Handles both `hyp:{domain}-r{number}` and `{domain}-r{number}` naming.
 
     Returns list of (hypothesis_id, status) tuples sorted by r-number.
 
@@ -152,7 +152,8 @@ def chain_gaps(domain: str, graph: "RenderableGraph") -> list[tuple[str, str]]:
 
     # Find hypothesis nodes matching domain pattern
     hyps: list[tuple[int, str]] = []
-    pattern = re.compile(rf"^{re.escape(domain)}-r(\d+)")
+    # Match hyp:domain-r{number} or domain-r{number}
+    pattern = re.compile(rf"^(?:hyp:)?{re.escape(domain)}-r(\d+)", re.IGNORECASE)
     for nid in graph.node_ids:
         m = pattern.match(nid)
         if m:
@@ -224,20 +225,17 @@ def next_best_hypothesis(
             continue
 
         children = outgoing.get(nid, set())
-        child_types = {}
-        for cid in children:
-            cnode = graph.get_node(cid)
-            if cnode:
-                child_types.setdefault(cnode.type, 0)
-                child_types[cnode.type] += 1
+        has_verdict = any(c.startswith("verdict:") for c in children)
+        has_experiment = any(c.startswith("exp:") for c in children)
+        has_task = any(c.startswith("task:") for c in children)
 
         # Chain-progress scoring
         score = 0.0
-        if "verdict" in child_types:
+        if has_verdict:
             score += 5.0  # needs MVP next
-        elif "experiment" in child_types:
+        elif has_experiment:
             score += 3.0  # needs verdict next
-        elif "task" in child_types:
+        elif has_task:
             score += 2.0  # needs experiment next
         else:
             score += 0.5  # no children yet, still possible
