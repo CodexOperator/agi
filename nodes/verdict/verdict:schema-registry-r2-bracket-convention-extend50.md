@@ -6,6 +6,6 @@ confidence: 0.9
 tags:
   - chain-persistence
 next_edges:
-  - "mvp:schema-registry-r2-bracket-convention"
+  - "exp:schema-registry-r2-bracket-convention-extend51"
 ---
 VERDICT: proved. Chain at 108 hops.
