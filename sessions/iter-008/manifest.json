@@ -1,67 +1,19 @@
 {
   "iter": 8,
-  "started_at": 1777619511,
+  "started_at": 1777640296,
   "timeout_seconds": 600,
   "agents": [
     {
-      "id": "a00-2f912182",
+      "id": "a00-7ef61010",
       "slot": 0,
       "level": "big",
       "target": null,
-      "pid": 1090114,
-      "started_at": 1777619511,
+      "pid": 1168664,
+      "started_at": 1777640296,
       "status": "running",
-      "context_file": "/home/ubuntu/.hermes/agi-tree/sessions/iter-008/a00-2f912182/context.md",
-      "log_file": "/home/ubuntu/.hermes/agi-tree/sessions/iter-008/a00-2f912182/output.log",
-      "command": "/home/ubuntu/.npm-global/bin/pi --append-system-prompt @/home/ubuntu/.hermes/agi-tree/sessions/iter-008/a00-2f912182/context.md --append-system-prompt 'You are agent a00-2f912182 on iteration 8. When complete, run: python3 /home/ubuntu/autoresearch-tree/extensions/autoresearch-tree/bin/cli.py done 8 a00-2f912182 --verdict <state> --confidence <0..1> --node-id <id>. Stay within zoom scope; do NOT wander.' --append-system-prompt @/home/ubuntu/autoresearch-tree/extensions/autoresearch-tree/lib/agent-prompt.md 'Begin iteration 8 as agent a00-2f912182. Read your zoom context, do the work, signal done.'"
-    },
-    {
-      "id": "a01-daa5541d",
-      "slot": 1,
-      "level": "small",
-      "target": "idea:domain-graph-core",
-      "pid": 1090123,
-      "started_at": 1777619511,
-      "status": "running",
-      "context_file": "/home/ubuntu/.hermes/agi-tree/sessions/iter-008/a01-daa5541d/context.md",
-      "log_file": "/home/ubuntu/.hermes/agi-tree/sessions/iter-008/a01-daa5541d/output.log",
-      "command": "/home/ubuntu/.npm-global/bin/pi --append-system-prompt @/home/ubuntu/.hermes/agi-tree/sessions/iter-008/a01-daa5541d/context.md --append-system-prompt 'You are agent a01-daa5541d on iteration 8. When complete, run: python3 /home/ubuntu/autoresearch-tree/extensions/autoresearch-tree/bin/cli.py done 8 a01-daa5541d --verdict <state> --confidence <0..1> --node-id <id>. Stay within zoom scope; do NOT wander.' --append-system-prompt @/home/ubuntu/autoresearch-tree/extensions/autoresearch-tree/lib/agent-prompt.md 'Begin iteration 8 as agent a01-daa5541d. Read your zoom context, do the work, signal done.'"
-    },
-    {
-      "id": "a02-905498e1",
-      "slot": 2,
-      "level": "small",
-      "target": "idea:domain-environment-indexers",
-      "pid": 1090132,
-      "started_at": 1777619512,
-      "status": "running",
-      "context_file": "/home/ubuntu/.hermes/agi-tree/sessions/iter-008/a02-905498e1/context.md",
-      "log_file": "/home/ubuntu/.hermes/agi-tree/sessions/iter-008/a02-905498e1/output.log",
-      "command": "/home/ubuntu/.npm-global/bin/pi --append-system-prompt @/home/ubuntu/.hermes/agi-tree/sessions/iter-008/a02-905498e1/context.md --append-system-prompt 'You are agent a02-905498e1 on iteration 8. When complete, run: python3 /home/ubuntu/autoresearch-tree/extensions/autoresearch-tree/bin/cli.py done 8 a02-905498e1 --verdict <state> --confidence <0..1> --node-id <id>. Stay within zoom scope; do NOT wander.' --append-system-prompt @/home/ubuntu/autoresearch-tree/extensions/autoresearch-tree/lib/agent-prompt.md 'Begin iteration 8 as agent a02-905498e1. Read your zoom context, do the work, signal done.'"
-    },
-    {
-      "id": "a03-42290479",
-      "slot": 3,
-      "level": "small",
-      "target": "idea:domain-autoresearch-tree-skill",
-      "pid": 1090158,
-      "started_at": 1777619512,
-      "status": "running",
-      "context_file": "/home/ubuntu/.hermes/agi-tree/sessions/iter-008/a03-42290479/context.md",
-      "log_file": "/home/ubuntu/.hermes/agi-tree/sessions/iter-008/a03-42290479/output.log",
-      "command": "/home/ubuntu/.npm-global/bin/pi --append-system-prompt @/home/ubuntu/.hermes/agi-tree/sessions/iter-008/a03-42290479/context.md --append-system-prompt 'You are agent a03-42290479 on iteration 8. When complete, run: python3 /home/ubuntu/autoresearch-tree/extensions/autoresearch-tree/bin/cli.py done 8 a03-42290479 --verdict <state> --confidence <0..1> --node-id <id>. Stay within zoom scope; do NOT wander.' --append-system-prompt @/home/ubuntu/autoresearch-tree/extensions/autoresearch-tree/lib/agent-prompt.md 'Begin iteration 8 as agent a03-42290479. Read your zoom context, do the work, signal done.'"
-    },
-    {
-      "id": "a04-6de253b0",
-      "slot": 4,
-      "level": "small",
-      "target": "idea:domain-chain-engine",
-      "pid": 1090193,
-      "started_at": 1777619513,
-      "status": "running",
-      "context_file": "/home/ubuntu/.hermes/agi-tree/sessions/iter-008/a04-6de253b0/context.md",
-      "log_file": "/home/ubuntu/.hermes/agi-tree/sessions/iter-008/a04-6de253b0/output.log",
-      "command": "/home/ubuntu/.npm-global/bin/pi --append-system-prompt @/home/ubuntu/.hermes/agi-tree/sessions/iter-008/a04-6de253b0/context.md --append-system-prompt 'You are agent a04-6de253b0 on iteration 8. When complete, run: python3 /home/ubuntu/autoresearch-tree/extensions/autoresearch-tree/bin/cli.py done 8 a04-6de253b0 --verdict <state> --confidence <0..1> --node-id <id>. Stay within zoom scope; do NOT wander.' --append-system-prompt @/home/ubuntu/autoresearch-tree/extensions/autoresearch-tree/lib/agent-prompt.md 'Begin iteration 8 as agent a04-6de253b0. Read your zoom context, do the work, signal done.'"
+      "context_file": "/home/ubuntu/.hermes/agi-tree/sessions/iter-008/a00-7ef61010/context.md",
+      "log_file": "/home/ubuntu/.hermes/agi-tree/sessions/iter-008/a00-7ef61010/output.log",
+      "command": "/home/ubuntu/.npm-global/bin/pi --append-system-prompt @/home/ubuntu/.hermes/agi-tree/sessions/iter-008/a00-7ef61010/context.md --append-system-prompt 'You are agent a00-7ef61010 on iteration 8. When complete, run: python3 /home/ubuntu/autoresearch-tree/extensions/autoresearch-tree/bin/cli.py done 8 a00-7ef61010 --verdict <state> --confidence <0..1> --node-id <id>. Stay within zoom scope; do NOT wander.' --append-system-prompt @/home/ubuntu/autoresearch-tree/extensions/autoresearch-tree/lib/agent-prompt.md 'Begin iteration 8 as agent a00-7ef61010. Read your zoom context, do the work, signal done.'"
     }
   ]
 }
