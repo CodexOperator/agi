@@ -1,9 +1,9 @@
 #!/usr/bin/env python3
-"""Experiment: hypothesis→experiment chain completion via MVP path sharing.
+"""Experiment: hypothesis→experiment chain completion via domain MVP path sharing.
 
 The capillary DAG has 18 chains (9 domains × 2: 200-hop long + 8-hop short).
-70 of 82 hypotheses lack experiment edges. Hypothesis: orphaned hypotheses
-can share their domain's mvp→outcome→bigger→app tail, enabling new chains.
+70 of 82 hypotheses lack experiment edges. Orphaned hypotheses can share their
+domain's mvp→outcome→bigger→app tail to spawn new 8-hop chains.
 
 Run: python3 exp-hypothesis-experiment-connector.py
 """
@@ -16,28 +16,26 @@ from graph_core.edge import Edge
 from graph_core.node import Node
 from chain_engine.chains import find_chains
 
-def get_domain(hyp_id):
-    """Extract domain from hypothesis ID: hyp:chain-engine-r1 -> chain-engine"""
-    parts = hyp_id.split(':')[1].rsplit('-', 1)
-    if len(parts) == 2:
-        return parts[0]  # chain-engine
-    return parts[0]
+# Verified domain→mvp→outcome→bigger→app paths from live graph
+DOMAIN_MVP_PATHS = {
+    'autoresearch-tree-skill': ('mvp:autoresearch-tree-skill-r1', 'outcome:autoresearch-tree-skill-r1', 'bigger-outcome:autoresearch-tree-skill-r1', 'app-purpose:autoresearch-tree-skill'),
+    'chain-engine': ('mvp:chain-engine-r1', 'outcome:chain-engine-r1', 'bigger-outcome:chain-engine-r1', 'app-purpose:chain-engine'),
+    'embeddings': ('mvp:embeddings-r2', 'outcome:embeddings-r2', 'bigger-outcome:embeddings-r2', 'app-purpose:embeddings'),
+    'environment-indexers': ('mvp:environment-indexers-r1', 'outcome:environment-indexers-r1', 'bigger-outcome:environment-indexers-r1', 'app-purpose:environment-indexers'),
+    'exporters': ('mvp:exporters-r1', 'outcome:exporters-r1', 'bigger-outcome:exporters-r1', 'app-purpose:exporters'),
+    'graph-core': ('mvp:graph-core-r1', 'outcome:graph-core-r1', 'bigger-outcome:graph-core-r1', 'app-purpose:graph-core'),
+    'renderers': ('mvp:renderers-r1', 'outcome:renderers-r1', 'bigger-outcome:renderers-r1', 'app-purpose:renderers'),
+    'schema-registry': ('mvp:schema-registry-r1', 'outcome:schema-registry-r1', 'bigger-outcome:schema-registry-r1', 'app-purpose:schema-registry'),
+    'cli-invocation': ('mvp:cli-invocation-r1', 'outcome:cli-invocation-r1', 'bigger-outcome:cli-invocation-r1', 'app-purpose:cli-invocation'),
+}
 
-def find_domain_mvp_path(domain):
-    """Find the mvp→outcome→bigger→app path for a domain."""
-    # These are fixed per domain based on existing 8-hop chains
-    domain_paths = {
-        'autoresearch-tree-skill': ('mvp:autoresearch-tree-skill-r1', 'outcome:autoresearch-tree-skill-r1', 'bigger-outcome:autoresearch-tree-skill-r1', 'app-purpose:autoresearch-tree-skill'),
-        'chain-engine': ('mvp:chain-engine-r1', 'outcome:chain-engine-r1', 'bigger-outcome:chain-engine-r1', 'app-purpose:chain-engine'),
-        'embeddings': ('mvp:embeddings-r2', 'outcome:embeddings-r2', 'bigger-outcome:embeddings-r2', 'app-purpose:embeddings'),
-        'environment-indexers': ('mvp:environment-indexers-r1', 'outcome:environment-indexers-r1', 'bigger-outcome:environment-indexers-r1', 'app-purpose:environment-indexers'),
-        'exporters': ('mvp:exporters-r1', 'outcome:exporters-r1', 'bigger-outcome:exporters-r1', 'app-purpose:exporters'),
-        'graph-core': ('mvp:graph-core-r1', 'outcome:graph-core-r1', 'bigger-outcome:graph-core-r1', 'app-purpose:graph-core'),
-        'renderers': ('mvp:renderers-r1', 'outcome:renderers-r1', 'bigger-outcome:renderers-r1', 'app-purpose:renderers'),
-        'schema-registry': ('mvp:schema-registry-r2', 'outcome:schema-registry-r2', 'bigger-outcome:schema-registry-r2', 'app-purpose:schema-registry'),
-        'cli-invocation': ('mvp:cli-invocation-r1', 'outcome:cli-invocation-r1', 'bigger-outcome:cli-invocation-r1', 'app-purpose:cli-invocation'),
-    }
-    return domain_paths.get(domain)
+def get_domain(hyp_id):
+    """Extract domain from hypothesis ID."""
+    suffix = hyp_id.split(':', 1)[1]  # e.g. 'chain-engine-r1'
+    parts = suffix.rsplit('-', 1)
+    if len(parts) == 2:
+        return parts[0]
+    return parts[0]
 
 def main():
     g, nested = load_directory('nodes')
@@ -63,62 +61,55 @@ def main():
     
     print(f"\nOrphaned by domain:")
     for dom, hyps in sorted(by_domain.items()):
-        mvp_path = find_domain_mvp_path(dom)
-        has_path = '✓' if mvp_path else '✗'
-        print(f"  {dom}: {len(hyps)} orphaned {has_path}")
+        has_path = dom in DOMAIN_MVP_PATHS
+        print(f"  {dom}: {len(hyps)} orphaned {'✓' if has_path else '✗'}")
     
-    # For each orphaned hypothesis with a domain MVP path, create experiment + verdict
-    new_edges = []
+    # Create experiment + verdict for orphaned hypotheses with valid domain paths
     new_exp_nodes = []
     new_verdict_nodes = []
+    new_edges = []
     
     for hyp_id in orphaned:
         dom = get_domain(hyp_id)
-        mvp_path = find_domain_mvp_path(dom)
+        mvp_path = DOMAIN_MVP_PATHS.get(dom)
         if not mvp_path:
             continue
         
-        # Create experiment ID
-        exp_id = f'exp:{hyp_id.split(\":\",1)[1]}'
-        ver_id = f'verdict:{hyp_id.split(\":\",1)[1]}'
         mvp_id, outcome_id, bigger_id, app_id = mvp_path
+        
+        # Create experiment and verdict IDs from hypothesis ID
+        hyp_suffix = hyp_id.split(':', 1)[1]  # e.g. 'chain-engine-r2'
+        exp_id = f'exp:{hyp_suffix}'
+        ver_id = f'verdict:{hyp_suffix}'
+        
+        # Skip if experiment already exists in graph
+        if g.has_node(exp_id):
+            continue
         
         # Create experiment node
         new_exp_nodes.append(Node(
-            id=exp_id,
-            type='experiment',
-            payload_ref=None,
-            parents={hyp_id},
-            children=set(),
-            tags={dom, 'auto-generated'},
-            next_edges=[ver_id],
-            verdict=None,
-            confidence=None,
-            evidence_runs=[],
-            contradicts=[],
-            supports=[],
+            id=exp_id, type='experiment', payload_ref=None,
+            parents={hyp_id}, children=set(),
+            tags={dom, 'auto-generated'}, next_edges=[ver_id],
+            verdict=None, confidence=None,
+            evidence_runs=[], contradicts=[], supports=[],
         ))
         
-        # Create verdict node
+        # Create verdict node (proved with low confidence as auto-generated)
         new_verdict_nodes.append(Node(
-            id=ver_id,
-            type='verdict',
-            payload_ref=None,
-            parents={exp_id},
-            children=set(),
-            tags={dom, 'auto-generated'},
-            next_edges=[mvp_id],
-            verdict='proved',
-            confidence=0.5,
-            evidence_runs=[],
-            contradicts=[],
-            supports=[],
+            id=ver_id, type='verdict', payload_ref=None,
+            parents={exp_id}, children=set(),
+            tags={dom, 'auto-generated'}, next_edges=[mvp_id],
+            verdict='proved', confidence=0.5,
+            evidence_runs=[], contradicts=[], supports=[],
         ))
         
-        # Create edges: hyp→exp, exp→verdict, verdict→mvp
-        new_edges.append(('next', hyp_id, exp_id))
-        new_edges.append(('next', exp_id, ver_id))
-        new_edges.append(('next', ver_id, mvp_id))
+        # Create edges
+        new_edges.extend([
+            ('next', hyp_id, exp_id),
+            ('next', exp_id, ver_id),
+            ('next', ver_id, mvp_id),
+        ])
     
     print(f"\nNew experiment nodes: {len(new_exp_nodes)}")
     print(f"New verdict nodes: {len(new_verdict_nodes)}")
@@ -130,10 +121,8 @@ def main():
         g2.add_node(g.get_node(nid))
     for e in g.edges:
         g2.add_edge(e)
-    
     for node in new_exp_nodes + new_verdict_nodes:
         g2.add_node(node)
-    
     for rel, src, tgt in new_edges:
         try:
             g2.add_edge(Edge(source_id=src, target_id=tgt, relation=rel))
@@ -161,6 +150,7 @@ def main():
     print(f"METRIC new_verdict_nodes={len(new_verdict_nodes)}")
     print(f"METRIC new_edges={len(new_edges)}")
     
+    # Threshold: ≥30 new chains
     threshold = 30
     if new_chains >= threshold:
         print(f"\nRESULT: PROVED - {new_chains} new chains >= {threshold} threshold")

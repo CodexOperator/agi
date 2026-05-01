@@ -8,6 +8,8 @@ status: inconclusive_lean_proved
 confidence: 0.81
 evidence_runs:
   - exp:session-management-r1
+next_edges:
+  - mvp:session-management-r1
 tags:
   - sessions
   - memory
