@@ -2,9 +2,9 @@
 
 ## Primary Metric
 - **longest_chain_length** (hops, direction: higher)
-- Current best: 50 hops (chain-engine-r1, environment-indexers-r1, graph-core-r1 at 21 cycles each)
+- Current best: 72 hops (chain-engine-r1, environment-indexers-r1, graph-core-r1 at 32 cycles each)
 - Chain formula: hops = 2 × max_cycle + 8 (verified empirically)
-- 3 chains at 50 hops (chain-engine, env-indexers, graph-core), 1 at 48 hops (renderers), 5 at 20 hops, 8 at 8 (base). Total 17 chains, 257 tests.
+- 3 chains at 72 hops, 1 at 56 hops (renderers), 4 at 48 hops (embeddings, exporters, schema-registry), 1 at 46 hops (autores-tree-skill), 8 at 8 (base). Total 17 chains, 257 tests.
 
 ## Secondary Metrics
 - `avg_chain_depth`

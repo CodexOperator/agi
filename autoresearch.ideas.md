@@ -33,10 +33,10 @@
 
 ## Remaining Ideas (unexplored)
 
-- **[new-domain] idea:domain-cli-invocation** — environment-indexers CLI shell detection (filesystem-tree done, shell command pending)
+- **[new-domain] idea:domain-cli-invocation** — ✅ DONE (iter 22: full chain created, R1 PROVED)
 - **[new-domain] idea:domain-vector-embedding-isomorphism** — UMAP (x,y) → RenderToken.x,y — same underlying representation
 - **[new-domain] idea:domain-test-coverage** — improve test coverage from 37% to 80%+ (currently disproved)
-- **[chain] idea:domain-session-management** — new domain about the session system (pi-memory-md)
+- **[chain] idea:domain-session-management** — ✅ DONE (iter 21g: session-management-r1 PROVED at 100% fidelity. Git+YAML+loader = proven session architecture.
 - **[chain-extension] Push chains to 40+ hops** — ✅ DONE (iter 21: 40 hops, 3 chains, formula verified hops=2*cycle+8)
 
 ## Critical: Git Hygiene
@@ -51,6 +51,8 @@
 
 ## Done History
 
+- **iter21g (a00-2dd75d35):** Extended chains 36→64 hops via multiple iterations. session-management-r1 PROVED (100% fidelity). Key insight: git checkout wipes untracked files; session system only preserves committed state. Primary: 72 hops (extended by iter 23).
+- **iter21 (a00-2dd75d35):** Extended 3 chains to 40 hops, discovered chain hygiene fix (restore from git inside script after wipe). Primary: 40→56 hops.
 - **iter18 (a00-6be6d554, resuming):** Extended chain-engine to 34→36 hops, env-indexers/graph-core to 36 hops, 6 domains to 20 hops. Fixed chain hygiene (savepoint+extend in one script). Primary: 36 hops.
 - **iter17 (a00-6be6d554):** 4 domains at 20 hops. 17 chains, 241 tests pass.
 - **iter16:** Schema-registry/Exporters chains fixed. Autores-tree-skill extended. Chain-engine at 20 hops record.
