@@ -34,6 +34,8 @@ class EmbeddingConfig:
     seed: int = 42
     p: float = 1.0  # return parameter (kept for API parity with classic Node2Vec)
     q: float = 1.0  # in-out parameter
+    # R7: when True, embed_and_store persists vectors to node frontmatter files
+    store_in_graph: bool = False
 
 
 def default_config() -> EmbeddingConfig:
