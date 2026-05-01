@@ -3,11 +3,24 @@ from src.graph_core.node import Node
 
 
 class TestNodeFields:
-    def test_field_set_exactly_seven(self):
-        """R1 + next_edges: Seven declared fields exist."""
-        fields = {"id", "type", "payload_ref", "parents", "children", "tags", "next_edges"}
+    def test_core_fields_present(self):
+        """R1 + next_edges: Seven core fields exist on every Node."""
+        core_fields = {"id", "type", "payload_ref", "parents", "children", "tags", "next_edges"}
+        verdict_fields = {"verdict", "confidence", "evidence_runs", "contradicts", "supports"}
         node = Node(id="n1", type="idea")
-        assert set(vars(node).keys()) == fields
+        all_fields = set(vars(node).keys())
+        # Core fields always present
+        assert core_fields.issubset(all_fields), f"Missing core fields: {core_fields - all_fields}"
+        # Verdict fields present (may be None/empty)
+        assert verdict_fields.issubset(all_fields), f"Missing verdict fields: {verdict_fields - all_fields}"
+        # Core values correct for default construction
+        assert node.id == "n1"
+        assert node.type == "idea"
+        assert node.payload_ref is None
+        assert node.parents == set()
+        assert node.children == set()
+        assert node.tags == set()
+        assert node.next_edges == []
 
     def test_id_type_required(self):
         """id and type are mandatory positional args."""
@@ -65,6 +78,36 @@ class TestNodeStructure:
         assert node.children == {"c1"}
         assert node.tags == {"tag-a", "tag-b"}
         assert node.next_edges == ["v1", "v2"]
+
+
+class TestVerdictMetadataFields:
+    """Verdict metadata fields loaded by loader (chain-engine extension)."""
+
+    def test_verdict_node_has_proved(self):
+        """A verdict node with verdict=proved has those fields populated."""
+        node = Node(
+            id="verdict:test",
+            type="verdict",
+            verdict="proved",
+            confidence=0.95,
+            evidence_runs=["run1", "run2"],
+            contradicts=["verdict:other"],
+            supports=[],
+        )
+        assert node.verdict == "proved"
+        assert node.confidence == 0.95
+        assert node.evidence_runs == ["run1", "run2"]
+        assert node.contradicts == ["verdict:other"]
+        assert node.supports == []
+
+    def test_non_verdict_node_defaults(self):
+        """Non-verdict nodes have verdict fields as None/empty."""
+        node = Node(id="hyp:test", type="hypothesis")
+        assert node.verdict is None
+        assert node.confidence is None
+        assert node.evidence_runs == []
+        assert node.contradicts == []
+        assert node.supports == []
 
 
 class TestNodeTagsIsolation:

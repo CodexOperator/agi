@@ -19,10 +19,11 @@ from typing import Optional
 class Node:
     """Generic graph node.
 
-    Seven fields. No timestamps. No auto-derived fields.
+    Seven core fields. No timestamps. No auto-derived fields.
 
     The six core fields (R1) are: id, type, payload_ref, parents, children, tags.
     next_edges is a chain-engine field: ordered list of node-id targets via 'next' relation.
+    verdict_meta are optional fields populated from frontmatter for verdict nodes.
     """
 
     id: str
@@ -32,6 +33,12 @@ class Node:
     children: set[str] = field(default_factory=set)
     tags: set[str] = field(default_factory=set)
     next_edges: list[str] = field(default_factory=list)
+    # Verdict-specific metadata (optional, populated from frontmatter by loader)
+    verdict: Optional[str] = None
+    confidence: Optional[float] = None
+    evidence_runs: list[str] = field(default_factory=list)
+    contradicts: list[str] = field(default_factory=list)
+    supports: list[str] = field(default_factory=list)
 
     @property
     def is_root(self) -> bool:

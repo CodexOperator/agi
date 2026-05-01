@@ -70,6 +70,12 @@ def _node_from_frontmatter(
     tags = set(fm.get("tags", []) or [])
     payload_ref = fm.get("payload_ref")
     next_edges = list(fm.get("next_edges", []) or [])
+    # Verdict-specific metadata (loaded from frontmatter for verdict nodes)
+    verdict_val = fm.get("verdict")
+    confidence_val = fm.get("confidence")
+    evidence_runs = list(fm.get("evidence_runs", []) or [])
+    contradicts = list(fm.get("contradicts", []) or [])
+    supports = list(fm.get("supports", []) or [])
     return Node(
         id=nid,
         type=type_str,
@@ -78,6 +84,11 @@ def _node_from_frontmatter(
         children=children,
         tags=tags,
         next_edges=next_edges,
+        verdict=verdict_val if isinstance(verdict_val, str) else None,
+        confidence=float(confidence_val) if confidence_val is not None else None,
+        evidence_runs=evidence_runs,
+        contradicts=contradicts,
+        supports=supports,
     )
 
 

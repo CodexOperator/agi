@@ -14,5 +14,7 @@
   "confidence": 1.0,
   "node_id": "hypothesis:a00-c1f04e81-04c43c",
   "parent": "idea:domain-chain-engine",
-  "notes": "0 chains confirmed. git checkout wiped 950 chain nodes. Restore from 442cae7."
+  "notes": "0 chains confirmed. git checkout wiped 950 chain nodes. Restore from 442cae7.",
+  "scaffolded_node": "verdict:iter24-verdict-loading",
+  "scaffolded_file": "/home/ubuntu/.hermes/agi-tree/nodes/verdict/iter24-verdict-loading.md"
 }

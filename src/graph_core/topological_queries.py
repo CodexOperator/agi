@@ -43,8 +43,8 @@ def completion_ratio(graph: RenderableGraph, idea_id: str) -> float:
         if ntype in ("hypothesis", "experiment"):
             verifiable += 1
         if ntype == "verdict":
-            verdict_val = getattr(node, "verdict", None) or "pending"
-            if verdict_val == "proved":
+            verdict_val = node.verdict or "pending"
+            if isinstance(verdict_val, str) and verdict_val.startswith("proved"):
                 proved += 1
         for target in next_adj.get(nid, []) + spawns_adj.get(nid, []):
             if target not in visited:
