@@ -14,7 +14,7 @@ tags:
   - restore-and-extend
   - proved
 next_edges:
-  - "verdict:embeddings-r2-extend81"
+  - "exp:embeddings-r2-extend83"
 ---
 
 VERDICT: proved. Chain extended via 82 verdict→experiment→verdict cycles after git restoration.
