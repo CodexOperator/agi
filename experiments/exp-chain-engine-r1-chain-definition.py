@@ -32,62 +32,76 @@ from graph_core.graph import Graph
 from chain_engine.chains import find_chains
 
 
+def _extract_id_from_fm(fm: str) -> str | None:
+    """Extract node id from frontmatter id: field."""
+    for line in fm.splitlines():
+        stripped = line.strip()
+        if stripped.startswith("id:"):
+            nid = stripped.split("id:", 1)[1].strip().strip('"').strip("'")
+            return nid
+    return None
+
+
 def load_live_graph() -> Graph:
-    """Load the actual 154-node graph from the nodes/ directory.
+    """Load the actual graph from the nodes/ directory.
     
-    Two-pass: first add all nodes, then add all edges.
+    Two-pass: first add all nodes (using id: from frontmatter),
+    then add all edges from parents: field.
     """
     graph = Graph()
     nodes_dir = Path(__file__).parent.parent / "nodes"
     
-    # PASS 1: Add all nodes first
-    node_count = 0
-    node_files = []  # track files for edge parsing pass
-    for node_file in (nodes_dir / "hypothesis").glob("*.md"):
-        node_count += 1
-        nid = node_file.stem.replace("-", ":", 1)
-        graph.add_node(Node(id=nid, type="hypothesis"))
-        node_files.append((node_file, nid))
+    def _load_node_type(subdir: str, ntype: str) -> list[tuple[Path, str]]:
+        """Load nodes of a type. Returns list of (file, node_id)."""
+        results = []
+        subdir_path = nodes_dir / subdir
+        if not subdir_path.exists():
+            return results
+        for nf in subdir_path.glob("*.md"):
+            content = nf.read_text()
+            fm_start = content.find("---")
+            fm_end = content.find("---", fm_start + 3)
+            if fm_start == -1 or fm_end == -1:
+                continue
+            fm = content[fm_start + 3 : fm_end]
+            nid = _extract_id_from_fm(fm)
+            if nid:
+                graph.add_node(Node(id=nid, type=ntype))
+                results.append((nf, nid))
+        return results
     
-    for node_file in (nodes_dir / "idea").glob("*.md"):
-        node_count += 1
-        nid = node_file.stem.replace("-", ":", 1)
-        graph.add_node(Node(id=nid, type="idea"))
-        node_files.append((node_file, nid))
+    # PASS 1: Add all nodes
+    node_files: list[tuple[Path, str]] = []
+    node_files += _load_node_type("idea", "idea")
+    node_files += _load_node_type("hypothesis", "hypothesis")
+    node_files += _load_node_type("task", "task")
+    node_count = len(node_files)
     
-    for node_file in (nodes_dir / "task").glob("*.md"):
-        node_count += 1
-        nid = node_file.stem.replace("-", ":", 1)
-        graph.add_node(Node(id=nid, type="task"))
-        node_files.append((node_file, nid))
-    
-    # PASS 2: Add all edges
-    spawns_edges = 0
-    next_edges = 0
+    # PASS 2: Add edges from parents: field
     for node_file, nid in node_files:
         content = node_file.read_text()
+        fm_start = content.find("---")
+        fm_end = content.find("---", fm_start + 3)
+        if fm_start == -1 or fm_end == -1:
+            continue
+        fm = content[fm_start + 3 : fm_end]
         
-        # Parse parents block (YAML frontmatter)
         in_parents = False
-        for line in content.splitlines():
+        for line in fm.splitlines():
             stripped = line.strip()
-            if stripped.startswith("parents:"):
+            if stripped == "parents:":
                 in_parents = True
                 continue
             if in_parents:
                 if line.startswith("  - ") or line.startswith("- "):
-                    parent = line.strip().lstrip("- ").strip()
-                    if parent and parent != nid:
-                        # Default to 'spawns' relation for live graph edges
-                        rel = "spawns"
-                        graph.add_edge(Edge(source_id=parent, target_id=nid, relation=rel))
-                        if rel == "next":
-                            next_edges += 1
-                        else:
-                            spawns_edges += 1
-                elif not line.startswith((" ", "  ")) and stripped:
-                    in_parents = False
+                    parent = stripped.lstrip("- ")
+                    if parent and parent != nid and parent in graph.node_ids:
+                        graph.add_edge(Edge(source_id=parent, target_id=nid, relation="spawns"))
+                elif stripped and not line.startswith("  "):
+                    break
     
+    spawns_edges = sum(1 for e in graph.edges if e.relation == "spawns")
+    next_edges = sum(1 for e in graph.edges if e.relation == "next")
     return graph, node_count, spawns_edges, next_edges
 
 
