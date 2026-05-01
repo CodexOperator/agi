@@ -1,13 +1,13 @@
 {
   "agent_id": "a00-2e2ed561",
   "iter_n": 34,
-  "verdict": "inconclusive_lean_proved:40",
-  "confidence": 0.55,
-  "node_id": "hypothesis:a00-2e2ed561-f5987b",
+  "verdict": "proved",
+  "confidence": 0.95,
+  "node_id": "hypothesis:a00-2e2ed561-embeddings-r1-gensim",
   "status": "done",
-  "finished_at": 1777657568,
+  "finished_at": 1777658161,
   "parent": null,
-  "notes": "R5: sg k-NN=0.492 vs cbow=0.463 (\u0394+6.3%), spearman=0.865 vs 0.757. Skip-gram preferred; falls below 10% k-NN threshold for clean PROVED.",
+  "notes": "R1 gensim production integration PROVED. Spearman=0.8552, k-NN=0.494 vs hash=0.8355/0.479. Critical fix: storage.py numpy float to native float for YAML. 274 tests pass.",
   "scaffolded_node": "verdict:a00-2e2ed561-embeddings-r1-gensim",
   "scaffolded_file": "/home/ubuntu/.hermes/agi-tree/nodes/verdict/a00-2e2ed561-embeddings-r1-gensim.md"
 }
