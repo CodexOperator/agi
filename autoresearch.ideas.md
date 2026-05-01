@@ -43,7 +43,12 @@
 - ~~**[chain-extension] Push chains to 300 hops**~~ — DONE (iter30b: 300 hops, 9 chains at cycle 146). 909 new files (450 exp + 450 verdict). 274 tests pass.
 - ~~**[loader] CSafeLoader optimization**~~ — DONE (iter30b: 4.02x speedup, 1884ms→468ms). ThreadPoolExecutor DISPROVED (0.7x, slower due to GIL). CSafeLoader is C-based libyaml binding. 274 tests pass.
 - ~~**[session-management chain fix]**~~ — DONE (iter30b): extend1 verdict next_edges changed from mvp to exp:extend2 → session-management chain restored to 200 hops.
-~~**[new-domain] idea:domain-vector-embedding-isomorphism**~~ — COMPLETE (iter31: R2 PROVED, full 7-node chain created). Gensim skip-gram Spearman=0.37 vs R1 hash-based -0.18.
+~~**[new-domain] idea:domain-vector-embedding-isomorphism**~~ — COMPLETE (iter31):
+  - R2 PROVED: gensim skip-gram Spearman=0.56 vs R1 hash-based -0.18 (+0.74 improvement)
+  - R3 inconclusive_lean_proved:60: embedding k-NN captures 48.7% of BFS neighbors (threshold 0.5)
+  - R4 PROVED: UMAP vs PCA — UMAP k-NN overlap 45.4% vs PCA 8.4% (PCA destroys neighborhood!)
+  - UMAP fix implemented in `src/embeddings/projection.py` (HAS_UMAP with PCA fallback)
+  - All 274 tests pass. Experiment scripts: r2.py, r3.py, r4.py
 - ~~**[session-management] Complete session-management chain**~~ — COMPLETE (iter 21g: verdict PROVED). Short chain (1 hop to verdict, mvp→outcome→bo→app present).
 - ~~**[embeddings] idea:domain-cli-invocation**~~ — COMPLETE (iter 22: idea→hyp→exp→verdict→mvp→outcome→bo→app, 7 hops).
 - ~~**[architecture] Query API for capillary DAG**~~ — IMPLEMENTED + FIXED (iter24): verdict fields loaded into Node objects, completion_ratio now returns 98-99% for active chains. rank_ideas shows meaningful score variation.
@@ -71,5 +76,7 @@
 - **iter17 (a00-6be6d554):** 4 domains at 20 hops. 17 chains, 241 tests pass.
 - **iter16:** Schema-registry/Exporters chains fixed. Autores-tree-skill extended. Chain-engine at 20 hops record.
 - **iter12b (a00-c2d7dbcc):** Chain confirmed at 168 hops (9 chains, cycle 80). Topological queries: topology=perfect coarse filter (100% set match), fails fine-grained (Match@5=40%, Spearman=0.604). topological_queries.py implemented. CRITICAL: log_experiment git-wipe nearly destroyed nodes/ — always commit before log_experiment.
+- **iter31 (a00-324837df):** Vector embedding isomorphism: R2 PROVED (gensim Spearman=0.56 vs R1 -0.18), R3 inconclusive (48.7% k-NN overlap), R4 PROVED (UMAP 45.4% vs PCA 8.4% overlap). UMAP fix in projection.py. All 274 tests pass. 19 chains, 9 at 300 hops.
+- **iter30b (a00-...):** 300 hops chains + CSafeLoader 4x speedup. UMAP experiment scripts scaffolded but not executed.
 - **iter12 (a00-c2d7dbcc):** topology-only DAG queries for task-selection: inconclusive_lean_proved:65. Graph state: 157 nodes, 7 idea domains. Topological ranking matches expert for all 7 domains but cannot resolve fine-grained priority.
 - **iter11/12:** Environment-indexers chain extended to 12 hops. 6 domains at 12 hops.
