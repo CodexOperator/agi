@@ -1,9 +1,10 @@
 ---
 id: hypothesis:a00-72d9d3ef-3fdc1e
 type: hypothesis
-parents:
-  - 
-next_edges: []
+parents: []
+next_edges:
+  - experiment:exp:a00-72d9d3ef-3fdc1e
+  - verdict:verdict:hyp:a00-72d9d3ef-3fdc1e
 ---
 
 # hypothesis:a00-72d9d3ef-3fdc1e
