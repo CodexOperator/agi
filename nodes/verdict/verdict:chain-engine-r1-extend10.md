@@ -14,8 +14,8 @@ tags:
   - eleventh-cycle
   - proved
 next_edges:
-  - "mvp:chain-engine-r1"
+  - "exp:chain-engine-r1-extend11"
 ---
 
-VERDICT: proved. Chain reached 28 hops via 11 verdict→experiment→verdict cycles.
+VERDICT: proved. Chain reached 28 hops (10 cycles). Adding 11th cycle to reach 30 hops. via 11 verdict→experiment→verdict cycles.
 Formula: 2N+6 = 28 hops.
