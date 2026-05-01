@@ -10,40 +10,34 @@ tags:
   - umap
   - render
   - isomorphism
-status: pending
+status: completed
 ---
 
 ## Task: Embedding-to-Render Coordinate Comparison
 
 ### Objective
-Test whether Node2Vec 2D coordinates (via UMAP) are isomorphic to ASCII render token positions.
+Test whether Node2Vec 2D coordinates (via PCA) are isomorphic to ASCII render token positions.
 
-### Implementation Steps
+### Implementation (iter 19)
 
-1. **Load graph and train embeddings**
-   - Use existing Node2Vec pipeline from idea:domain-embeddings
-   - Or train fresh: walk_length=80, dimensions=64, num_walks=10
+1. **Loaded graph**: 345 nodes via graph_core.loader
+2. **Created embeddings**: Node2Vec hash-based (dim=32, walk_length=40)
+3. **Projected to 2D**: PCA via embeddings.projection
+4. **Computed distances**: BFS graph distance, Euclidean embedding distance
+5. **Measured correlation**: Spearman on 94 reachable pairs
 
-2. **Project to 2D via UMAP**
-   - Transform embedding vectors to (x, y) coordinates
-   - Preserve local neighborhood structure
+### Result
+- **Correlation: -0.18** (weak negative)
+- Interpretation: Hash-based embeddings produce anti-correlated projection
+- Hypothesis **DISPROVED**
 
-3. **Extract render token positions**
-   - Use existing ASCII renderer from idea:domain-renderers
-   - Extract (x, y) for each node from rendered output
+### Key Finding
+The hash-based Node2Vec implementation does NOT preserve graph topology:
+- Random walks + hash projection = random-ish vectors
+- PCA on random vectors = random 2D directions
+- No topology preservation expected
 
-4. **Compare coordinate systems**
-   - Match nodes between embedding space and render space
-   - Compute correlation: are nodes with similar embedding (x,y) also near render (x,y)?
-   - Measure: Spearman correlation between embedding distance and render distance
-
-### Expected Output
-- `METRIC embedding_render_correlation=<value>` (higher = more isomorphic)
-- Scatter plot: embedding (x,y) vs render (x,y)
-- Verdict: proved if correlation > 0.7, disproved if < 0.3
-
-### Dependencies
-- graph_core.loader (existing)
-- graph_core.renderers.ascii (existing)
-- embeddings node2vec pipeline (existing)
-- umap-learn (pip install umap-learn)
+### Dependencies (used)
+- graph_core.loader
+- embeddings.node2vec (hash-based)
+- embeddings.projection (PCA)

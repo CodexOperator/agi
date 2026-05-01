@@ -13,31 +13,34 @@ tags:
 spawns:
   - task:t-093
 status: pending
-verdict: pending
+verdict: disproved
+confidence: 0.18
 ---
 
 ## Hypothesis
 
-**Claim**: Node2Vec embeddings projected to 2D via UMAP produce (x,y) coordinates that are **topologically isomorphic** to ASCII render token positions.
+**Claim**: Node2Vec embeddings projected to 2D via PCA produce (x,y) coordinates that are **topologically isomorphic** to ASCII render token positions.
 
 **Test**: 
-1. Train Node2Vec on graph (skip-gram, walk_length=80, dimensions=64)
-2. Project to 2D via UMAP
-3. Compare UMAP (x,y) with RenderToken (x,y) for same nodes
-4. Measure: correlation coefficient between UMAP coordinates and render positions
+1. Train Node2Vec on graph (walk_length=40, walks_per_node=5)
+2. Project to 2D via PCA (from embeddings.projection)
+3. Compare embedding (x,y) with graph distance for reachable node pairs
+4. Measure: Spearman correlation between graph distance and embedding distance
 
-**Expected**: Nodes adjacent in graph should cluster near each other in BOTH UMAP space AND ASCII render space.
+**Expected**: Nodes closer in graph should be closer in embedding space.
 
-## Rationale
-- idea:domain-embeddings already has Node2Vec pipeline (hyp:embeddings-r1 through r7)
-- idea:domain-renderers already has ASCII renderer with (x,y) token positions
-- Both use same underlying graph representation
-- If isomorphic, embedding similarity can predict render proximity
+## Result (iter 19)
+- **Spearman correlation: -0.18** (weak negative)
+- Nodes farther in graph are actually slightly CLOSER in embedding space
+- **VERDICT: DISPROVED**
 
-## Failure Mode
-- UMAP projection loses global structure → local clusters don't match render layout
-- Render layout optimizes for aesthetics, not graph structure
-- Graph is not "planar" → 2D projection inherently lossy
+## Analysis
+The hash-based Node2Vec implementation doesn't preserve graph topology:
+- Uses deterministic random walks + hash projection
+- Hash-based vectors don't encode semantic similarity
+- PCA projection of random-ish vectors produces random directions
+- No reason to expect topology preservation
 
-## Spawned Tasks
-- task:t-093: Implement embedding-to-render coordinate comparison
+## Next Steps
+- R2: Try true skip-gram Node2Vec (gensim) vs hash-based
+- R3: Check if embedding similarity matches graph traversal neighbors

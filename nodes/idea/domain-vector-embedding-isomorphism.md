@@ -19,7 +19,7 @@ spawns:
 ## Concept
 Bridge idea:domain-embeddings (Node2Vec + UMAP) with idea:domain-renderers (ASCII token positions) via **shared underlying representation**.
 
-The claim: Node2Vec embeddings projected to 2D (UMAP) produce coordinates that are **isomorphic** to render token (x,y) positions. Same node should occupy similar coordinates in both spaces.
+The claim: Node2Vec embeddings projected to 2D (UMAP) produce coordinates that are **isomorphic** to render token (x, y) positions. Same node should occupy similar coordinates in both spaces.
 
 ## Motivation
 - AGENTS.md Capillary DAG: "Graph↔vector duality via Node2Vec+UMAP — shared representation between surface and embedding layer"
