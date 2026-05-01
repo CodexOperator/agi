@@ -10,7 +10,7 @@ parents:
 tags:
   - chain-extension
 next_edges:
-  - "mvp:schema-registry-r2-bracket-convention"
+  - "exp:schema-registry-r2-bracket-convention-extend21"
 ---
 
 VERDICT: proved. schema-registry-r2-bracket-convention at cycle 20 = 44 hops.

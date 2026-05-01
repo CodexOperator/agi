@@ -10,7 +10,7 @@ parents:
 tags:
   - chain-extension
 next_edges:
-  - "mvp:embeddings-r2"
+  - "exp:embeddings-r2-extend21"
 ---
 
 VERDICT: proved. embeddings-r2 at cycle 20 = 44 hops.

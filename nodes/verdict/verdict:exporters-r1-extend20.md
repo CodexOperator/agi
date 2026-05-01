@@ -10,7 +10,7 @@ parents:
 tags:
   - chain-extension
 next_edges:
-  - "mvp:exporters-r1"
+  - "exp:exporters-r1-extend21"
 ---
 
 VERDICT: proved. exporters-r1 at cycle 20 = 44 hops.
