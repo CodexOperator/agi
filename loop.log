@@ -416,3 +416,17 @@ spawned a02-150fdf60 pid=1081334 level=small target=idea:domain-environment-inde
 spawned a03-d5b8a8bc pid=1081343 level=small target=idea:domain-chain-engine
 spawned a04-517645d2 pid=1081352 level=small target=idea:domain-autoresearch-tree-skill
 manifest: /home/ubuntu/.hermes/agi-tree/sessions/iter-006/manifest.json
+=== iter 1 @ 2026-05-01T06:51:03Z ===
+wrote: 7 idea + 59 hypothesis + 90 task = 156 nodes
+target dir: /home/ubuntu/.hermes/agi-tree/nodes
+loaded 155 nodes from /home/ubuntu/.hermes/agi-tree/nodes
+ASCII rendering: 161 lines
+wrote: /home/ubuntu/.hermes/agi-tree/context/INJECTION.md
+METRIC longest_chain_length=2
+METRIC avg_chain_depth=0.95
+METRIC mvp_count=0
+METRIC outcome_coverage=0.000
+METRIC chain_branching_factor=2.21
+METRIC node_count=155
+METRIC edge_count=146
+[smoke] skipping agent dispatch + heal

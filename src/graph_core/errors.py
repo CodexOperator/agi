@@ -30,6 +30,18 @@ class CycleError(GraphCoreError):
         )
 
 
+class PathOutsideProjectError(GraphCoreError):
+    """Raised when a path operation escapes the project root (T-016)."""
+
+    def __init__(self, path: str | Path, project_root: str | Path) -> None:
+        from pathlib import Path as _Path
+        self.path = str(path)
+        self.project_root = str(_Path(project_root).resolve())
+        super().__init__(
+            f"path '{path}' is outside project root '{project_root}'"
+        )
+
+
 # Re-export FrontmatterError from persistence so callers can `from graph_core.errors import FrontmatterError`
 def _frontmatter_error_proxy():
     from .persistence.frontmatter import FrontmatterError

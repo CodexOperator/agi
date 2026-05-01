@@ -696,7 +696,7 @@ Decomposition of 7 cavekits, 59 requirements, and 236 acceptance criteria into e
 - **Files:** `agi-tree/src/embeddings/in_graph_storage.py`, `agi-tree/tests/embeddings/test_in_graph_storage.py`
 - **Test Strategy:** Default off → no field. Enable → field appears, other fields untouched. Toggle off → cache still valid. Toggle on with prior writes → no overwrite of unchanged values.
 
-### Domain: autoresearch-tree-skill (8 R, 32 criteria, T-076..T-088)
+### Domain: autoresearch-tree-skill (9 R, 37 criteria, T-076..T-089)
 
 #### T-076: Skill installation in forked skill repository
 - **Cavekit Requirement:** autoresearch-tree-skill/R1
@@ -814,6 +814,15 @@ Decomposition of 7 cavekits, 59 requirements, and 236 acceptance criteria into e
 - **Description:** Pre-create the directory tree under `agi-tree/skills/autoresearch-tree/` so T-076's installer has files to install. This is a structural-only task that prepares the payload; the criteria coverage is validated under T-076.
 - **Files:** `agi-tree/skills/autoresearch-tree/.gitkeep`, `agi-tree/skills/autoresearch-tree/scripts/.gitkeep`, `agi-tree/skills/autoresearch-tree/references/.gitkeep`
 - **Test Strategy:** Directory existence test.
+
+#### T-089: Agent timeout and healer dispatch mechanism
+- **Cavekit Requirement:** autoresearch-tree-skill/R9
+- **Acceptance Criteria Mapped:** R9.1 (agent process exceeding agent_timeout_mins terminated with SIGTERM, then SIGKILL if unresponsive after 30s), R9.2 (healer subagent dispatched on timeout receives: original task, elapsed time, partial output from session dir), R9.3 (healer produces verdict node with state inconclusive_lean_proved:N reflecting remaining work), R9.4 (iteration continues with remaining agents; partial results from timed-out agents included in manifest), R9.5 (timeout handling does not corrupt session state for other running agents)
+- **blockedBy:** T-078, T-081
+- **Effort:** M
+- **Description:** Implement heal.py monitoring agent PIDs, graceful termination (SIGTERM → SIGKILL), healer subagent dispatch with partial output context, and verdict emission with calibrated confidence. Partial results from timed-out agents flow into manifest.json alongside successful agents.
+- **Files:** `extensions/autoresearch-tree/bin/heal.py`, `extensions/autoresearch-tree/lib/agent-prompt.md`
+- **Test Strategy:** Mock agent processes that sleep beyond timeout; assert heal.py dispatches healer and produces partial manifest entry with inconclusive_lean_proved:N verdict.
 
 ## Tier Grouping
 
@@ -1367,7 +1376,7 @@ Every acceptance criterion across all 7 kits, with its assigned task. 236 rows t
 | embeddings | R7 | R7.3 toggling does not invalidate prior vectors | T-075 |
 | embeddings | R7 | R7.4 enabled + missing field → backfill without rewriting unrelated | T-075 |
 
-### autoresearch-tree-skill (32)
+### autoresearch-tree-skill (37)
 
 | Kit | Req | Criterion | Task |
 |---|---|---|---|
@@ -1403,6 +1412,11 @@ Every acceptance criterion across all 7 kits, with its assigned task. 236 rows t
 | autoresearch-tree-skill | R8 | R8.2 no assumed repo name/host path/env beyond optional model selector | T-087 |
 | autoresearch-tree-skill | R8 | R8.3 removing context dir removes all skill-managed state | T-087 |
 | autoresearch-tree-skill | R8 | R8.4 documentation states portability contract + self-test command | T-087 |
+| autoresearch-tree-skill | R9 | R9.1 agent exceeding timeout terminated SIGTERM → SIGKILL after 30s | T-089 |
+| autoresearch-tree-skill | R9 | R9.2 healer receives original task, elapsed time, partial output | T-089 |
+| autoresearch-tree-skill | R9 | R9.3 healer verdict = inconclusive_lean_proved:N reflecting remaining work | T-089 |
+| autoresearch-tree-skill | R9 | R9.4 iteration continues, partial results in manifest | T-089 |
+| autoresearch-tree-skill | R9 | R9.5 timeout handling does not corrupt other agents' session state | T-089 |
 
 ### Coverage Summary
 
