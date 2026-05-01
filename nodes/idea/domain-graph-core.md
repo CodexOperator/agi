@@ -1,7 +1,6 @@
 ---
+confidence: 1.0
 id: "idea:domain-graph-core"
-next_edges:
-  - "hyp:graph-core-r12"
 scale: big
 status: open
 tags:

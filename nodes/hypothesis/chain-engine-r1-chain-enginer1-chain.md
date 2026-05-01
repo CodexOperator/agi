@@ -1,8 +1,6 @@
 ---
 confidence: 0.5
 id: "hyp:chain-engine-r1"
-next_edges:
-  - exp:chain-engine-r1-verify-chain-definition
 parents:
   - idea:domain-chain-engine
 subgraph: false

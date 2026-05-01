@@ -1,0 +1,67 @@
+{
+  "iter": 21,
+  "started_at": 1777623973,
+  "timeout_seconds": 600,
+  "agents": [
+    {
+      "id": "a00-4a989c0f",
+      "slot": 0,
+      "level": "big",
+      "target": null,
+      "pid": 1113099,
+      "started_at": 1777623973,
+      "status": "running",
+      "context_file": "/home/ubuntu/.hermes/agi-tree/sessions/iter-021/a00-4a989c0f/context.md",
+      "log_file": "/home/ubuntu/.hermes/agi-tree/sessions/iter-021/a00-4a989c0f/output.log",
+      "command": "/home/ubuntu/.npm-global/bin/pi --append-system-prompt @/home/ubuntu/.hermes/agi-tree/sessions/iter-021/a00-4a989c0f/context.md --append-system-prompt 'You are agent a00-4a989c0f on iteration 21. When complete, run: python3 /home/ubuntu/autoresearch-tree/extensions/autoresearch-tree/bin/cli.py done 21 a00-4a989c0f --verdict <state> --confidence <0..1> --node-id <id>. Stay within zoom scope; do NOT wander.' --append-system-prompt @/home/ubuntu/autoresearch-tree/extensions/autoresearch-tree/lib/agent-prompt.md 'Begin iteration 21 as agent a00-4a989c0f. Read your zoom context, do the work, signal done.'"
+    },
+    {
+      "id": "a01-61df3f11",
+      "slot": 1,
+      "level": "small",
+      "target": "idea:domain-graph-core",
+      "pid": 1113108,
+      "started_at": 1777623974,
+      "status": "running",
+      "context_file": "/home/ubuntu/.hermes/agi-tree/sessions/iter-021/a01-61df3f11/context.md",
+      "log_file": "/home/ubuntu/.hermes/agi-tree/sessions/iter-021/a01-61df3f11/output.log",
+      "command": "/home/ubuntu/.npm-global/bin/pi --append-system-prompt @/home/ubuntu/.hermes/agi-tree/sessions/iter-021/a01-61df3f11/context.md --append-system-prompt 'You are agent a01-61df3f11 on iteration 21. When complete, run: python3 /home/ubuntu/autoresearch-tree/extensions/autoresearch-tree/bin/cli.py done 21 a01-61df3f11 --verdict <state> --confidence <0..1> --node-id <id>. Stay within zoom scope; do NOT wander.' --append-system-prompt @/home/ubuntu/autoresearch-tree/extensions/autoresearch-tree/lib/agent-prompt.md 'Begin iteration 21 as agent a01-61df3f11. Read your zoom context, do the work, signal done.'"
+    },
+    {
+      "id": "a02-ec40cf40",
+      "slot": 2,
+      "level": "small",
+      "target": "idea:domain-environment-indexers",
+      "pid": 1113123,
+      "started_at": 1777623974,
+      "status": "running",
+      "context_file": "/home/ubuntu/.hermes/agi-tree/sessions/iter-021/a02-ec40cf40/context.md",
+      "log_file": "/home/ubuntu/.hermes/agi-tree/sessions/iter-021/a02-ec40cf40/output.log",
+      "command": "/home/ubuntu/.npm-global/bin/pi --append-system-prompt @/home/ubuntu/.hermes/agi-tree/sessions/iter-021/a02-ec40cf40/context.md --append-system-prompt 'You are agent a02-ec40cf40 on iteration 21. When complete, run: python3 /home/ubuntu/autoresearch-tree/extensions/autoresearch-tree/bin/cli.py done 21 a02-ec40cf40 --verdict <state> --confidence <0..1> --node-id <id>. Stay within zoom scope; do NOT wander.' --append-system-prompt @/home/ubuntu/autoresearch-tree/extensions/autoresearch-tree/lib/agent-prompt.md 'Begin iteration 21 as agent a02-ec40cf40. Read your zoom context, do the work, signal done.'"
+    },
+    {
+      "id": "a03-f3dae015",
+      "slot": 3,
+      "level": "small",
+      "target": "idea:domain-autoresearch-tree-skill",
+      "pid": 1113144,
+      "started_at": 1777623975,
+      "status": "running",
+      "context_file": "/home/ubuntu/.hermes/agi-tree/sessions/iter-021/a03-f3dae015/context.md",
+      "log_file": "/home/ubuntu/.hermes/agi-tree/sessions/iter-021/a03-f3dae015/output.log",
+      "command": "/home/ubuntu/.npm-global/bin/pi --append-system-prompt @/home/ubuntu/.hermes/agi-tree/sessions/iter-021/a03-f3dae015/context.md --append-system-prompt 'You are agent a03-f3dae015 on iteration 21. When complete, run: python3 /home/ubuntu/autoresearch-tree/extensions/autoresearch-tree/bin/cli.py done 21 a03-f3dae015 --verdict <state> --confidence <0..1> --node-id <id>. Stay within zoom scope; do NOT wander.' --append-system-prompt @/home/ubuntu/autoresearch-tree/extensions/autoresearch-tree/lib/agent-prompt.md 'Begin iteration 21 as agent a03-f3dae015. Read your zoom context, do the work, signal done.'"
+    },
+    {
+      "id": "a04-acd13cad",
+      "slot": 4,
+      "level": "small",
+      "target": "idea:domain-chain-engine",
+      "pid": 1113169,
+      "started_at": 1777623975,
+      "status": "running",
+      "context_file": "/home/ubuntu/.hermes/agi-tree/sessions/iter-021/a04-acd13cad/context.md",
+      "log_file": "/home/ubuntu/.hermes/agi-tree/sessions/iter-021/a04-acd13cad/output.log",
+      "command": "/home/ubuntu/.npm-global/bin/pi --append-system-prompt @/home/ubuntu/.hermes/agi-tree/sessions/iter-021/a04-acd13cad/context.md --append-system-prompt 'You are agent a04-acd13cad on iteration 21. When complete, run: python3 /home/ubuntu/autoresearch-tree/extensions/autoresearch-tree/bin/cli.py done 21 a04-acd13cad --verdict <state> --confidence <0..1> --node-id <id>. Stay within zoom scope; do NOT wander.' --append-system-prompt @/home/ubuntu/autoresearch-tree/extensions/autoresearch-tree/lib/agent-prompt.md 'Begin iteration 21 as agent a04-acd13cad. Read your zoom context, do the work, signal done.'"
+    }
+  ]
+}

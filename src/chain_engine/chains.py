@@ -28,11 +28,14 @@ def find_chains(graph: RenderableGraph) -> list[Chain]:
     """
     chains: list[Chain] = []
 
-    # Build adjacency: node_id -> list of (target_id, relation)
+    # Build adjacency: node_id -> list of target_ids by relation
     next_edges: dict[str, list[str]] = {}
+    spawns_edges: dict[str, list[str]] = {}
     for edge in graph.edges:
         if edge.relation == "next":
             next_edges.setdefault(edge.source_id, []).append(edge.target_id)
+        elif edge.relation == "spawns":
+            spawns_edges.setdefault(edge.source_id, []).append(edge.target_id)
 
     # Find all idea nodes (roots with no 'next' incoming edge)
     next_targets: set[str] = {t for targets in next_edges.values() for t in targets}
@@ -42,7 +45,7 @@ def find_chains(graph: RenderableGraph) -> list[Chain]:
     ]
 
     for idea_id in sorted(idea_nodes):  # sorted for determinism
-        _traverse_from(idea_id, graph, next_edges, [], chains)
+        _traverse_from(idea_id, graph, next_edges, spawns_edges, [], chains)
 
     return chains
 
@@ -51,10 +54,16 @@ def _traverse_from(
     node_id: str,
     graph: RenderableGraph,
     next_edges: dict[str, list[str]],
+    spawns_edges: dict[str, list[str]],
     path: Chain,
     chains: list[Chain],
+    depth: int = 0,
 ) -> None:
-    """DFS traversal from node_id, building valid chain paths."""
+    """DFS traversal from node_id, building valid chain paths.
+    
+    When a node has no 'next' successors, falls back to 'spawns' children
+    to enable true capillary branching (one idea → multiple chains).
+    """
     node = graph.get_node(node_id)
     if node is None:
         return
@@ -66,8 +75,13 @@ def _traverse_from(
         chains.append(new_path)
         return
 
-    # Get successors via 'next' edges
+    # Get successors via 'next' edges first (primary path)
     successors = next_edges.get(node_id, [])
+
+    # If no 'next' successors, fall back to 'spawns' children for capillary branching
+    # This allows one idea to spawn multiple chains (one per hypothesis)
+    if not successors:
+        successors = spawns_edges.get(node_id, [])
 
     if not successors:
         # Dead end — not a complete chain (doesn't reach app_purpose)
@@ -78,9 +92,12 @@ def _traverse_from(
         if succ_node is None:
             continue
 
-        # Validate the transition
-        if is_valid_transition(node.type, succ_node.type):
-            _traverse_from(succ_id, graph, next_edges, new_path, chains)
+        # Validate the transition (only for 'next' edges; spawns can jump types)
+        if node_id in next_edges and is_valid_transition(node.type, succ_node.type):
+            _traverse_from(succ_id, graph, next_edges, spawns_edges, new_path, chains, depth + 1)
+        elif node_id not in next_edges:
+            # No 'next' edge from this node — any spawns child is valid
+            _traverse_from(succ_id, graph, next_edges, spawns_edges, new_path, chains, depth + 1)
         # Invalid transition: skip this successor (path rejected)
 
 
@@ -91,13 +108,16 @@ def find_chains_from_node(graph: RenderableGraph, start_id: str) -> list[Chain]:
     """
     chains: list[Chain] = []
     next_edges: dict[str, list[str]] = {}
+    spawns_edges: dict[str, list[str]] = {}
     for edge in graph.edges:
         if edge.relation == "next":
             next_edges.setdefault(edge.source_id, []).append(edge.target_id)
+        elif edge.relation == "spawns":
+            spawns_edges.setdefault(edge.source_id, []).append(edge.target_id)
 
     start_node = graph.get_node(start_id)
     if start_node is None:
         return []
 
-    _traverse_from(start_id, graph, next_edges, [], chains)
+    _traverse_from(start_id, graph, next_edges, spawns_edges, [], chains)
     return chains
