@@ -12,7 +12,7 @@ tags:
   - chain-extension
   - proved
 next_edges:
-  - "exp:autoresearch-tree-skill-r1-extend3"
+  - "exp:autoresearch-tree-skill-r1-extend2"
 ---
 
 VERDICT: proved. Chain extended from 8 to 12 hops.
