@@ -202,7 +202,7 @@ class TestCliIntegration:
             executed.append(path)
 
         with TemporaryDirectory() as tmpdir:
-            code = main(["run", "exec_test", tmpdir])
+            code = main(["exec_test", tmpdir])
 
         assert code == 0
         assert len(executed) == 1
@@ -214,6 +214,6 @@ class TestCliIntegration:
 
         stderr = StringIO()
         with patch("sys.stderr", stderr):
-            code = main(["run", "does_not_exist", "/tmp"])
+            code = main(["does_not_exist", "/tmp"])
 
         assert code == 1

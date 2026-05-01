@@ -193,3 +193,18 @@ Live record of build progress against `context/plans/build-site.md`.
 - **Files:** src/schema_registry/fingerprint.py (new), src/schema_registry/__init__.py (edit), tests/schema_registry/test_cascade_step_2.py (new)
 - **Validation:** Tests 5/5 PASS (test_cascade_step_2.py); full schema_registry suite 41/41 PASS; full repo suite 167/167 PASS. R5.2 (fingerprint Jaccard match against active schemas, threshold default 0.7), end-to-end discover_schema chains step 1 → step 2, sub-threshold misses fall through, jaccard/collect_fingerprint helpers verified.
 - **Notes:** `collect_fingerprint()` unions frontmatter keys across .md/.json files in a directory using `load_node_file(p, body=False)` (skips body parse — keys only). `schema_field_keys()` excludes `name`, `fields`, `validation` from the comparison set so a schema with explicit `fields:` plus a `name:` header doesn't artificially deflate Jaccard against node-level frontmatter. `cascade_step_2()` only scores ACTIVE schemas, returns the highest scorer iff its score ≥ threshold else `no-match` carrying `candidate_score` for diagnostics. Module-level `register_extra_step(cascade_step_2)` self-registers at import — `from .fingerprint import ...` in package `__init__.py` triggers registration so `discover_schema()` chains step 1 → step 2 with no manual wiring.
+
+### Iteration 24 — 2026-05-01T07:30:00Z
+- **Task:** T-032 — Indexer invocation command (environment-indexers/R1)
+- **Tier:** 5
+- **Status:** DONE
+- **Files:** 
+  - `src/environment_indexers/__init__.py` (package init + exports)
+  - `src/environment_indexers/errors.py` (UnknownIndexerError, IndexerExecutionError)
+  - `src/environment_indexers/registry.py` (IndexerRegistry, @register_indexer decorator)
+  - `src/environment_indexers/cli.py` (`--list` + `<name> <path>` invocation)
+  - `tests/environment_indexers/test_cli.py` (10 tests)
+  - `nodes/task/t-032.md` (task documentation)
+- **Validation:** Tests 10/10 PASS; full suite 177/177 PASS. R1.1+R1.2+R1.3+R1.4 covered.
+- **Notes:** Decorator-based registration enables surgical indexer removal (R7). `main()` accepts optional argv for testing. Error handling propagates non-zero exit codes per R1.4.
+- **Next:** T-033 (filesystem tree indexer) — blocked by T-032, T-031, T-005 (all done)
