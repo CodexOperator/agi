@@ -1,15 +1,15 @@
 ---
 id: "exp:embeddings-r3-extend82"
 type: experiment
-title: "embeddings-r3/R17: extend82 — chain restoration extension"
+title: "Experiment: embeddings-r3 extend cycle 82"
 parents:
   - "verdict:embeddings-r3-extend81"
-tags:
-  - chain-extension
-  - r17
-  - restore-and-extend
 next_edges:
   - "verdict:embeddings-r3-extend82"
 ---
 
-R17: extend82 verdict→experiment transition after git restoration.
+# exp:embeddings-r3-extend82
+
+**Extend cycle 82/96** — pushing embeddings-r3 chain toward 200 hops.
+
+Chain: idea → ... → verdict-extend81 → **exp-extend82** → verdict-extend82 → ...

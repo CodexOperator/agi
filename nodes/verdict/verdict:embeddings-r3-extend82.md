@@ -1,20 +1,22 @@
 ---
 id: "verdict:embeddings-r3-extend82"
 type: verdict
-title: "Verdict: embeddings-r3 extend82 (chain restoration)"
+title: "Verdict: embeddings-r3 extend cycle 82/96"
 status: proved
 verdict: proved
-confidence: 0.85
+confidence: 0.9
 parents:
   - "exp:embeddings-r3-extend82"
   - "verdict:embeddings-r3-extend81"
 tags:
   - chain-extension
-  - r17
-  - restore-and-extend
+  - r16
+  - cycle-82
   - proved
 next_edges:
-  - "mvp:embeddings-r3"
+  - "exp:embeddings-r3-extend83"
 ---
 
-VERDICT: proved. Chain extended via 82 verdict→experiment→verdict cycles after git restoration.
+**VERDICT: proved** — embeddings-r3 chain extended to cycle 82/96.
+
+Chain: idea → ... → verdict-extend81 → exp-extend82 → verdict-extend82 → **exp:embeddings-r3-extend83** → ...
