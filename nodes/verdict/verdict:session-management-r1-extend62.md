@@ -1,17 +1,18 @@
 ---
-id: "verdict:session-management-r1-extend62"
+id: verdict:session-management-r1-extend62
 type: verdict
-title: "session-management-r1 extend cycle 62"
-status: proved
 verdict: proved
-confidence: 0.9
+confidence: 1.0
 parents:
-  - "exp:session-management-r1-extend62"
-  - "verdict:session-management-r1-extend61"
+- hypothesis:session-management-r1
 next_edges:
-  - "exp:session-management-r1-extend63"
+- exp:session-management-r1-extend63
+tags:
+- session-management
+- chain-extension
 ---
-
 # verdict:session-management-r1-extend62
 
-Verdict for session-management-r1 chain extension cycle 62.
+Chain extension cycle 62.
+
+Evidence: verdict->experiment->verdict cycle confirmed.

@@ -4,15 +4,15 @@ type: verdict
 verdict: proved
 confidence: 1.0
 parents:
-- exp:session-management-r1-r1
+- hypothesis:session-management-r1
 next_edges:
-- exp:session-management-r1-extend331
+- exp:session-management-r1-extend332
 tags:
-- session-management-r1
+- session-management
 - chain-extension
 ---
 # verdict:session-management-r1-extend331
 
-Chain extension cycle 331 (hops = 2*331+8 = 670).
+Chain extension cycle 331.
 
 Evidence: verdict->experiment->verdict cycle confirmed.
