@@ -1,0 +1,14 @@
+---
+id: "app-purpose:embeddings"
+next_edges: []
+parents:
+  - "bigger-outcome:embeddings-r2"
+subgraph: false
+tags:
+  - embeddings
+  - root
+title: "App Purpose: embeddings"
+type: app_purpose
+---
+
+**App Purpose:** Per-node vector embeddings enable semantic similarity search, scatter plot visualization, and a shared coordinate system with the ASCII renderer. The graph's structure is preserved in vector space; agents can query "what's similar to X?" and render scatter plots of hypothesis clusters.

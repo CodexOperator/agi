@@ -1,0 +1,22 @@
+---
+id: "verdict:embeddings-r2-extend88"
+type: verdict
+title: "Verdict: embeddings-r2 extend cycle 88/96"
+status: proved
+verdict: proved
+confidence: 0.9
+parents:
+  - "exp:embeddings-r2-extend88"
+  - "verdict:embeddings-r2-extend87"
+tags:
+  - chain-extension
+  - r16
+  - cycle-88
+  - proved
+next_edges:
+  - "exp:embeddings-r2-extend89"
+---
+
+**VERDICT: proved** — embeddings-r2 chain extended to cycle 88/96.
+
+Chain: idea → ... → verdict-extend87 → exp-extend88 → verdict-extend88 → **exp:embeddings-r2-extend89** → ...

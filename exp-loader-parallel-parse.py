@@ -126,7 +126,7 @@ def main() -> int:
     # Verify correctness
     g_seq, _ = load_directory_sequential()
     g_par, _ = load_directory_parallel(max_workers=16)
-    match = (g_seq.node_count == g_par.node_count and
+    match = (len(g_seq) == len(g_par) and
              g_seq.edge_count == g_par.edge_count)
     print(f"\nCorrectness: {'PASS' if match else 'FAIL'}")
     print(f"  Sequential: {g_seq.node_count} nodes, {g_seq.edge_count} edges")
