@@ -14,7 +14,7 @@ tags:
   - second-cycle
   - proved
 next_edges:
-  - "exp:embeddings-r2-extend3"
+  - "mvp:embeddings-r2"
 ---
 
 VERDICT: proved. Chain extended from 10 to 12 hops via second verdict→experiment→verdict cycle.

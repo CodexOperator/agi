@@ -5,7 +5,8 @@ evidence_runs:
   - exp:schema-registry-r1
 id: "verdict:schema-registry-r1"
 next_edges:
-  - "mvp:schema-registry-r1"
+  - exp:schema-registry-r1-extend
+  - mvp:schema-registry-r1
 parents:
   - exp:schema-registry-r1
 status: proved

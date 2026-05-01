@@ -5,7 +5,8 @@ evidence_runs:
   - exp:embeddings-r3
 id: "verdict:embeddings-r3"
 next_edges:
-  - "mvp:embeddings-r3"
+  - exp:embeddings-r3-extend
+  - mvp:embeddings-r3
 parents:
   - exp:embeddings-r3
 status: proved
