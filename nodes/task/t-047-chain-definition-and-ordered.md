@@ -12,7 +12,7 @@ effort: M
 id: "task:t-047"
 parents:
   - hyp:chain-engine-r1
-status: done
+status: pending
 tags:
   - M
   - tier--1

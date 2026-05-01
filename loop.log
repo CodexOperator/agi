@@ -306,3 +306,30 @@ spawned a02-e9530ba6 pid=1066883 level=small target=idea:domain-environment-inde
 spawned a03-74a3b1f3 pid=1066892 level=small target=idea:domain-chain-engine
 spawned a04-bba88e05 pid=1066901 level=small target=idea:domain-autoresearch-tree-skill
 manifest: /home/ubuntu/.hermes/agi-tree/sessions/iter-002/manifest.json
+all agents terminal
+iter 2: 5 agents
+  a00-7634c05d: status=done verdict=proved pid=1066867
+  a01-1010c099: status=done verdict=pending pid=1066875
+  a02-e9530ba6: status=done verdict=pending pid=1066883
+  a03-74a3b1f3: status=done verdict=proved pid=1066892
+  a04-bba88e05: status=done verdict=proved pid=1066901
+[driver] sleeping 2m before iter 3...
+=== iter 3 @ 2026-05-01T06:12:06Z ===
+wrote: 7 idea + 59 hypothesis + 88 task = 154 nodes
+target dir: /home/ubuntu/.hermes/agi-tree/nodes
+loaded 154 nodes from /home/ubuntu/.hermes/agi-tree/nodes
+ASCII rendering: 160 lines
+wrote: /home/ubuntu/.hermes/agi-tree/context/INJECTION.md
+METRIC longest_chain_length=2
+METRIC avg_chain_depth=0.95
+METRIC mvp_count=0
+METRIC outcome_coverage=0.000
+METRIC chain_branching_factor=2.23
+METRIC node_count=154
+METRIC edge_count=147
+spawned a00-e2cf028b pid=1069405 level=big target=-
+spawned a01-44d2f5da pid=1069413 level=small target=idea:domain-graph-core
+spawned a02-3cd6c09d pid=1069427 level=small target=idea:domain-environment-indexers
+spawned a03-b4478b53 pid=1069436 level=small target=idea:domain-chain-engine
+spawned a04-315e3656 pid=1069453 level=small target=idea:domain-autoresearch-tree-skill
+manifest: /home/ubuntu/.hermes/agi-tree/sessions/iter-003/manifest.json

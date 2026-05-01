@@ -1,5 +1,5 @@
 ---
-confidence: 1.0
+confidence: 0.5
 id: "hyp:chain-engine-r1"
 parents:
   - idea:domain-chain-engine
