@@ -12,6 +12,7 @@ tags:
   - duality
 spawns:
   - hyp:vector-embedding-isomorphism-r1
+  - hypothesis:a00-324837df-2546ce
 ---
 
 # Domain: Vector Embedding Isomorphism
