@@ -116,6 +116,14 @@ Live record of build progress against `context/plans/build-site.md`.
 - **Notes:** `load_node_with_subgraph()` returns `LoadedNode` containing `node`, `body`, optional `subgraph`. When frontmatter has `subgraph: true`, body is parsed via `_SUBGRAPH_LINE_RE` into a child Graph; cycles silently dropped. Same loader recursion through `load_directory()` walks `.md`/`.json` files deterministically.
 
 ### Iteration 15 — 2026-05-01T03:30:00Z
+- **Task:** T-065 — Git-diff renderer (renderers/R5)
+- **Tier:** 3
+- **Status:** DONE
+- **Files:** src/renderers/git_diff.py (new), src/renderers/__init__.py (edit), tests/renderers/test_git_diff.py (new)
+- **Validation:** Tests 7/7 PASS. R5.1 (chain mismatch + unknown chain raise MismatchedRunsError; same chain proceeds), R5.2 (+/-/~ markers for added/removed/changed fields), R5.3 (identical runs emit single-line "no differences" note, never blank), R5.4 (printable-ASCII-only output via `_ascii_only` filter) all covered.
+- **Notes:** `chain_lookup` is a caller-supplied callable (`run_id -> chain_id | None`); permissive when `None` since chain-engine isn't wired yet. `MismatchedRunsError` exposes `run_a`, `run_b`, `reason`. Long values truncated at 80 chars in `_fmt_val` for diff readability.
+
+### Iteration 15 — 2026-05-01T03:30:00Z
 - **Task:** T-073 — Similarity query API top-k cosine (embeddings/R5)
 - **Tier:** 3
 - **Status:** DONE
