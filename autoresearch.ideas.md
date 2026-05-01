@@ -40,7 +40,8 @@
 
 - ~~**[chain-extension] Push chains to 112 hops**~~ — DONE (168 hops, 9 chains at cycle 80). Formula hops=2*cycle+8 verified at cycles 0–80. Chain hygiene: always commit before log_experiment.
 - ~~**[chain-extension] Push chains to 200 hops**~~ — DONE (iter 16b: 200 hops, 9 chains at cycle 96). Added cycles 81-96 (288 nodes). Fixed graph-core first verdict + extend80 verdict wiring. 272 tests pass.
-- ~~**[chain-extension] Push chains to 300 hops**~~ — DONE (iter30b: 300 hops, 9 chains at cycle 146). 909 new files (450 exp + 450 verdict). Load time 1873ms. 274 tests pass.
+- ~~**[chain-extension] Push chains to 300 hops**~~ — DONE (iter30b: 300 hops, 9 chains at cycle 146). 909 new files (450 exp + 450 verdict). 274 tests pass.
+- ~~**[loader] CSafeLoader optimization**~~ — DONE (iter30b: 4.02x speedup, 1884ms→468ms). ThreadPoolExecutor DISPROVED (0.7x, slower due to GIL). CSafeLoader is C-based libyaml binding. 274 tests pass.
 ~~**[new-domain] idea:domain-vector-embedding-isomorphism**~~ — COMPLETE (iter31: R2 PROVED, full 7-node chain created). Gensim skip-gram Spearman=0.37 vs R1 hash-based -0.18.
 - ~~**[session-management] Complete session-management chain**~~ — COMPLETE (iter 21g: verdict PROVED). Short chain (1 hop to verdict, mvp→outcome→bo→app present).
 - ~~**[embeddings] idea:domain-cli-invocation**~~ — COMPLETE (iter 22: idea→hyp→exp→verdict→mvp→outcome→bo→app, 7 hops).
