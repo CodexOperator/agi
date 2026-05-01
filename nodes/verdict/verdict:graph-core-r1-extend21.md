@@ -11,7 +11,7 @@ tags:
   - chain-extension
   - r21d
 next_edges:
-  - "mvp:graph-core-r1"
+  - "exp:graph-core-r1-extend22"
 ---
 
 VERDICT: proved. graph-core-r1 at 50 hops.
