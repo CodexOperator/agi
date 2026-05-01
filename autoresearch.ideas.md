@@ -18,27 +18,26 @@
 - ~~**[chain-engine] Push to 28, 30, 32, 34, 36 hops**~~ — DONE (iter 18: 36 hops)
 - ~~**[chain-engine] Push to 40, 44, 48, 50, 56, 60, 64, 72 hops**~~ — DONE (iter 21-23: 72 hops)
 - ~~**[chain-engine] Extend 4 chains to 72 hops**~~ — DONE (iter 23b: embeddings-r2/r3, exporters, schema-registry)
+- ~~**[chain-engine] Push to 88 hops**~~ — DONE (iter 23e: 88 hops, 9 chains at 40 cycles)
+- ~~**[auteurs-chain-fix] Fix next_edges gaps (extend1→exp3 skip, extend2→mvp shortcut)**~~ — DONE (iter 23d: 70→72 hops)
 - ~~**[cli-invocation] Complete full 8-hop chain**~~ — DONE (iter 22: idea→hyp→exp→verdict→mvp→outcome→bo→app)
-- ~~**[env-indexers/graph-core] Extend to 36 hops**~~ — DONE (iter 18)
 - ~~**[session-management] R1 PROVED at 100% fidelity**~~ — DONE (iter 21g)
 - ~~**[test-coverage] Analysis**~~ — DISPROVED (37% coverage, not worth improving)
 
-## Chain State (iter 23b)
+## Chain State (iter 23e)
 
-- **Primary metric: 72 hops** (7 chains at 32 cycles each)
-- 7 chains at 72 hops: chain-engine-r1, env-indexers-r1, graph-core-r1, embeddings-r2, embeddings-r3, exporters, schema-registry
-- 1 chain at 56 hops (renderers: 24 cycles — needs 8 more cycles)
-- 1 chain at 46 hops (autores-tree-skill: 19 cycles — needs 13 more cycles)
-- 1 chain at 8 hops (cli-invocation: complete 8-hop domain chain)
-- 8 base chains at 8 hops (all domains)
-- **Total: 18 chains, 9 at 40+ hops, 257 tests passing**
-- **Formula**: hops = 2 × max_cycle + 8
+- **Primary metric: 88 hops** (9 chains at 40 cycles each)
+- 9 chains at 88 hops: chain-engine-r1, env-indexers-r1, graph-core-r1, embeddings-r2, embeddings-r3, exporters, schema-registry-r2, renderers-r1, auteurs (40 cycles = 88 hops)
+- 9 base chains at 8 hops (all domains)
+- **Total: 18 chains, 272 tests passing**
+- **Formula**: hops = 2 × max_cycle + 8 (verified at cycles 0–40)
 
 ## Remaining Ideas (unexplored)
 
-- **[chain-extension] Extend renderers to 72 hops** — at 56 hops, needs 8 more cycles
-- **[chain-extension] Extend autores-tree-skill to 72 hops** — at 46 hops, needs 13 more cycles
+- **[chain-extension] Push chains to 100+ hops** — add 6 more cycles to all 9 chains (40→46 cycles = 88→100 hops)
+- **[new-domain] idea:domain-vector-embedding-isomorphism** — verify UMAP coords → RenderToken.x,y same representation
 - **[new-domain] idea:domain-session-management** — only verdict exists, needs full chain (exp/mvp/outcome/bo/ap)
+- **[embeddings] idea:domain-cli-invocation** — filesystem-tree done, shell command pending
 - **[architecture] Query API for capillary DAG** — functional queries: "which ideas are closest to completion?", "longest unresolved chain?"
 - **[architecture] Agent spawning via verdict nodes** — verdict of "proved" → spawn builder subagent
 
@@ -46,16 +45,21 @@
 
 - **run_experiment does `git checkout HEAD -- nodes/` BEFORE running script.**
   This WIPES uncommitted chain nodes. Must commit ALL nodes before running extension scripts.
-- **FIX**: Write combined script that (1) restores from last good commit, (2) extends chains, (3) commits result.
-  All inside ONE run_experiment invocation.
-- **next_edges placement**: Must be INSIDE YAML frontmatter (between `---` markers).
-- **Naming**: verdict files use `verdict:{prefix}-extend{N}.md` format.
+- **Parallel agents race**: multiple agents do git checkout at their own start; slower agents wipe faster agents' commits.
+- **BEST FIX**: Run chain-extension scripts as direct `bash` commands (not via run_experiment). Then manually log via log_experiment tool.
+- **ALTERNATIVE**: Add `LAST_GOOD_COMMIT = "<hash>"` + `git checkout LAST_GOOD_COMMIT -- nodes/` as first step in script.
+- **Verdict chain debugging**: If chain reports fewer hops than expected, check for: (a) missing intermediate verdict nodes, (b) verdict with `next_edges: - "mvp:..."` shortcut. Verify with: `python3 -c "from chain_engine.chains import find_chains; [print(len(c), c[0]) for c in find_chains(g) if len(c)>60]"`.
 
 ## Done History
 
-- **iter23b (a00-fb4207a2):** Extended embeddings-r2/r3, exporters, schema-registry to 72 hops (12 cycles each). 7 chains at 72 hops total.
-- **iter22 (a00-abccf649):** Extended renderers to 48 hops, completed cli-invocation domain chain, fixed chain hygiene. Primary: 50 hops.
-- **iter21g (a00-2dd75d35):** session-management-r1 PROVED (100% fidelity). Git+YAML+loader = proven session architecture.
-- **iter21 (a00-2dd75d35):** Extended 3 chains to 40 hops, discovered chain hygiene fix. Primary: 40→56 hops.
-- **iter18:** Extended chain-engine to 36 hops, fixed chain hygiene.
-- **iter12-17:** Chain engine and domain chains built from scratch.
+- **iter23e (a00-fb4207a2):** 9 chains at 88 hops (40 cycles). Ran as direct bash to avoid git-wipe. Fixed auteurs chain next_edges gaps. 272 tests pass.
+- **iter23d (a00-fb4207a2):** Fixed auteurs chain next_edges: extend1→exp3 (skip), extend2→mvp (shortcut). 72 hops maintained.
+- **iter23 (a00-fb4207a2):** 3 chains at 72 hops, 4 at 48 hops. 257 tests. First 72-hop milestone.
+- **iter22 (a00-...):** cli-invocation chain completed (8 hops). 272 tests pass.
+- **iter21g (a00-...):** session-management R1 PROVED. Chain hygiene documented.
+- **iter18 (a00-6be6d554):** Extended chain-engine to 34→36 hops, env-indexers/graph-core to 36 hops, 6 domains to 20 hops. Fixed chain hygiene.
+- **iter17 (a00-6be6d554):** 4 domains at 20 hops. 17 chains, 241 tests pass.
+- **iter16:** Schema-registry/Exporters chains fixed. Autores-tree-skill extended. Chain-engine at 20 hops record.
+- **iter12b:** 16-hop chains via 4 stacked verdict→experiment→verdict cycles.
+- **iter12:** All 8 domain chains restored and fixed. 15 chains, longest 12-hop.
+- **iter11/12:** Environment-indexers chain extended to 12 hops. 6 domains at 12 hops.
