@@ -10,9 +10,13 @@ from __future__ import annotations
 
 import random
 from dataclasses import dataclass
-from typing import Sequence
+from typing import Sequence, TYPE_CHECKING
 
-from ..graph_core.graph import Graph
+if TYPE_CHECKING:
+    from graph_core.graph import Graph
+
+# Runtime import
+from graph_core.graph import Graph  # noqa: E402
 
 
 @dataclass
@@ -24,7 +28,7 @@ class MidChainConfig:
 
 def mid_chain_join_candidates(
     chains: Sequence[Sequence[str]],
-    g: Graph,
+    g,  # type: Graph  # noqa: F821
     config: MidChainConfig | None = None,
 ) -> list[str]:
     """Return candidate node IDs for joining a chain.
