@@ -31,3 +31,10 @@ Live record of build progress against `context/plans/build-site.md`.
 - **Status:** DONE
 - **Files:** src/graph_core/identity.py, tests/graph_core/test_identity.py
 - **Validation:** Tests 7/7 PASS, R3.1+R3.2+R3.3+R3.4 covered
+
+### Iteration 4 — 2026-05-01T01:51:00Z
+- **Task:** T-006 — Node file frontmatter persistence
+- **Tier:** 1
+- **Status:** DONE
+- **Files:** src/graph_core/persistence/frontmatter.py, tests/graph_core/test_frontmatter.py, tests/fixtures/nodes/sample.{md,json}
+- **Validation:** Tests 7/7 PASS, R4.2+R4.3 covered
