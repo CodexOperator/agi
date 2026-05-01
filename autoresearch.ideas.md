@@ -53,6 +53,16 @@
 - ~~**[embeddings] idea:domain-cli-invocation**~~ — COMPLETE (iter 22: idea→hyp→exp→verdict→mvp→outcome→bo→app, 7 hops).
 - ~~**[embeddings] R1 gensim production integration**~~ — PROVED (iter34: spearman=0.8552, knn=0.494). Key fix: storage.py numpy float serialization. 274 tests pass.
 - ~~**[embeddings] R5 skip-gram vs CBOW**~~ — inconclusive_lean_proved:40 (iter34: sg k-NN=0.492 vs cbow=0.463, Δ=+6.3%; spearman Δ=+0.108).
+- **[structural-bias] Verdict Pareto skew** — PROVED (iter37): 99.7% verdict nodes orphaned, 1.1% evidence-backed. Chain-extension scripts stamp `proved` without running experiments. Fix: populate parents + evidence_runs in extend scripts.
+- **[structural-bias] Verdict repair analysis** — inconclusive_lean_proved:60 (iter37): domain_match recovers 23.5% of orphans; experiment_parent strategy fails (0 repairs) because extend scripts don't populate next_edges. Full repair requires fixing extend-to-300hop.py.
+- **[chain-extension] Extend chains to 400 hops** — NOT YET DONE. 9 chains at 300 hops (cycle 146). Formula hops=2*cycle+8. 50 more cycles needed (cycles 147-196). WARNING: creates 100 more orphaned synthetic verdict nodes. Should fix extend script first.
+
+## Structural Bias Fixes (iter 37 findings)
+
+- **[fix-extend-script] Populate parents in extend-to-300hop.py**: extend script must set `parents: ["hypothesis:{domain}-r1"]` on verdict nodes and `next_edges: ["exp:{domain}-extend{cycle}"]`. This enables experiment_parent repair strategy and improves capillary DAG integrity.
+- **[repair-orphaned-verdicts] Automated repair of existing 1473 orphaned verdicts**: Use domain_match strategy to add hypothesis parents. 346/1473 (23.5%) recoverable. Remaining 1127 need experiment_parent strategy (requires next_edges fix first).
+- **[synthetic-flag] Mark all synthetic verdict nodes**: Add `synthetic: true` field to all verdict nodes created by chain-extension scripts. Distinguishes script-generated from experiment-generated verdicts.
+- **[evidence-synthetic] Populate evidence_runs for synthetic verdicts**: Set `evidence_runs: ["synthetic"]` for script-created verdict nodes instead of leaving blank.
 - ~~**[architecture] Query API for capillary DAG**~~ — IMPLEMENTED + FIXED (iter24): verdict fields loaded into Node objects, completion_ratio now returns 98-99% for active chains. rank_ideas shows meaningful score variation.
 - ~~**[architecture] Agent spawning via verdict nodes**~~ — EXPLORED by iter025 (pending verdict). NOT YET IMPLEMENTED.
 - ~~**[architecture] Branching chains**~~ — PROVED (iter24): capillary DAG already supports branching. idea:domain-embeddings has 4 chains (r2+r3 both reach app_purpose). Total 18 chains across 12 ideas.
