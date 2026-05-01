@@ -11,7 +11,7 @@ tags:
   - chain-extension
   - r21f
 next_edges:
-  - "mvp:renderers-r1"
+  - "exp:renderers-r1-extend25"
 ---
 
 VERDICT: proved. renderers-r1 at 56 hops.

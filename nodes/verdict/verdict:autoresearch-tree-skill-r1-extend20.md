@@ -10,7 +10,7 @@ parents:
 tags:
   - chain-extension
 next_edges:
-  - "mvp:autoresearch-tree-skill-r1"
+  - "exp:autoresearch-tree-skill-r1-extend21"
 ---
 
 VERDICT: proved. autoresearch-tree-skill-r1 at cycle 20 = 44 hops.
