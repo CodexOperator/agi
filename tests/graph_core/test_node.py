@@ -3,9 +3,9 @@ from src.graph_core.node import Node
 
 
 class TestNodeFields:
-    def test_field_set_exactly_six(self):
-        """R1.1: Only the six declared fields exist."""
-        fields = {"id", "type", "payload_ref", "parents", "children", "tags"}
+    def test_field_set_exactly_seven(self):
+        """R1 + next_edges: Seven declared fields exist."""
+        fields = {"id", "type", "payload_ref", "parents", "children", "tags", "next_edges"}
         node = Node(id="n1", type="idea")
         assert set(vars(node).keys()) == fields
 
@@ -56,6 +56,7 @@ class TestNodeStructure:
             parents={"p1", "p2"},
             children={"c1"},
             tags={"tag-a", "tag-b"},
+            next_edges=["v1", "v2"],
         )
         assert node.id == "n1"
         assert node.type == "hypothesis"
@@ -63,6 +64,7 @@ class TestNodeStructure:
         assert node.parents == {"p1", "p2"}
         assert node.children == {"c1"}
         assert node.tags == {"tag-a", "tag-b"}
+        assert node.next_edges == ["v1", "v2"]
 
 
 class TestNodeTagsIsolation:

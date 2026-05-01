@@ -69,6 +69,7 @@ def _node_from_frontmatter(
     children = set(fm.get("children", []) or [])
     tags = set(fm.get("tags", []) or [])
     payload_ref = fm.get("payload_ref")
+    next_edges = list(fm.get("next_edges", []) or [])
     return Node(
         id=nid,
         type=type_str,
@@ -76,6 +77,7 @@ def _node_from_frontmatter(
         parents=parents,
         children=children,
         tags=tags,
+        next_edges=next_edges,
     )
 
 
@@ -233,6 +235,14 @@ def load_directory(
             loaded.append(ln)
 
     if reconstruct_next_edges:
-        _reconstruct_next_edges(g, loaded, base_dir)
+        # Use next_edges already extracted on each node (single-pass extraction).
+        # This replaces the double-walk _reconstruct_next_edges.
+        for node in g.nodes:
+            for target_id in node.next_edges:
+                if g.has_node(target_id):
+                    try:
+                        g.add_edge(Edge(source_id=node.id, target_id=target_id, relation="next"))
+                    except Exception:
+                        pass
 
     return g, loaded

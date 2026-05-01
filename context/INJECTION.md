@@ -1,188 +1,227 @@
 # autoresearch-tree INJECTION CONTEXT
-_generated 2026-05-01T16:14:12+00:00_
+_generated 2026-05-01T16:22:37+00:00_
 
 ## graph snapshot
-- nodes: 158
-- edges: 148
-- by type: hypothesis=61, idea=7, task=90
-- longest chain: 0 hops (via next edges)
-- chain count: 0
+- nodes: 1785
+- edges: 3112
+- by type: app_purpose=11, bigger_outcome=12, experiment=770, hypothesis=75, idea=12, mvp=13, node=2, outcome=13, task=94, verdict=783
+- longest chain: 168 hops (via next edges)
+- chain count: 18
 
 ## attractive ideas (descendant count, top 10)
-- idea:domain-graph-core :: 28 descendants
-- idea:domain-environment-indexers :: 24 descendants
-- idea:domain-autoresearch-tree-skill :: 23 descendants
-- idea:domain-chain-engine :: 22 descendants
-- idea:domain-schema-registry :: 20 descendants
-- idea:domain-renderers :: 17 descendants
-- idea:domain-embeddings :: 14 descendants
+- idea:domain-embeddings :: 209 descendants
+- idea:domain-graph-core :: 129 descendants
+- idea:domain-environment-indexers :: 124 descendants
+- idea:domain-autoresearch-tree-skill :: 121 descendants
+- idea:domain-chain-engine :: 120 descendants
+- idea:domain-renderers :: 115 descendants
+- idea:domain-exporters :: 99 descendants
+- idea:domain-schema-registry :: 37 descendants
+- idea:domain-cli-invocation :: 0 descendants
+- idea:domain-session-management :: 0 descendants
 
 ## ASCII view (≤200 lines)
 ```
-# graph: 158 nodes
-# types: hypothesis=61, idea=7, task=90
+# graph: 1785 nodes
+# types: app_purpose=11, bigger_outcome=12, experiment=770, hypothesis=75, idea=12, mvp=13, node=2, outcome=13, task=94, verdict=783
 #
-  hyp:autoresearch-tree-skill-r1 :: hypothesis [spawns->task:t-076, spawns->task:t-088]
-  hyp:autoresearch-tree-skill-r2 :: hypothesis [spawns->task:t-077]
-  hyp:autoresearch-tree-skill-r3 :: hypothesis [spawns->task:t-078]
-  hyp:autoresearch-tree-skill-r4 :: hypothesis [spawns->task:t-079, spawns->task:t-080]
-  hyp:autoresearch-tree-skill-r5 :: hypothesis [spawns->task:t-081]
-  hyp:autoresearch-tree-skill-r6 :: hypothesis [spawns->task:t-082, spawns->task:t-083, spawns->task:t-084]
-  hyp:autoresearch-tree-skill-r7 :: hypothesis [spawns->task:t-085, spawns->task:t-086]
-  hyp:autoresearch-tree-skill-r8 :: hypothesis [spawns->task:t-087]
-  hyp:autoresearch-tree-skill-r9 :: hypothesis [spawns->task:t-089]
-  hyp:chain-engine-r1 :: hypothesis [spawns->task:t-047]
-  hyp:chain-engine-r2 :: hypothesis [spawns->task:t-048]
-  hyp:chain-engine-r3 :: hypothesis [spawns->task:t-049]
-  hyp:chain-engine-r4 :: hypothesis [spawns->task:t-050]
-  hyp:chain-engine-r5 :: hypothesis [spawns->task:t-051]
-  hyp:chain-engine-r6 :: hypothesis [spawns->task:t-052]
-  hyp:chain-engine-r7 :: hypothesis [spawns->task:t-053]
-  hyp:chain-engine-r8 :: hypothesis [spawns->task:t-054, spawns->task:t-055]
-  hyp:chain-engine-r9 :: hypothesis [spawns->task:t-056, spawns->task:t-057, spawns->task:t-058 (+1)]
-  hyp:embeddings-r1 :: hypothesis [spawns->task:t-069]
-  hyp:embeddings-r2 :: hypothesis [spawns->task:t-070]
-  hyp:embeddings-r3 :: hypothesis [spawns->task:t-071]
-  hyp:embeddings-r4 :: hypothesis [spawns->task:t-072]
-  hyp:embeddings-r5 :: hypothesis [spawns->task:t-073]
-  hyp:embeddings-r6 :: hypothesis [spawns->task:t-074]
-  hyp:embeddings-r7 :: hypothesis [spawns->task:t-075]
-  hyp:environment-indexers-r1 :: hypothesis [spawns->task:t-032]
-  hyp:environment-indexers-r2 :: hypothesis [spawns->task:t-033]
-  hyp:environment-indexers-r3 :: hypothesis [spawns->task:t-034, spawns->task:t-035, spawns->task:t-036]
-  hyp:environment-indexers-r4 :: hypothesis [spawns->task:t-037, spawns->task:t-038]
-  hyp:environment-indexers-r5 :: hypothesis [spawns->task:t-039, spawns->task:t-040]
-  hyp:environment-indexers-r6 :: hypothesis [spawns->task:t-041]
-  hyp:environment-indexers-r7 :: hypothesis [spawns->task:t-042]
-  hyp:environment-indexers-r8 :: hypothesis [spawns->task:t-043]
-  hyp:environment-indexers-r9 :: hypothesis [spawns->task:t-044, spawns->task:t-045, spawns->task:t-046]
-  hyp:graph-core-r1 :: hypothesis [spawns->task:t-001, spawns->task:t-002]
-  hyp:graph-core-r10 :: hypothesis [spawns->task:t-018]
-  hyp:graph-core-r2 :: hypothesis [spawns->task:t-003, spawns->task:t-004]
-  hyp:graph-core-r3 :: hypothesis [spawns->task:t-005]
-  hyp:graph-core-r4 :: hypothesis [spawns->task:t-006, spawns->task:t-007, spawns->task:t-008]
-  hyp:graph-core-r5 :: hypothesis [spawns->task:t-009, spawns->task:t-010]
-  hyp:graph-core-r6 :: hypothesis [spawns->task:t-011, spawns->task:t-012]
-  hyp:graph-core-r7 :: hypothesis [spawns->task:t-013, spawns->task:t-014]
-  hyp:graph-core-r8 :: hypothesis [spawns->task:t-015]
-  hyp:graph-core-r9 :: hypothesis [spawns->task:t-016, spawns->task:t-017]
-  hyp:renderers-r1 :: hypothesis [spawns->task:t-060]
-  hyp:renderers-r2 :: hypothesis [spawns->task:t-061, spawns->task:t-062]
-  hyp:renderers-r3 :: hypothesis [spawns->task:t-063]
-  hyp:renderers-r4 :: hypothesis [spawns->task:t-064]
-  hyp:renderers-r5 :: hypothesis [spawns->task:t-065]
-  hyp:renderers-r6 :: hypothesis [spawns->task:t-066]
-  hyp:renderers-r7 :: hypothesis [spawns->task:t-067]
-  hyp:renderers-r8 :: hypothesis [spawns->task:t-068]
-  hyp:schema-registry-r1 :: hypothesis [spawns->task:t-091]
-  hyp:schema-registry-r2 :: hypothesis [spawns->task:t-021]
-  hyp:schema-registry-r3 :: hypothesis [spawns->task:t-022, spawns->task:t-023]
-  hyp:schema-registry-r4 :: hypothesis [spawns->task:t-024]
-  hyp:schema-registry-r5 :: hypothesis [spawns->task:t-025, spawns->task:t-026, spawns->task:t-027 (+1)]
-  hyp:schema-registry-r6 :: hypothesis [spawns->task:t-028]
-  hyp:schema-registry-r7 :: hypothesis [spawns->task:t-030]
-  hyp:schema-registry-r8 :: hypothesis [spawns->task:t-031]
-hypothesis:a00-8fe3e715-af88f6 :: hypothesis
-idea:domain-autoresearch-tree-skill :: idea [spawns->hyp:autoresearch-tree-skill-r1, spawns->hyp:autoresearch-tree-skill-r2, spawns->hyp:autoresearch-tree-skill-r3 (+6)]
-idea:domain-chain-engine :: idea [spawns->hyp:chain-engine-r1, spawns->hyp:chain-engine-r2, spawns->hyp:chain-engine-r3 (+6)]
-idea:domain-embeddings :: idea [spawns->hyp:embeddings-r1, spawns->hyp:embeddings-r2, spawns->hyp:embeddings-r3 (+4)]
-idea:domain-environment-indexers :: idea [spawns->hyp:environment-indexers-r1, spawns->hyp:environment-indexers-r2, spawns->hyp:environment-indexers-r3 (+6)]
-idea:domain-graph-core :: idea [spawns->hyp:graph-core-r1, spawns->hyp:graph-core-r10, spawns->hyp:graph-core-r2 (+7)]
-idea:domain-renderers :: idea [spawns->hyp:renderers-r1, spawns->hyp:renderers-r2, spawns->hyp:renderers-r3 (+5)]
-idea:domain-schema-registry :: idea [spawns->hyp:schema-registry-r1, spawns->hyp:schema-registry-r2, spawns->hyp:schema-registry-r3 (+5)]
-    task:t-001 :: task
-    task:t-002 :: task
-    task:t-003 :: task
-    task:t-004 :: task
-    task:t-005 :: task
-    task:t-006 :: task
-    task:t-007 :: task
-    task:t-008 :: task
-    task:t-009 :: task
-    task:t-010 :: task
-    task:t-011 :: task
-    task:t-012 :: task
-    task:t-013 :: task
-    task:t-014 :: task
-    task:t-015 :: task
-    task:t-016 :: task
-    task:t-017 :: task
-    task:t-018 :: task
-    task:t-021 :: task
-    task:t-022 :: task
-    task:t-023 :: task
-    task:t-024 :: task
-    task:t-025 :: task
-    task:t-026 :: task
-    task:t-027 :: task
-    task:t-028 :: task
-    task:t-029 :: task
-    task:t-030 :: task
-    task:t-031 :: task
-    task:t-032 :: task
-    task:t-033 :: task
-    task:t-034 :: task
-    task:t-035 :: task
-    task:t-036 :: task
-    task:t-037 :: task
-    task:t-038 :: task
-    task:t-039 :: task
-    task:t-040 :: task
-    task:t-041 :: task
-    task:t-042 :: task
-    task:t-043 :: task
-    task:t-044 :: task
-    task:t-045 :: task
-    task:t-046 :: task
-    task:t-047 :: task
-    task:t-048 :: task
-    task:t-049 :: task
-    task:t-050 :: task
-    task:t-051 :: task
-    task:t-052 :: task
-    task:t-053 :: task
-    task:t-054 :: task
-    task:t-055 :: task
-    task:t-056 :: task
-    task:t-057 :: task
-    task:t-058 :: task
-    task:t-059 :: task
-    task:t-060 :: task
-    task:t-061 :: task
-    task:t-062 :: task
-    task:t-063 :: task
-    task:t-064 :: task
-    task:t-065 :: task
-    task:t-066 :: task
-    task:t-067 :: task
-    task:t-068 :: task
-    task:t-069 :: task
-    task:t-070 :: task
-    task:t-071 :: task
-    task:t-072 :: task
-    task:t-073 :: task
-    task:t-074 :: task
-    task:t-075 :: task
-    task:t-076 :: task
-    task:t-077 :: task
-    task:t-078 :: task
-    task:t-079 :: task
-    task:t-080 :: task
-    task:t-081 :: task
-    task:t-082 :: task
-    task:t-083 :: task
-    task:t-084 :: task
-    task:t-085 :: task
-    task:t-086 :: task
-    task:t-087 :: task
-    task:t-088 :: task
-    task:t-089 :: task
-task:t-090 :: task
-    task:t-091 :: task
-task:t-092 :: task
+        app-purpose:autoresearch-tree-skill :: app_purpose
+              app-purpose:chain-engine :: app_purpose
+              app-purpose:cli-invocation :: app_purpose
+              app-purpose:embeddings :: app_purpose
+        app-purpose:environment-indexers :: app_purpose
+            app-purpose:exporters :: app_purpose
+              app-purpose:graph-core :: app_purpose
+              app-purpose:renderers :: app_purpose
+              app-purpose:schema-registry :: app_purpose
+          app-purpose:session-management :: app_purpose
+          app-purpose:session-management-r1 :: app_purpose
+        bigger-outcome:autoresearch-tree-skill-r :: bigger_outcome [next->app-purpose:autoresearch-tree-skill, spawns->app-purpose:autoresearch-tree-skill]
+            bigger-outcome:chain-engine-r1 :: bigger_outcome [next->app-purpose:chain-engine, spawns->app-purpose:chain-engine]
+            bigger-outcome:cli-invocation-r1 :: bigger_outcome [next->app-purpose:cli-invocation, spawns->app-purpose:cli-invocation]
+            bigger-outcome:embeddings-r2 :: bigger_outcome [next->app-purpose:embeddings, spawns->app-purpose:embeddings]
+            bigger-outcome:embeddings-r3 :: bigger_outcome [next->app-purpose:embeddings]
+        bigger-outcome:environment-indexers-r1 :: bigger_outcome [next->app-purpose:environment-indexers, spawns->app-purpose:environment-indexers]
+          bigger-outcome:exporters-r1 :: bigger_outcome [next->app-purpose:exporters, spawns->app-purpose:exporters]
+            bigger-outcome:graph-core-r1 :: bigger_outcome [next->app-purpose:graph-core, spawns->app-purpose:graph-core]
+            bigger-outcome:renderers-r1 :: bigger_outcome [next->app-purpose:renderers, spawns->app-purpose:renderers]
+            bigger-outcome:schema-registry-r1 :: bigger_outcome [next->app-purpose:schema-registry, spawns->app-purpose:schema-registry]
+            bigger-outcome:schema-registry-r2 :: bigger_outcome [next->app-purpose:schema-registry]
+        bigger-outcome:session-management-r1 :: bigger_outcome [next->app-purpose:session-management, spawns->app-purpose:session-management, spawns->app-purpose:session-management-r1]
+  exp:a00-c2ec59b7-b391d9 :: experiment [next->verdict:a00-c2ec59b7-b391d9, spawns->verdict:a00-c2ec59b7-b391d9]
+    exp:autoresearch-tree-skill-r1 :: experiment [spawns->mvp:autoresearch-tree-skill-r1, next->verdict:autoresearch-tree-skill-r1, spawns->verdict:autoresearch-tree-skill-r1]
+      exp:autoresearch-tree-skill-r1-extend :: experiment [next->verdict:autoresearch-tree-skill-r1-extend, spawns->verdict:autoresearch-tree-skill-r1-extend]
+                      exp:autoresearch-tree-skill-r1-extend10 :: experiment [next->verdict:autoresearch-tree-skill-r1-extend10, spawns->verdict:autoresearch-tree-skill-r1-extend10]
+                        exp:autoresearch-tree-skill-r1-extend11 :: experiment [next->verdict:autoresearch-tree-skill-r1-extend11, spawns->verdict:autoresearch-tree-skill-r1-extend11]
+                          exp:autoresearch-tree-skill-r1-extend12 :: experiment [next->verdict:autoresearch-tree-skill-r1-extend12, spawns->verdict:autoresearch-tree-skill-r1-extend12]
+                            exp:autoresearch-tree-skill-r1-extend13 :: experiment [next->verdict:autoresearch-tree-skill-r1-extend13, spawns->verdict:autoresearch-tree-skill-r1-extend13]
+                              exp:autoresearch-tree-skill-r1-extend14 :: experiment [next->verdict:autoresearch-tree-skill-r1-extend14, spawns->verdict:autoresearch-tree-skill-r1-extend14]
+                                exp:autoresearch-tree-skill-r1-extend15 :: experiment [next->verdict:autoresearch-tree-skill-r1-extend15, spawns->verdict:autoresearch-tree-skill-r1-extend15]
+                                  exp:autoresearch-tree-skill-r1-extend16 :: experiment [next->verdict:autoresearch-tree-skill-r1-extend16, spawns->verdict:autoresearch-tree-skill-r1-extend16]
+                                    exp:autoresearch-tree-skill-r1-extend17 :: experiment [next->verdict:autoresearch-tree-skill-r1-extend17, spawns->verdict:autoresearch-tree-skill-r1-extend17]
+                                      exp:autoresearch-tree-skill-r1-extend18 :: experiment [next->verdict:autoresearch-tree-skill-r1-extend18, spawns->verdict:autoresearch-tree-skill-r1-extend18]
+                                        exp:autoresearch-tree-skill-r1-extend19 :: experiment [next->verdict:autoresearch-tree-skill-r1-extend19, spawns->verdict:autoresearch-tree-skill-r1-extend19]
+        exp:autoresearch-tree-skill-r1-extend2 :: experiment [next->verdict:autoresearch-tree-skill-r1-extend2, spawns->verdict:autoresearch-tree-skill-r1-extend2]
+                                          exp:autoresearch-tree-skill-r1-extend20 :: experiment [next->verdict:autoresearch-tree-skill-r1-extend20, spawns->verdict:autoresearch-tree-skill-r1-extend20]
+                                            exp:autoresearch-tree-skill-r1-extend21 :: experiment [next->verdict:autoresearch-tree-skill-r1-extend21, spawns->verdict:autoresearch-tree-s ... [line cut]
+                                              exp:autoresearch-tree-skill-r1-extend22 :: experiment [next->verdict:autoresearch-tree-skill-r1-extend22, spawns->verdict:autoresearch-tree ... [line cut]
+                                                exp:autoresearch-tree-skill-r1-extend23 :: experiment [next->verdict:autoresearch-tree-skill-r1-extend23, spawns->verdict:autoresearch-tr ... [line cut]
+                                                  exp:autoresearch-tree-skill-r1-extend24 :: experiment [next->verdict:autoresearch-tree-skill-r1-extend24, spawns->verdict:autoresearch- ... [line cut]
+                                                    exp:autoresearch-tree-skill-r1-extend25 :: experiment [next->verdict:autoresearch-tree-skill-r1-extend25, spawns->verdict:autoresearc ... [line cut]
+                                                      exp:autoresearch-tree-skill-r1-extend26 :: experiment [next->verdict:autoresearch-tree-skill-r1-extend26, spawns->verdict:autoresea ... [line cut]
+                                                        exp:autoresearch-tree-skill-r1-extend27 :: experiment [next->verdict:autoresearch-tree-skill-r1-extend27, spawns->verdict:autores ... [line cut]
+                                                          exp:autoresearch-tree-skill-r1-extend28 :: experiment [next->verdict:autoresearch-tree-skill-r1-extend28, spawns->verdict:autor ... [line cut]
+                                                            exp:autoresearch-tree-skill-r1-extend29 :: experiment [next->verdict:autoresearch-tree-skill-r1-extend29, spawns->verdict:aut ... [line cut]
+        exp:autoresearch-tree-skill-r1-extend3 :: experiment [next->verdict:autoresearch-tree-skill-r1-extend3, spawns->verdict:autoresearch-tree-skill-r1-extend3]
+                                                              exp:autoresearch-tree-skill-r1-extend30 :: experiment [next->verdict:autoresearch-tree-skill-r1-extend30, spawns->verdict:a ... [line cut]
+                                                                exp:autoresearch-tree-skill-r1-extend31 :: experiment [next->verdict:autoresearch-tree-skill-r1-extend31, spawns->verdict ... [line cut]
+                                                                  exp:autoresearch-tree-skill-r1-extend32 :: experiment [next->verdict:autoresearch-tree-skill-r1-extend32, spawns->verdi ... [line cut]
+                                                                    exp:autoresearch-tree-skill-r1-extend33 :: experiment [next->verdict:autoresearch-tree-skill-r1-extend33, spawns->ver ... [line cut]
+                                                                      exp:autoresearch-tree-skill-r1-extend34 :: experiment [next->verdict:autoresearch-tree-skill-r1-extend34, spawns->v ... [line cut]
+                                                                        exp:autoresearch-tree-skill-r1-extend35 :: experiment [next->verdict:autoresearch-tree-skill-r1-extend35, spawns- ... [line cut]
+                                                                          exp:autoresearch-tree-skill-r1-extend36 :: experiment [next->verdict:autoresearch-tree-skill-r1-extend36, spawn ... [line cut]
+                                                                            exp:autoresearch-tree-skill-r1-extend37 :: experiment [next->verdict:autoresearch-tree-skill-r1-extend37, spa ... [line cut]
+                                                                              exp:autoresearch-tree-skill-r1-extend38 :: experiment [next->verdict:autoresearch-tree-skill-r1-extend38, s ... [line cut]
+                                                                                exp:autoresearch-tree-skill-r1-extend39 :: experiment [next->verdict:autoresearch-tree-skill-r1-extend39, ... [line cut]
+          exp:autoresearch-tree-skill-r1-extend4 :: experiment [next->verdict:autoresearch-tree-skill-r1-extend4, spawns->verdict:autoresearch-tree-skill-r1-extend4]
+                                                                                  exp:autoresearch-tree-skill-r1-extend40 :: experiment [next->verdict:autoresearch-tree-skill-r1-extend4 ... [line cut]
+                                                                                    exp:autoresearch-tree-skill-r1-extend41 :: experiment [next->verdict:autoresearch-tree-skill-r1-exten ... [line cut]
+                                                                                      exp:autoresearch-tree-skill-r1-extend42 :: experiment [next->verdict:autoresearch-tree-skill-r1-ext ... [line cut]
+                                                                                        exp:autoresearch-tree-skill-r1-extend43 :: experiment [next->verdict:autoresearch-tree-skill-r1-e ... [line cut]
+                                                                                          exp:autoresearch-tree-skill-r1-extend44 :: experiment [next->verdict:autoresearch-tree-skill-r1 ... [line cut]
+                                                                                            exp:autoresearch-tree-skill-r1-extend45 :: experiment [next->verdict:autoresearch-tree-skill- ... [line cut]
+                                                                                              exp:autoresearch-tree-skill-r1-extend46 :: experiment [next->verdict:autoresearch-tree-skil ... [line cut]
+                                                                                                exp:autoresearch-tree-skill-r1-extend47 :: experiment [next->verdict:autoresearch-tree-sk ... [line cut]
+                                                                                                    exp:autoresearch-tree-skill-r1-extend48 :: experiment [next->verdict:autoresearch-tre ... [line cut]
+                                                                                                        exp:autoresearch-tree-skill-r1-extend49 :: experiment [next->verdict:autoresearch ... [line cut]
+            exp:autoresearch-tree-skill-r1-extend5 :: experiment [next->verdict:autoresearch-tree-skill-r1-extend5, spawns->verdict:autoresearch-tree-skill-r1-extend5]
+                                                                                                            exp:autoresearch-tree-skill-r1-extend50 :: experiment [next->verdict:autorese ... [line cut]
+                                                                                                                exp:autoresearch-tree-skill-r1-extend51 :: experiment [next->verdict:auto ... [line cut]
+                                                                                                                    exp:autoresearch-tree-skill-r1-extend52 :: experiment [next->verdict: ... [line cut]
+                                                                                                                        exp:autoresearch-tree-skill-r1-extend53 :: experiment [next->verd ... [line cut]
+                                                                                                                            exp:autoresearch-tree-skill-r1-extend54 :: experiment [next-> ... [line cut]
+                                                                                                                                exp:autoresearch-tree-skill-r1-extend55 :: experiment [ne ... [line cut]
+                                                                                                                                    exp:autoresearch-tree-skill-r1-extend56 :: experiment ... [line cut]
+                                                                                                                                        exp:autoresearch-tree-skill-r1-extend57 :: experi ... [line cut]
+                                                                                                                                            exp:autoresearch-tree-skill-r1-extend58 :: ex ... [line cut]
+                                                                                                                                                exp:autoresearch-tree-skill-r1-extend59 : ... [line cut]
+              exp:autoresearch-tree-skill-r1-extend6 :: experiment [next->verdict:autoresearch-tree-skill-r1-extend6, spawns->verdict:autoresearch-tree-skill-r1-extend6]
+                                                                                                                                                    exp:autoresearch-tree-skill-r1-extend ... [line cut]
+                                                                                                                                                        exp:autoresearch-tree-skill-r1-ex ... [line cut]
+                                                                                                                                                            exp:autoresearch-tree-skill-r ... [line cut]
+                                                                                                                                                                exp:autoresearch-tree-ski ... [line cut]
+                                                                                                                                                                    exp:autoresearch-tree ... [line cut]
+                                                                                                                                                                        exp:autoresearch- ... [line cut]
+                                                                                                                                                                            exp:autoresea ... [line cut]
+                                                                                                                                                                                exp:autor ... [line cut]
+                                                                                                                                                                                    exp:a ... [line cut]
+                                                                                                                                                                                        e ... [line cut]
+                exp:autoresearch-tree-skill-r1-extend7 :: experiment [next->verdict:autoresearch-tree-skill-r1-extend7, spawns->verdict:autoresearch-tree-skill-r1-extend7]
+                                                                                                                                                                                          ... [line cut]
+                                                                                                                                                                                          ... [line cut]
+                                                                                                                                                                                          ... [line cut]
+                                                                                                                                                                                          ... [line cut]
+                                                                                                                                                                                          ... [line cut]
+                                                                                                                                                                                          ... [line cut]
+                                                                                                                                                                                          ... [line cut]
+                                                                                                                                                                                          ... [line cut]
+                                                                                                                                                                                          ... [line cut]
+                                                                                                                                                                                          ... [line cut]
+                  exp:autoresearch-tree-skill-r1-extend8 :: experiment [next->verdict:autoresearch-tree-skill-r1-extend8, spawns->verdict:autoresearch-tree-skill-r1-extend8]
+                                                                                                                                                                                          ... [line cut]
+                    exp:autoresearch-tree-skill-r1-extend9 :: experiment [next->verdict:autoresearch-tree-skill-r1-extend9, spawns->verdict:autoresearch-tree-skill-r1-extend9]
+exp:autoresearch-tree-skill-r1:extend8 :: experiment
+    exp:chain-engine-r1 :: experiment [next->verdict:chain-engine-r1, spawns->verdict:chain-engine-r1]
+    exp:chain-engine-r1-extend :: experiment [next->verdict:chain-engine-r1-extend, spawns->verdict:chain-engine-r1-extend]
+                        exp:chain-engine-r1-extend10 :: experiment [next->verdict:chain-engine-r1-extend10, spawns->verdict:chain-engine-r1-extend10]
+                          exp:chain-engine-r1-extend11 :: experiment [next->verdict:chain-engine-r1-extend11, spawns->verdict:chain-engine-r1-extend11]
+                            exp:chain-engine-r1-extend12 :: experiment [next->verdict:chain-engine-r1-extend12, spawns->verdict:chain-engine-r1-extend12]
+                              exp:chain-engine-r1-extend13 :: experiment [next->verdict:chain-engine-r1-extend13, spawns->verdict:chain-engine-r1-extend13]
+                                exp:chain-engine-r1-extend14 :: experiment [next->verdict:chain-engine-r1-extend14, spawns->verdict:chain-engine-r1-extend14]
+                                  exp:chain-engine-r1-extend15 :: experiment [next->verdict:chain-engine-r1-extend15, spawns->verdict:chain-engine-r1-extend15]
+                                    exp:chain-engine-r1-extend16 :: experiment [next->verdict:chain-engine-r1-extend16, spawns->verdict:chain-engine-r1-extend16]
+                                      exp:chain-engine-r1-extend17 :: experiment [next->verdict:chain-engine-r1-extend17, spawns->verdict:chain-engine-r1-extend17]
+                                        exp:chain-engine-r1-extend18 :: experiment [next->verdict:chain-engine-r1-extend18, spawns->verdict:chain-engine-r1-extend18]
+                                          exp:chain-engine-r1-extend19 :: experiment [next->verdict:chain-engine-r1-extend19, spawns->verdict:chain-engine-r1-extend19]
+        exp:chain-engine-r1-extend2 :: experiment [next->verdict:chain-engine-r1-extend2, spawns->verdict:chain-engine-r1-extend2]
+                                            exp:chain-engine-r1-extend20 :: experiment [next->verdict:chain-engine-r1-extend20, spawns->verdict:chain-engine-r1-extend20]
+                                              exp:chain-engine-r1-extend21 :: experiment [next->verdict:chain-engine-r1-extend21, spawns->verdict:chain-engine-r1-extend21]
+                                                exp:chain-engine-r1-extend22 :: experiment [next->verdict:chain-engine-r1-extend22, spawns->verdict:chain-engine-r1-extend22]
+                                                  exp:chain-engine-r1-extend23 :: experiment [next->verdict:chain-engine-r1-extend23, spawns->verdict:chain-engine-r1-extend23]
+                                                    exp:chain-engine-r1-extend24 :: experiment [next->verdict:chain-engine-r1-extend24, spawns->verdict:chain-engine-r1-extend24]
+                                                      exp:chain-engine-r1-extend25 :: experiment [next->verdict:chain-engine-r1-extend25, spawns->verdict:chain-engine-r1-extend25]
+                                                        exp:chain-engine-r1-extend26 :: experiment [next->verdict:chain-engine-r1-extend26, spawns->verdict:chain-engine-r1-extend26]
+                                                          exp:chain-engine-r1-extend27 :: experiment [next->verdict:chain-engine-r1-extend27, spawns->verdict:chain-engine-r1-extend27]
+                                                            exp:chain-engine-r1-extend28 :: experiment [next->verdict:chain-engine-r1-extend28, spawns->verdict:chain-engine-r1-extend28]
+                                                              exp:chain-engine-r1-extend29 :: experiment [next->verdict:chain-engine-r1-extend29, spawns->verdict:chain-engine-r1-extend29]
+          exp:chain-engine-r1-extend3 :: experiment [next->verdict:chain-engine-r1-extend3, spawns->verdict:chain-engine-r1-extend3]
+                                                                exp:chain-engine-r1-extend30 :: experiment [next->verdict:chain-engine-r1-extend30, spawns->verdict:chain-engine-r1-extend30]
+                                                                  exp:chain-engine-r1-extend31 :: experiment [next->verdict:chain-engine-r1-extend31, spawns->verdict:chain-engine-r1-extend31]
+                                                                    exp:chain-engine-r1-extend32 :: experiment [next->verdict:chain-engine-r1-extend32, spawns->verdict:chain-engine-r1-extend32]
+                                                                      exp:chain-engine-r1-extend33 :: experiment [next->verdict:chain-engine-r1-extend33, spawns->verdict:chain-engine-r1-extend33]
+                                                                        exp:chain-engine-r1-extend34 :: experiment [next->verdict:chain-engine-r1-extend34, spawns->verdict:chain-engine-r1-extend34]
+                                                                          exp:chain-engine-r1-extend35 :: experiment [next->verdict:chain-engine-r1-extend35, spawns->verdict:chain-engine-r1-extend35]
+                                                                            exp:chain-engine-r1-extend36 :: experiment [next->verdict:chain-engine-r1-extend36, spawns->verdict:chain-eng ... [line cut]
+                                                                              exp:chain-engine-r1-extend37 :: experiment [next->verdict:chain-engine-r1-extend37, spawns->verdict:chain-e ... [line cut]
+                                                                                exp:chain-engine-r1-extend38 :: experiment [next->verdict:chain-engine-r1-extend38, spawns->verdict:chain ... [line cut]
+                                                                                  exp:chain-engine-r1-extend39 :: experiment [next->verdict:chain-engine-r1-extend39, spawns->verdict:cha ... [line cut]
+            exp:chain-engine-r1-extend4 :: experiment [next->verdict:chain-engine-r1-extend4, spawns->verdict:chain-engine-r1-extend4]
+                                                                                    exp:chain-engine-r1-extend40 :: experiment [next->verdict:chain-engine-r1-extend40, spawns->verdict:c ... [line cut]
+                                                                                      exp:chain-engine-r1-extend41 :: experiment [next->verdict:chain-engine-r1-extend41, spawns->verdict ... [line cut]
+                                                                                        exp:chain-engine-r1-extend42 :: experiment [next->verdict:chain-engine-r1-extend42, spawns->verdi ... [line cut]
+                                                                                          exp:chain-engine-r1-extend43 :: experiment [next->verdict:chain-engine-r1-extend43, spawns->ver ... [line cut]
+                                                                                            exp:chain-engine-r1-extend44 :: experiment [next->verdict:chain-engine-r1-extend44, spawns->v ... [line cut]
+                                                                                              exp:chain-engine-r1-extend45 :: experiment [next->verdict:chain-engine-r1-extend45, spawns- ... [line cut]
+                                                                                                exp:chain-engine-r1-extend46 :: experiment [next->verdict:chain-engine-r1-extend46, spawn ... [line cut]
+                                                                                                  exp:chain-engine-r1-extend47 :: experiment [next->verdict:chain-engine-r1-extend47]
+                                                                                                      exp:chain-engine-r1-extend48 :: experiment [next->verdict:chain-engine-r1-extend48]
+                                                                                                          exp:chain-engine-r1-extend49 :: experiment [next->verdict:chain-engine-r1-extend49]
+              exp:chain-engine-r1-extend5 :: experiment [next->verdict:chain-engine-r1-extend5, spawns->verdict:chain-engine-r1-extend5]
+                                                                                                              exp:chain-engine-r1-extend50 :: experiment [next->verdict:chain-engine-r1-extend50]
+                                                                                                                  exp:chain-engine-r1-extend51 :: experiment [next->verdict:chain-engine-r1-extend51]
+                                                                                                                      exp:chain-engine-r1-extend52 :: experiment [next->verdict:chain-eng ... [line cut]
+                                                                                                                          exp:chain-engine-r1-extend53 :: experiment [next->verdict:chain ... [line cut]
+                                                                                                                              exp:chain-engine-r1-extend54 :: experiment [next->verdict:c ... [line cut]
+                                                                                                                                  exp:chain-engine-r1-extend55 :: experiment [next->verdi ... [line cut]
+                                                                                                                                      exp:chain-engine-r1-extend56 :: experiment [next->v ... [line cut]
+                                                                                                                                          exp:chain-engine-r1-extend57 :: experiment [nex ... [line cut]
+                                                                                                                                              exp:chain-engine-r1-extend58 :: experiment  ... [line cut]
+                                                                                                                                                  exp:chain-engine-r1-extend59 :: experim ... [line cut]
+                exp:chain-engine-r1-extend6 :: experiment [next->verdict:chain-engine-r1-extend6, spawns->verdict:chain-engine-r1-extend6]
+                                                                                                                                                      exp:chain-engine-r1-extend60 :: exp ... [line cut]
+                                                                                                                                                          exp:chain-engine-r1-extend61 :: ... [line cut]
+                                                                                                                                                              exp:chain-engine-r1-extend6 ... [line cut]
+                                                                                                                                                                  exp:chain-engine-r1-ext ... [line cut]
+                                                                                                                                                                      exp:chain-engine-r1 ... [line cut]
+                                                                                                                                                                          exp:chain-engin ... [line cut]
+                                                                                                                                                                              exp:chain-e ... [line cut]
+                                                                                                                                                                                  exp:cha ... [line cut]
+                                                                                                                                                                                      exp ... [line cut]
+                                                                                                                                                                                          ... [line cut]
+                  exp:chain-engine-r1-extend7 :: experiment [next->verdict:chain-engine-r1-extend7, spawns->verdict:chain-engine-r1-extend7]
+                                                                                                                                                                                          ... [line cut]
+                                                                                                                                                                                          ... [line cut]
+                                                                                                                                                                                          ... [line cut]
+                                                                                                                                                                                          ... [line cut]
+                                                                                                                                                                                          ... [line cut]
+                                                                                                                                                                                          ... [line cut]
+                                                                                                                                                                                          ... [line cut]
+                                                                                                                                                                                          ... [line cut]
+                                                                                                                                                                                          ... [line cut]
+                                                                                                                                                                                          ... [line cut]
+                    exp:chain-engine-r1-extend8 :: experiment [next->verdict:chain-engine-r1-extend8, spawns->verdict:chain-engine-r1-extend8]
+                                                                                                                                                                                          ... [line cut]
+                      exp:chain-engine-r1-extend9 :: experiment [next->verdict:chain-engine-r1-extend9, spawns->verdict:chain-engine-r1-extend9]
+    exp:cli-invocation-r1 :: experiment [next->verdict:cli-invocation-r1]
+exp:cli-invocation-r1-extend1 :: experiment [next->verdict:cli-invocation-r1-extend1]
+                                    exp:cli-invocation-r1-extend10 :: experiment [next->verdict:cli-invocation-r1-extend10]
+                                        exp:cli-invocation-r1-extend11 :: experiment [next->verdict:cli-invocation-r1-extend11]
+                                            exp:cli-invocation-r1-extend12 :: experiment [next->verdict:cli-invocation-r1-extend12]
+                                                exp:cli-invocation-r1-extend13 :: experiment [next->verdict:cli-invocation-r1-extend13]
+... [truncated, 1592 more nodes]
 ----
-Types: hypothesis=61, idea=7, task=90
-Edges: spawns=148
+Types: app_purpose=11, bigger_outcome=12, experiment=770, hypothesis=75, idea=12, mvp=13, node=2, outcome=13, task=94, verdict=783
+Edges: next=1605, spawns=1507
 ```
 
 ## big-vs-small decision

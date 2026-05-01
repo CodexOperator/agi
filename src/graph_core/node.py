@@ -19,7 +19,10 @@ from typing import Optional
 class Node:
     """Generic graph node.
 
-    Exactly six fields. No timestamps. No auto-derived fields.
+    Seven fields. No timestamps. No auto-derived fields.
+
+    The six core fields (R1) are: id, type, payload_ref, parents, children, tags.
+    next_edges is a chain-engine field: ordered list of node-id targets via 'next' relation.
     """
 
     id: str
@@ -28,6 +31,7 @@ class Node:
     parents: set[str] = field(default_factory=set)
     children: set[str] = field(default_factory=set)
     tags: set[str] = field(default_factory=set)
+    next_edges: list[str] = field(default_factory=list)
 
     @property
     def is_root(self) -> bool:

@@ -3,6 +3,8 @@ id: "verdict:session-management-r1"
 type: verdict
 verdict: proved
 confidence: 0.9
+next_edges:
+  - "mvp:session-management-r1"
 evidence_runs:
   - exp-r21g-session-management-test
 parents:
