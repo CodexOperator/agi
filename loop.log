@@ -360,3 +360,32 @@ spawned a02-3ef099e3 pid=1073221 level=small target=idea:domain-environment-inde
 spawned a03-31d9af0a pid=1073230 level=small target=idea:domain-chain-engine
 spawned a04-48cbb4bc pid=1073239 level=small target=idea:domain-autoresearch-tree-skill
 manifest: /home/ubuntu/.hermes/agi-tree/sessions/iter-004/manifest.json
+healer: agent a04-48cbb4bc timed out (pid=1073239), killing + spawning healer
+healer heal-12bdfcb4 spawned pid=1077354 for hung agent a04-48cbb4bc
+all agents terminal
+iter 4: 5 agents
+  a00-7f2d9f9c: status=done verdict=pending pid=1073205
+  a01-3d14fe44: status=done verdict=pending pid=1073213
+  a02-3ef099e3: status=done verdict=inconclusive_lean_proved:80 pid=1073221
+  a03-31d9af0a: status=done verdict=pending pid=1073230
+  a04-48cbb4bc: status=hung-healed verdict=- pid=1073239
+[driver] sleeping 2m before iter 5...
+=== iter 5 @ 2026-05-01T06:37:42Z ===
+wrote: 7 idea + 59 hypothesis + 90 task = 156 nodes
+target dir: /home/ubuntu/.hermes/agi-tree/nodes
+loaded 155 nodes from /home/ubuntu/.hermes/agi-tree/nodes
+ASCII rendering: 161 lines
+wrote: /home/ubuntu/.hermes/agi-tree/context/INJECTION.md
+METRIC longest_chain_length=2
+METRIC avg_chain_depth=0.95
+METRIC mvp_count=0
+METRIC outcome_coverage=0.000
+METRIC chain_branching_factor=2.21
+METRIC node_count=155
+METRIC edge_count=146
+spawned a00-f90d0498 pid=1077851 level=big target=-
+spawned a01-bf647ec3 pid=1077859 level=small target=idea:domain-graph-core
+spawned a02-b000ca8a pid=1077867 level=small target=idea:domain-environment-indexers
+spawned a03-d823cb61 pid=1077882 level=small target=idea:domain-chain-engine
+spawned a04-70968e57 pid=1077891 level=small target=idea:domain-autoresearch-tree-skill
+manifest: /home/ubuntu/.hermes/agi-tree/sessions/iter-005/manifest.json
