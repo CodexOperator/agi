@@ -1,0 +1,9 @@
+{
+  "verdict": "pending",
+  "confidence": 0.5,
+  "evidence_runs": [
+    "run-001"
+  ],
+  "contradicts": [],
+  "supports": []
+}
