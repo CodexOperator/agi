@@ -7,4 +7,4 @@ parents:
   - idea:domain-graph-core
 ---
 
-Spawned hyp:graph-core-r11 (Traversal API) as new branch under idea:domain-graph-core. BFS/DFS/reachability/orphans/shortest-path criteria defined.
+New hypothesis R11: graph traversal/query primitives (BFS, DFS, reachability, path finding) — clear gap in graph-core; needed by chain-engine and renderers
