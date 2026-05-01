@@ -1,0 +1,12 @@
+{
+  "id": "a04-91b6bf32",
+  "slot": 4,
+  "level": "small",
+  "target": "idea:domain-chain-engine",
+  "pid": 1095207,
+  "started_at": 1777620269,
+  "status": "running",
+  "context_file": "/home/ubuntu/.hermes/agi-tree/sessions/iter-009/a04-91b6bf32/context.md",
+  "log_file": "/home/ubuntu/.hermes/agi-tree/sessions/iter-009/a04-91b6bf32/output.log",
+  "command": "/home/ubuntu/.npm-global/bin/pi --append-system-prompt @/home/ubuntu/.hermes/agi-tree/sessions/iter-009/a04-91b6bf32/context.md --append-system-prompt 'You are agent a04-91b6bf32 on iteration 9. When complete, run: python3 /home/ubuntu/autoresearch-tree/extensions/autoresearch-tree/bin/cli.py done 9 a04-91b6bf32 --verdict <state> --confidence <0..1> --node-id <id>. Stay within zoom scope; do NOT wander.' --append-system-prompt @/home/ubuntu/autoresearch-tree/extensions/autoresearch-tree/lib/agent-prompt.md 'Begin iteration 9 as agent a04-91b6bf32. Read your zoom context, do the work, signal done.'"
+}
