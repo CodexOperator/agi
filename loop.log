@@ -55,3 +55,119 @@ METRIC chain_branching_factor=2.23
 METRIC node_count=154
 METRIC edge_count=147
 [smoke] skipping agent dispatch + heal
+=== iter 1 @ 2026-05-01T04:56:44Z ===
+wrote: 7 idea + 59 hypothesis + 88 task = 154 nodes
+target dir: /home/ubuntu/.hermes/agi-tree/nodes
+loaded 154 nodes from /home/ubuntu/.hermes/agi-tree/nodes
+ASCII rendering: 160 lines
+wrote: /home/ubuntu/.hermes/agi-tree/context/INJECTION.md
+METRIC longest_chain_length=2
+METRIC avg_chain_depth=0.95
+METRIC mvp_count=0
+METRIC outcome_coverage=0.000
+METRIC chain_branching_factor=2.23
+METRIC node_count=154
+METRIC edge_count=147
+[smoke] skipping agent dispatch + heal
+=== iter 1 @ 2026-05-01T04:56:53Z ===
+wrote: 7 idea + 59 hypothesis + 88 task = 154 nodes
+target dir: /home/ubuntu/.hermes/agi-tree/nodes
+loaded 154 nodes from /home/ubuntu/.hermes/agi-tree/nodes
+ASCII rendering: 160 lines
+wrote: /home/ubuntu/.hermes/agi-tree/context/INJECTION.md
+METRIC longest_chain_length=2
+METRIC avg_chain_depth=0.95
+METRIC mvp_count=0
+METRIC outcome_coverage=0.000
+METRIC chain_branching_factor=2.23
+METRIC node_count=154
+METRIC edge_count=147
+spawned a00-f3af16df pid=1053875 level=big target=-
+spawned a01-d2456dd6 pid=1053883 level=small target=idea:domain-graph-core
+spawned a02-bd1595ff pid=1053891 level=small target=idea:domain-environment-indexers
+spawned a03-2b7d6b81 pid=1053900 level=small target=idea:domain-chain-engine
+spawned a04-fd760545 pid=1053909 level=small target=idea:domain-autoresearch-tree-skill
+manifest: /home/ubuntu/.hermes/agi-tree/sessions/iter-001/manifest.json
+agent a00-f3af16df marked failed (pid 1053875 gone)
+agent a01-d2456dd6 marked failed (pid 1053883 gone)
+agent a02-bd1595ff marked failed (pid 1053891 gone)
+agent a03-2b7d6b81 marked failed (pid 1053900 gone)
+agent a04-fd760545 marked failed (pid 1053909 gone)
+all agents terminal
+iter 1: 5 agents
+  a00-f3af16df: status=failed verdict=- pid=1053875
+  a01-d2456dd6: status=failed verdict=- pid=1053883
+  a02-bd1595ff: status=failed verdict=- pid=1053891
+  a03-2b7d6b81: status=failed verdict=- pid=1053900
+  a04-fd760545: status=failed verdict=- pid=1053909
+[driver] sleeping 2m before iter 2...
+=== iter 2 @ 2026-05-01T04:59:55Z ===
+wrote: 7 idea + 59 hypothesis + 88 task = 154 nodes
+target dir: /home/ubuntu/.hermes/agi-tree/nodes
+loaded 154 nodes from /home/ubuntu/.hermes/agi-tree/nodes
+ASCII rendering: 160 lines
+wrote: /home/ubuntu/.hermes/agi-tree/context/INJECTION.md
+METRIC longest_chain_length=2
+METRIC avg_chain_depth=0.95
+METRIC mvp_count=0
+METRIC outcome_coverage=0.000
+METRIC chain_branching_factor=2.23
+METRIC node_count=154
+METRIC edge_count=147
+spawned a00-843b7e6e pid=1054561 level=big target=-
+spawned a01-36aba62c pid=1054569 level=small target=idea:domain-graph-core
+spawned a02-8fc2637f pid=1054597 level=small target=idea:domain-environment-indexers
+spawned a03-a9bdfa3c pid=1054606 level=small target=idea:domain-chain-engine
+spawned a04-b9f2d555 pid=1054614 level=small target=idea:domain-autoresearch-tree-skill
+manifest: /home/ubuntu/.hermes/agi-tree/sessions/iter-002/manifest.json
+agent a00-843b7e6e marked failed (pid 1054561 gone)
+agent a01-36aba62c marked failed (pid 1054569 gone)
+agent a02-8fc2637f marked failed (pid 1054597 gone)
+agent a03-a9bdfa3c marked failed (pid 1054606 gone)
+agent a04-b9f2d555 marked failed (pid 1054614 gone)
+all agents terminal
+iter 2: 5 agents
+  a00-843b7e6e: status=failed verdict=- pid=1054561
+  a01-36aba62c: status=failed verdict=- pid=1054569
+  a02-8fc2637f: status=failed verdict=- pid=1054597
+  a03-a9bdfa3c: status=failed verdict=- pid=1054606
+  a04-b9f2d555: status=failed verdict=- pid=1054614
+[driver] sleeping 2m before iter 3...
+=== iter 3 @ 2026-05-01T05:02:57Z ===
+wrote: 7 idea + 59 hypothesis + 88 task = 154 nodes
+target dir: /home/ubuntu/.hermes/agi-tree/nodes
+loaded 154 nodes from /home/ubuntu/.hermes/agi-tree/nodes
+ASCII rendering: 160 lines
+wrote: /home/ubuntu/.hermes/agi-tree/context/INJECTION.md
+METRIC longest_chain_length=2
+METRIC avg_chain_depth=0.95
+METRIC mvp_count=0
+METRIC outcome_coverage=0.000
+METRIC chain_branching_factor=2.23
+METRIC node_count=154
+METRIC edge_count=147
+spawned a00-de07e302 pid=1055325 level=big target=-
+spawned a01-34ce15c8 pid=1055333 level=small target=idea:domain-graph-core
+spawned a02-a9ae69d8 pid=1055341 level=small target=idea:domain-environment-indexers
+spawned a03-7e5c0d80 pid=1055350 level=small target=idea:domain-chain-engine
+spawned a04-7e21717f pid=1055359 level=small target=idea:domain-autoresearch-tree-skill
+manifest: /home/ubuntu/.hermes/agi-tree/sessions/iter-003/manifest.json
+=== iter 1 @ 2026-05-01T05:05:11Z ===
+wrote: 7 idea + 59 hypothesis + 88 task = 154 nodes
+target dir: /home/ubuntu/.hermes/agi-tree/nodes
+loaded 154 nodes from /home/ubuntu/.hermes/agi-tree/nodes
+ASCII rendering: 160 lines
+wrote: /home/ubuntu/.hermes/agi-tree/context/INJECTION.md
+METRIC longest_chain_length=2
+METRIC avg_chain_depth=0.95
+METRIC mvp_count=0
+METRIC outcome_coverage=0.000
+METRIC chain_branching_factor=2.23
+METRIC node_count=154
+METRIC edge_count=147
+spawned a00-abf31989 pid=1056046 level=big target=-
+spawned a01-d8baeea7 pid=1056054 level=small target=idea:domain-graph-core
+spawned a02-ad064f49 pid=1056062 level=small target=idea:domain-environment-indexers
+spawned a03-bd94970d pid=1056071 level=small target=idea:domain-chain-engine
+spawned a04-5d3554cf pid=1056080 level=small target=idea:domain-autoresearch-tree-skill
+manifest: /home/ubuntu/.hermes/agi-tree/sessions/iter-001/manifest.json
