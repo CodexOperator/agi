@@ -158,22 +158,21 @@ def _reconstruct_next_edges(
 
     Returns the count of 'next' edges added.
     """
-    # Build node_id -> path mapping from LoadedNodes
+    # Build node_id -> path mapping by walking full directory tree
+    # (node files live in subdirs like nodes/idea/, nodes/hypothesis/, etc.)
     id_to_path: dict[str, Path] = {}
     base = Path(directory).resolve()
-    for ln in loaded:
-        for root, _, files in os.walk(base):
-            for fname in sorted(files):
-                if fname.lower().endswith((".md", ".json")):
-                    p = Path(root) / fname
-                    try:
-                        nf = load_node_file(p, body=False)
-                        nid = nf.frontmatter.get("id")
-                        if nid == ln.node.id:
-                            id_to_path[nid] = p
-                    except Exception:
-                        pass
-            break  # only top-level per LoadedNode — OK approximation
+    for root, _, files in os.walk(base):
+        for fname in sorted(files):
+            if fname.lower().endswith((".md", ".json")):
+                p = Path(root) / fname
+                try:
+                    nf = load_node_file(p, body=False)
+                    nid = nf.frontmatter.get("id")
+                    if nid:
+                        id_to_path[nid] = p
+                except Exception:
+                    pass
 
     added = 0
     for nid, path in id_to_path.items():
