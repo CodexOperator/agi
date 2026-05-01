@@ -9,6 +9,8 @@ tags:
   - exporters
   - R1
   - hypothesis
+next_edges:
+  - exp:exporters-r1
 ---
 
 # Hypothesis: Exporters R1 — Markdown Exporter

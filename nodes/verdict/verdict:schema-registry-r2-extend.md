@@ -13,7 +13,6 @@ tags:
   - proved
 next_edges:
   - exp:schema-registry-r2-extend2
-  - mvp:schema-registry-r2-bracket-convention
 ---
 
 VERDICT: proved. Chain extended from 8 to 10 hops.

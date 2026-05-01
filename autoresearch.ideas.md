@@ -20,7 +20,7 @@
 
 - ~~**[chain-engine] Persist verdict→experiment→verdict next_edges**~~ — DONE (iter 11+12: 6 chains extended to 10-hop, committed)
 
-- **[graph-core] Environment-indexers domain chain** — environment-indexers has 9 hypothesis nodes (r1-r9) but no chain nodes. Prove R9 (Indexer Documentation) by adding upgrade markers to indexer source files, then create full 8-hop chain. Would add 7th domain chain.
+- ~~**[graph-core] Environment-indexers domain chain**~~ — DONE (iter 12: 8-hop chain created for environment-indexers)
 
 - ~~**[schema-registry] Fix verdict node type field**~~ — DONE (iter 11: verdict-frontmatter-type-r1 proved)
 
