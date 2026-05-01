@@ -14,7 +14,7 @@ tags:
   - proved
   - second-cycle
 next_edges:
-  - mvp:exporters-r1
+  - "exp:exporters-r1-extend3"
 ---
 
 VERDICT: proved. Exporters chain extended from 10 to 12 hops via second verdict→experiment→verdict cycle.
