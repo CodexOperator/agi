@@ -4,7 +4,7 @@
 - **longest_chain_length** (hops, direction: higher)
 - Current best: 300 hops (9 chains at cycle 146 each)
 - Chain formula: hops = 2 × max_cycle + 8 (verified at cycles 0–146)
-- 9 chains at 300 hops (146 cycles), 10 at 8 hops (base). Total 19 chains, 274 tests.
+- 9 chains at 300 hops (146 cycles), 1 at 200 hops (session-management), 9 at 8 hops (base). Total 19 chains, 274 tests.
 - **Load time: 468ms** (CSafeLoader optimization, was 1884ms before iter30b) Verified: branching chains = 4 for embeddings (2 hyps).
 
 ## Secondary Metrics
