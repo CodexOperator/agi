@@ -10,8 +10,6 @@ tags:
 testable_claim: Per-Node Vector Generation
 title: "embeddings/R1: Per-Node Vector Generation"
 type: hypothesis
-next_edges:
-  - "exp:embeddings-r1"
 ---
 
 **Description:** A vector is generated per node by running Node2Vec over the graph-core graph. The choice of Node2Vec is fixed for v1; alternative models are out of scope.

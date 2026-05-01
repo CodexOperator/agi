@@ -545,3 +545,22 @@ iter 9: 5 agents
   a03-75931864: status=done verdict=proved pid=1095180
   a04-91b6bf32: status=hung-healed verdict=- pid=1095207
 [driver] sleeping 2m before iter 10...
+=== iter 10 @ 2026-05-01T07:37:03Z ===
+wrote: 7 idea + 60 hypothesis + 91 task = 158 nodes
+target dir: /home/ubuntu/.hermes/agi-tree/nodes
+loaded 157 nodes from /home/ubuntu/.hermes/agi-tree/nodes
+ASCII rendering: 163 lines
+wrote: /home/ubuntu/.hermes/agi-tree/context/INJECTION.md
+METRIC longest_chain_length=2
+METRIC avg_chain_depth=0.96
+METRIC mvp_count=0
+METRIC outcome_coverage=0.000
+METRIC chain_branching_factor=2.21
+METRIC node_count=157
+METRIC edge_count=148
+spawned a00-04651550 pid=1100634 level=big target=-
+spawned a01-ebefb555 pid=1100645 level=small target=idea:domain-graph-core
+spawned a02-ad746e9d pid=1100660 level=small target=idea:domain-environment-indexers
+spawned a03-b985cd62 pid=1100688 level=small target=idea:domain-autoresearch-tree-skill
+spawned a04-cd42cada pid=1100712 level=small target=idea:domain-chain-engine
+manifest: /home/ubuntu/.hermes/agi-tree/sessions/iter-010/manifest.json
