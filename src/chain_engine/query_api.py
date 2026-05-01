@@ -48,11 +48,11 @@ def task_attractiveness(
 ) -> float:
     """Score how attractive a task is for an agent to work on (Q1).
 
-    Score = descendant_density * 10 + type_balance_bonus + spawns_count * 0.5
+    Score = parent_chain_signal + sibling_count * 0.5 + descendent_reach
 
-    - descendant_density: fraction of total graph nodes that are descendants of this task
-    - type_balance_bonus: +2 if task's children span >= 3 different node types
-    - spawns_count: number of children (direct spawns edges)
+    - parent_chain_signal: +3 if task's parent hypothesis has verdict/children (on a chain)
+    - sibling_count: number of siblings (other children of parent hypothesis)
+    - descendent_reach: fraction of total graph reachable from task via outgoing edges
 
     Returns 0.0 if task_id not found.
 
@@ -68,30 +68,43 @@ def task_attractiveness(
     if node is None:
         return 0.0
 
-    # Build outgoing edges map
+    # Task nodes are leaves: parents set comes from frontmatter
+    parents = node.parents
+    if not parents:
+        return 0.0
+
+    # Score based on parent hypothesis: use graph edges for children
+    parent = list(parents)[0]  # take first parent
     outgoing = _build_outgoing(graph)
-    children_ids = outgoing.get(task_id, set())
-    # spawns children are a subset of children (relation == spawns)
-    spawns_children: set[str] = set()
-    for edge in graph.edges:
-        if edge.source_id == task_id and edge.relation == "spawns":
-            spawns_children.add(edge.target_id)
+    verdict_children = [
+        e.target_id for e in graph.edges
+        if e.source_id == parent and "verdict" in e.target_id.lower()
+    ]
+    experiment_children = [
+        e.target_id for e in graph.edges
+        if e.source_id == parent and "experiment" in e.target_id.lower()
+    ]
+    task_children = [
+        e.target_id for e in graph.edges
+        if e.source_id == parent and ("task" in e.target_id.lower() or e.target_id.startswith("task:"))
+    ]
 
-    # descendant_count: BFS downstream via all outgoing edges
+    parent_chain_signal = 0.0
+    if verdict_children:
+        parent_chain_signal += 2.0  # parent has verdict, needs MVP
+    elif experiment_children:
+        parent_chain_signal += 1.5  # parent has experiment, needs verdict
+    elif task_children:
+        parent_chain_signal += 1.0  # parent has tasks, needs experiment
+
+    # sibling_count: other tasks spawned by same hypothesis
+    sibling_count = max(0, len(task_children) - 1)
+
+    # descendent_reach: BFS descendants from task
     descendants = _bfs_descendants(task_id, graph)
-    descendant_density = len(descendants) / max(len(graph.node_ids), 1)
+    descendent_reach = len(descendants) / max(len(graph.node_ids), 1) * 10.0
 
-    # type_balance_bonus: distinct child types
-    child_types: set[str] = set()
-    for cid in children_ids:
-        child = graph.get_node(cid)
-        if child:
-            child_types.add(child.type)
-    type_balance_bonus = 2.0 if len(child_types) >= 3 else 0.0
-
-    spawns_count = len(spawns_children)
-
-    return descendant_density * 10.0 + type_balance_bonus + spawns_count * 0.5
+    return parent_chain_signal + sibling_count * 0.5 + descendent_reach
 
 
 def _build_outgoing(graph: "RenderableGraph") -> dict[str, set[str]]:
@@ -178,34 +191,60 @@ def next_best_hypothesis(
     weights: "AttractivenessWeights | None" = None,
     n: int = 5,
 ) -> list[tuple[str, float, int]]:
-    """Return top-N hypotheses to extend next, ranked by task attractiveness (Q3).
+    """Return top-N hypotheses to extend next, ranked by chain-progress score (Q3).
 
-    Considers all hypothesis nodes, computes their task_attractiveness score,
-    and returns the top N.
+    Considers all hypothesis nodes and computes a chain-progress score:
+    - +5 if hypothesis has verdict children (on a chain, needs MVP next)
+    - +3 if hypothesis has experiment children (active chain, needs verdict next)
+    - +2 if hypothesis has task children (spawned, needs experiment next)
+    - +1 per descendant node (more graph reach = more important)
 
     Args:
         graph: the graph
-        weights: attractiveness weights (passed to task_attractiveness for consistency)
+        weights: unused (kept for API consistency)
         n: number of results to return
 
     Returns:
         List of (hypothesis_id, score, descendant_count) tuples, sorted descending by score.
     """
+    outgoing = _build_outgoing(graph)
     results: list[tuple[str, float, int]] = []
+
     for nid in graph.node_ids:
         node = graph.get_node(nid)
         if node is None:
             continue
-        # Include both 'hypothesis' type and nodes with 'hypothesis' in id
+        # Include hypothesis nodes: type == 'hypothesis' or id starts with 'hyp:'
         is_hypothesis = (
             node.type == "hypothesis"
-            or "hypothesis" in nid.lower()
             or nid.startswith("hyp:")
+            or "hypothesis" in nid.lower()
         )
         if not is_hypothesis:
             continue
-        score = task_attractiveness(nid, graph, weights)
+
+        children = outgoing.get(nid, set())
+        child_types = {}
+        for cid in children:
+            cnode = graph.get_node(cid)
+            if cnode:
+                child_types.setdefault(cnode.type, 0)
+                child_types[cnode.type] += 1
+
+        # Chain-progress scoring
+        score = 0.0
+        if "verdict" in child_types:
+            score += 5.0  # needs MVP next
+        elif "experiment" in child_types:
+            score += 3.0  # needs verdict next
+        elif "task" in child_types:
+            score += 2.0  # needs experiment next
+        else:
+            score += 0.5  # no children yet, still possible
+
         descendants = len(_bfs_descendants(nid, graph))
+        score += descendants * 0.1  # small bonus for graph reach
+
         results.append((nid, score, descendants))
 
     results.sort(key=lambda x: x[1], reverse=True)

@@ -16,7 +16,7 @@ tags:
   - chain-extension
   - iter9
 next_edges:
-  - "mvp:embeddings-r2"
+  - "exp:embeddings-r2-extend47"
 ---
 
 VERDICT: proved. embeddings-r2 at 100 hops.

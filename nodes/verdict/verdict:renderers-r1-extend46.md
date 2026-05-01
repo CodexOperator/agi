@@ -16,7 +16,7 @@ tags:
   - chain-extension
   - iter9
 next_edges:
-  - "mvp:renderers-r1"
+  - "exp:renderers-r1-extend47"
 ---
 
 VERDICT: proved. renderers-r1 at 100 hops.

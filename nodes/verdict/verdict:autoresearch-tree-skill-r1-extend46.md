@@ -16,7 +16,7 @@ tags:
   - chain-extension
   - iter9
 next_edges:
-  - "mvp:autoresearch-tree-skill-r1"
+  - "exp:autoresearch-tree-skill-r1-extend47"
 ---
 
 VERDICT: proved. autoresearch-tree-skill-r1 at 100 hops.
