@@ -1,11 +1,12 @@
 ---
-id: "verdict:chain-engine-r1-extend80"
-type: verdict
-verdict: proved
 confidence: 0.9
-tags:
-  - chain-persistence
+id: "verdict:chain-engine-r1-extend80"
 next_edges:
-  - "mvp:chain-engine-r1"
+  - "exp:chain-engine-r1-extend81"
+tags:
+  - "chain-persistence"
+type: "verdict"
+verdict: "proved"
 ---
+
 VERDICT: proved. Chain at 168 hops.

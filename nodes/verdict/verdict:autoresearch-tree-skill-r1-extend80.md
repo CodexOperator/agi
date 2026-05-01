@@ -1,11 +1,12 @@
 ---
-id: "verdict:autoresearch-tree-skill-r1-extend80"
-type: verdict
-verdict: proved
 confidence: 0.9
-tags:
-  - chain-persistence
+id: "verdict:autoresearch-tree-skill-r1-extend80"
 next_edges:
-  - "mvp:autoresearch-tree-skill-r1"
+  - "exp:autoresearch-tree-skill-r1-extend81"
+tags:
+  - "chain-persistence"
+type: "verdict"
+verdict: "proved"
 ---
+
 VERDICT: proved. Chain at 168 hops.
