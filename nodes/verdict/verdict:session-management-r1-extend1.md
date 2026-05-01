@@ -14,7 +14,7 @@ tags:
   - chain-extension
   - r21g
 next_edges:
-  - "mvp:session-management-r1"
+  - "exp:session-management-r1-extend2"
 ---
 
 VERDICT: proved. session-management-r1 chain extended. State capture/restore 100% fidelity proven.

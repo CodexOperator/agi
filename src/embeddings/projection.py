@@ -1,9 +1,11 @@
-"""UMAP-style 2D/3D projection (T-070 / embeddings R2).
+"""UMAP 2D/3D projection (T-070 / embeddings R2).
 
-This is a v1 placeholder using deterministic random projection +
-optional PCA (when numpy is available). The contract — same vectors +
-config + seed → identical coords — is what matters; the underlying
-algorithm can be swapped in v2 (true UMAP).
+Uses true UMAP (when available) for neighborhood-preserving projection.
+Falls back to PCA when UMAP is not available. The contract — same vectors
++ config + seed → identical coords — is preserved in both paths.
+
+UMAP is critical: PCA's 2D projection destroys neighborhood structure
+(PCA k-NN overlap: 6% vs UMAP k-NN overlap: 46%). See R4 verdict.
 
 Acceptance criteria (R2):
 - R2.1: every embedded node has (x, y) coords after projection
@@ -26,6 +28,13 @@ try:
     HAS_NUMPY = True
 except ImportError:  # pragma: no cover
     HAS_NUMPY = False
+
+try:
+    import umap  # type: ignore
+
+    HAS_UMAP = True
+except ImportError:  # pragma: no cover
+    HAS_UMAP = False
 
 
 @dataclass(frozen=True)
@@ -55,9 +64,35 @@ def project(
         )
         return {nid: tuple([0.0] * cfg.dim) for nid in vectors}
 
+    if HAS_UMAP:
+        return _project_umap(vectors, cfg)
     if HAS_NUMPY:
         return _project_pca(vectors, cfg)
     return _project_random(vectors, cfg)
+
+
+def _project_umap(vectors: dict[str, list[float]], cfg: ProjectionConfig) -> dict[str, tuple[float, ...]]:
+    """UMAP projection — neighborhood-preserving (R4 verdict: PCA destroys structure).
+
+    Falls back to PCA for datasets too small for UMAP (n < 3).
+    """
+    ids = sorted(vectors.keys())
+    M = np.array([vectors[i] for i in ids], dtype=np.float64)
+    n = len(ids)
+    # UMAP requires n_neighbors >= 2 and n_neighbors < n_samples.
+    # For very small datasets, fall back to PCA.
+    if n < 3:
+        return _project_pca(vectors, cfg)
+    n_neighbors = min(cfg.n_neighbors, max(2, n - 1))
+    reducer = umap.UMAP(
+        n_components=cfg.dim,
+        n_neighbors=n_neighbors,
+        min_dist=cfg.min_dist,
+        metric="cosine",
+        random_state=cfg.seed,
+    )
+    proj = reducer.fit_transform(M)
+    return {ids[i]: tuple(float(x) for x in proj[i]) for i in range(len(ids))}
 
 
 def _project_pca(vectors: dict[str, list[float]], cfg: ProjectionConfig) -> dict[str, tuple[float, ...]]:
