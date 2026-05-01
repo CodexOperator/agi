@@ -1,0 +1,18 @@
+---
+id: verdict:schema-registry-r2-bracket-convention-extend177
+type: verdict
+verdict: proved
+confidence: 1.0
+parents:
+- exp:schema-registry-r2-bracket-convention-r1
+next_edges:
+- exp:schema-registry-r2-bracket-convention-extend177
+tags:
+- schema-registry-r2-bracket-convention
+- chain-extension
+---
+# verdict:schema-registry-r2-bracket-convention-extend177
+
+Chain extension cycle 177 (hops = 2*177+8 = 362).
+
+Evidence: verdict->experiment->verdict cycle confirmed.

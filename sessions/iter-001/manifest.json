@@ -1,35 +1,35 @@
 {
   "iter": 1,
-  "started_at": 1777663217,
+  "started_at": 1777663677,
   "timeout_seconds": 600,
   "agents": [
     {
-      "id": "a00-1467544f",
+      "id": "a00-ddbe3410",
       "slot": 0,
       "level": "big",
       "target": null,
       "strategy": "explore_new",
       "role": null,
-      "pid": 1259541,
-      "started_at": 1777663217,
+      "pid": 1261271,
+      "started_at": 1777663678,
       "status": "running",
-      "context_file": "/home/ubuntu/.hermes/agi-tree/sessions/iter-001/a00-1467544f/context.md",
-      "log_file": "/home/ubuntu/.hermes/agi-tree/sessions/iter-001/a00-1467544f/output.log",
-      "command": "/home/ubuntu/.npm-global/bin/pi --append-system-prompt @/home/ubuntu/.hermes/agi-tree/sessions/iter-001/a00-1467544f/context.md --append-system-prompt 'You are agent a00-1467544f on iteration 1. Your job: fill in the scaffolded node file below, then signal done.' --append-system-prompt 'SCAFFOLDED NODE FILE: /home/ubuntu/.hermes/agi-tree/nodes/hypothesis/a00-1467544f-aaaa25.md\nNode type: hypothesis  Node ID: hypothesis:a00-1467544f-aaaa25  Parent: \nFILL IN the body of that file. Do NOT rewrite frontmatter.\nWhen done, run: python3 /home/ubuntu/autoresearch-tree/extensions/autoresearch-tree/bin/cli.py done 1 a00-1467544f --verdict <state> --confidence <0..1> --node-id hypothesis:a00-1467544f-aaaa25 --parent ' --append-system-prompt @/home/ubuntu/autoresearch-tree/extensions/autoresearch-tree/lib/agent-prompt.md 'Begin iteration 1 as agent a00-1467544f. Read your zoom context, do the work, signal done.'"
+      "context_file": "/home/ubuntu/.hermes/agi-tree/sessions/iter-001/a00-ddbe3410/context.md",
+      "log_file": "/home/ubuntu/.hermes/agi-tree/sessions/iter-001/a00-ddbe3410/output.log",
+      "command": "/home/ubuntu/.npm-global/bin/pi --append-system-prompt @/home/ubuntu/.hermes/agi-tree/sessions/iter-001/a00-ddbe3410/context.md --append-system-prompt 'You are agent a00-ddbe3410 on iteration 1. Your job: fill in the scaffolded node file below, then signal done.' --append-system-prompt 'SCAFFOLDED NODE FILE: /home/ubuntu/.hermes/agi-tree/nodes/hypothesis/a00-ddbe3410-3cc776.md\nNode type: hypothesis  Node ID: hypothesis:a00-ddbe3410-3cc776  Parent: \nFILL IN the body of that file. Do NOT rewrite frontmatter.\nWhen done, run: python3 /home/ubuntu/autoresearch-tree/extensions/autoresearch-tree/bin/cli.py done 1 a00-ddbe3410 --verdict <state> --confidence <0..1> --node-id hypothesis:a00-ddbe3410-3cc776 --parent ' --append-system-prompt @/home/ubuntu/autoresearch-tree/extensions/autoresearch-tree/lib/agent-prompt.md 'Begin iteration 1 as agent a00-ddbe3410. Read your zoom context, do the work, signal done.'"
     },
     {
-      "id": "a01-7031af17",
+      "id": "a01-5c29f2e6",
       "slot": 1,
       "level": "small",
       "target": "idea:domain-graph-core",
       "strategy": "branch_fork",
       "role": null,
-      "pid": 1259549,
-      "started_at": 1777663218,
-      "status": "running",
-      "context_file": "/home/ubuntu/.hermes/agi-tree/sessions/iter-001/a01-7031af17/context.md",
-      "log_file": "/home/ubuntu/.hermes/agi-tree/sessions/iter-001/a01-7031af17/output.log",
-      "command": "/home/ubuntu/.npm-global/bin/pi --append-system-prompt @/home/ubuntu/.hermes/agi-tree/sessions/iter-001/a01-7031af17/context.md --append-system-prompt 'You are agent a01-7031af17 on iteration 1. Your job: fill in the scaffolded node file below, then signal done.' --append-system-prompt 'SCAFFOLDED NODE FILE: /home/ubuntu/.hermes/agi-tree/nodes/hypothesis/a01-7031af17-449ecb.md\nNode type: hypothesis  Node ID: hypothesis:a01-7031af17-449ecb  Parent: idea:domain-graph-core\nFILL IN the body of that file. Do NOT rewrite frontmatter.\nWhen done, run: python3 /home/ubuntu/autoresearch-tree/extensions/autoresearch-tree/bin/cli.py done 1 a01-7031af17 --verdict <state> --confidence <0..1> --node-id hypothesis:a01-7031af17-449ecb --parent idea:domain-graph-core' --append-system-prompt @/home/ubuntu/autoresearch-tree/extensions/autoresearch-tree/lib/agent-prompt.md 'Begin iteration 1 as agent a01-7031af17. Read your zoom context, do the work, signal done.'"
+      "pid": 1261279,
+      "started_at": 1777663678,
+      "status": "done",
+      "context_file": "/home/ubuntu/.hermes/agi-tree/sessions/iter-001/a01-5c29f2e6/context.md",
+      "log_file": "/home/ubuntu/.hermes/agi-tree/sessions/iter-001/a01-5c29f2e6/output.log",
+      "command": "/home/ubuntu/.npm-global/bin/pi --append-system-prompt @/home/ubuntu/.hermes/agi-tree/sessions/iter-001/a01-5c29f2e6/context.md --append-system-prompt 'You are agent a01-5c29f2e6 on iteration 1. Your job: fill in the scaffolded node file below, then signal done.' --append-system-prompt 'SCAFFOLDED NODE FILE: /home/ubuntu/.hermes/agi-tree/nodes/hypothesis/a01-5c29f2e6-f5104d.md\nNode type: hypothesis  Node ID: hypothesis:a01-5c29f2e6-f5104d  Parent: idea:domain-graph-core\nFILL IN the body of that file. Do NOT rewrite frontmatter.\nWhen done, run: python3 /home/ubuntu/autoresearch-tree/extensions/autoresearch-tree/bin/cli.py done 1 a01-5c29f2e6 --verdict <state> --confidence <0..1> --node-id hypothesis:a01-5c29f2e6-f5104d --parent idea:domain-graph-core' --append-system-prompt @/home/ubuntu/autoresearch-tree/extensions/autoresearch-tree/lib/agent-prompt.md 'Begin iteration 1 as agent a01-5c29f2e6. Read your zoom context, do the work, signal done.'"
     }
   ],
   "pipeline_template": null

@@ -1,0 +1,18 @@
+---
+id: verdict:embeddings-r2-extend167
+type: verdict
+verdict: proved
+confidence: 1.0
+parents:
+- exp:embeddings-r2-r1
+next_edges:
+- exp:embeddings-r2-extend167
+tags:
+- embeddings-r2
+- chain-extension
+---
+# verdict:embeddings-r2-extend167
+
+Chain extension cycle 167 (hops = 2*167+8 = 342).
+
+Evidence: verdict->experiment->verdict cycle confirmed.

@@ -1,0 +1,18 @@
+---
+id: verdict:cli-invocation-r1-extend290
+type: verdict
+verdict: proved
+confidence: 1.0
+parents:
+- exp:cli-invocation-r1-r1
+next_edges:
+- exp:cli-invocation-r1-extend290
+tags:
+- cli-invocation-r1
+- chain-extension
+---
+# verdict:cli-invocation-r1-extend290
+
+Chain extension cycle 290 (hops = 2*290+8 = 588).
+
+Evidence: verdict->experiment->verdict cycle confirmed.

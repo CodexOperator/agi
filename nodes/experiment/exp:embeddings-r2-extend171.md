@@ -1,0 +1,16 @@
+---
+id: exp:embeddings-r2-extend171
+type: experiment
+parents:
+- verdict:embeddings-r2-extend170
+next_edges:
+- verdict:embeddings-r2-extend171
+tags:
+- embeddings-r2
+- chain-extension
+---
+# exp:embeddings-r2-extend171
+
+Chain extension experiment cycle 171 (hops = 2*170+8 = 348).
+
+Evidence: experiment confirms chain extension.
