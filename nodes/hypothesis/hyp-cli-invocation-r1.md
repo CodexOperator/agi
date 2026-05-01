@@ -11,7 +11,9 @@ tags:
   - R1
 spawns:
   - task:t-096
-status: pending
+status: proved
+next_edges:
+  - exp:cli-invocation-r1
 verdict: proved
 confidence: 0.80
 ---
