@@ -37,6 +37,7 @@
 ## Remaining Ideas (unexplored)
 
 - ~~**[chain-extension] Push chains to 112 hops**~~ — DONE (168 hops, 9 chains at cycle 80). Formula hops=2*cycle+8 verified at cycles 0–80. Chain hygiene: always commit before log_experiment.
+- ~~**[chain-extension] Push chains to 200 hops**~~ — DONE (iter 16b: 200 hops, 9 chains at cycle 96). Added cycles 81-96 (288 nodes). Fixed graph-core first verdict + extend80 verdict wiring. 272 tests pass.
 - **[new-domain] idea:domain-vector-embedding-isomorphism** — verify UMAP coords → RenderToken.x,y same representation
 - **[session-management] Complete session-management chain** — verdict exists but chain incomplete (no mvp→outcome→bo→app). Fix next_edges from verdict→extend1→mvp→outcome→bo→app.
 - **[embeddings] idea:domain-cli-invocation** — needs complete chain (idea→hyp→exp→verdict→mvp→outcome→bo→app) — partial only

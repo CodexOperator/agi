@@ -2,9 +2,9 @@
 
 ## Primary Metric
 - **longest_chain_length** (hops, direction: higher)
-- Current best: 168 hops (9 chains at cycle 80 each)
-- Chain formula: hops = 2 × max_cycle + 8 (verified at cycles 0–80)
-- 9 chains at 168 hops (80 cycles), 9 at 8 hops (base). Total 18 chains, 272 tests.
+- Current best: 200 hops (9 chains at cycle 96 each)
+- Chain formula: hops = 2 × max_cycle + 8 (verified at cycles 0–96)
+- 9 chains at 200 hops (96 cycles), 9 at 8 hops (base). Total 18 chains, 272 tests.
 
 ## Secondary Metrics
 - `avg_chain_depth`
