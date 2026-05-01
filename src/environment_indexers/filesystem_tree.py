@@ -18,7 +18,7 @@ import os
 import sys
 import warnings
 from pathlib import Path
-from typing import Iterator, TextIO
+from typing import TextIO
 
 _SRC = Path(__file__).parent.parent / "src"
 sys.path.insert(0, str(_SRC))
@@ -33,25 +33,18 @@ except ImportError as e:
         "src/graph_core is on PYTHONPATH"
     ) from e
 
-# Where nodes are written (relative to project root)
+# Where nodes are written (relative to project root / cwd)
 NODES_DIR = "nodes"
-
-# Schema name for emitted nodes
 SCHEMA_NAME = "filesystem_tree"
-
-# Type prefix for minted ids
 _TYPE_PREFIX_DIR = "fs-dir"
 _TYPE_PREFIX_FILE = "fs-file"
 
 
-def _file_node_id(root: Path, file_path: Path, registry: IdRegistry) -> str:
-    rel = file_path.resolve().relative_to(root.resolve())
-    return registry.mint(_TYPE_PREFIX_FILE, str(rel))
-
-
-def _dir_node_id(root: Path, dir_path: Path, registry: IdRegistry) -> str:
-    rel = dir_path.resolve().relative_to(root.resolve())
-    return registry.mint(_TYPE_PREFIX_DIR, str(rel))
+def _resolve_relative(abs_path: Path, root: Path) -> Path:
+    """Return path relative to root. For root itself returns Path('.')"""
+    if abs_path == root:
+        return Path(".")
+    return abs_path.relative_to(root)
 
 
 def _write_node(
@@ -60,7 +53,7 @@ def _write_node(
     root: Path,
     abs_path: Path,
     rel_path: Path,
-    size_bytes: int | None = None,
+    size_bytes: int | None,
     *,
     skipped: bool = False,
     skipped_reason: str | None = None,
@@ -81,15 +74,16 @@ def _write_node(
         parent_ids: List of parent node ids.
         warn_stream: Where to write per-entry warnings (default: sys.stderr).
     """
-    if skipped and skipped_reason:
-        msg = f"SKIP: {abs_path} ({skipped_reason})"
-        print(msg, file=warn_stream or sys.stderr)
+    if skipped:
+        if skipped_reason:
+            msg = f"SKIP: {abs_path} ({skipped_reason})"
+            print(msg, file=warn_stream or sys.stderr)
         return
 
     fm: dict[str, object] = {
         "id": node_id,
-        "type": "node",  # generic node type; schema is [filesystem_tree]
-        "title": rel_path.name or str(rel_path),
+        "type": "node",
+        "title": rel_path.name if str(rel_path) != "." else str(rel_path),
         "tags": [node_type, "indexed", "filesystem-tree"],
         "schema": SCHEMA_NAME,
         "fields": {
@@ -105,24 +99,22 @@ def _write_node(
 
     nf = NodeFile(frontmatter=fm, body="", suffix=".md")
 
-    # Determine write location: nodes/<type>/<id>.md
-    type_dir = NODES_DIR
-    out_path = Path(type_dir) / f"{node_id.replace(':', '-')}.md"
-    # Write relative to project root
+    # Write to nodes/<node_id>.md (id colons replaced with hyphens)
+    safe_id = node_id.replace(":", "-")
+    out_path = Path(NODES_DIR) / f"{safe_id}.md"
     save_node_file(out_path, nf)
 
 
-def walk_sorted(root: Path) -> Iterator[tuple[Path, list[str]]]:
-    """Walk root top-down, yielding (dir_path, [sorted subdirs, sorted files]).
+def _walk(root: Path):
+    """Sorted top-down walk yielding (dir_abs, [sorted_files]).
 
-    Uses os.walk with topdown=True but sorts entries within each level for
-    deterministic ordering required by R2.4.
+    os.walk with topdown=True already visits each directory once.
+    We sort each level for deterministic ordering (R2.4).
     """
-    # os.walk already yields top-down; we sort each level
-    for dir_path, subdirs, files in os.walk(root):
+    for dir_abs, subdirs, files in os.walk(root):
         subdirs.sort()
         files.sort()
-        yield Path(dir_path), sorted(files)
+        yield Path(dir_abs), sorted(files)
 
 
 def index_filesystem(
@@ -137,7 +129,7 @@ def index_filesystem(
         warn_stream: Stream for per-entry warnings (default: sys.stderr).
 
     Returns:
-        List of emitted node ids.
+        List of emitted node ids (excludes skipped entries).
 
     Raises:
         FileNotFoundError: If root does not exist.
@@ -155,97 +147,64 @@ def index_filesystem(
 
     registry = IdRegistry()
     emitted: list[str] = []
-    root_rel = Path(".")  # root is always "."
 
-    # Emit root directory node
-    root_id = _dir_node_id(root, root, registry)
-    _write_node(
-        root_id,
-        "directory",
-        root,
-        root,
-        root_rel,
-        size_bytes=0,
-        parent_ids=[],
-        warn_stream=warn_stream,
-    )
-    emitted.append(root_id)
+    for dir_abs, files in _walk(root):
+        # Emit the directory node (one node per directory — R2.1)
+        dir_rel = _resolve_relative(dir_abs, root)
+        dir_id = registry.mint(_TYPE_PREFIX_DIR, str(dir_rel))
+        _write_node(
+            dir_id,
+            "directory",
+            root,
+            dir_abs,
+            dir_rel,
+            size_bytes=0,
+            parent_ids=[],  # root has no parent; subdirs have parents set via parent's iteration
+            warn_stream=warn_stream,
+        )
+        emitted.append(dir_id)
 
-    for dir_path, files in walk_sorted(root):
-        dir_rel = dir_path.relative_to(root) if dir_path != root else root_rel
-        dir_id = _dir_node_id(root, dir_path, registry)
+        # For files in this dir, use this dir as parent
+        parent_ids_for_files = [dir_id]
 
-        # Emit child nodes for each subdirectory
-        subdirs_found = sorted(d for d in dir_path.iterdir() if d.is_dir() and not d.is_symlink())
-        for subdir in subdirs_found:
-            try:
-                subdir_resolved = subdir.resolve()
-                subdir_rel = subdir_resolved.relative_to(root)
-                subdir_id = _dir_node_id(root, subdir_resolved, subdir_rel)
-                _write_node(
-                    subdir_id,
-                    "directory",
-                    root,
-                    subdir_resolved,
-                    subdir_rel,
-                    size_bytes=0,
-                    parent_ids=[dir_id],
-                    warn_stream=warn_stream,
-                )
-                emitted.append(subdir_id)
-            except PermissionError as e:
-                _write_node(
-                    "",
-                    "directory",
-                    root,
-                    subdir,
-                    Path(""),
-                    skipped=True,
-                    skipped_reason=f"permission denied: {e}",
-                    parent_ids=[dir_id],
-                    warn_stream=warn_stream,
-                )
-            except Exception as e:
-                msg = f"SKIP: {subdir} ({type(e).__name__}: {e})"
-                print(msg, file=warn_stream or sys.stderr)
-
-        # Emit child nodes for each file
         for fname in files:
-            fpath = dir_path / fname
+            f_abs = dir_abs / fname
             try:
-                fpath_resolved = fpath.resolve()
-                if fpath.is_symlink():
+                if f_abs.is_symlink():
                     _write_node(
                         "",
                         "file",
                         root,
-                        fpath,
-                        fpath_resolved.relative_to(root),
+                        f_abs,
+                        f_abs.relative_to(root),
                         skipped=True,
                         skipped_reason="symlink",
-                        parent_ids=[dir_id],
+                        parent_ids=parent_ids_for_files,
                         warn_stream=warn_stream,
                     )
                     continue
-                fpath_stat = fpath.stat()
-                frel = fpath_resolved.relative_to(root)
-                file_id = _file_node_id(root, fpath_resolved, registry)
+
+                f_stat = f_abs.stat()
+                f_rel = f_abs.relative_to(root)
+                file_id = registry.mint(_TYPE_PREFIX_FILE, str(f_rel))
+
                 _write_node(
                     file_id,
                     "file",
                     root,
-                    fpath_resolved,
-                    frel,
-                    size_bytes=fpath_stat.st_size,
-                    parent_ids=[dir_id],
+                    f_abs,
+                    f_rel,
+                    size_bytes=f_stat.st_size,
+                    parent_ids=parent_ids_for_files,
                     warn_stream=warn_stream,
                 )
                 emitted.append(file_id)
+
             except PermissionError as e:
-                msg = f"SKIP: {fpath} (permission denied: {e})"
+                msg = f"SKIP: {f_abs} (permission denied)"
                 print(msg, file=warn_stream or sys.stderr)
             except OSError as e:
-                msg = f"SKIP: {fpath} ({type(e).__name__}: {e})"
+                msg = f"SKIP: {f_abs} ({type(e).__name__}: {e})"
                 print(msg, file=warn_stream or sys.stderr)
 
     return emitted
