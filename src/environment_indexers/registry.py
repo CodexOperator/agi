@@ -51,7 +51,8 @@ class IndexerRegistry:
 
         def decorator(fn: IndexerFn) -> IndexerFn:
             if name in self._indexers:
-                raise ValueError(f"Indexer already registered: {name}")
+                # Idempotent: don't raise if already registered (allows module reload)
+                return self._indexers[name].func
             self._indexers[name] = IndexerInfo(
                 name=name,
                 description=description,
