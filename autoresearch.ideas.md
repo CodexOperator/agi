@@ -16,6 +16,8 @@
 - ~~**[autoresearch-tree-skill] Add verdict→experiment→verdict cycles**~~ — DONE (iter 16-17)
 - ~~**[chain-engine] 7-cycle chain discovered**~~ — DONE (iter 16: 20 hops)
 - ~~**[chain-engine] Push to 28, 30, 32, 34, 36 hops**~~ — DONE (iter 18: 36 hops)
+- ~~**[chain-engine] Push to 40, 44, 48, 50, 56, 60, 64 hops**~~ — DONE (iter 21-22: 64 hops)
+- ~~**[chain-engine] Push to 72 hops**~~ — DONE (iter 23: 72 hops)
 - ~~**[env-indexers/graph-core] Extend to 36 hops**~~ — DONE (iter 18)
 - ~~**[test-coverage] Analysis**~~ — DONE (another agent: 37% coverage, disproved)
 
