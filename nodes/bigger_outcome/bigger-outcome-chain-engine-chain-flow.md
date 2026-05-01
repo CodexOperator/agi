@@ -1,14 +1,13 @@
 ---
 id: "bigger-outcome:chain-engine-chain-flow"
-title: "Bigger Outcome: capillary DAG chain completion pattern"
+title: "bigger_outcome node for chain-persistence R1"
 type: bigger_outcome
-outcome: "outcome:chain-engine-r10-chain-flow"
+parents:
+  - outcome:chain-engine-r10-chain-flow
+next_edges:
+  - app-purpose:chain-engine
 ---
 
-**Pattern demonstrated:** Adding 'next' edges between node types enables
-find_chains() to compute valid capillary chains through all 8 node types.
+**Bigger_Outcome node:** bigger-outcome:chain-engine-chain-flow
 
-**Implication for graph:** The graph needs experiment, verdict, mvp, outcome,
-bigger_outcome, and app_purpose nodes AND 'next' edges to complete chains.
-'spawns' edges alone produce max 2-hop paths; 'next' edges are required
-for full capillary DAG traversal.
+Chain position validated by chain-persistence R1 experiment.

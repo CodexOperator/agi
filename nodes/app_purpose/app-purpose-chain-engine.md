@@ -1,13 +1,11 @@
 ---
 id: "app-purpose:chain-engine"
-title: "App Purpose: chain-engine enables longest-chain-attracts agent dispatch"
+title: "app_purpose node for chain-persistence R1"
 type: app_purpose
-bigger_outcome: "bigger-outcome:chain-engine-chain-flow"
+parents:
+  - bigger-outcome:chain-engine-chain-flow
 ---
 
-**Mission:** The chain-engine defines what a chain is, how chains are
-discovered, scored, and selected, and drives agent dispatch decisions
-(longest-chain-wins, mid-chain join, fork, hop, or fresh start).
+**App_Purpose node:** app-purpose:chain-engine
 
-**Chain completion (R10) enables:** agents can now see full 8-type chains
-through find_chains(), enabling longest-chain-attracts dispatch.
+Chain position validated by chain-persistence R1 experiment.

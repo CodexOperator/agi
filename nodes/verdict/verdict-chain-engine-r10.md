@@ -1,14 +1,13 @@
 ---
-confidence: 0.95
-evidence_runs:
-  - "exp:chain-engine-r10"
 id: "verdict:chain-engine-r10"
-parents:
-  - "exp:chain-engine-r10"
-status: proved
+title: "verdict node for chain-persistence R1"
 type: verdict
+parents:
+  - hyp:chain-engine-r10
+next_edges:
+  - mvp:chain-engine-r10-chain-flow
 ---
 
-**Verdict:** PROVED
+**Verdict node:** verdict:chain-engine-r10
 
-**Evidence:** find_chains() returned valid chain of length 8 (idea→hypothesis→experiment→verdict→mvp→outcome→bigger_outcome→app_purpose). All acceptance criteria met.
+Chain position validated by chain-persistence R1 experiment.
