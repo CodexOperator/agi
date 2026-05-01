@@ -16,6 +16,11 @@ from graph_core.loader import load_directory
 from chain_engine.chains import find_chains
 
 
+def parse_cycle(name: str) -> int:
+    m = re.search(r'extend(\d+)\.md$', name)
+    return int(m.group(1)) if m else 1
+
+
 def git_add_commit(msg: str) -> None:
     subprocess.run(["git", "add", "nodes/"], cwd=str(ROOT), check=True)
     r = subprocess.run(
@@ -49,7 +54,7 @@ def main() -> int:
     # Step 2: extend chain-engine by 1 cycle (32→34 hops)
     print("\nStep 2: Extending chain-engine to 34 hops...")
     
-    # Find current max cycle (sort by parsed number, not lexicographically)
+    # Find current max cycle (sort by numeric cycle, not lexicographic)
     verdict_files = sorted(
         verdict_dir.glob(f"verdict:{domain}-extend*.md"),
         key=lambda p: parse_cycle(p.name)
