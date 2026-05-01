@@ -5,7 +5,7 @@ type: verdict
 parent_hypothesis: hyp:test-coverage-r1
 domain: test-coverage
 status: disproved
-confidence: 0.38
+confidence: 0.41
 evidence_runs:
   - exp:test-coverage-r1
 tags:
@@ -17,17 +17,17 @@ tags:
 **Verdict:** DISPROVED
 
 **Coverage Metrics:**
-- Overall: 38.2%
+- Overall: 41.4%
 - Node types: 20.0% (2/10)
 - Operations: 90.0% (9/10)
-- Hypotheses with verdicts: 4.7% (3/64)
+- Hypotheses with verdicts: 14.1% (9/64)
 
 **Evidence:**
 - 258 test functions across 38 files
 - Threshold: 80.0%
 
 **Interpretation:**
-Coverage (38%) below threshold (80.0%)
+Coverage (41%) below threshold (80.0%)
 
 **Categories by test count:**
 - other_tests: 215
