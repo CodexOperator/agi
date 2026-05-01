@@ -141,7 +141,7 @@ def create_chain_nodes():
     base = Path(__file__).parent.parent / "nodes"
 
     # Ensure subdirectories exist
-    for subdir in ("experiment", "verdict", "mvp", "outcome", "bigger_outcome"):
+    for subdir in ("experiment", "verdict", "mvp", "outcome", "bigger-outcome", "app-purpose"):
         (base / subdir).mkdir(exist_ok=True)
 
     # Experiment node
@@ -271,7 +271,7 @@ type: outcome
 
     # Bigger-outcome node
     bigger_id = "bigger-outcome:schema-registry-r1"
-    (base / "bigger_outcome" / "schema-registry-r1.md").write_text(f"""---
+    (base / "bigger-outcome" / "schema-registry-r1.md").write_text(f"""---
 id: "{bigger_id}"
 next_edges:
   - "app-purpose:schema-registry"
@@ -298,6 +298,24 @@ type: bigger_outcome
 - Built-in Schemas (R8): core node types have shipped schemas
 """)
 
+    # App-purpose node
+    app_id = "app-purpose:schema-registry"
+    (base / "app-purpose" / "schema-registry.md").write_text(f"""---
+id: "{app_id}"
+next_edges: []
+parents:
+  - "{bigger_id}"
+subgraph: false
+tags:
+  - schema-registry
+  - root
+title: "App Purpose: schema-registry"
+type: app_purpose
+---
+
+**App Purpose:** Drop-in schema registry enabling the graph to extend its type system without code changes. Schemas live as files, bracket convention controls activation, and the cascade (bracket → fingerprint → LM hook) handles auto-discovery. Every future domain plugs in by dropping schema files — zero code required.
+""")
+
     # Update hypothesis with next_edges
     hyp_file = Path(__file__).parent.parent / "nodes" / "hypothesis" / "schema-registry-r1-schema-registryr1-schema.md"
     if hyp_file.exists():
@@ -320,7 +338,8 @@ type: bigger_outcome
         "verdict": f"nodes/verdict/schema-registry-r1.md",
         "mvp": f"nodes/mvp/schema-registry-r1.md",
         "outcome": f"nodes/outcome/schema-registry-r1.md",
-        "bigger_outcome": f"nodes/bigger_outcome/schema-registry-r1.md",
+        "bigger-outcome": f"nodes/bigger-outcome/schema-registry-r1.md",
+        "app-purpose": f"nodes/app-purpose/schema-registry.md",
     }
 
 
