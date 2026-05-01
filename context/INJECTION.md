@@ -1,26 +1,28 @@
 # autoresearch-tree INJECTION CONTEXT
-_generated 2026-05-01T05:05:11+00:00_
+_generated 2026-05-01T05:08:26+00:00_
 
 ## graph snapshot
-- nodes: 154
-- edges: 147
-- by type: hypothesis=59, idea=7, task=88
+- nodes: 165
+- edges: 157
+- by type: experiment=2, hypothesis=62, idea=7, task=90, verdict=4
 - longest chain: 2 hops
 
 ## attractive ideas (descendant count, top 10)
-- idea:domain-graph-core :: 28 descendants
-- idea:domain-environment-indexers :: 24 descendants
-- idea:domain-chain-engine :: 22 descendants
-- idea:domain-autoresearch-tree-skill :: 21 descendants
+- idea:domain-graph-core :: 30 descendants
+- idea:domain-environment-indexers :: 26 descendants
+- idea:domain-autoresearch-tree-skill :: 25 descendants
+- idea:domain-chain-engine :: 24 descendants
 - idea:domain-schema-registry :: 21 descendants
 - idea:domain-renderers :: 17 descendants
 - idea:domain-embeddings :: 14 descendants
 
 ## ASCII view (≤200 lines)
 ```
-# graph: 154 nodes
-# types: hypothesis=59, idea=7, task=88
+# graph: 165 nodes
+# types: experiment=2, hypothesis=62, idea=7, task=90, verdict=4
 #
+    exp:checkpoint-r9-01 :: experiment
+    exp:graph-core-r1-generic-node-primitive :: experiment
   hyp:autoresearch-tree-skill-r1 :: hypothesis [spawns->task:t-076, spawns->task:t-088]
   hyp:autoresearch-tree-skill-r2 :: hypothesis [spawns->task:t-077]
   hyp:autoresearch-tree-skill-r3 :: hypothesis [spawns->task:t-078]
@@ -29,7 +31,9 @@ _generated 2026-05-01T05:05:11+00:00_
   hyp:autoresearch-tree-skill-r6 :: hypothesis [spawns->task:t-082, spawns->task:t-083, spawns->task:t-084]
   hyp:autoresearch-tree-skill-r7 :: hypothesis [spawns->task:t-085, spawns->task:t-086]
   hyp:autoresearch-tree-skill-r8 :: hypothesis [spawns->task:t-087]
+  hyp:autoresearch-tree-skill-r9 :: hypothesis [spawns->exp:checkpoint-r9-01, spawns->task:t-089]
   hyp:chain-engine-r1 :: hypothesis [spawns->task:t-047]
+  hyp:chain-engine-r10 :: hypothesis [spawns->task:t-090]
   hyp:chain-engine-r2 :: hypothesis [spawns->task:t-048]
   hyp:chain-engine-r3 :: hypothesis [spawns->task:t-049]
   hyp:chain-engine-r4 :: hypothesis [spawns->task:t-050]
@@ -46,6 +50,7 @@ _generated 2026-05-01T05:05:11+00:00_
   hyp:embeddings-r6 :: hypothesis [spawns->task:t-074]
   hyp:embeddings-r7 :: hypothesis [spawns->task:t-075]
   hyp:environment-indexers-r1 :: hypothesis [spawns->task:t-032]
+  hyp:environment-indexers-r10 :: hypothesis
   hyp:environment-indexers-r2 :: hypothesis [spawns->task:t-033]
   hyp:environment-indexers-r3 :: hypothesis [spawns->task:t-034, spawns->task:t-035, spawns->task:t-036]
   hyp:environment-indexers-r4 :: hypothesis [spawns->task:t-037, spawns->task:t-038]
@@ -54,7 +59,7 @@ _generated 2026-05-01T05:05:11+00:00_
   hyp:environment-indexers-r7 :: hypothesis [spawns->task:t-042]
   hyp:environment-indexers-r8 :: hypothesis [spawns->task:t-043]
   hyp:environment-indexers-r9 :: hypothesis [spawns->task:t-044, spawns->task:t-045, spawns->task:t-046]
-  hyp:graph-core-r1 :: hypothesis [spawns->task:t-001, spawns->task:t-002]
+  hyp:graph-core-r1 :: hypothesis [spawns->exp:graph-core-r1-generic-node-primitive, spawns->task:t-001, spawns->task:t-002 (+1)]
   hyp:graph-core-r10 :: hypothesis [spawns->task:t-018]
   hyp:graph-core-r2 :: hypothesis [spawns->task:t-003, spawns->task:t-004]
   hyp:graph-core-r3 :: hypothesis [spawns->task:t-005]
@@ -80,10 +85,10 @@ _generated 2026-05-01T05:05:11+00:00_
   hyp:schema-registry-r6 :: hypothesis [spawns->task:t-028]
   hyp:schema-registry-r7 :: hypothesis [spawns->task:t-030]
   hyp:schema-registry-r8 :: hypothesis [spawns->task:t-031]
-idea:domain-autoresearch-tree-skill :: idea [spawns->hyp:autoresearch-tree-skill-r1, spawns->hyp:autoresearch-tree-skill-r2, spawns->hyp:autoresearch-tree-skill-r3 (+5)]
-idea:domain-chain-engine :: idea [spawns->hyp:chain-engine-r1, spawns->hyp:chain-engine-r2, spawns->hyp:chain-engine-r3 (+6)]
+idea:domain-autoresearch-tree-skill :: idea [spawns->hyp:autoresearch-tree-skill-r1, spawns->hyp:autoresearch-tree-skill-r2, spawns->hyp:autoresearch-tree-skill-r3 (+7)]
+idea:domain-chain-engine :: idea [spawns->hyp:chain-engine-r1, spawns->hyp:chain-engine-r10, spawns->hyp:chain-engine-r2 (+7)]
 idea:domain-embeddings :: idea [spawns->hyp:embeddings-r1, spawns->hyp:embeddings-r2, spawns->hyp:embeddings-r3 (+4)]
-idea:domain-environment-indexers :: idea [spawns->hyp:environment-indexers-r1, spawns->hyp:environment-indexers-r2, spawns->hyp:environment-indexers-r3 (+6)]
+idea:domain-environment-indexers :: idea [spawns->hyp:environment-indexers-r1, spawns->hyp:environment-indexers-r10, spawns->hyp:environment-indexers-r2 (+8)]
 idea:domain-graph-core :: idea [spawns->hyp:graph-core-r1, spawns->hyp:graph-core-r10, spawns->hyp:graph-core-r2 (+7)]
 idea:domain-renderers :: idea [spawns->hyp:renderers-r1, spawns->hyp:renderers-r2, spawns->hyp:renderers-r3 (+5)]
 idea:domain-schema-registry :: idea [spawns->hyp:schema-registry-r1, spawns->hyp:schema-registry-r2, spawns->hyp:schema-registry-r3 (+5)]
@@ -175,9 +180,15 @@ idea:domain-schema-registry :: idea [spawns->hyp:schema-registry-r1, spawns->hyp
     task:t-086 :: task
     task:t-087 :: task
     task:t-088 :: task
+    task:t-089 :: task
+    task:t-090 :: task
+    verdict:exp_graph-core-r1-generic-node-p :: verdict
+  verdict:hyp_autoresearch-tree-skill-r9 :: verdict
+  verdict:hyp_environment-indexers-r10 :: verdict
+verdict:idea_domain-agent-protocol :: verdict
 ----
-Types: hypothesis=59, idea=7, task=88
-Edges: spawns=147
+Types: experiment=2, hypothesis=62, idea=7, task=90, verdict=4
+Edges: spawns=157
 ```
 
 ## big-vs-small decision
@@ -194,4 +205,4 @@ Each iteration MUST first answer: **explore a big idea or small idea?**
 - new ideas spawn from any node type (idea/hypothesis/experiment/verdict)
 
 ## next-step suggestions
-- pending tasks: 88 (see nodes/task/)
+- pending tasks: 90 (see nodes/task/)

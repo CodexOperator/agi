@@ -11,7 +11,7 @@ blocked_by:
   - task:t-048
 cavekit_req: chain-engine/R10
 effort: M
-id: "task:t-060"
+id: "task:t-090"
 parents:
   - hyp:chain-engine-r10
 status: pending
@@ -19,7 +19,7 @@ tags:
   - M
   - tier--1
 tier: -1
-title: "T-060: Chain integrity under node mutations"
+title: "T-090: Chain integrity under node mutations"
 type: task
 ---
 
