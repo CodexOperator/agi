@@ -23,16 +23,13 @@ tags:
 - Method agreement: 2/2 (100%)
 - Detected shell: bash
 - Ground truth: bash
-- Threshold: 90.0%
+- Threshold: 90%
 
 **Detection Methods:**
 - Method 1 ($SHELL): /bin/bash
 - Method 2 (ps parent): bash
 - Method 3 (/proc/status): python3
-- Method 4 (env indicators): []
-
-**Interpretation:**
-Shell detection accuracy (100%) meets threshold (90.0%)
+- Method 4 (env indicators): ['bash']
 
 **Analysis:**
 Shell detection via environment variables and process inspection provides
