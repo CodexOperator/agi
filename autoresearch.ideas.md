@@ -51,6 +51,8 @@
   - All 274 tests pass. Experiment scripts: r2.py, r3.py, r4.py
 - ~~**[session-management] Complete session-management chain**~~ — COMPLETE (iter 21g: verdict PROVED). Short chain (1 hop to verdict, mvp→outcome→bo→app present).
 - ~~**[embeddings] idea:domain-cli-invocation**~~ — COMPLETE (iter 22: idea→hyp→exp→verdict→mvp→outcome→bo→app, 7 hops).
+- ~~**[embeddings] R1 gensim production integration**~~ — PROVED (iter34: spearman=0.8552, knn=0.494). Key fix: storage.py numpy float serialization. 274 tests pass.
+- ~~**[embeddings] R5 skip-gram vs CBOW**~~ — inconclusive_lean_proved:40 (iter34: sg k-NN=0.492 vs cbow=0.463, Δ=+6.3%; spearman Δ=+0.108).
 - ~~**[architecture] Query API for capillary DAG**~~ — IMPLEMENTED + FIXED (iter24): verdict fields loaded into Node objects, completion_ratio now returns 98-99% for active chains. rank_ideas shows meaningful score variation.
 - ~~**[architecture] Agent spawning via verdict nodes**~~ — EXPLORED by iter025 (pending verdict). NOT YET IMPLEMENTED.
 - ~~**[architecture] Branching chains**~~ — PROVED (iter24): capillary DAG already supports branching. idea:domain-embeddings has 4 chains (r2+r3 both reach app_purpose). Total 18 chains across 12 ideas.
@@ -66,6 +68,7 @@
 
 ## Done History
 
+- **iter34 (a00-2e2ed561):** R5 skip-gram vs CBOW — inconclusive_lean_proved:40 (sg k-NN=0.492, cbow=0.463, Δ=+6.3%, below 10% threshold; spearman Δ=+0.108). R1 gensim production integration PROVED (spearman=0.8552, knn=0.494; exceeds thresholds). Critical fix: storage.py numpy float → native float for YAML serialization. All 274 tests pass.
 - **iter9 (a00-c2ec59b7):** Extended 9 chains to 100 hops (46 cycles). Render proximity isomorphism DISPROVED (spearman=-0.903 for both ASCII and ancestor overlap). 272 tests. Primary: 100 hops.
 - **iter23e (a00-fb4207a2):** 9 chains at 88 hops (40 cycles). Ran as direct bash to avoid git-wipe. Fixed auteurs chain next_edges gaps. 272 tests pass.
 - **iter23d (a00-fb4207a2):** Fixed auteurs chain next_edges: extend1→exp3 (skip), extend2→mvp (shortcut). 72 hops maintained.
