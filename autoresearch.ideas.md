@@ -50,3 +50,4 @@
 - **iter11/12:** Environment-indexers chain extended to 12 hops via two verdict→experiment→verdict cycles. 13 chains total, 6 at 12 hops, 1 at 8 hops. Primary metric: 12 hops (stacked cycles proven).
 - **iter12 (final):** All 8 domain chains restored and fixed. 15 chains total, longest 12-hop. 12-hop chains achieved via stacked verdict→experiment→verdict cycles.
 - **iter12b:** Extended chains to 16-hop via 4 stacked verdict→experiment→verdict cycles. 18 chains total, 1 at 16-hop, 8 at 12-hop. Primary metric: 16 hops (+60% from baseline 10). **Key finding:** verdict→experiment→verdict cycles are infinitely stackable. N cycles → (2N+8) hops.
+- **iter13:** Verified 16-hop chains persist across cold reload. All 8 domains now have chains, 6 at 16 hops. All 241 tests pass. Primary metric: 16 hops maintained.
