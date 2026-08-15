@@ -1,5 +1,5 @@
 # autoresearch-tree INJECTION CONTEXT
-_generated 2026-05-01T19:37:16+00:00_
+_generated 2026-05-04T08:55:00+00:00_
 
 ## graph snapshot
 - nodes: 157

@@ -29,5 +29,9 @@
   "agent_timeout_mins": 10,
   "delay_mins": 0,
   "max_iters": 55,
-  "injection_file": "context/INJECTION.md"
+  "injection_file": "context/INJECTION.md",
+  "persistence": {
+    "type": "sqlite",
+    "path": "nodes.db"
+  }
 }

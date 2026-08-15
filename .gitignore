@@ -8,3 +8,9 @@ htmlcov/
 .venv/
 venv/
 .DS_Store
+
+# nested agent worktrees + local caches (added during ~/work consolidation)
+.claude/worktrees/
+.chain_cache.pkl
+nodes.db
+loop.log
