@@ -1,6 +1,7 @@
 ---
 confidence: 0.5
 id: "hyp:autoresearch-tree-skill-r3"
+origin: build-site
 parents:
   - idea:domain-autoresearch-tree-skill
 subgraph: false

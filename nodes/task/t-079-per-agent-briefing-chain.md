@@ -10,6 +10,7 @@ blocked_by:
 cavekit_req: autoresearch-tree-skill/R4
 effort: M
 id: "task:t-079"
+origin: build-site
 parents:
   - hyp:autoresearch-tree-skill-r4
 status: pending

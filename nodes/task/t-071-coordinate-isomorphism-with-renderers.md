@@ -11,6 +11,7 @@ blocked_by:
 cavekit_req: embeddings/R3
 effort: M
 id: "task:t-071"
+origin: build-site
 parents:
   - hyp:embeddings-r3
 status: pending

@@ -12,6 +12,7 @@ blocked_by:
 cavekit_req: schema-registry/R8
 effort: L
 id: "task:t-031"
+origin: build-site
 parents:
   - hyp:schema-registry-r8
 status: pending

@@ -5,6 +5,7 @@ blocked_by: []
 cavekit_req: autoresearch-tree-skill/R1
 effort: S
 id: "task:t-088"
+origin: build-site
 parents:
   - hyp:autoresearch-tree-skill-r1
 status: pending

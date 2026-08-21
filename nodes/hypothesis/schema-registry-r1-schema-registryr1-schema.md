@@ -1,6 +1,7 @@
 ---
 confidence: 0.5
 id: "hyp:schema-registry-r1"
+origin: build-site
 parents:
   - idea:domain-schema-registry
 subgraph: false

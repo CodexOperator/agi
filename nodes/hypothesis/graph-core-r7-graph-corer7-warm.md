@@ -1,6 +1,7 @@
 ---
 confidence: 0.5
 id: "hyp:graph-core-r7"
+origin: build-site
 parents:
   - idea:domain-graph-core
 subgraph: false

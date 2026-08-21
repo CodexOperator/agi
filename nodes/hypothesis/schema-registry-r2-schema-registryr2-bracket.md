@@ -1,6 +1,9 @@
 ---
 confidence: 0.5
 id: "hyp:schema-registry-r2"
+next_edges:
+  - exp:schema-registry-r2
+origin: build-site
 parents:
   - idea:domain-schema-registry
 subgraph: false
@@ -10,8 +13,6 @@ tags:
 testable_claim: Bracket Convention for Active Schemas
 title: "schema-registry/R2: Bracket Convention for Active Schemas"
 type: hypothesis
-next_edges:
-  - exp:schema-registry-r2
 ---
 
 **Description:** A schema file whose name is wrapped in brackets is treated as the active schema for the directory tree it lives in. Bracketing is the user's signal of approval.

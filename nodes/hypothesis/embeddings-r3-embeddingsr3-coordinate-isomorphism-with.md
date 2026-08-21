@@ -1,6 +1,9 @@
 ---
 confidence: 0.5
 id: "hyp:embeddings-r3"
+next_edges:
+  - exp:embeddings-r3
+origin: build-site
 parents:
   - idea:domain-embeddings
 subgraph: false
@@ -10,8 +13,6 @@ tags:
 testable_claim: Coordinate Isomorphism with Renderers
 title: "embeddings/R3: Coordinate Isomorphism with Renderers"
 type: hypothesis
-next_edges:
-  - exp:embeddings-r3
 ---
 
 **Description:** The `(x, y)` coordinates produced by projection are exactly the `x` and `y` values used by the renderers' shared representation. There is one source of truth.

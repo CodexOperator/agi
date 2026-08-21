@@ -10,6 +10,7 @@ blocked_by:
 cavekit_req: schema-registry/R3
 effort: M
 id: "task:t-022"
+origin: build-site
 parents:
   - hyp:schema-registry-r3
 status: pending

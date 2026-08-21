@@ -11,6 +11,7 @@ blocked_by:
 cavekit_req: embeddings/R1
 effort: M
 id: "task:t-069"
+origin: build-site
 parents:
   - hyp:embeddings-r1
 status: pending

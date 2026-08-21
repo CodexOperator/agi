@@ -845,3 +845,100 @@ METRIC node_count=157
 METRIC edge_count=148
 ERR: ollama package not installed (pip install ollama)
 [smoke] skipping agent dispatch + heal
+=== iter 1 @ 2026-08-21T21:24:18Z ===
+wrote: 8 goal nodes
+target dir: /home/ubuntu/work/agi-tree/nodes/goal
+wrote: 7 idea + 60 hypothesis + 91 task = 158 nodes
+target dir: /home/ubuntu/work/agi-tree/nodes
+WARN: find_chains truncated (deadline); returning 29 partial chain(s)
+loaded 29412 nodes from /home/ubuntu/work/agi-tree/nodes
+ASCII rendering: 200 lines
+wrote: /home/ubuntu/work/agi-tree/context/INJECTION.md
+Traceback (most recent call last):
+  File "/home/ubuntu/work/agi/extensions/agi/bin/metrics.py", line 275, in <module>
+    sys.exit(main())
+             ^^^^^^
+  File "/home/ubuntu/work/agi/extensions/agi/bin/metrics.py", line 270, in main
+    emit(root)
+  File "/home/ubuntu/work/agi/extensions/agi/bin/metrics.py", line 232, in emit
+    m = compute(root)
+        ^^^^^^^^^^^^^
+  File "/home/ubuntu/work/agi/extensions/agi/bin/metrics.py", line 211, in compute
+    "longest_chain_length": longest_chain_length(g),
+                            ^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/ubuntu/work/agi/extensions/agi/bin/metrics.py", line 89, in longest_chain_length
+    return max(d(nid) for nid in g.node_ids)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/ubuntu/work/agi/extensions/agi/bin/metrics.py", line 89, in <genexpr>
+    return max(d(nid) for nid in g.node_ids)
+               ^^^^^^
+  File "/home/ubuntu/work/agi/extensions/agi/bin/metrics.py", line 83, in d
+    best = max(best, d(c) + 1)
+                     ^^^^
+  File "/home/ubuntu/work/agi/extensions/agi/bin/metrics.py", line 83, in d
+    best = max(best, d(c) + 1)
+                     ^^^^
+  File "/home/ubuntu/work/agi/extensions/agi/bin/metrics.py", line 83, in d
+    best = max(best, d(c) + 1)
+                     ^^^^
+  [Previous line repeated 989 more times]
+  File "/home/ubuntu/work/agi/extensions/agi/bin/metrics.py", line 75, in d
+    n = g.get_node(nid)
+        ^^^^^^^^^^^^^^^
+RecursionError: maximum recursion depth exceeded
+=== iter 1 @ 2026-08-21T21:26:18Z ===
+wrote: 8 goal nodes
+target dir: /home/ubuntu/work/agi-tree/nodes/goal
+wrote: 7 idea + 60 hypothesis + 91 task = 158 nodes
+target dir: /home/ubuntu/work/agi-tree/nodes
+WARN: find_chains truncated (deadline); returning 29 partial chain(s)
+loaded 29412 nodes from /home/ubuntu/work/agi-tree/nodes
+ASCII rendering: 200 lines
+wrote: /home/ubuntu/work/agi-tree/context/INJECTION.md
+METRIC longest_chain_length=192
+METRIC avg_chain_depth=1.0
+METRIC mvp_count=20
+METRIC outcome_coverage=0.202
+METRIC chain_branching_factor=1.07
+METRIC node_count=29412
+METRIC edge_count=11975
+METRIC verdicts_asserting=14573
+METRIC verdicts_pending=7
+METRIC verdicts_evidence_backed=2855
+METRIC evidence_fraction=0.196
+METRIC decisive_verdicts=14565
+METRIC decisive_evidence_fraction=0.196
+METRIC unevidenced_decisive_verdicts=11715
+METRIC evidence_weighted_depth=0.196
+METRIC primary_metric=outcome_coverage
+METRIC primary_value=0.202
+ERR: ollama package not installed (pip install ollama)
+[smoke] skipping agent dispatch + heal
+=== iter 1 @ 2026-08-21T21:45:49Z ===
+wrote: 8 goal nodes
+target dir: /home/ubuntu/work/agi-tree/nodes/goal
+wrote: 7 idea + 60 hypothesis + 91 task = 158 nodes
+target dir: /home/ubuntu/work/agi-tree/nodes
+WARN: find_chains truncated (deadline); returning 28 partial chain(s)
+loaded 29412 nodes from /home/ubuntu/work/agi-tree/nodes
+ASCII rendering: 200 lines
+wrote: /home/ubuntu/work/agi-tree/context/INJECTION.md
+METRIC longest_chain_length=192
+METRIC avg_chain_depth=1.0
+METRIC mvp_count=20
+METRIC outcome_coverage=0.202
+METRIC chain_branching_factor=1.07
+METRIC node_count=29412
+METRIC edge_count=11975
+METRIC verdicts_asserting=14573
+METRIC verdicts_pending=7
+METRIC verdicts_evidence_backed=2855
+METRIC evidence_fraction=0.196
+METRIC decisive_verdicts=14565
+METRIC decisive_evidence_fraction=0.196
+METRIC unevidenced_decisive_verdicts=11715
+METRIC evidence_weighted_depth=0.196
+METRIC primary_metric=outcome_coverage
+METRIC primary_value=0.202
+ERR: ollama package not installed (pip install ollama)
+[smoke] skipping agent dispatch + heal

@@ -11,6 +11,7 @@ blocked_by:
 cavekit_req: embeddings/R7
 effort: M
 id: "task:t-075"
+origin: build-site
 parents:
   - hyp:embeddings-r7
 status: pending

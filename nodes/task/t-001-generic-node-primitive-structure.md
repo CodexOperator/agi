@@ -7,6 +7,7 @@ blocked_by: []
 cavekit_req: graph-core/R1
 effort: M
 id: "task:t-001"
+origin: build-site
 parents:
   - hyp:graph-core-r1
 status: pending

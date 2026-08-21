@@ -1,0 +1,26 @@
+---
+confidence: 1.0
+goal_id: G8
+id: "goal:g8"
+origin: goals-doc
+seeds: []
+status: horizon
+tags:
+  - goal
+  - root
+title: "G8: Forkability: anyone grows their own tree"
+type: goal
+---
+
+A project repo holds data and configuration; the engine arrives as a clone.
+`fantasia` is the reference implementation and proves the layout composes.
+
+The interesting case is **recursive**: a tree per task domain, where a tree
+spawns child trees for personas it finds useful, and individual skills, plugins
+and MCP servers can each own one. The payoff that justifies the recursion is
+**AI experts that compound** — agents that get sharper the longer they are
+exposed to a workflow.
+
+Owns: **L9** (scaffolding a project without copying by hand — shares its writer
+with G1/L17), **L10** (ride along as a kid to judge whether briefs are genuinely
+self-contained; an ASCII dashboard with live agent positions across zoom levels).
