@@ -1,27 +1,14 @@
 ---
 id: "bigger-outcome:graph-core-r1"
-next_edges:
-  - "app-purpose:graph-core"
+title: "Bigger-Outcome: graph-core"
+type: bigger-outcome
+status: open
+confidence: 1.0
 parents:
   - outcome:graph-core-r1
-subgraph: false
 tags:
-  - graph-core
-  - R1
-title: "graph-core/R1: Bigger Outcome"
-type: bigger_outcome
+  - chain-persistence-r13
+next_edges:
+  - app-purpose:graph-core
 ---
-
-**Broader outcome:** graph-core provides the foundational primitives (Node, Edge, Graph) for the entire capillary DAG memory system. All other modules (chain_engine, renderers, embeddings, schema_registry, environment_indexers) depend on these primitives. The DAG invariant ensures the graph never forms cycles, making find_chains() termination guaranteed.
-
-**Properties achieved:**
-- Generic Node Primitive (R1): id + type + optional body
-- Generic Edge Primitive (R2): source + target + relation triple
-- Identity Scheme (R3): slug-based collision resistance
-- Frontmatter File Persistence (R4): YAML frontmatter storage
-- Recursive Node Bodies (R5): arbitrary content per node
-- Directory-Walking Auto-Discovery (R6): load entire graph from disk
-- Warm-Load Caching (R7): LRU cache on GraphBuilder
-- Pluggable Persistence Layer (R8): abstracted backend contract
-- Portability Contract (R9): relative paths for repo portability
-- Bootstrap Command (R10): CLI to initialize new graph context
+BIGGER OUTCOME: graph-core domain aggregates into capillary DAG memory purpose.
