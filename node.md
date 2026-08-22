@@ -1,25 +1,27 @@
 ---
 acceptance_criteria:
-  - R11.1 (traverse_bfs)
-  - R11.2 (traverse_dfs)
-  - R11.8 (cycle detection utility)
+  - R1.1 (schema lives at known context path with documented naming)
+  - R1.2 (adding new schema file makes node type available without code changes/restart)
+  - R1.4 (Markdown-with-frontmatter or structured-data file accepted)
 blocked_by:
-  - task:t-004
-cavekit_req: graph-core/R11
+  - task:t-006
+cavekit_req: schema-registry/R1
 effort: M
 id: "task:t-090"
 origin: build-site
 parents:
-  - hyp:graph-core-r11
+  - hyp:schema-registry-r1
 status: pending
 tags:
   - M
   - tier--1
 tier: -1
-title: "T-090: BFS/DFS traversal primitives"
+title: "T-090: Schema as file with naming convention"
 type: task
 ---
 
-**Description:** Implement `traverse_bfs(start_id)` and `traverse_dfs(start_id)` as lazy generators yielding node ids in traversal order. Also expose a `detect_cycle(node_id)` utility that runs DFS from that node and reports any found cycle path. Use the existing Graph container from T-004.
+**Description:** Schemas live under `context/schemas/`. Naming: `name.md` for inactive, `[name].md` for active (R2 covers brackets). Loader iterates the directory; reuses T-006 frontmatter reader. Both `.md` and `.json` accepted.
 
-**Files:** `src/graph_core/traversal.py`, `tests/graph_core/test_traversal.py`
+**Files:** `agi-tree/src/schema_registry/loader.py`, `agi-tree/tests/schema_registry/test_schema_files.py`, `agi-tree/tests/fixtures/schemas/example.md`, `agi-tree/tests/fixtures/schemas/example.json`
+
+**Test Strategy:** Drop a new schema file into a fixture and assert it appears in the registry on next load without code changes.
