@@ -8,5 +8,8 @@ parents:
 next_edges:
   - bigger-outcome:cli-invocation-r1
 ---
-Input: detect_shell(). Output: (shell_type, confidence).
-Edge cases: unknown -> ('unknown', 0.0). Used by environment-indexers.
+## Outcome: CLI Shell Detection
+
+Input: detect_shell()
+Output: (shell_type, confidence)
+Used by environment-indexers CLI.
