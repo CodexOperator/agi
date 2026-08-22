@@ -8,4 +8,4 @@ parents:
 next_edges:
   - app-purpose:cli-invocation
 ---
-CLI domain: shell detection (R1 proved). Enables platform-appropriate commands.
+CLI invocation domain: shell detection (R1 proved), execution planned.
