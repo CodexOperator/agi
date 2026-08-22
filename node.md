@@ -1,14 +1,37 @@
 ---
 id: "mvp:graph-core-r1"
-title: "Mvp: graph-core"
-type: mvp
-status: open
-confidence: 1.0
+next_edges:
+  - "outcome:graph-core-r1"
 parents:
   - verdict:graph-core-r1
+subgraph: false
 tags:
-  - chain-persistence-r13
-next_edges:
-  - outcome:graph-core-r1
+  - graph-core
+  - R1
+testable_claim: MVP for graph-core R1
+title: "graph-core/R1: MVP"
+type: mvp
 ---
-MVP: persists next_edges to 8 node files enabling find_chains() to return 8-hop capillary chains.
+
+**MVP:** Generic Node Primitive
+
+```python
+from graph_core.node import Node
+from graph_core.edge import Edge
+from graph_core.graph import Graph
+
+# Node: id + type + optional body
+n = Node(id="my:id", type="hypothesis")
+# Edge: source + target + relation
+e = Edge(source_id="a", target_id="b", relation="spawns")
+# Graph: container for nodes + edges
+g = Graph()
+g.add_node(n)
+g.add_edge(e)
+```
+
+**Key files:**
+- `src/graph_core/node.py` — Node dataclass
+- `src/graph_core/edge.py` — Edge dataclass
+- `src/graph_core/graph.py` — Graph container + DAG invariants
+- `src/graph_core/persistence.py` — file-based frontmatter persistence
