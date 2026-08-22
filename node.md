@@ -1,14 +1,21 @@
 ---
 id: "exp:graph-core-r1"
-title: "Experiment: graph-core"
-type: experiment
-status: open
-confidence: 1.0
+next_edges:
+  - "verdict:graph-core-r1"
 parents:
   - hyp:graph-core-r1
+subgraph: false
 tags:
-  - chain-persistence-r13
-next_edges:
-  - verdict:graph-core-r1
+  - graph-core
+  - R1
+testable_claim: Generic Node Primitive
+title: "graph-core/R1: Experiment"
+type: experiment
 ---
-graph-core R13 experiment: validates next_edges chain persistence.
+
+**Description:** Run graph-core test suite + validate R1 acceptance criteria.
+
+**Method:**
+- Run pytest on tests/graph_core/ (16 test files)
+- Validate R1.1–R1.6 programmatically
+- Create 8-hop chain nodes
