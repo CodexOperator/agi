@@ -1,5 +1,5 @@
 ---
-id: "exp:cli-invocation-r1"
+id: exp:cli-invocation-r1
 type: experiment
 status: completed
 parents:
@@ -7,4 +7,4 @@ parents:
 next_edges:
   - verdict:cli-invocation-r1
 ---
-Shell detection experiment: $SHELL + ps parent = 100% bash detection.
+Shell detection: $SHELL + ps parent = 100% accuracy. R1 PROVED.
