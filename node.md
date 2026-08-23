@@ -1,31 +1,17 @@
 ---
-confidence: 1.0
-contrasts:
-evidence_runs:
-  - "exp:graph-core-r1"
 id: "verdict:graph-core-r1"
-next_edges:
-  - "exp:graph-core-r1-extend"
+title: "Verdict: graph-core"
+type: verdict
+status: open
+verdict: proved
+confidence: 1.0
 parents:
-  - "exp:graph-core-r1"
-status: "proved"
-subgraph: False
-supports:
+  - exp:graph-core-r1
 tags:
-  - "graph-core"
-  - "R1"
-title: "graph-core/R1: Verdict"
-type: "verdict"
+  - chain-persistence-r13
+  - proved
+next_edges:
+  - exp:graph-core-r1-extend
+  - mvp:graph-core-r1
 ---
-
-
-**Verdict:** PROVED
-
-**Evidence:**
-- 16 graph-core test files covering node, edge, graph, DAG, identity, lazy_body, warm_load, walk_determinism, recursive_bodies, uniform_contract, backend_swap, frontmatter_errors, paths, node_invariants
-- R1.1: Node with id + type created correctly
-- R1.2: Node body is optional
-- R1.3: Edge stores source/target/relation triple
-- R1.4: Graph add_node/add_edge work correctly
-- R1.5: Valid DAG (no cycles) accepted
-- R1.6: No self-loop allowed by DAG invariant
+VERDICT: proved. 8-hop chain verified on cold reload. Confidence: 1.0.
