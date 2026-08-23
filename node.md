@@ -10,40 +10,39 @@ tags:
   - goal
   - root
   - short-term
-title: "S9: the purged gamed mass is still on disk inside agi-tree"
+title: "S9: `commit_file()` drops the exec bit and mis-hashes symlinks"
 type: goal
 ---
 
-Found 2026-08-23. **G6.2 says the 28,916 gamed `-extend<N>` nodes were "removed
-from the working tree and archived outside the repo." The first half is not
-true.** `.claude/worktrees/wonderful-lamport-51c9a9/` — a git worktree registered
-against a `~/.hermes/agi-tree/` path — still holds **29,706 `.md` files, 29,062
-of them `-extend<N>` nodes**. They are gitignored, which is why nothing has
-complained, and why nothing found them for two days.
+Found 2026-08-23 by `exp:grid-payload-roundtrip`, confirmed at the cited lines.
+`bin/grid.py`:
 
-**The hazard is specific and I walked into it while writing this iteration.**
-`evidence_gate.build_corpus()` takes a directory and `rglob`s it for `*.md`.
-Called on `nodes/` it returns 657 ids, correct. Called on the **project root** it
-returns **29,582** — the pre-purge corpus, resurrected. A verdict citing a
-deleted gamed node as `evidence_runs` would resolve against it and pass the gate,
-which is H4c's fix silently undone.
+- **`:154`** — `git hash-object -w str(path.resolve())`. `Path.resolve()`
+  dereferences a symlink *before* hashing, so the object committed is the
+  **target file's bytes**, not the link text. Not a dropped-metadata edge case: a
+  silently wrong object, no error, no warning.
+- **`:160`** — the tree line is `f"100644 blob {blob}\tnode.md\n"`. Mode is
+  hardcoded, so any `100755` payload comes back `100644` and any `120000` comes
+  back a regular file.
 
-**The engine is not currently affected, and that was checked rather than
-assumed:** all three real callers pass `root / "nodes"` — `cli.py:85`,
-`metrics.py:145`, `post_wire.py:137`. The bug was in the throwaway harness that
-found it. But "the correct argument is passed at all three current call sites" is
-a property of today's callers, not of the function, and the incorrect call took
-one line to write.
+**Benign today, and it will not stay that way.** Grid only ever commits regular
+node `.md` files under the fixed name `node.md`, and node files are not symlinks
+and not executable — so nothing is currently wrong on disk. The defect activates
+the moment a *payload* goes through the same call, which is exactly what
+**G6.3** picked and what **G6.7** is built on. This is the rare case where the
+right time to fix a latent bug is before its first caller, because both callers'
+falsifiers are byte-comparisons that it would fail.
 
-Two independent fixes, and both are cheap:
-1. **Delete the worktree.** `git worktree remove` / prune. This is **S4** C5,
-   which is gated and explicitly last — this entry is the evidence for promoting
-   it, because "archived, not deleted" was the deviation G6.2 recorded and it did
-   not fully happen.
-2. **Make `build_corpus` refuse a non-`nodes/` root**, or resolve `nodes/` itself
-   from the project root rather than trusting the caller. A gate that cannot
-   verify must fail closed — the function already argues exactly this for a
-   `None` corpus, and should hold itself to it for a wrong directory.
+Fix: read the mode from `os.lstat()` (100644 / 100755 / 120000) and, for a
+symlink, hash the `readlink()` target text via `hash-object --stdin` rather than
+the dereferenced file — which is what `git add` does internally, built from the
+four primitives `grid.py` already calls. A matching mode/symlink-aware read path
+is needed in whatever resolves a payload back out. Estimated ~15–20 lines, and
+the experiment's mode-aware variant is a working reference implementation
+(`sessions/iter-9007/kid-c/sandbox/`, which is gitignored — port it, do not
+depend on it).
 
-Do (2) regardless of (1). Deleting the worktree removes today's 29k; it does not
-stop the next stale tree from being swept in.
+Test: the experiment's own table is the regression suite — a 100755 file and a
+120000 symlink, three version bumps each, sha256 against a non-git baseline.
+
+Blocks **G6.3** and **G6.7**. One fix, two callers.
