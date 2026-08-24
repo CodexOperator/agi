@@ -6,7 +6,8 @@ id: "goal:g8.2"
 origin: goals-doc
 parents:
   - goal:g8
-seeds: []
+seeds:
+  - level3:lib-find-root.sh@v2
 status: active
 tags:
   - goal
