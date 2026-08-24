@@ -1,15 +1,21 @@
 ---
 id: "bigger-outcome:session-management-r1"
-title: "Session Management Module Purpose"
 type: bigger_outcome
-status: open
-confidence: 0.9
+title: "Session Management Module Purpose"
 parents:
-  - outcome:session-management-r1
+  - "outcome:session-management-r1-r1"
 tags:
-  - session-management
-  - r1
+  - session-management-r1
+  - bigger-outcome
 next_edges:
-  - app-purpose:session-management
+  - "app-purpose:session-management-r1"
 ---
-BO: Aggregates session capture/restore into module-level purpose. Enables persistent agent memory across restarts. Powers long-running autonomous research loops.
+
+# Session Management Module Purpose
+
+Aggregates session capture/restore outcomes into module-level purpose:
+
+**Enables**: Persistent agent sessions with memory across restarts.
+**Uses**: git commits + YAML frontmatter + graph loader.
+**Achieves**: 100% fidelity for committed state.
+**Enables**: Long-running autonomous research loops (like this one).
