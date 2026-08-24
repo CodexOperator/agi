@@ -6,7 +6,8 @@ id: "goal:g2.5"
 origin: goals-doc
 parents:
   - goal:g2
-seeds: []
+seeds:
+  - hyp:zoom-encoded-node-ids
 status: active
 tags:
   - goal
@@ -64,17 +65,16 @@ unreadable by the reader it exists for. G9 is a goal about legibility; a
 36-character opaque id is a direct tax on it, paid on every injected map, every
 iteration, forever. Decide on that axis, not on bytes.
 
-**Falsifier, and it is cheap and must be run first:** one alphanumeric character
-is 36 values case-insensitively, 62 case-sensitively — so **no node may have
-more than 36 (or 62) children**. Count the actual fan-out in this corpus before
-committing: 178 level-3 nodes hang off their census parents today, and if any
-single parent already exceeds the budget the fixed one-char-per-level rule is
-dead on arrival and the scheme needs a variable-width or escape-hatch design.
-Measure, then choose.
+**Falsifier — run 2026-08-24, and it did not fire.** One alphanumeric character
+is 36 values case-insensitively, 62 case-sensitively, so **no node may have more
+than 36 (or 62) children**. Measured over all 831 node files: max fan-out is
+**20**, on `idea:engine-graph-core`. Zero parents exceed 36; zero exceed 62. The
+level-3 layer — the one this goal pins at 7 characters and flagged as the
+known-large-fan-out risk — has the same worst offender at the same 20. Chain:
+`hyp:zoom-encoded-node-ids` → `exp:id-fanout-budget` →
+`verdict:zoom-encoded-node-ids` (proved, conf 0.9, evidence resolves,
+independently recomputed by the reviewing parent).
 
-**Sequencing note:** this changes every id in the corpus, so it needs a
-migration that preserves grid history (`refs/grid/node/*` is keyed by the old
-sanitized id) and an old→new mapping kept as prior art. Do not begin the
-migration before the falsifier above has a number attached to it.
-
-**Numbering direction to confirm before building:*
+So the fixed one-char-per-level rule survives this corpus with 1.8× headroom,
+and no variable-width or escape-hatch design is needed today. **Watch
+`idea:engine-graph-core`:** it is the c
