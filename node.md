@@ -8,6 +8,7 @@ parents:
   - goal:g2
 seeds:
   - hyp:zoom-encoded-node-ids
+  - level3:bin-grid@v2
 status: active
 tags:
   - goal
