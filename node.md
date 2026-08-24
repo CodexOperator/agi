@@ -1,22 +1,18 @@
 ---
-id: verdict:schema-registry-r2
+id: "verdict:schema-registry-r2"
+title: "schema-registry R2 chain: verdict:schema-registry-r2"
 type: verdict
-title: "Verdict: schema-registry R2"
-status: proved
-verdict: inconclusive_lean_proved:50
-confidence: 0.85
 parents:
   - exp:schema-registry-r2
-  - hyp:schema-registry-r2
-tags:
-  - schema-registry
-  - R2
-  - proved
 next_edges:
   - exp:schema-registry-r2-extend
-evidence_runs: 0
-demoted_from: proved
-demote_reason: 'no experiment evidence (evidence_runs=0) for ''proved'''
+  - mvp:schema-registry-r2-bracket-convention
 ---
 
-VERDICT: proved. Bracket Convention for active schemas works.
+**verdict** node for schema-registry R2: Bracket Convention.
+
+## Acceptance Criteria
+- R2.1 Bracketed → active
+- R2.2 Non-bracketed → inactive
+- R2.3 Rename to add brackets = activate
+- R2.4 Duplicate active → DuplicateActiveSchemaError
