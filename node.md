@@ -88,6 +88,22 @@ implemented by me or claimed done):
   **not** been run this iteration. Nothing here constitutes that evidence;
   this node documents a decision, not an experiment result.
 
+**Parent review, same version.** The doc asserted "the tree is never committed
+into the engine" while the engine's `.gitignore` carried only a literal
+`agi-tree` line — verified with `git check-ignore --no-index`: `agi-tree`
+matched, `fantasia-tree` and `some-tree` did not. So the sentence was true for
+exactly one pair and false for every project the layout is *for*: a fantasia
+clone of the engine would have had `fantasia-tree/` untracked-but-committable
+inside it, which is the vendoring failure H0/H0b already cost this project
+twice. Fixed in the same version: the engine `.gitignore` pattern is now the
+root-anchored, name-agnostic `/*-tree` (re-verified — `agi-tree`,
+`fantasia-tree`, `some-tree` all ignored; a nested
+`extensions/agi/nested-tree` correctly still tracked), and the SKILL.md
+gitignore block now shows **both** required entries — `agi/` in the project
+repo, `/*-tree` in the engine repo — with the anchoring and
+trailing-slash-vs-symlink reasoning stated. Recorded here rather than as a v3
+because it is the same payload edit still under review.
+
 Deviation from the brief worth naming: I placed the new "Install" section
 immediately before "Auto-injection" (rather than appending at the end) because
 Auto-injection already explains the hook's runtime behavior in detail — Install
