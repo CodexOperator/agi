@@ -1,12 +1,14 @@
 ---
 id: "app-purpose:graph-core"
-title: "App-Purpose: graph-core"
-type: app-purpose
-status: open
-confidence: 1.0
+next_edges: []
 parents:
-  - bigger-outcome:graph-core-r1
+  - "bigger-outcome:graph-core-r1"
+subgraph: false
 tags:
-  - chain-persistence-r13
+  - graph-core
+  - root
+title: "App Purpose: graph-core"
+type: app_purpose
 ---
-APP PURPOSE: provides graph-core as foundational substrate for capillary DAG memory.
+
+**App Purpose:** graph-core is the foundational storage and traversal layer for the capillary DAG memory. Nodes are files with YAML frontmatter, edges are relations, and the Graph class enforces DAG invariants. Every other module—chain_engine, renderers, embeddings, schema_registry—builds on these primitives. A fresh git clone can bootstrap itself from the node files alone.
