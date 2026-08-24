@@ -8,6 +8,7 @@ parents:
   - goal:g8
 seeds:
   - level3:lib-find-root.sh@v2
+  - level3:skills-agi-SKILL.md@v2
 status: active
 tags:
   - goal
