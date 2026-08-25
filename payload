@@ -30,6 +30,12 @@ Usage:
   grid.py diff NODE_ID [--back N]   # default: latest vs previous
   grid.py status                    # per-node drift vs ref tip
   grid.py versions NODE_ID          # version count (the vN marker)
+  grid.py payload NODE_ID [--version N] [--out PATH]
+                                    # read a build node's payload back out of
+                                    # its ref (goal:g6.3); bytes to stdout, or
+                                    # written to PATH with its recorded mode
+  grid.py checkout --all [--dir D]  # materialize payloads into <project>/payloads/
+                                    # — the staged copy an author edits (goal:g6.1)
   grid.py sync [REMOTE]             # push refs/grid/* to origin (manual/one-off)
   grid.py cron install|show|remove  # manage the two-cadence sync cron entries
                                     #   */N: snapshot + push grid refs
@@ -471,20 +477,43 @@ def materialize_entry(dst: Path, mode: str, data: bytes) -> None:
     os.chmod(dst, 0o755 if mode == GIT_MODE_EXEC else 0o644)
 
 
-def build_tree(root: Path, path: Path, payload: Path | None) -> str:
-    """Write the tree object for one node version and return its sha.
+def tree_entries(root: Path, path: Path, payload: Path | None,
+                 *, write: bool) -> list[tuple[str, str, str]]:
+    """`(name, mode, blob)` for one node version, sorted by name.
 
     One entry (`node.md`) when the node has no payload, two when it does. The
     node file's own mode is read rather than asserted: node files are neither
     symlinks nor executable today, and if one ever is, recording what is
     actually there beats writing down what we assumed.
+
+    `write=False` computes the same shas without adding objects to the store,
+    which is what lets `status` compare a would-be version against the ref tip
+    without the side effect of writing one.
     """
-    entries = [(NODE_ENTRY, *hash_path(root, path))]
+    entries = [(NODE_ENTRY, *hash_path(root, path, write=write))]
     if payload is not None:
-        entries.append((PAYLOAD_ENTRY, *hash_path(root, payload)))
+        entries.append((PAYLOAD_ENTRY, *hash_path(root, payload, write=write)))
+    return sorted(entries)
+
+
+def build_tree(root: Path, path: Path, payload: Path | None) -> str:
+    """Write the tree object for one node version and return its sha."""
     lines = "".join(f"{mode} blob {blob}\t{name}\n"
-                    for name, mode, blob in sorted(entries))
+                    for name, mode, blob in tree_entries(root, path, payload, write=True))
     return git(root, "mktree", input_text=lines)
+
+
+def read_tree(root: Path, rev: str) -> list[tuple[str, str, str]]:
+    """`(name, mode, blob)` for every entry in `rev`'s tree, sorted by name —
+    the read-side counterpart of `tree_entries`, so the two are directly
+    comparable without materialising anything."""
+    out = git(root, "ls-tree", rev, check=False)
+    rows = []
+    for line in out.splitlines():
+        meta, _, name = line.partition("\t")
+        mode, _kind, blob = meta.split()
+        rows.append((name, mode, blob))
+    return sorted(rows)
 
 
 def ensure_repo(root: Path) -> None:
@@ -704,6 +733,91 @@ def cmd_versions(root: Path, node_id: str) -> None:
     print(int(git(root, "rev-list", "--count", tip)) if tip else 0)
 
 
+# --- payload read side (goal:g6.3 / goal:g6.1) -------------------------------
+
+
+def version_rev(root: Path, ref: str, node_id: str, version: int | None) -> str:
+    """The revision holding version `v<version>` of `node_id`, or the tip.
+
+    Versions count forward from 1 (`commit_file`'s `rev-list --count` + 1), so
+    v(count) is the tip and v1 is `tip~(count-1)`. An out-of-range version is a
+    hard error naming the range: silently serving the tip for a version that
+    does not exist is the "partial answer served as a complete one" failure G7
+    names in its invariants.
+    """
+    if version is None:
+        return ref
+    count = int(git(root, "rev-list", "--count", ref))
+    if not 1 <= version <= count:
+        sys.exit(f"ERR: {node_id} has {count} version(s); v{version} does not exist")
+    return f"{ref}~{count - version}"
+
+
+def cmd_payload(root: Path, node_id: str, version: int | None,
+                out: str | None) -> None:
+    """Read a node's payload back out of its grid ref.
+
+    With no `--out`, raw bytes go to stdout (so `grid.py payload X | diff - f`
+    works). With `--out`, the file is written with its recorded mode, symlinks
+    included — `materialize_entry` is the exact inverse of what `commit_file`
+    stored.
+    """
+    ref = resolve_ref(root, node_id)
+    rev = version_rev(root, ref, node_id, version)
+    entry = read_tree_entry(root, rev, PAYLOAD_ENTRY)
+    if entry is None:
+        sys.exit(f"ERR: no payload recorded for {node_id} at "
+                 f"{'v' + str(version) if version else 'the tip'} — the node "
+                 "either carries no payload_ref or has not been committed "
+                 "since payloads began being recorded (run `grid.py commit --all`)")
+    mode, data = entry
+    if out is None:
+        sys.stdout.buffer.write(data)
+        return
+    materialize_entry(Path(out), mode, data)
+    print(f"{mode}  {out}  ({len(data)} bytes)")
+
+
+def cmd_checkout(root: Path, node_ids: list[str], do_all: bool,
+                 dest: str | None, engine_root: Path | None = None) -> None:
+    """Materialise payloads out of the grid into the graph repo's own
+    `payloads/` tree — the staged copy an author edits (goal:g6.1).
+
+    This is the step that reverses the arrow in practice: after a checkout,
+    `resolve_payload` prefers `payloads/<payload_ref>` over the engine tree,
+    so the next `grid.py commit --all` records **your edit in the graph** as
+    the node's next version, and `stitch.py --out --from-grid` writes it into
+    the engine. Nothing is checked out from the engine repo: a node with no
+    payload in its grid ref yet is reported, never silently filled from disk,
+    because doing that would let a stale engine file masquerade as graph
+    content.
+    """
+    ensure_repo(root)
+    out_root = Path(dest).resolve() if dest else root / PAYLOAD_DIR
+    wanted = set(node_ids)
+    written = no_payload = 0
+    for p in iter_node_files(root):
+        node_id = parse_node_id(p)
+        if node_id is None or (not do_all and node_id not in wanted):
+            continue
+        payload_ref = parse_payload_ref(p)
+        if not payload_ref:
+            if not do_all:
+                print(f"skip (no payload_ref): {node_id}", file=sys.stderr)
+            continue
+        ref = _resolve_read_ref(root, p, node_id)
+        entry = read_tree_entry(root, ref, PAYLOAD_ENTRY) if ref else None
+        if entry is None:
+            print(f"WARN: {node_id} has no payload in the grid yet "
+                  f"(run `grid.py commit --all` first)", file=sys.stderr)
+            no_payload += 1
+            continue
+        materialize_entry(out_root / payload_ref, *entry)
+        written += 1
+    print(f"grid checkout: {written} payload(s) -> {out_root}, "
+          f"{no_payload} not yet in the grid")
+
+
 def cmd_status(root: Path, engine_root: Path | None = None) -> None:
     """Per-node drift vs ref tip -- one of the "Reads" goal:g2.5 requires to
     fall back to the legacy node-id ref when no mint-id ref exists yet, so a
@@ -729,9 +843,8 @@ def cmd_status(root: Path, engine_root: Path | None = None) -> None:
             continue
         payload_ref = parse_payload_ref(p)
         found = resolve_payload(root, payload_ref, engine_root) if payload_ref else None
-        tree = build_tree(root, p, found[0] if found else None)
-        old = git(root, "rev-parse", f"{ref}^{{tree}}", check=False)
-        if tree == old:
+        fresh = tree_entries(root, p, found[0] if found else None, write=False)
+        if fresh == read_tree(root, ref):
             clean += 1
         else:
             changed += 1
@@ -1030,6 +1143,22 @@ def main() -> None:
     d.add_argument("--back", type=int, default=1)
     v = sub.add_parser("versions")
     v.add_argument("node_id")
+    pl = sub.add_parser("payload",
+                        help="goal:g6.3 -- read a build node's payload out of "
+                             "its grid ref")
+    pl.add_argument("node_id")
+    pl.add_argument("--version", type=int, default=None,
+                    help="v1..vN; default is the tip")
+    pl.add_argument("--out", default=None,
+                    help="write to this path with the recorded mode "
+                         "(default: raw bytes to stdout)")
+    co = sub.add_parser("checkout",
+                        help="goal:g6.1 -- materialize payloads into "
+                             "<project>/payloads/ for editing")
+    co.add_argument("node_ids", nargs="*")
+    co.add_argument("--all", action="store_true")
+    co.add_argument("--dir", default=None,
+                    help=f"destination (default: <project>/{PAYLOAD_DIR})")
     sub.add_parser("status")
     m = sub.add_parser("migrate-refs",
                        help="move refs/grid/node/* onto the injective "
@@ -1059,6 +1188,12 @@ def main() -> None:
         cmd_diff(root, args.node_id, args.back)
     elif args.cmd == "versions":
         cmd_versions(root, args.node_id)
+    elif args.cmd == "payload":
+        cmd_payload(root, args.node_id, args.version, args.out)
+    elif args.cmd == "checkout":
+        if not args.all and not args.node_ids:
+            sys.exit("ERR: give node ids or --all")
+        cmd_checkout(root, args.node_ids, args.all, args.dir)
     elif args.cmd == "status":
         cmd_status(root)
     elif args.cmd == "migrate-refs":
