@@ -1,9 +1,9 @@
 ---
-id: experiment:node-type-corpus-survey
+id: exp:node-type-corpus-survey
 mint_id: c0f08ab06be947f0a9954e0d868f19c2
 type: experiment
 parents:
-  - hypothesis:spawn-check-on-writer-path
+  - hyp:spawn-check-on-writer-path
 next_edges:
   - verdict:spawn-gate-lands-on-writer-path
 confidence: 0.9
@@ -15,7 +15,7 @@ tags:
 title: "Corpus survey: the spawn rule table reproduces, and 53 nodes already violate it"
 ---
 
-# experiment:node-type-corpus-survey
+# exp:node-type-corpus-survey
 
 **Sub-claim 1 of the hypothesis: is the rule derivable?** Re-ran the S17
 survey independently rather than trusting the table in `GOALS.md` §S17.
