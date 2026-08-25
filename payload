@@ -136,6 +136,7 @@ walked together (as this script already notes it must) prevents it.
 Run:
     python3 bin/stitch.py --project PATH --verify [--engine-root PATH] [--strict]
     python3 bin/stitch.py --project PATH --out DIR [--engine-root PATH] [--force]
+    python3 bin/stitch.py --project PATH --out DIR --from-grid [--force]
 """
 from __future__ import annotations
 
@@ -173,6 +174,15 @@ _LEVEL3_PATH = BIN_DIR / "level3.py"
 _spec = importlib.util.spec_from_file_location("level3_for_stitch", _LEVEL3_PATH)
 level3 = importlib.util.module_from_spec(_spec)
 _spec.loader.exec_module(level3)
+
+# Same rule, same reason (`goal:g6.3`): `--from-grid` resolves payloads out of
+# `refs/grid/node/<mint-id>`, and grid.py is the one definition of how those
+# refs are named, read, and materialised back with their modes. A second
+# implementation here would be free to disagree with the one that wrote them.
+_GRID_PATH = BIN_DIR / "grid.py"
+_grid_spec = importlib.util.spec_from_file_location("grid_for_stitch", _GRID_PATH)
+grid = importlib.util.module_from_spec(_grid_spec)
+_grid_spec.loader.exec_module(grid)
 
 
 # --- level-3 node loading (read-only; never touches nodes/level3/) -----------
@@ -540,9 +550,39 @@ def _guard_out_dir(out_dir: Path, project_root: Path, engine_root: Path) -> None
                 f"--out {out_dir} resolves inside the {label} ({forbidden_r}); refusing to write")
 
 
+def _grid_payload(project_root: Path, node: Level3Node) -> tuple[str, bytes] | None:
+    """`(mode, bytes)` for one node's payload as recorded in its grid ref, or
+    None if the node has no history or no payload entry there yet.
+
+    This is the resolution rule `goal:g6.3` picked: `payload_ref` keeps its
+    shape and only its *source* changes, from "read this path off the engine
+    tree" to "read it out of `refs/grid/node/<mint-id>`". Nothing falls back to
+    disk — a node that has never been grid-committed is reported, because
+    silently serving the engine file would make `--from-grid` a no-op that
+    looks like a success.
+    """
+    node_id = grid.parse_node_id(node.path)
+    if node_id is None:
+        return None
+    ref = grid._resolve_read_ref(project_root, node.path, node_id)
+    if ref is None:
+        return None
+    return grid.read_tree_entry(project_root, ref, grid.PAYLOAD_ENTRY)
+
+
 def materialize(project_root: Path, engine_root: Path, out_dir: Path,
-                 force: bool = False, version: int | None = None) -> dict:
-    """Copy every level-3 node's `payload_ref` from the engine tree into `out_dir`.
+                 force: bool = False, version: int | None = None,
+                 from_grid: bool = False) -> dict:
+    """Copy every level-3 node's `payload_ref` into `out_dir`.
+
+    Source of the bytes, and this is the whole of `goal:g6.1`'s arrow:
+
+      - default — the **engine tree** (`engine_root / payload_ref`). The graph
+        describes the code; the code is authoritative.
+      - `from_grid=True` — the node's **own grid ref**. The graph *is* the
+        code; the engine tree is what falls out of it, and modes and symlinks
+        come back from the tree entry rather than from a `copy2` of a file
+        that may not exist any more.
 
     Preserves the repo-relative path. Refuses to write into a non-empty
     `out_dir` unless `force=True`, and refuses unconditionally to write
@@ -577,12 +617,14 @@ def materialize(project_root: Path, engine_root: Path, out_dir: Path,
             f"{out_dir} is non-empty; refusing to write without --force")
 
     nodes, warnings = load_level3_nodes(project_root)
-    if not engine_root.is_dir():
+    # Under --from-grid the engine tree is not a source, so its absence is not
+    # a reason to write nothing: that is the point of the mode.
+    if not from_grid and not engine_root.is_dir():
         warnings.append(f"engine root {engine_root} is missing or unreadable — nothing written")
         return {
             "nodes_total": len(nodes), "written": 0, "bytes_written": 0,
             "skipped_missing": [], "skipped_duplicate": [], "skipped_no_version": [],
-            "chains_materialized": {}, "warnings": warnings,
+            "chains_materialized": {}, "warnings": warnings, "source": "engine",
             "runtime_seconds": time.perf_counter() - t0,
         }
 
@@ -628,11 +670,24 @@ def materialize(project_root: Path, engine_root: Path, out_dir: Path,
     skipped_missing: list[str] = []
 
     for n in targets:
+        dst = out_dir / n.payload_ref
+        if from_grid:
+            entry = _grid_payload(project_root, n)
+            if entry is None:
+                skipped_missing.append(n.node_id)
+                continue
+            mode, data = entry
+            grid.materialize_entry(dst, mode, data)
+            written += 1
+            bytes_written += len(data)
+            continue
         src = engine_root / n.payload_ref
+        # `is_file()` follows a symlink, so a dangling one reads as missing.
+        # That is the right answer for the engine-tree source: the payload it
+        # names genuinely is not readable there.
         if not src.is_file():
             skipped_missing.append(n.node_id)
             continue
-        dst = out_dir / n.payload_ref
         dst.parent.mkdir(parents=True, exist_ok=True)
         shutil.copy2(src, dst)
         written += 1
@@ -647,6 +702,7 @@ def materialize(project_root: Path, engine_root: Path, out_dir: Path,
         "skipped_no_version": skipped_no_version,
         "chains_materialized": chains_materialized,
         "warnings": warnings,
+        "source": "grid" if from_grid else "engine",
         "runtime_seconds": time.perf_counter() - t0,
     }
 
@@ -703,8 +759,12 @@ def print_materialize_report(stats: dict) -> None:
               f"{len(stats['chains_materialized'])}")
         for ref, node_id in stats["chains_materialized"].items():
             print(f"    {ref} -> {node_id}")
+    if stats.get("source") == "grid":
+        print("  payload source: grid refs (goal:g6.3 — the graph is the source)")
     if stats["skipped_missing"]:
-        print(f"  skipped (payload_ref missing on disk): {len(stats['skipped_missing'])}")
+        label = ("no payload in the node's grid ref" if stats.get("source") == "grid"
+                 else "payload_ref missing on disk")
+        print(f"  skipped ({label}): {len(stats['skipped_missing'])}")
         for nid in stats["skipped_missing"]:
             print(f"    {nid}")
     if stats["skipped_duplicate"]:
@@ -743,6 +803,12 @@ def main(argv: list[str] | None = None) -> int:
                           "(default: highest version). A payload_ref with no "
                           "member at this version is skipped and reported, "
                           "never guessed.")
+    ap.add_argument("--from-grid", action="store_true",
+                     help="goal:g6.3 — resolve each payload out of the node's "
+                          "own grid ref (refs/grid/node/<mint-id>) instead of "
+                          "off the engine tree. Modes and symlinks come back "
+                          "from the tree entry. This is the direction goal:g6.1 "
+                          "commits to: the engine is assembled from the graph.")
     ap.add_argument("--verify", action="store_true",
                      help="report drift only; write nothing")
     ap.add_argument("--strict", action="store_true",
@@ -765,7 +831,7 @@ def main(argv: list[str] | None = None) -> int:
     out_dir = Path(args.out).resolve()
     try:
         stats = materialize(project_root, engine_root, out_dir, force=args.force,
-                             version=args.version)
+                             version=args.version, from_grid=args.from_grid)
     except StitchSafetyError as exc:
         print(f"ERROR: {exc}", file=sys.stderr)
         return 2
