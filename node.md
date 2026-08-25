@@ -1,6 +1,7 @@
 ---
 confidence: 1.0
 id: "level3:bin-snapshot-goals"
+mint_id: aa00705c2b644965a9cba7e91c411188
 origin: level3-scan
 parents:
   - idea:engine-snapshot-goals
