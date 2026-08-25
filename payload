@@ -127,6 +127,34 @@ payload_boundary = importlib.util.module_from_spec(_pb_spec)
 _pb_spec.loader.exec_module(payload_boundary)
 
 
+# grid.py, by file path — same rule, same reason: `--from-grid` resolves
+# payloads out of `refs/grid/node/<mint-id>`, and grid.py is the one definition
+# of how those refs are named and read (goal:g6.1).
+_GRID_PATH = BIN_DIR / "grid.py"
+_grid_spec = importlib.util.spec_from_file_location("grid_for_level3", _GRID_PATH)
+grid = importlib.util.module_from_spec(_grid_spec)
+_grid_spec.loader.exec_module(grid)
+
+
+def grid_payload_for(project_root: Path, node_path: Path) -> bytes | None:
+    """The payload bytes recorded in `node_path`'s grid ref, or None.
+
+    None is returned — never a fallback to disk — for a node with no mint id,
+    no ref, or no payload entry yet. The caller reports it and derives from the
+    engine tree instead, saying which source it used. A silent fallback would
+    make `--from-grid` a no-op that reads like a success, which is the failure
+    `stitch.py --from-grid` was already written to avoid.
+    """
+    node_id = grid.parse_node_id(node_path)
+    if node_id is None:
+        return None
+    ref = grid._resolve_read_ref(project_root, node_path, node_id)
+    if ref is None:
+        return None
+    entry = grid.read_tree_entry(project_root, ref, grid.PAYLOAD_ENTRY)
+    return entry[1] if entry else None
+
+
 # --- file discovery -----------------------------------------------------------
 
 # Retained for tests and for the record: the pre-G6.8 scope. Nothing reads
@@ -638,6 +666,12 @@ def main(argv: list[str] | None = None) -> int:
                     help="override the engine repo root (default: this script's own repo)")
     ap.add_argument("--dry-run", action="store_true",
                     help="report what would happen; write nothing")
+    ap.add_argument("--from-grid", action="store_true",
+                    help="goal:g6.1 — derive each existing node's contract from "
+                         "the payload in its own grid ref instead of from the "
+                         "engine tree. Discovery still reads the engine tree "
+                         "(a file with no node yet can only be found there); "
+                         "derivation stops depending on it.")
     args = ap.parse_args(argv)
 
     if args.project:
@@ -681,10 +715,22 @@ def main(argv: list[str] | None = None) -> int:
     n_uncovered = 0
     n_parse_fail = 0
 
+    n_from_grid = 0
+    n_from_engine = 0
+
     for rel_path in files:
         abs_path = engine_root / rel_path
         parent_id = find_parent(rel_path, units)
-        node_id, fm, body, analysis = build_node(rel_path, abs_path, parent_id)
+        payload = None
+        if args.from_grid:
+            probe_id = f"level3:{slug_for(rel_path)}"
+            node_path = existing.get(probe_id, {}).get("path")
+            payload = grid_payload_for(project_root, node_path) if node_path else None
+            if payload is None:
+                n_from_engine += 1
+            else:
+                n_from_grid += 1
+        node_id, fm, body, analysis = build_node(rel_path, abs_path, parent_id, payload)
 
         if node_id in used_ids:
             disambiguated = f"{node_id}-{len(used_ids)}"
@@ -743,6 +789,9 @@ def main(argv: list[str] | None = None) -> int:
     print(f"level-3 nodes {verb}: {len(files)}")
     print(f"  with census parent: {n_with_parent}")
     print(f"  flagged NO_PARENT (parentless): {n_no_parent}")
+    if args.from_grid:
+        print(f"payload source: {n_from_grid} from the grid, {n_from_engine} "
+              "from the engine tree (no node or no payload in its ref yet)")
     print(f"contract entries: {n_derivable} derivable, {n_uncovered} uncovered, "
           f"{n_parse_fail} file(s) failed to parse")
     prune_verb = "would prune" if args.dry_run else "pruned"
