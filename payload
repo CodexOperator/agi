@@ -137,6 +137,7 @@ Run:
     python3 bin/stitch.py --project PATH --verify [--engine-root PATH] [--strict]
     python3 bin/stitch.py --project PATH --out DIR [--engine-root PATH] [--force]
     python3 bin/stitch.py --project PATH --out DIR --from-grid [--force]
+    python3 bin/stitch.py --project PATH --out ENGINE --from-grid --publish
 """
 from __future__ import annotations
 
@@ -144,6 +145,7 @@ import argparse
 import importlib.util
 import re
 import shutil
+import subprocess
 import sys
 import time
 from collections import Counter
@@ -540,14 +542,69 @@ def _is_within(path: Path, root: Path) -> bool:
         return False
 
 
-def _guard_out_dir(out_dir: Path, project_root: Path, engine_root: Path) -> None:
-    """Refuse to write into the graph repo or the engine repo, ever."""
+def _git_is_clean(repo: Path) -> bool | None:
+    """True/False if `repo` is a git repo with a clean working tree; None if it
+    is not a git repo at all (which is not the same answer and must not be
+    collapsed into False)."""
+    res = subprocess.run(["git", "-C", str(repo), "status", "--porcelain"],
+                         capture_output=True, text=True)
+    if res.returncode != 0:
+        return None
+    return not res.stdout.strip()
+
+
+def _guard_out_dir(out_dir: Path, project_root: Path, engine_root: Path,
+                   publish: bool = False, from_grid: bool = False) -> None:
+    """Refuse to write into the graph repo, ever; and into the engine repo
+    unless this is an explicit, grid-sourced, recoverable publish.
+
+    The graph repo is never a legal target: nothing the engine tree contains
+    belongs in `nodes/`.
+
+    The engine repo is the target `goal:g6.5` step 2 exists for — "after G6.3,
+    cron may stitch and commit the engine" — so it stops being permanently
+    forbidden once G6.3 holds. It stays gated on three things at once, because
+    this project has paid three times (H0, H0b, H0i) for a script that wrote a
+    tree it had no independent record of:
+
+      1. `--publish`, explicitly. Never a side effect of `--force`.
+      2. `--from-grid`. Publishing from the engine tree *into* the engine tree
+         is a no-op that can only lose information, and publishing from disk
+         would mean the graph never had to hold the bytes at all.
+      3. A **clean** engine working tree. This is the one that makes the write
+         recoverable rather than merely intended: every byte it overwrites is
+         already in the engine's own git history, so `git checkout .` undoes
+         the whole publish. An uncommitted engine edit is exactly the work a
+         publish would destroy silently, so its presence is a hard stop.
+    """
     out_r = out_dir.resolve()
-    for forbidden, label in ((project_root, "graph repo"), (engine_root, "engine repo")):
-        forbidden_r = forbidden.resolve()
-        if _is_within(out_r, forbidden_r):
-            raise StitchSafetyError(
-                f"--out {out_dir} resolves inside the {label} ({forbidden_r}); refusing to write")
+    if _is_within(out_r, project_root.resolve()):
+        raise StitchSafetyError(
+            f"--out {out_dir} resolves inside the graph repo "
+            f"({project_root.resolve()}); refusing to write")
+    engine_r = engine_root.resolve()
+    if not _is_within(out_r, engine_r):
+        return
+    if not publish:
+        raise StitchSafetyError(
+            f"--out {out_dir} resolves inside the engine repo ({engine_r}); "
+            "refusing to write. Publishing the engine from the graph is "
+            "`--publish --from-grid` (goal:g6.5 step 2), never a plain --out.")
+    if not from_grid:
+        raise StitchSafetyError(
+            "--publish requires --from-grid: publishing the engine tree from "
+            "itself cannot add information, and publishing from disk would mean "
+            "the graph never held the bytes (goal:g6.1)")
+    clean = _git_is_clean(engine_r)
+    if clean is None:
+        raise StitchSafetyError(
+            f"--publish target {engine_r} is not a git repo; refusing to "
+            "overwrite files whose previous contents nothing is holding")
+    if not clean:
+        raise StitchSafetyError(
+            f"--publish target {engine_r} has uncommitted changes; refusing. "
+            "Commit or stash them first — they are the one thing a publish "
+            "would destroy that git could not give back.")
 
 
 def _grid_payload(project_root: Path, node: Level3Node) -> tuple[str, bytes] | None:
@@ -572,7 +629,7 @@ def _grid_payload(project_root: Path, node: Level3Node) -> tuple[str, bytes] | N
 
 def materialize(project_root: Path, engine_root: Path, out_dir: Path,
                  force: bool = False, version: int | None = None,
-                 from_grid: bool = False) -> dict:
+                 from_grid: bool = False, publish: bool = False) -> dict:
     """Copy every level-3 node's `payload_ref` into `out_dir`.
 
     Source of the bytes, and this is the whole of `goal:g6.1`'s arrow:
@@ -610,9 +667,13 @@ def materialize(project_root: Path, engine_root: Path, out_dir: Path,
     an ambiguous group stays ambiguous regardless of `version`.
     """
     t0 = time.perf_counter()
-    _guard_out_dir(out_dir, project_root, engine_root)
+    _guard_out_dir(out_dir, project_root, engine_root, publish=publish,
+                   from_grid=from_grid)
 
-    if out_dir.exists() and any(out_dir.iterdir()) and not force:
+    # A publish writes over an existing tree by definition, so --force is
+    # implied there; the recoverability check in _guard_out_dir is what makes
+    # that safe, not an empty directory.
+    if out_dir.exists() and any(out_dir.iterdir()) and not (force or publish):
         raise StitchSafetyError(
             f"{out_dir} is non-empty; refusing to write without --force")
 
@@ -809,6 +870,12 @@ def main(argv: list[str] | None = None) -> int:
                           "off the engine tree. Modes and symlinks come back "
                           "from the tree entry. This is the direction goal:g6.1 "
                           "commits to: the engine is assembled from the graph.")
+    ap.add_argument("--publish", action="store_true",
+                     help="goal:g6.5 step 2 — allow --out to write INTO the "
+                          "engine repo. Requires --from-grid and a clean engine "
+                          "working tree, so every overwritten byte is already in "
+                          "the engine's own git history and `git checkout .` "
+                          "undoes the whole publish.")
     ap.add_argument("--verify", action="store_true",
                      help="report drift only; write nothing")
     ap.add_argument("--strict", action="store_true",
@@ -831,7 +898,8 @@ def main(argv: list[str] | None = None) -> int:
     out_dir = Path(args.out).resolve()
     try:
         stats = materialize(project_root, engine_root, out_dir, force=args.force,
-                             version=args.version, from_grid=args.from_grid)
+                             version=args.version, from_grid=args.from_grid,
+                             publish=args.publish)
     except StitchSafetyError as exc:
         print(f"ERROR: {exc}", file=sys.stderr)
         return 2
