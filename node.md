@@ -7,7 +7,8 @@ id: "goal:s17"
 mint_id: 46b7d8f76a8742bf9aafa5a82ad8cca3
 order: 64
 origin: goals-doc
-seeds: []
+seeds:
+  - idea:schema-declared-spawn-gate
 status: active
 tags:
   - goal
