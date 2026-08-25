@@ -3,17 +3,17 @@ id: verdict:spawn-gate-lands-on-writer-path
 mint_id: 9a84308c787f492d9bc9359672f52dee
 type: verdict
 parents:
-  - experiment:node-type-corpus-survey
-  - experiment:spawn-gate-falsifier
+  - exp:node-type-corpus-survey
+  - exp:spawn-gate-falsifier
 next_edges:
   - mvp:spawn-gate
 verdict: proved
 confidence: 0.85
 evidence_runs:
-  - experiment:node-type-corpus-survey
-  - experiment:spawn-gate-falsifier
+  - exp:node-type-corpus-survey
+  - exp:spawn-gate-falsifier
 supports:
-  - hypothesis:spawn-check-on-writer-path
+  - hyp:spawn-check-on-writer-path
 contradicts: []
 tags:
   - s17
@@ -34,7 +34,7 @@ file, the node and the fix**; announces an explicit approval naming the schema
 on a legal spawn; and leaves every historical violation in place.
 
 All three registered falsifier points fired, with verbatim output in
-`experiment:spawn-gate-falsifier`:
+`exp:spawn-gate-falsifier`:
 
 | registered check | outcome |
 |---|---|
