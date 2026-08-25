@@ -112,6 +112,11 @@ inputs:
   why: TODO(model)
   perf: TODO(model)
   security: TODO(model)
+- name: tip / rel
+  how: '`(tip / rel).read_text()` at line 833'
+  why: TODO(model)
+  perf: TODO(model)
+  security: TODO(model)
 - name: out / rel
   how: '`(out / rel).read_bytes()` at line 135'
   why: TODO(model)
@@ -129,6 +134,11 @@ inputs:
   security: TODO(model)
 - name: b / rel
   how: '`(b / rel).read_bytes()` at line 709'
+  why: TODO(model)
+  perf: TODO(model)
+  security: TODO(model)
+- name: out / rel
+  how: '`(out / rel).read_text()` at line 829'
   why: TODO(model)
   perf: TODO(model)
   security: TODO(model)
@@ -486,6 +496,18 @@ outputs:
   why: TODO(model)
   perf: TODO(model)
   security: TODO(model)
+- name: test_grid_version_materializes_a_chosen_version_not_the_tip
+  how: 'defines public function `test_grid_version_materializes_a_chosen_version_not_the_tip`
+    at line 810, signature: (project, engine, tmp_path)'
+  why: TODO(model)
+  perf: TODO(model)
+  security: TODO(model)
+- name: test_grid_version_beyond_history_is_reported_not_silently_the_tip
+  how: 'defines public function `test_grid_version_beyond_history_is_reported_not_silently_the_tip`
+    at line 836, signature: (project, engine, tmp_path)'
+  why: TODO(model)
+  perf: TODO(model)
+  security: TODO(model)
 - name: out / 'stray.txt'
   how: '`(out / ''stray.txt'').write_text(''pre-existing'')` at line 159'
   why: TODO(model)
@@ -578,6 +600,11 @@ outputs:
   security: TODO(model)
 - name: p
   how: '`p.write_text(content, encoding=''utf-8'')` at line 276'
+  why: TODO(model)
+  perf: TODO(model)
+  security: TODO(model)
+- name: staged
+  how: '`staged.write_text(text)` at line 823'
   why: TODO(model)
   perf: TODO(model)
   security: TODO(model)
