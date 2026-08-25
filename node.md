@@ -1,9 +1,9 @@
 ---
-id: experiment:spawn-gate-falsifier
+id: exp:spawn-gate-falsifier
 mint_id: a59b1cf86c7e4d50b2cdbb75c0440f8a
 type: experiment
 parents:
-  - hypothesis:spawn-check-on-writer-path
+  - hyp:spawn-check-on-writer-path
 next_edges:
   - verdict:spawn-gate-lands-on-writer-path
 confidence: 0.9
@@ -15,7 +15,7 @@ tags:
 title: "Pre-registered falsifier: two illegal spawns rejected by name, legal spawns approved out loud"
 ---
 
-# experiment:spawn-gate-falsifier
+# exp:spawn-gate-falsifier
 
 The falsifier was registered in `GOALS.md` §S17 **before** the gate existed:
 write a `verdict` with no parent and a `task` with three parents — both must
@@ -74,8 +74,8 @@ $ cli.py scaffold ... --type idea --slug schema-declared-spawn-gate --parent goa
 scaffolded: /home/ubuntu/work/agi-tree/nodes/idea/schema-declared-spawn-gate.md
 
 $ cli.py scaffold ... --type verdict --slug spawn-gate-lands-on-writer-path \
-    --parent experiment:node-type-corpus-survey --parent experiment:spawn-gate-falsifier
--- SPAWN-GATE APPROVED: verdict:spawn-gate-lands-on-writer-path checked against context/schemas/[verdict].md [verdict] — min_parents>=1; max_parents<=2; allowed_parents={experiment, hypothesis, verdict}. parents=['experiment:node-type-corpus-survey', 'experiment:spawn-gate-falsifier']
+    --parent exp:node-type-corpus-survey --parent exp:spawn-gate-falsifier
+-- SPAWN-GATE APPROVED: verdict:spawn-gate-lands-on-writer-path checked against context/schemas/[verdict].md [verdict] — min_parents>=1; max_parents<=2; allowed_parents={experiment, hypothesis, verdict}. parents=['exp:node-type-corpus-survey', 'exp:spawn-gate-falsifier']
 
 $ cli.py scaffold ... --type mvp --slug spawn-gate --parent verdict:spawn-gate-lands-on-writer-path
 -- SPAWN-GATE APPROVED: mvp:spawn-gate checked against context/schemas/[mvp].md [mvp] — min_parents>=1; max_parents<=2; allowed_parents={experiment, goal, hypothesis, verdict}. parents=['verdict:spawn-gate-lands-on-writer-path']
@@ -102,7 +102,7 @@ evidence it works:
 
 ```
 $ cli.py scaffold ... --type experiment --slug node-type-corpus-survey --parent hyp:spawn-check-on-writer-path
--- SPAWN-GATE UNVERIFIED: experiment:node-type-corpus-survey — parent(s) ['hyp:spawn-check-on-writer-path'] name no node in the corpus, so their type could not be checked against context/schemas/[experiment].md. The node is written. Fix the reference, or drop it — never infer one (G7.1).
+-- SPAWN-GATE UNVERIFIED: exp:node-type-corpus-survey — parent(s) ['hyp:spawn-check-on-writer-path'] name no node in the corpus, so their type could not be checked against context/schemas/[experiment].md. The node is written. Fix the reference, or drop it — never infer one (G7.1).
 ```
 
 I typed `hyp:` because that is what `[hypothesis].md` documents as the id
