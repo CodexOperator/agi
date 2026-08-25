@@ -179,7 +179,8 @@ def git_ls_files(engine_root: Path) -> list[str] | None:
     return [line for line in result.stdout.splitlines() if line]
 
 
-def discover_files(engine_root: Path) -> list[str] | None:
+def discover_files(engine_root: Path,
+                   payload_root: Path | None = None) -> list[str] | None:
     """Tracked files passing the G6.8 payload-boundary predicate, or None on a
     no-op (missing/unreadable engine root, or not a git repo).
 
@@ -206,7 +207,46 @@ def discover_files(engine_root: Path) -> list[str] | None:
         # to the same no-op signal the old git_ls_files() gave — never a
         # partial or guessed file list.
         return None
-    return sorted(f for f, verdict, _reason in rows if verdict == "in")
+    found = {f for f, verdict, _reason in rows if verdict == "in"}
+    found |= discover_payload_only_files(engine_root, payload_root, found)
+    return sorted(found)
+
+
+def discover_payload_only_files(engine_root: Path, payload_root: Path | None,
+                                already: set[str]) -> set[str]:
+    """Files that exist in the graph's payload checkout and nowhere else.
+
+    **This is how a NEW file enters the graph graph-first (goal:g6.1).** Before
+    it existed, discovery asked `git ls-files` on the engine and nothing else,
+    so a script authored in `payloads/` was invisible to `level3.py`, never got
+    a node, never got a `payload_ref`, and was therefore never committed to the
+    grid or published — it lived in exactly one gitignored directory. Writing a
+    new engine file still meant touching the engine repo first, which is the
+    one thing the closed loop is supposed to remove.
+
+    Same boundary predicate as the engine side (`classify_paths`), so a fixture
+    or a `.jsonl` stream authored here is excluded for the same reason it is
+    excluded there.
+    """
+    if payload_root is None or not payload_root.is_dir():
+        return set()
+    candidates = []
+    for p in payload_root.rglob("*"):
+        if p.is_dir() and not p.is_symlink():
+            continue
+        rel = str(p.relative_to(payload_root))
+        if rel in already:
+            continue
+        candidates.append(rel)
+    try:
+        rows = payload_boundary.classify_paths(engine_root, candidates)
+    except Exception:
+        return set()
+    new = {f for f, verdict, _reason in rows if verdict == "in"}
+    for f in sorted(new):
+        print(f"NEW: {f} exists only in the payload checkout — minting its node "
+              f"(goal:g6.1)")
+    return new
 
 
 # --- ast-based contract derivation --------------------------------------------
@@ -679,7 +719,8 @@ def main(argv: list[str] | None = None) -> int:
     project_root = PROJECT_ROOT
     engine_root = Path(args.engine_root).resolve() if args.engine_root else DEFAULT_ENGINE_ROOT
 
-    files = discover_files(engine_root)
+    payload_root = project_root / grid.PAYLOAD_DIR
+    files = discover_files(engine_root, payload_root)
     if files is None:
         # A missing/unreadable engine tree is a no-op: nothing written, nothing pruned.
         print(f"WARN: engine root {engine_root} is missing or unreadable "
@@ -720,6 +761,11 @@ def main(argv: list[str] | None = None) -> int:
 
     for rel_path in files:
         abs_path = engine_root / rel_path
+        if not (abs_path.is_symlink() or abs_path.exists()):
+            # A file authored in the graph and not yet published has no engine
+            # copy. The payload checkout is its only source; that is not a
+            # policy choice about which source wins, it is the only one there is.
+            abs_path = payload_root / rel_path
         parent_id = find_parent(rel_path, units)
         payload = None
         if args.from_grid:
@@ -771,11 +817,25 @@ def main(argv: list[str] | None = None) -> int:
     # Prune only nodes stamped with our own origin that we did not write this
     # run. Never touches unstamped or other-origin nodes (build-site,
     # goals-doc, engine-decomp, ...).
-    stale_generated = [
-        node["path"]
-        for node_id, node in existing.items()
-        if node["origin"] == ORIGIN and node["path"].resolve() not in written_paths
-    ]
+    stale_generated = []
+    kept_by_grid = 0
+    for node_id, node in existing.items():
+        if node["origin"] != ORIGIN or node["path"].resolve() in written_paths:
+            continue
+        # H0-class guard, added with payload-only discovery (goal:g6.1). A node
+        # whose payload is in its own grid ref is backed by the graph, so
+        # "discovery did not find it this run" is a statement about the two
+        # source trees, not about whether the node is real. Deleting it would
+        # be the H0i shape with a new door: run `level3.py` on a machine where
+        # `payloads/` was never checked out and every graph-authored file's
+        # node disappears. The grid is what makes that recoverable, so the grid
+        # is what gets asked.
+        if grid_payload_for(project_root, node["path"]) is not None:
+            kept_by_grid += 1
+            print(f"KEEP: {node_id} was not discovered this run but its payload "
+                  f"is in the grid — not pruning (goal:g6.1)", file=sys.stderr)
+            continue
+        stale_generated.append(node["path"])
     for path in sorted(stale_generated):
         if args.dry_run:
             print(f"DRY-RUN: would prune stale {path}")
