@@ -1,12 +1,12 @@
 ---
-id: hypothesis:spawn-check-on-writer-path
+id: hyp:spawn-check-on-writer-path
 mint_id: 35f11042d4114652a71dc3d8e6697b65
 type: hypothesis
 parents:
   - idea:schema-declared-spawn-gate
 next_edges:
-  - experiment:node-type-corpus-survey
-  - experiment:spawn-gate-falsifier
+  - exp:node-type-corpus-survey
+  - exp:spawn-gate-falsifier
 confidence: 0.8
 subgraph: false
 tags:
@@ -23,7 +23,7 @@ testable_claim: >-
   in place.
 ---
 
-# hypothesis:spawn-check-on-writer-path
+# hyp:spawn-check-on-writer-path
 
 ## The testable claim
 
