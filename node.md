@@ -331,6 +331,24 @@ outputs:
   why: TODO(model)
   perf: TODO(model)
   security: TODO(model)
+- name: test_write_frontmatter_preserves_none_scalar
+  how: 'defines public function `test_write_frontmatter_preserves_none_scalar` at
+    line 514, signature: (tmp_path)'
+  why: TODO(model)
+  perf: TODO(model)
+  security: TODO(model)
+- name: test_write_frontmatter_preserves_none_list_entry
+  how: 'defines public function `test_write_frontmatter_preserves_none_list_entry`
+    at line 519, signature: (tmp_path)'
+  why: TODO(model)
+  perf: TODO(model)
+  security: TODO(model)
+- name: test_write_frontmatter_none_survives_a_second_round_trip
+  how: 'defines public function `test_write_frontmatter_none_survives_a_second_round_trip`
+    at line 524, signature: (tmp_path)'
+  why: TODO(model)
+  perf: TODO(model)
+  security: TODO(model)
 - name: tmp_path / 'GOALS.md'
   how: '`(tmp_path / ''GOALS.md'').write_text(GOALS_DOC, encoding=''utf-8'')` at line
     55'
