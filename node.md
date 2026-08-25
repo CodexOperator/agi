@@ -184,39 +184,39 @@ outputs:
   security: TODO(model)
 - name: _grid_payload
   how: 'defines private function `_grid_payload` at line 610, signature: (project_root:
-    Path, node: Level3Node)'
+    Path, node: Level3Node, grid_version: int | None=None)'
   why: TODO(model)
   perf: TODO(model)
   security: TODO(model)
 - name: materialize
-  how: 'defines public function `materialize` at line 630, signature: (project_root:
+  how: 'defines public function `materialize` at line 644, signature: (project_root:
     Path, engine_root: Path, out_dir: Path, force: bool=False, version: int | None=None,
-    from_grid: bool=False, publish: bool=False)'
+    from_grid: bool=False, publish: bool=False, grid_version: int | None=None)'
   why: TODO(model)
   perf: TODO(model)
   security: TODO(model)
 - name: print_verify_report
-  how: 'defines public function `print_verify_report` at line 774, signature: (report:
+  how: 'defines public function `print_verify_report` at line 789, signature: (report:
     dict)'
   why: TODO(model)
   perf: TODO(model)
   security: TODO(model)
 - name: print_materialize_report
-  how: 'defines public function `print_materialize_report` at line 815, signature:
+  how: 'defines public function `print_materialize_report` at line 830, signature:
     (stats: dict)'
   why: TODO(model)
   perf: TODO(model)
   security: TODO(model)
 - name: main
-  how: 'defines public function `main` at line 849, signature: (argv: list[str] |
+  how: 'defines public function `main` at line 864, signature: (argv: list[str] |
     None=None)'
   why: TODO(model)
   perf: TODO(model)
   security: TODO(model)
 - name: stdout
-  how: 34 `print()` call(s) at line(s) [775, 776, 778, 780, 782, 784, 786, 788, 790,
-    792, 794, 795, 798, 800, 804, 806, 807, 810, 812, 816, 817, 819, 822, 824, 828,
-    830, 832, 835, 837, 840, 842, 843, 896, 904]
+  how: 35 `print()` call(s) at line(s) [790, 791, 793, 795, 797, 799, 801, 803, 805,
+    807, 809, 810, 813, 815, 819, 821, 822, 825, 827, 831, 832, 834, 837, 839, 843,
+    845, 847, 850, 852, 855, 857, 858, 909, 920, 928]
   why: TODO(model)
   perf: TODO(model)
   security: TODO(model)
