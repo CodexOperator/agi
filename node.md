@@ -13,7 +13,7 @@ tags:
   - goal
   - root
   - short-term
-title: "S13: `write_frontmatter` serialized YAML null as the string \"None\""
+title: "S13: `write_frontmatter` serialized YAML null as the string 'None'"
 type: goal
 ---
 
