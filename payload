@@ -399,10 +399,37 @@ def _content_sha256(abs_path: Path) -> str:
 
 
 def analyze_file(abs_path: Path) -> dict:
-    """Mechanically derive the contract's `how` half from a Python file via `ast`.
+    """Mechanically derive the contract's `how` half from a file **on disk**.
+
+    Thin wrapper over `analyze_source`, which is the real derivation. Kept as
+    the disk-facing entry point because that is what every caller has used
+    since this script existed, and because a file that cannot be *read* is a
+    distinguishable failure from one that cannot be *parsed*.
+    """
+    try:
+        data = abs_path.read_bytes()
+    except Exception as exc:
+        return {"parse_ok": False, "parse_error": f"unreadable: {exc}",
+                "inputs": [], "outputs": [], "uncovered": []}
+    return analyze_source(data, abs_path.suffix, str(abs_path))
+
+
+def analyze_source(data: bytes, suffix: str, name: str = "<payload>") -> dict:
+    """Mechanically derive the contract's `how` half from bytes.
+
+    **goal:g6.1** — the derivation takes *bytes*, not a path, so it can run
+    against a payload read out of a node's grid ref exactly as it runs against
+    a file on disk. That is the read direction the write direction already has:
+    until this existed, the graph could write the engine but could only learn
+    about it by reading the engine, so a payload edited only in the graph
+    carried a stale contract until it was published and rescanned.
+
+    One derivation, two sources. Re-implementing it per source is the drift
+    `stitch.py` exists to catch in the nodes, so it is not allowed to happen
+    between these two entry points either.
 
     Returns {"parse_ok", "parse_error", "inputs", "outputs", "uncovered"}.
-    A file that cannot be read or parsed gets `parse_ok: false` and an empty
+    Anything that cannot be read or parsed gets `parse_ok: false` and an empty
     contract — never an invented one.
     """
     # `ast` is a *Python* parser, so gate on the suffix before using it. JSON
@@ -412,7 +439,7 @@ def analyze_file(abs_path: Path) -> dict:
     # `stitch.py --verify` would then read as no drift. An honest
     # `not-python` is the correct answer for every non-`.py` payload until
     # G6.6's extracted-claims contract exists.
-    if abs_path.suffix != ".py":
+    if suffix != ".py":
         # Still record a content fingerprint. Without it a non-`.py` node's body
         # is byte-identical no matter what its payload says, so editing a doc
         # produces no node change and therefore no grid version — the payload's
@@ -423,18 +450,18 @@ def analyze_file(abs_path: Path) -> dict:
         # is not claimed to be one; it is the minimum that makes a prose change
         # *visible* to node history until G6.6's extracted-claims contract lands.
         return {"parse_ok": False,
-                "parse_error": f"not-python: {abs_path.suffix or 'no suffix'} "
+                "parse_error": f"not-python: {suffix or 'no suffix'} "
                                "(no mechanical contract derivation for this "
                                "file type yet — see goal:g6.6)",
-                "content_sha256": _content_sha256(abs_path),
+                "content_sha256": hashlib.sha256(data).hexdigest(),
                 "inputs": [], "outputs": [], "uncovered": []}
     try:
-        source = abs_path.read_text(encoding="utf-8")
+        source = data.decode("utf-8")
     except Exception as exc:
         return {"parse_ok": False, "parse_error": f"unreadable: {exc}",
                 "inputs": [], "outputs": [], "uncovered": []}
     try:
-        tree = ast.parse(source, filename=str(abs_path))
+        tree = ast.parse(source, filename=name)
     except SyntaxError as exc:
         return {"parse_ok": False, "parse_error": f"SyntaxError: {exc}",
                 "inputs": [], "outputs": [], "uncovered": []}
@@ -531,10 +558,19 @@ def _fill_entries(entries: list[dict]) -> list[dict]:
     ]
 
 
-def build_node(rel_path: str, abs_path: Path, parent_id: str | None) -> tuple[str, dict, str, dict]:
-    """Returns (node_id, frontmatter, body, analysis) for one file."""
+def build_node(rel_path: str, abs_path: Path, parent_id: str | None,
+               payload: bytes | None = None) -> tuple[str, dict, str, dict]:
+    """Returns (node_id, frontmatter, body, analysis) for one file.
+
+    `payload`, when given, is the file's bytes read from somewhere other than
+    `abs_path` — in practice the node's own grid ref under `--from-grid`
+    (goal:g6.1). `abs_path` is still used for nothing but its suffix in that
+    case, so a node whose payload exists only in the graph derives correctly
+    even if the engine tree no longer has the file.
+    """
     node_id = f"level3:{slug_for(rel_path)}"
-    analysis = analyze_file(abs_path)
+    analysis = (analyze_source(payload, Path(rel_path).suffix, rel_path)
+                if payload is not None else analyze_file(abs_path))
 
     fm = {
         "id": node_id,
