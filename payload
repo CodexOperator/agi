@@ -781,3 +781,33 @@ def test_write_frontmatter_preserves_backslashes(tmp_path):
     value = 'a \\ b " c'
     p = write_node(tmp_path, "goal/y.md", {"id": "goal:y", "title": value})
     assert fm_of(p)["title"] == value
+
+
+def test_prune_only_touches_nodes_this_script_can_produce(project):
+    """A generator may delete only what it can produce.
+
+    `origin: goals-doc` alone was the prune predicate, and `doc:goals-preamble`
+    carries that origin without being a goal heading. The published engine —
+    still running the origin-only rule — deleted it within an hour of it
+    existing (loop.log, 2026-08-25T23:04:50Z). Recovered from the grid; the
+    rule is narrowed here so the class cannot recur.
+    """
+    run(project)
+    other = write_node(project, "doc/notes.md",
+                       {"id": "doc:notes", "type": "doc", "origin": "goals-doc"})
+    assert other.exists()
+    run(project)                       # a second import must not sweep it
+    assert other.exists()
+    assert (project / "nodes" / "doc" / "goals-preamble.md").exists()
+
+
+def test_prune_still_removes_a_goal_the_document_dropped(project):
+    """The narrowing must not disable the prune it narrows: a goal heading that
+    leaves GOALS.md still takes its node with it under `--from-doc`."""
+    run(project)
+    assert "goal:g2" in goal_nodes(project)
+    doc = project / "GOALS.md"
+    doc.write_text(doc.read_text().replace(
+        "## G2 — Persistent ideation system — status: active\n\nAdapt the research loop.\n", ""))
+    run(project)
+    assert "goal:g2" not in goal_nodes(project)
