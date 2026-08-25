@@ -808,11 +808,22 @@ def main(argv: list[str] | None = None) -> int:
 
     # Prune only nodes stamped with our origin that we did not write this run
     # (covers both removed goals and goals whose title/slug changed).
+    # Prune only nodes this script actually owns: `origin: goals-doc` AND
+    # `type: goal`. Origin alone was not enough, and the gap cost a real node
+    # within an hour of `doc:goals-preamble` existing — the published (older)
+    # engine still had the origin-only rule, saw a `doc` node it had not
+    # written, and deleted it. It was recovered from the grid, which is the
+    # only reason this is a story rather than a loss.
+    #
+    # The rule that generalises: **a generator may delete only what it can
+    # produce.** This one produces goal headings; a `doc` node is not one, so
+    # it is not this function's to sweep, whatever origin it carries.
     stale = [
         node["path"]
         for node_id, node in existing.items()
         if node["origin"] == ORIGIN
-        and node_id != PREAMBLE_ID          # written above, not a goal heading
+        and node["fm"].get("type") == "goal"
+        and node_id != PREAMBLE_ID
         and node["path"].resolve() not in written_paths
     ]
     for path in sorted(stale):
