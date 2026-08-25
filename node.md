@@ -10,7 +10,7 @@ origin: goals-doc
 parents:
   - goal:g6
 seeds: []
-status: active
+status: complete
 tags:
   - goal
   - subgoal
@@ -64,3 +64,49 @@ from position in the rendered output.
 Falsifier: delete a goal's heading from `GOALS.md`, run the loop, and confirm
 the goal node is still there and the next render puts the heading back. Until
 that holds, the document is still the source and this is not done.
+
+**Done 2026-08-25, and the falsifier ran exactly as pre-registered.** Deleted
+`## S12`'s heading from `GOALS.md`, ran the loop: the node survived and the
+next render put the heading back. The document is now output.
+
+- `snapshot-goals.py --render` writes `GOALS.md` from `nodes/goal/*` plus
+  `doc:goals-preamble`. `--from-doc` is the legacy import, retained for
+  bootstrapping a hand-written document into a fresh project. **The bare
+  invocation refuses to guess** — one direction prunes and the other cannot, so
+  defaulting to either silently is the H0i shape.
+- `--render --check` is the migration's own test and stays useful after it:
+  **75 goals round-trip byte-identical.** Across 2,800 lines the only
+  difference from the hand-written original was a single missing blank line
+  after one heading, which the render normalised.
+- Each goal node carries `heading_level` and `order`. Neither is inferable —
+  depth would be guessed from the id shape, and the S-block deliberately runs
+  S11..S17 before S1..S10 because ids are never renumbered.
+- `goal_body_cap` is now `0` for this project. **A source of truth cannot be
+  capped**, so S12's owner-picks knob got picked by the inversion rather than
+  by preference.
+- The preamble is `doc:goals-preamble`, `type: doc` and not `type: goal`: it
+  has no status, no seeds and nothing to fulfil, and typing it as a goal would
+  add a phantom to every count that reads `type == goal`.
+
+**Two real bugs fell out of the round-trip check**, which is the argument for
+building the check before the flip rather than after:
+
+- `write_frontmatter` **substituted** a character instead of escaping it —
+  `sval.replace('"', "'")`. S13's own title, *"...the string `\"None\"`"*, came
+  back out of its node as `'None'`. Silent data loss in the one function that
+  touches every node on every run, three lines below where S13 was fixed. Both
+  copies of the serializer now emit a proper escaped YAML scalar.
+- `snapshot-goals.py`'s prune keyed on `origin: goals-doc` alone, so the
+  published (older) engine saw `doc:goals-preamble` — a node it had not written
+  and could not produce — and deleted it. **Recovered from the grid**, which
+  had it at v1 from the 5-minute cron 19 minutes earlier. The prune now
+  requires `type: goal` as well.
+
+That second one is worth keeping as the concrete case for the general rule in
+**G6.1**: a generator may delete only what it can produce. It is also the
+clearest thing the grid has yet done — the node existed in no commit, no
+working tree and no backup, and came back whole.
+
+**The document is the weaker interface and says so in its own banner.** The
+real one is the hypergraph viewport (**G9.4**, **G10.3**); markdown is what
+gets rendered until that exists, not the target.
