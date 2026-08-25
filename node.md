@@ -192,20 +192,20 @@ outputs:
   perf: TODO(model)
   security: TODO(model)
 - name: main
-  how: 'defines public function `main` at line 590, signature: (argv: list[str] |
+  how: 'defines public function `main` at line 596, signature: (argv: list[str] |
     None=None)'
   why: TODO(model)
   perf: TODO(model)
   security: TODO(model)
 - name: yaml.safe_dump
   how: '`yaml.safe_dump(contract, sort_keys=False, default_flow_style=False, allow_unicode=True)`
-    at line 558'
+    at line 564'
   why: TODO(model)
   perf: TODO(model)
   security: TODO(model)
 - name: stdout
-  how: 15 `print()` call(s) at line(s) [609, 623, 649, 659, 675, 693, 696, 698, 699,
-    701, 702, 703, 704, 707, 708]
+  how: 15 `print()` call(s) at line(s) [615, 629, 655, 665, 681, 699, 702, 704, 705,
+    707, 708, 709, 710, 713, 714]
   why: TODO(model)
   perf: TODO(model)
   security: TODO(model)
