@@ -69,3 +69,25 @@ this loop closed; pointing it at fantasia is what makes it a product. Neither
 should require a different engine — see **G8.2**.
 
 Pairs with **S2** (done) and **S5** (the engine repo has no sync at all yet).
+
+**Step 2 landed 2026-08-25: `bin/publish-engine.sh`.** Four steps, every one a
+gate rather than a stage — re-derive contracts from the grid, `grid commit`
+them, `stitch --verify --from-grid --strict`, then publish and commit the
+engine citing the graph commit that produced it.
+
+It refuses more often than it acts, and each refusal has a named reason:
+- the graph has uncommitted changes under `nodes/` or `GOALS.md` (the engine
+  commit message would cite a graph state that exists nowhere)
+- the graph disagrees with its own contracts (publishing that would put drift
+  into the engine atomically and cleanly, which is **G6.7**'s argument about an
+  atomic publisher of corrupt content arriving here first)
+- the engine working tree is dirty (`stitch --publish`'s own gate — it is what
+  makes every overwritten byte recoverable with `git checkout .`)
+
+**It does not push.** The existing hourly cron already owns remote traffic;
+this only commits, so a bad publish never leaves the machine.
+
+`grid.py cron install --publish-engine` adds it at :37, after the :07 branch
+push, so a publish never races the push of the graph commit it cites. **Off by
+default** — `cron install` runs on projects whose version layer is not yet
+trusted, and deciding that is the project's call, not the installer's.
