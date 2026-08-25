@@ -81,6 +81,4 @@ them touches `stitch.py`'s chain logic and the grid refs that already carry thei
 history. `stitch.py`'s version-chain support is not wasted either way: it is what
 keeps a transitional corpus from reading as drift.
 
-This also settles that the anatomy decision was not overturned by fiat. A grid
-ref is never checked out, so it is not a second copy of the tree — it is a second
-*name* into the same object stor
+> **[truncated: 336 of 4141 characters dropped at a block boundary to fit the 4000-character cap. `GOALS.md` section `G6.3` is the complete text; raise `goal_body_cap` in the project config to keep more.]**
