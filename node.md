@@ -1,6 +1,7 @@
 ---
 confidence: 1.0
 id: "level3:tests-test-snapshot-goals"
+mint_id: 6822341f98a441c5af4da675e6d7dd90
 origin: level3-scan
 parents:
   - idea:engine-tests
