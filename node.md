@@ -10,7 +10,7 @@ parents:
 seeds:
   - hyp:payload-in-node
   - level3:bin-stitch@v2
-status: active
+status: complete
 tags:
   - goal
   - subgoal
@@ -81,4 +81,6 @@ them touches `stitch.py`'s chain logic and the grid refs that already carry thei
 history. `stitch.py`'s version-chain support is not wasted either way: it is what
 keeps a transitional corpus from reading as drift.
 
-> **[truncated: 336 of 4141 characters dropped at a block boundary to fit the 4000-character cap. `GOALS.md` section `G6.3` is the complete text; raise `goal_body_cap` in the project config to keep more.]**
+**Built and falsified 2026-08-25. Both halves of the untested case now run.**
+
+> **[truncated: 2198 of 6082 characters dropped at a block boundary to fit the 4000-character cap. `GOALS.md` section `G6.3` is the complete text; raise `goal_body_cap` in the project config to keep more.]**
