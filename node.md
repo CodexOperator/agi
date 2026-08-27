@@ -18,6 +18,7 @@ supports:
   - verdict:chain-engine-r1
 title: "iter30: context longest_chain 0→199 hops via next_edges fix"
 type: verdict
+verdict: proved
 ---
 
 **Verdict:** PROVED (confidence 0.98)
