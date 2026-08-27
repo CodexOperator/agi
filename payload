@@ -168,6 +168,30 @@ class Geometry:
     parentless_types: frozenset = frozenset(FALLBACK_PARENTLESS)
     max_parents_ceiling: int = FALLBACK_CEILING
     source: str = "<default>"
+    #: `edge_fields` from `[shape].md`: field name -> {role, traversable}.
+    #: Empty when the project does not declare it, which is why
+    #: `is_traversable` fails OPEN — an undeclared field keeps whatever
+    #: behaviour it had rather than silently dropping out of a walk.
+    edge_fields: dict = field(default_factory=dict)
+
+    def is_traversable(self, field_name) -> bool:
+        """May a chain/metric walk follow this edge field?
+
+        False only for a field explicitly declared `traversable: false`.
+        `depends_on` is the case this exists for: it orders the build, it is
+        not descent, and counting it would make build order inflate depth.
+        """
+        entry = self.edge_fields.get(str(field_name).strip())
+        if isinstance(entry, dict) and "traversable" in entry:
+            return bool(entry["traversable"])
+        return True
+
+    def scheduling_edges(self) -> frozenset:
+        """Edge fields declared non-traversable — the walk's deny-list."""
+        return frozenset(
+            k for k, v in self.edge_fields.items()
+            if isinstance(v, dict) and v.get("traversable") is False
+        )
 
 
 @dataclass
@@ -377,6 +401,11 @@ def _parse_geometry(fm: dict, src: str, rules: SpawnRules) -> Geometry:
         )
     else:
         rules.schema_errors.append((src, "parentless_types missing or empty"))
+    ef = fm.get("edge_fields")
+    if isinstance(ef, dict):
+        geo.edge_fields = {
+            str(k): v for k, v in ef.items() if isinstance(v, dict)
+        }
     ceiling = fm.get("max_parents_ceiling")
     if isinstance(ceiling, int) and not isinstance(ceiling, bool) and ceiling >= 0:
         geo.max_parents_ceiling = ceiling
