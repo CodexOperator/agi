@@ -5,8 +5,7 @@ demoted_from: proved
 evidence_runs: 0
 id: "verdict:a00-8636e255-bf1a6c"
 mint_id: aefe5460cf0f4741b86e5b59ab34ffb1
-next_edges:
-  - hypothesis:renderers-r3-renderersr3-mermaid-renderer
+next_edges: []
 parents:
   - exp:a00-8636e255-bf1a6c
   - hypothesis:a00-8636e255-bf1a6c
