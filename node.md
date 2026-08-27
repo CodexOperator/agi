@@ -3,7 +3,7 @@ confidence: 0.18
 demote_reason: "no experiment evidence (evidence_runs=0) for 'disproved'"
 demoted_from: disproved
 domain: vector-embedding-isomorphism
-evidence_runs: 0
+evidence_runs: []
 id: "hyp:vector-embedding-isomorphism-r1"
 mint_id: fb05c39e9d4a4a3f9400d13eb649372e
 next_edges: []
