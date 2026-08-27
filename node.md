@@ -124,26 +124,26 @@ outputs:
   perf: TODO(model)
   security: TODO(model)
 - name: _warn_truncated
-  how: 'defines private function `_warn_truncated` at line 168, signature: (reason:
+  how: 'defines private function `_warn_truncated` at line 175, signature: (reason:
     str, chains_found: int)'
   why: TODO(model)
   perf: TODO(model)
   security: TODO(model)
 - name: _make_can_reach_terminal
-  how: 'defines private function `_make_can_reach_terminal` at line 176, signature:
+  how: 'defines private function `_make_can_reach_terminal` at line 183, signature:
     (graph: RenderableGraph, next_edges: dict[str, list[str]], memo: dict[str, bool])'
   why: TODO(model)
   perf: TODO(model)
   security: TODO(model)
 - name: find_chains
-  how: 'defines public function `find_chains` at line 228, signature: (graph: RenderableGraph,
+  how: 'defines public function `find_chains` at line 235, signature: (graph: RenderableGraph,
     graph_dir: str | None=None, *, max_chains: int=DEFAULT_MAX_CHAINS, max_path_len:
     int=DEFAULT_MAX_PATH_LEN, deadline_s: float | None=DEFAULT_DEADLINE_S)'
   why: TODO(model)
   perf: TODO(model)
   security: TODO(model)
 - name: _traverse_iterative
-  how: 'defines private function `_traverse_iterative` at line 426, signature: (start_id:
+  how: 'defines private function `_traverse_iterative` at line 433, signature: (start_id:
     str, graph: RenderableGraph, next_edges: dict[str, list[str]], spawns_edges: dict[str,
     list[str]], path: Chain, chains: list[Chain], verdict_can_reach_app: dict[str,
     bool], can_reach_terminal: callable, *, max_chains: int=DEFAULT_...[truncated,
@@ -152,14 +152,14 @@ outputs:
   perf: TODO(model)
   security: TODO(model)
 - name: _get_successors
-  how: 'defines private function `_get_successors` at line 531, signature: (node_id:
+  how: 'defines private function `_get_successors` at line 538, signature: (node_id:
     str, node, next_edges: dict[str, list[str]], spawns_edges: dict[str, list[str]],
     verdict_can_reach_app: dict[str, bool], can_reach_terminal: callable)'
   why: TODO(model)
   perf: TODO(model)
   security: TODO(model)
 - name: find_chains_from_node
-  how: 'defines public function `find_chains_from_node` at line 573, signature: (graph:
+  how: 'defines public function `find_chains_from_node` at line 580, signature: (graph:
     RenderableGraph, start_id: str, *, max_chains: int=DEFAULT_MAX_CHAINS, max_path_len:
     int=DEFAULT_MAX_PATH_LEN, deadline_s: float | None=DEFAULT_DEADLINE_S)'
   why: TODO(model)
@@ -176,7 +176,7 @@ outputs:
   perf: TODO(model)
   security: TODO(model)
 - name: stdout
-  how: 1 `print()` call(s) at line(s) [169]
+  how: 1 `print()` call(s) at line(s) [176]
   why: TODO(model)
   perf: TODO(model)
   security: TODO(model)
