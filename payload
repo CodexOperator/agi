@@ -1,0 +1,29 @@
+.gitnexus
+.graph_cache.pkl
+.gitnexus_cache.json
+loop.log
+pi-agi.log
+__pycache__/
+*.pyc
+*.pyo
+.pytest_cache/
+.mypy_cache/
+.ruff_cache/
+.claude/worktrees/
+sessions/
+experiments/
+.claude/skills/
+
+# GitNexus-generated (wholly inside <!-- gitnexus:start/end -->; rebuilt by
+# `npx gitnexus analyze`, whose stat line churns on every commit)
+AGENTS.md
+CLAUDE.md
+
+# The graph this engine is built from. The tree lives OUTSIDE the engine —
+# <project>/<project>-tree/agi — so a normal clone of this repo never contains
+# a tree and needs no pattern here. This single line exists only for the
+# self-referential pair, where agi/agi-tree is a symlink back to the graph repo
+# so that agi/agi-tree/agi resolves. No trailing slash: that would not match a
+# symlink. Deliberately literal, not a `*-tree` glob — nothing else should be
+# ignorable here, and a generic pattern would hide a real mistake.
+agi-tree
