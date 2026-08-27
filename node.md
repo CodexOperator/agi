@@ -1,18 +1,19 @@
 ---
+build_kind: code
 confidence: 0.7
-id: "level3:src-graph-core-identity@v2"
+id: "build:src-graph-core-identity@v2"
 mint_id: 89e2e7abcb0f48ed80d0455c4c80735f
 origin: build-version
 parents:
   - goal:g2.5
 payload_ref: extensions/agi/src/graph_core/identity.py
-supersedes: "level3:src-graph-core-identity"
+supersedes: "build:src-graph-core-identity"
 tags:
-  - level3
+  - build
   - build-version
   - g2.5
 title: "Level-3 v2: extensions/agi/src/graph_core/identity.py — fixed-width hierarchical addresses"
-type: level3
+type: build
 version: 2
 ---
 
