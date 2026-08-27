@@ -17,6 +17,7 @@ tags:
   - R1
 title: "R1: Session state capture and restore fidelity"
 type: verdict
+verdict: inconclusive_lean_proved:50
 ---
 
 **Verdict:** INCONCLUSIVE_LEAN_PROVED:60
