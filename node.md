@@ -56,83 +56,83 @@ inputs:
   perf: TODO(model)
   security: TODO(model)
 - name: nf
-  how: '`nf.read_text(encoding=''utf-8'')` at line 143'
+  how: '`nf.read_text(encoding=''utf-8'')` at line 151'
   why: TODO(model)
   perf: TODO(model)
   security: TODO(model)
 - name: yaml.safe_load
-  how: '`yaml.safe_load(parts[1])` at line 153'
+  how: '`yaml.safe_load(parts[1])` at line 161'
   why: TODO(model)
   perf: TODO(model)
   security: TODO(model)
 - name: nf
-  how: '`nf.read_text(encoding=''utf-8'')` at line 210'
+  how: '`nf.read_text(encoding=''utf-8'')` at line 218'
   why: TODO(model)
   perf: TODO(model)
   security: TODO(model)
 - name: yaml.safe_load
-  how: '`yaml.safe_load(text.split(''---'', 2)[1])` at line 214'
+  how: '`yaml.safe_load(text.split(''---'', 2)[1])` at line 222'
   why: TODO(model)
   perf: TODO(model)
   security: TODO(model)
 - name: node_file
-  how: '`node_file.read_text(encoding=''utf-8'')` at line 386'
+  how: '`node_file.read_text(encoding=''utf-8'')` at line 394'
   why: TODO(model)
   perf: TODO(model)
   security: TODO(model)
 outputs:
 - name: canonical_node_type
-  how: 'defines public function `canonical_node_type` at line 112, signature: (node_type)'
+  how: 'defines public function `canonical_node_type` at line 120, signature: (node_type)'
   why: TODO(model)
   perf: TODO(model)
   security: TODO(model)
 - name: node_dir
-  how: 'defines public function `node_dir` at line 124, signature: (root, node_type)'
+  how: 'defines public function `node_dir` at line 132, signature: (root, node_type)'
   why: TODO(model)
   perf: TODO(model)
   security: TODO(model)
 - name: _build_id_index
-  how: 'defines private function `_build_id_index` at line 135, signature: (root:
+  how: 'defines private function `_build_id_index` at line 143, signature: (root:
     Path)'
   why: TODO(model)
   perf: TODO(model)
   security: TODO(model)
 - name: find_node_file
-  how: 'defines public function `find_node_file` at line 163, signature: (root, node_id)'
+  how: 'defines public function `find_node_file` at line 171, signature: (root, node_id)'
   why: TODO(model)
   perf: TODO(model)
   security: TODO(model)
 - name: _needs_quoting
-  how: 'defines private function `_needs_quoting` at line 226, signature: (sval: str)'
+  how: 'defines private function `_needs_quoting` at line 234, signature: (sval: str)'
   why: TODO(model)
   perf: TODO(model)
   security: TODO(model)
 - name: render_frontmatter
-  how: 'defines public function `render_frontmatter` at line 243, signature: (fm:
+  how: 'defines public function `render_frontmatter` at line 251, signature: (fm:
     dict)'
   why: TODO(model)
   perf: TODO(model)
   security: TODO(model)
 - name: NodeWrite
-  how: defines public class `NodeWrite` at line 270
+  how: defines public class `NodeWrite` at line 278
   why: TODO(model)
   perf: TODO(model)
   security: TODO(model)
 - name: _is_untouched_scaffold
-  how: 'defines private function `_is_untouched_scaffold` at line 302, signature:
+  how: 'defines private function `_is_untouched_scaffold` at line 310, signature:
     (text: str, scaffold_body: str)'
   why: TODO(model)
   perf: TODO(model)
   security: TODO(model)
 - name: write_node
-  how: 'defines public function `write_node` at line 319, signature: (root, node_type,
+  how: 'defines public function `write_node` at line 327, signature: (root, node_type,
     slug, parents=None, *, extra_fm=None, body=None, heading=True, bypass=False, rules=None,
     type_index=None, fm_for_gate=None, on_exists=SKIP, announce=True)'
   why: TODO(model)
   perf: TODO(model)
   security: TODO(model)
 - name: node_file
-  how: '`node_file.write_text(text, encoding=''utf-8'')` at line 405'
+  how: '`node_file.write_text(text, encoding=''utf-8'')` at line 413'
   why: TODO(model)
   perf: TODO(model)
   security: TODO(model)
