@@ -1,18 +1,19 @@
 ---
+build_kind: code
 confidence: 0.85
-id: "level3:lib-find-root.sh@v2"
+id: "build:lib-find-root.sh@v2"
 mint_id: 7d1096b9e7bb412dbeb37ab51860570a
 origin: build-version
 parents:
   - goal:g8.2
 payload_ref: extensions/agi/lib/find-root.sh
-supersedes: "level3:lib-find-root.sh"
+supersedes: "build:lib-find-root.sh"
 tags:
-  - level3
+  - build
   - build-version
   - g8.2
 title: "Level-3 v2: extensions/agi/lib/find-root.sh — descend into <project>/<name>-tree"
-type: level3
+type: build
 version: 2
 ---
 
