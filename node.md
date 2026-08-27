@@ -8,10 +8,10 @@ domain: renderers
 evidence_runs: 0
 id: "hypothesis:a00-c2ec59b7-b391d9-r2"
 mint_id: 873bbda1ad4044a484c59b2789defdd4
-parent_hypothesis: "hypothesis:a00-c2ec59b7-b391d9"
-parent_idea: "idea:domain-renderers"
-spawns:
-  - exp:a00-c2ec59b7-b391d9-r2
+next_edges: []
+parents:
+  - idea:domain-renderers
+  - hypothesis:a00-c2ec59b7-b391d9
 status: completed
 tags:
   - renderers
