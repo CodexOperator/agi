@@ -8,9 +8,8 @@ id: "hyp:cli-invocation-r1"
 mint_id: 62b5a7ef160b4266b4414819f168f2df
 next_edges:
   - exp:cli-invocation-r1
-parent_idea: "idea:domain-cli-invocation"
-spawns:
-  - task:t-096
+parents:
+  - idea:domain-cli-invocation
 status: "inconclusive_lean_proved:50"
 tags:
   - cli
