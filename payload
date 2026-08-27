@@ -24,6 +24,17 @@
 #     attributable to a graph commit, or step 4's message is a lie)
 #   - push. Pushing is the existing hourly cron's job; this only commits.
 #
+# goal:g7.10 — EVERY exit from here is recorded, in machine-readable form, in
+# `<project>/context/publish-state.json`. Refusing is a legitimate outcome;
+# refusing *quietly* is not. This script is the `:37` cron, and it refused 40
+# consecutive times while publishing nothing at all, from install on
+# 2026-08-25 until someone checked by hand on 2026-08-27. Nothing caught it:
+# the refusal went to a log nobody reads, no metric moved, `driver.sh --smoke`
+# said nothing and the injected map said nothing. The marker is what
+# `metrics.py` (hours_since_successful_publish, publish_blocked_reason) and
+# `hooks/cc-session-start.sh` read, so a stall now moves a number and shouts at
+# the next agent to open any session anywhere.
+#
 # Usage: publish-engine.sh [--engine-root DIR] [--dry-run]
 set -euo pipefail
 
