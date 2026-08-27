@@ -18,7 +18,6 @@ tags:
   - topology
   - descendant-overlap
 type: hypothesis
-verdict: disproved
 ---
 
 # hypothesis:a00-c2ec59b7-b391d9
@@ -181,3 +180,5 @@ This ordering has NOTHING to do with graph descendant overlap.
 - R2: Test if topology-sorted order (e.g., BFS from shared roots) produces positive correlation
 - R3: Test Mermaid renderer — does it cluster semantically related nodes?
 - R4: Consider a "semantic proximity" renderer that orders by descendant overlap
+
+**Deviation, 2026-08-27.** This node carried `verdict: disproved` in its own frontmatter — a **stronger claim than its own verdict node**, which the evidence gate holds at `inconclusive_lean_disproved:50` with zero evidence (`verdict:a00-c2ec59b7-b391d9`). An overclaim on an ungated node type is exactly what the gate exists to prevent, so the field was removed rather than reconciled: the gated child is the authority.
