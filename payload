@@ -465,6 +465,46 @@ def test_prune_removes_stale_level3_scan_but_spares_others(project, engine):
     assert "removed stale" in r.stdout
 
 
+def test_a_node_stamped_with_the_LEGACY_origin_is_never_pruned(project, engine):
+    """The asymmetry that makes the level3 -> build rename survivable.
+
+    Readers accept both names; the pruner recognises only the current
+    `ORIGIN`. A straggler still stamped `level3-scan` is therefore *left
+    alone* — "this scan does not recognise it" and "this node is stale" are
+    different statements, and only the second licenses deletion.
+
+    Pruning on the legacy stamp is precisely how a half-applied rename turns
+    into H0i: `level3.py` would stop recognising ~185 nodes as its own output
+    and delete every one of them on the next run. This test is the guard on
+    that, so the two rules can never quietly converge again.
+    """
+    run(project, engine)
+    legacy = project / "nodes" / "build" / "legacy-stamped-file.md"
+    l3.write_frontmatter(
+        legacy,
+        {"id": "level3:legacy-file", "type": "level3",
+         "payload_ref": "extensions/agi/src/legacy.py"},
+        "body", origin="level3-scan",
+    )
+    r = run(project, engine)
+    assert r.returncode == 0
+    assert legacy.exists(), (
+        "a node stamped with the pre-rename origin was pruned; the pruner must "
+        "only ever remove nodes carrying its own current ORIGIN"
+    )
+    assert l3.ORIGIN == "build-scan"
+    assert l3.LEGACY_ORIGIN == "level3-scan"
+    assert l3.ORIGIN != l3.LEGACY_ORIGIN
+
+
+def test_build_kind_is_derived_from_the_payload_suffix():
+    """`code` vs `prose` answers without a human adjudicating (G6.8)."""
+    for path in ("bin/x.py", "lib/y.sh", "src/z.ts", "a/b.js"):
+        assert l3.build_kind_for(path) == "code", path
+    for path in ("README.md", "c.json", "d.toml", "e.sql", "Makefile"):
+        assert l3.build_kind_for(path) == "prose", path
+
+
 # --- 10. no project-local override door --------------------------------------
 
 
