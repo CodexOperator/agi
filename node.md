@@ -5,6 +5,7 @@ acceptance_criteria:
 blocked_by:
   - task:t-011
   - task:t-019
+  - task:t-020
 cavekit_req: graph-core/R6
 effort: M
 id: "task:t-012"
