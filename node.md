@@ -85,7 +85,7 @@ outputs:
   perf: TODO(model)
   security: TODO(model)
 - name: _empty_counts
-  how: defines private function `_empty_counts` at line 352
+  how: defines private function `_empty_counts` at line 353
   why: TODO(model)
   perf: TODO(model)
   security: TODO(model)
