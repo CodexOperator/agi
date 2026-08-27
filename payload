@@ -134,17 +134,66 @@ snapshot_goals = importlib.util.module_from_spec(_spec)
 _spec.loader.exec_module(snapshot_goals)
 write_frontmatter = snapshot_goals.write_frontmatter
 
-# --- reuse stitch.py's contract reader (goal:g2.10) ------------------------
-# The stored contract has to be read back before it can be rewritten, and
-# `_extract_contract` already solves the one hard part: a `how` value can
-# itself contain a ``` fence, so the closing fence is the *last* one inside
-# the harness markers, not the first. Writing a second parser here would be
-# goal:s14's defect in a new place, one commit after collapsing it.
-_STITCH_PATH = BIN_DIR / "stitch.py"
-_stitch_spec = importlib.util.spec_from_file_location("stitch_for_level3", _STITCH_PATH)
-_stitch = importlib.util.module_from_spec(_stitch_spec)
-_stitch_spec.loader.exec_module(_stitch)
-extract_contract = _stitch._extract_contract
+# --- the contract reader (goal:g2.10) --------------------------------------
+# Moved here from stitch.py on 2026-08-27, because this file "owns the
+# contract shape" (stitch.py's own module docstring) and, from g2.10 onward,
+# has to read a stored contract back before it can rewrite one. It could not
+# import stitch.py to get it: stitch.py already imports *this* file for
+# `analyze_file` and `discover_files`, so the borrow was an import cycle and
+# died with RecursionError on the first run. Ownership decides direction —
+# stitch.py now aliases these instead.
+#
+# Both marker spellings. `LEVEL3-CONTRACT` was renamed to `BUILD-CONTRACT` on
+# 2026-08-27; a reader that recognised only the new one would report every
+# unmigrated node as having no contract at all, which `--strict` turns into
+# drift and `publish-engine.sh` turns into a refusal.
+_MARKER_SPAN_RE = re.compile(
+    r"(?:LEVEL3|BUILD)-CONTRACT:BEGIN(.*?)(?:LEVEL3|BUILD)-CONTRACT:END", re.DOTALL)
+_YAML_FENCE_OPEN = "```yaml"
+_FENCE = "```"
+NO_CONTRACT_BLOCK = "no BUILD-CONTRACT block found in body"
+
+
+def extract_contract(body: str) -> tuple[dict | None, str | None]:
+    """Pull the fenced YAML contract block out of a node body.
+
+    Returns (contract_dict, None) on success, (None, reason) on failure. A
+    node with no contract markers, or an unparsable contract, is reported —
+    never silently treated as fresh (that would hide exactly the kind of
+    drift this tool exists to find).
+
+    Bounding matters more than it looks: a `how` field can (and, on the real
+    corpus, does — `build:bin-heal`) contain a mechanically-unparsed call
+    site whose literal text itself embeds a ``` fence, e.g. an f-string
+    template being written to disk that contains a markdown code block. A
+    naive "first ``` after ```yaml" search stops at that embedded fence, not
+    the real closing one, and truncates the block mid-string — invalid YAML,
+    not because the file is malformed but because the *parser* guessed
+    wrong. So: bound first by the harness markers (which model-authored prose
+    can only ever appear outside of), then take the *last* ``` inside that
+    bounded span as the closing fence, not the first.
+    """
+    span_m = _MARKER_SPAN_RE.search(body)
+    if not span_m:
+        return None, NO_CONTRACT_BLOCK
+    span = span_m.group(1)
+    open_idx = span.find(_YAML_FENCE_OPEN)
+    if open_idx == -1:
+        return None, "no ```yaml fence found inside BUILD-CONTRACT block"
+    after_open = span[open_idx + len(_YAML_FENCE_OPEN):]
+    if after_open.startswith("\n"):
+        after_open = after_open[1:]
+    close_idx = after_open.rfind(_FENCE)
+    if close_idx == -1:
+        return None, "no closing ``` fence found inside BUILD-CONTRACT block"
+    yaml_text = after_open[:close_idx]
+    try:
+        contract = yaml.safe_load(yaml_text)
+    except yaml.YAMLError as exc:
+        return None, f"contract block is not valid YAML: {exc}"
+    if not isinstance(contract, dict):
+        return None, "contract block did not parse to a mapping"
+    return contract, None
 
 
 # --- reuse payload_boundary.py's classify() (the G6.8 boundary predicate) ---
