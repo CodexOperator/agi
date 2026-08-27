@@ -2,10 +2,10 @@
 confidence: 1.0
 id: "hyp:a00-1467544f-chain-600hop"
 mint_id: 34a607fdc8d8411aa353f276fa53ecb0
+next_edges:
+  - exp:a00-1467544f-chain-600hop
 parents:
   - idea:domain-bootstrap-discovery
-spawns:
-  - exp:a00-1467544f-chain-600hop
 subgraph: false
 tags:
   - chain-engine
