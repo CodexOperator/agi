@@ -104,3 +104,32 @@ Falsifier: fill one `why:` and one `THOUGHT` block on a build node, run
 `driver.sh --smoke` and a full `level3.py` scan, and read them back. Run twice.
 Both must survive both passes. (Run 2026-08-27 on `nodes/build/bin-grid.md`:
 both survived; before the fix, both were wiped by the first scan.)
+
+<!-- THOUGHT:BEGIN — authored, not derived; carried across regenerating scans. The reasoning behind THIS version. -->
+First version of this goal, and the first thought in the graph — so it is also
+the demonstration that the mechanism works.
+
+The idea arrived from the user as "add a `thought` field to each node, unless
+`body` already covers it for build nodes." Checking that premise is what
+produced the shape above: for build nodes `body` does not cover it at all (the
+body is 100% derived contract, and G2.10 had just measured 8,034 authored
+fields being wiped unread), while for idea/hypothesis nodes `body` *looks*
+like it covers it but does not — that body is the cumulative argument, not a
+record of what changed in this version. `body` is state, `thought` is delta.
+That distinction is the whole goal and it came from testing the user's own
+caveat rather than accepting it.
+
+Three alternatives were live and two were rejected on evidence, not taste. A
+frontmatter field dies to `write_frontmatter`'s newline flattening — the same
+function behind S13 and S14's corpus-wide corruptions. A third grid tree entry
+beside `node.md` and `payload` is the purest design, and would keep thought out
+of readers by construction, but it needs an authoring surface and new plumbing;
+the body block gets per-version storage free because the grid already snapshots
+`node.md` per version. Purity lost to the fact that the cheap option was also
+sufficient.
+
+What I am least sure of: whether "rewritten from scratch each version" survives
+contact with agents who will be tempted to append instead. If thoughts start
+accumulating, this becomes a second body and the distinction collapses. Worth
+measuring later — average thought length over versions is the tell.
+<!-- THOUGHT:END -->
