@@ -5,7 +5,7 @@ contradicts:
 demote_reason: "no experiment evidence (evidence_runs=0) for 'disproved'"
 demoted_from: disproved
 domain: renderers
-evidence_runs: 0
+evidence_runs: []
 id: "hypothesis:a00-c2ec59b7-b391d9-r2"
 mint_id: 873bbda1ad4044a484c59b2789defdd4
 next_edges: []
