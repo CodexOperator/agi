@@ -6,8 +6,7 @@ evidence_runs:
 id: "verdict:verdict-a00-4125fa6d-005488"
 lean_strength: 75
 mint_id: ed29e1f7eb8a42c09b57eb7e05ef3d60
-next_edges:
-  - mvp:mvp-a00-4125fa6d-005488
+next_edges: []
 parents:
   - experiment:exp-a00-4125fa6d-005488
 supports:
