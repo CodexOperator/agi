@@ -70,19 +70,19 @@ inputs:
   perf: TODO(model)
   security: TODO(model)
 - name: node_path
-  how: '`node_path.read_text(encoding="utf-8")` at line 424'
+  how: '`node_path.read_text(encoding=''utf-8'')` at line 424'
   why: TODO(model)
   perf: TODO(model)
   security: TODO(model)
-- name: Path(__file__).resolve().parents[1] / "bin" / "stitch.py"
-  how: '`(Path(__file__).resolve().parents[1] / "bin" / "stitch.py").read_text()`
+- name: Path(__file__).resolve().parents[1] / 'bin' / 'stitch.py'
+  how: '`(Path(__file__).resolve().parents[1] / ''bin'' / ''stitch.py'').read_text()`
     at line 612'
   why: TODO(model)
   perf: TODO(model)
   security: TODO(model)
 - name: yaml.safe_load
-  how: '`yaml.safe_load(path.read_text(encoding="utf-8").split("---", 2)[1])` at line
-    131'
+  how: '`yaml.safe_load(path.read_text(encoding=''utf-8'').split(''---'', 2)[1])`
+    at line 131'
   why: TODO(model)
   perf: TODO(model)
   security: TODO(model)
@@ -97,17 +97,17 @@ inputs:
   perf: TODO(model)
   security: TODO(model)
 - name: path
-  how: '`path.read_text(encoding="utf-8")` at line 135'
+  how: '`path.read_text(encoding=''utf-8'')` at line 135'
   why: TODO(model)
   perf: TODO(model)
   security: TODO(model)
 - name: path
-  how: '`path.read_text(encoding="utf-8")` at line 934'
+  how: '`path.read_text(encoding=''utf-8'')` at line 934'
   why: TODO(model)
   perf: TODO(model)
   security: TODO(model)
 - name: path
-  how: '`path.read_text(encoding="utf-8")` at line 131'
+  how: '`path.read_text(encoding=''utf-8'')` at line 131'
   why: TODO(model)
   perf: TODO(model)
   security: TODO(model)
@@ -451,13 +451,13 @@ outputs:
   perf: TODO(model)
   security: TODO(model)
 - name: node_path
-  how: '`node_path.write_text( f"---{head}next_edges:\n  - hyp:graph-core-r1\n" f"embedding_coords:
-    [0.1, 0.2]\n---{body}", encoding="utf-8", )` at line 426'
+  how: '`node_path.write_text(f''---{head}next_edges:\n  - hyp:graph-core-r1\nembedding_coords:
+    [0.1, 0.2]\n---{body}'', encoding=''utf-8'')` at line 426'
   why: TODO(model)
   perf: TODO(model)
   security: TODO(model)
 - name: p
-  how: '`p.write_text(content, encoding="utf-8")` at line 100'
+  how: '`p.write_text(content, encoding=''utf-8'')` at line 100'
   why: TODO(model)
   perf: TODO(model)
   security: TODO(model)
