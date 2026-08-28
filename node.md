@@ -102,6 +102,11 @@ inputs:
   perf: TODO(model)
   security: TODO(model)
 - name: path
+  how: '`path.read_text(encoding="utf-8")` at line 934'
+  why: TODO(model)
+  perf: TODO(model)
+  security: TODO(model)
+- name: path
   how: '`path.read_text(encoding="utf-8")` at line 131'
   why: TODO(model)
   perf: TODO(model)
@@ -436,6 +441,12 @@ outputs:
 - name: test_derivation_is_a_fixed_point_over_its_own_output
   how: 'defines public function `test_derivation_is_a_fixed_point_over_its_own_output`
     at line 896, signature: (tmp_path)'
+  why: TODO(model)
+  perf: TODO(model)
+  security: TODO(model)
+- name: test_no_engine_signature_contains_an_fstring
+  how: defines public function `test_no_engine_signature_contains_an_fstring` at line
+    914
   why: TODO(model)
   perf: TODO(model)
   security: TODO(model)
