@@ -697,6 +697,22 @@ def test_the_fallback_parks_nothing_the_real_publish_would_refuse(tmp_path):
     assert _read_state(project)["last_fallback_status"] == "verify-failed"
 
 
+def test_a_declined_fallback_shows_what_the_verify_actually_said(tmp_path):
+    """Sending that output to /dev/null cost a real diagnosis: a fallback
+    declined `verify-failed` while a concurrent `*/5` grid cron ran, and
+    afterwards there was no way to tell drift from a lost race. A decline whose
+    evidence is gone is the failure mode this goal is named after."""
+    ghost = ('---\nid: "build:ghost"\ntype: build\nlevel: 3\n'
+             'payload_ref: extensions/agi/bin/ghost.py\n---\n\nbody\n')
+    project, engine = _pair(tmp_path, extra_nodes={"ghost": ghost})
+    _dirty_a_node(project)
+
+    r = _publish(project, engine)
+
+    assert "missing_payload" in r.stdout
+    assert "extensions/agi/bin/ghost.py" in r.stdout
+
+
 def test_dry_run_creates_no_branch(tmp_path):
     """`--dry-run` writes nothing, and a branch is a write."""
     project, engine = _pair(tmp_path)
