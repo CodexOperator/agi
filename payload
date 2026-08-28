@@ -909,3 +909,36 @@ def test_derivation_is_a_fixed_point_over_its_own_output(tmp_path):
         "extensions/agi/bin/x.py", tmp_path / "x.py", None, payload=payload,
         prior_body=body1)
     assert body1 == body2
+
+
+def test_no_engine_signature_contains_an_fstring():
+    """Guard the premise that licenses the `ast.arguments` fallback.
+
+    Signatures are the one place `ast.unparse` still runs, and an f-string is
+    the only construct these CPython versions are known to render differently.
+    Zero of this engine's top-level signatures contain one (measured
+    2026-08-28: 0 of 1,241), which is what makes the fallback safe — so the
+    premise is checked rather than assumed, because it is a fact about the
+    corpus and facts about the corpus change.
+
+    If this fails, do **not** relax the test: an f-string default or annotation
+    would reintroduce goal:s19's flap, silently and only across interpreters.
+    Either write the default some other way, or slice the parameter list out of
+    the source (which needs a tokenizer — see `_render`).
+    """
+    root = l3.DEFAULT_ENGINE_ROOT
+    offenders = []
+    n_sigs = 0
+    for path in sorted(root.glob("extensions/agi/**/*.py")):
+        try:
+            tree = ast.parse(path.read_text(encoding="utf-8"))
+        except (SyntaxError, UnicodeDecodeError, OSError, ValueError):
+            continue
+        for node in tree.body:
+            if not isinstance(node, (ast.FunctionDef, ast.AsyncFunctionDef)):
+                continue
+            n_sigs += 1
+            if any(isinstance(s, ast.JoinedStr) for s in ast.walk(node.args)):
+                offenders.append(f"{path.name}:{node.lineno} {node.name}")
+    assert n_sigs > 100, f"scanned only {n_sigs} signatures — the glob is wrong"
+    assert offenders == [], offenders
