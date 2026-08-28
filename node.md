@@ -10,7 +10,7 @@ origin: goals-doc
 parents:
   - goal:g7
 seeds: []
-status: active
+status: complete
 tags:
   - goal
   - subgoal
@@ -81,8 +81,8 @@ must cite a graph commit that exists. The defect is everything around it:
 ## Parts 1 and 2 built 2026-08-27 — the failure now moves a number
 
 Scoped to the alarm and the marker; parts 3 and 4 were **deliberately left out
-of that build**. Part 3 shipped on 2026-08-28 (below); **part 4 remains open and
-is what keeps this goal `active`.**
+of that build**. Both shipped on 2026-08-28 (below), which is what closes this
+goal.
 
 **The alarm.** `metrics.py` emits four new lines, verified live against the
 real graph:
@@ -135,7 +135,7 @@ changing.
 
 Branch-and-continue, the option this goal named as the recommended default.
 The force-record half was already shipped with parts 1–2 (`say_bytes_are_safe()`).
-**Part 4 is still open and this goal stays `active`.**
+Part 4 followed the same day, below.
 
 **What it does.** When `publish-engine.sh` refuses for a reason that is about
 *attribution* rather than *content*, it materialises the same tree it would have
