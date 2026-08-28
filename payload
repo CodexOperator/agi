@@ -37,6 +37,19 @@ gate 2 get a say — so a refused run during the last rename left **184 junk
 nodes** and 184 burned grid versions behind, which then armed gate 0 for the
 next run. "It refused" has to mean "nothing happened", because that is what
 every reader assumes it means.
+
+goal:s20 adds a sixth, and it is the half of the path everything above stops
+short of. All five claims end at the **local commit**. `publish-engine.sh`
+commits the engine and deliberately does not push, on the stated grounds that
+pushing is the hourly push cron's job — and for the engine repo that cron did
+not exist. The two halves shipped apart and the gap was invisible from both
+sides: publish-engine reported success every time,
+`hours_since_successful_publish` read healthy, the local tree was healthy, and
+the remote sat **3 days and 25 commits** behind. It was found by looking at
+GitHub, which is the failure mode this whole goal exists to remove. So section
+6 pins a count of what has been committed and not pushed — **state, not an
+event**, because a push that succeeds with nothing to push is
+indistinguishable from one that shipped 25 commits.
 """
 
 import importlib.util
