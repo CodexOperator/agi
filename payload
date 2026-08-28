@@ -750,9 +750,15 @@ def test_how_quotes_the_payload_source_rather_than_re_rendering_it():
     """The S19 falsifier, as a unit test.
 
     The assertion is the property itself: the backticked fragment in `how` is a
-    verbatim substring of the payload. A re-render cannot satisfy that, which
-    is what the second half pins — under the old `ast.unparse` code this test
-    fails on both interpreters, for two different reasons.
+    verbatim substring of the payload. Only a slice can satisfy that; a
+    re-render satisfies it at most by coincidence.
+
+    Note what is deliberately *not* asserted here — that the fragment differs
+    from `ast.unparse` of the same node. On this exact fixture 3.11 reproduces
+    the source byte-for-byte and 3.12 does not, so that assertion would itself
+    be interpreter-dependent. That asymmetry is the bug, not a test artefact;
+    the stable discriminator lives in
+    `test_re_rendering_is_lossy_in_a_version_independent_way` below.
     """
     analysis = l3.analyze_source(_FSTRING_FIXTURE.encode(), ".py", "brackets.py")
     assert analysis["parse_ok"] is True
@@ -762,12 +768,22 @@ def test_how_quotes_the_payload_source_rather_than_re_rendering_it():
     assert fragment in _FSTRING_FIXTURE, (
         "`how` must quote the payload's own bytes, not a re-render")
     assert 'write_text(f"---' in fragment, "source uses a double-quoted f-string"
+    # the indentation inside the template is content; it must survive verbatim
+    assert '\\nfields:\\n  {fields}:\\n    type: string' in fragment
 
-    call = next(n for n in ast.walk(ast.parse(_FSTRING_FIXTURE))
-                if isinstance(n, ast.Call))
-    assert fragment != ast.unparse(call), (
-        "if these are equal the test has stopped discriminating — pick a "
-        "fixture whose source and re-render differ")
+
+def test_re_rendering_is_lossy_in_a_version_independent_way():
+    """Why the substring assertion above has teeth, pinned on a stable case.
+
+    Every supported CPython normalises a double-quoted plain string to single
+    quotes when unparsing, so this fixture discriminates a slice from a
+    re-render on 3.11 and 3.12 alike — unlike the f-string, where the two
+    versions disagree with each other.
+    """
+    src = 'Path("a/b.txt").read_text()\n'
+    call = ast.parse(src).body[0].value
+    assert ast.unparse(call) == "Path('a/b.txt').read_text()"
+    assert l3._render(src, call) == 'Path("a/b.txt").read_text()'
 
 
 def test_derived_entry_names_are_source_slices_too():
