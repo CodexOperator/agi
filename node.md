@@ -258,34 +258,44 @@ is orphan drift, so verify-first correctly declined and the test would have
 passed for the wrong reason.
 
 <!-- THOUGHT:BEGIN — authored, not derived; carried across regenerating scans. The reasoning behind THIS version. -->
-This version is the first half of the build, and the one judgement worth
-recording is where the alarm was deliberately made *quieter* than first written.
+The previous version's reasoning — why `never-run` was kept out of `STALLED`,
+and why the marker is gitignored beside `INJECTION.md` rather than under
+`nodes/` — is one grid version back, at the parts 1–2 commit. It still holds; it
+is not restated here.
 
-The original warning said `the engine publish is STALLED` for every non-empty
-blocked reason, including `never-run`. That is wrong in a way this goal should
-have anticipated: a project that has simply never installed the publish cron is
-not stalled, and a fresh clone would have greeted its first session with a
-red-flagged outage that did not exist. The kid that built it caught this in its
-own verification and reported it rather than smoothing it over; the fix was
-three lines and is applied.
+This version adds part 3, and the decision that took the longest was **gate 2**.
+The brief left it open. The tempting answer is that a pending branch is a safe
+place to put anything, because a human has to act before it reaches the default
+branch. That is wrong by one command: `merge --ff-only` is the landing
+instruction *written in the commit message*, and a human following documented
+instructions is not an independent check. So the fallback is held to exactly the
+gate the real publish is held to, and `contracts-disagree` becomes ineligible
+without needing its own rule — its precondition is what failed. Deriving the
+exclusion instead of listing it means a future widening of the eligibility list
+cannot quietly undo it.
 
-Worth keeping because it is this goal's own thesis turned one level up. The
-premise here is that a failure nobody can see gets ignored — 40 refusals, zero
-notice. The symmetric failure is an alarm that fires when nothing is wrong,
-which gets ignored just as completely and takes the true positives with it. An
-alarm's credibility is the asset; overstating `never-run` spends it for nothing.
+The second judgement is that **parking had to be made to feel like a refusal**,
+not like a success with an unusual destination. Everything visible points the
+same way — non-zero exit, `refused` status, frozen `last_success_*`, a climbing
+clock — because the failure this goal exists to prevent has a mirror image, and
+the mirror is easier to build by accident. A safety net that stops the alarm is
+worse than no net: the work survives and nobody ever comes back for it.
 
-The same instinct decided the marker's location. Putting it under `nodes/` would
-have been the obvious place for graph-adjacent state and would have armed gate 0
-on every single run — an alarm whose own operation triggers the condition it
-reports. Gitignored beside `INJECTION.md` instead: this is machine state about
-one checkout, and it does not survive a clone because it should not.
+The third thing is not a decision but a finding, and it is why the build took an
+extra pass. The first version sent the fallback's verify output to `/dev/null`,
+and a run then declined `verify-failed` during a collision with the ungated
+`*/5` grid cron. There was no way afterwards to tell a real disagreement from a
+lost race. That is this goal's own thesis — a failure whose evidence is gone —
+reproduced inside the fix for it, at a smaller scale, by me. It is recorded
+rather than quietly patched because the reflex that caused it (suppress the
+noisy subprocess so the cron log stays tidy) is the same reflex that produced
+the 40 silent refusals, and it will be back.
 
-Parts 3 and 4 are untouched on purpose. Branch-and-continue changes where bytes
-land and atomicity changes what a refusal leaves behind; both are behaviour
-changes to the publish path, and neither should ride in on the commit whose job
-was to make the existing behaviour visible. Visibility first — it is also what
-will show whether the remaining two are working.
+Deliberately not done: no push, no `--push-fallback`, and no touch of
+`metrics.py` or the SessionStart hook. Parts 4 and 5 own those, and teaching the
+alarm to *read* the new fallback keys is their call, not this one's — the keys
+are additive and every existing reader ignores them, which is the property that
+lets those iterations land independently.
 <!-- THOUGHT:END -->
 
 ## The design principle underneath
