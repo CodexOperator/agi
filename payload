@@ -636,7 +636,16 @@ derive_into_scratch() {
   # only way a graph-authored file is ever found. A symlink restores exactly the
   # scope the real tree has, and nothing writes through it: `level3.py` reads
   # payloads and writes only nodes.
+  #
+  # The `rm -rf` first is not paranoia. `payloads/` is gitignored HERE, but a
+  # project that tracks it would give the worktree a real `payloads/` directory
+  # from HEAD — and `ln -s TARGET DIR` then puts the link *inside* it, so
+  # discovery finds a file called `payloads/payloads` and mints `build:payloads`
+  # for it. That is not hypothetical; it is what the first run of the new
+  # success-path tests did. Scoped to the throwaway tree, which was created two
+  # lines above and holds nothing else.
   if [[ -d "$PROJECT_ROOT/payloads" ]]; then
+    rm -rf "$SCRATCH_WT/payloads"
     ln -s "$PROJECT_ROOT/payloads" "$SCRATCH_WT/payloads"
   fi
 
