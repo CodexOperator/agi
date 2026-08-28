@@ -546,10 +546,25 @@ SCRATCH_WT=""
 SCRATCH_NEW_NODES=0
 
 _scratch_cleanup() {
+  local i
+  # A signal is delivered to this shell, not to the python child holding the
+  # scratch tree open, and bash runs the EXIT trap straight away. So the child
+  # outlives the cleanup by a moment and re-creates directories under it —
+  # observed: `level3.py` re-made `nodes/build/` a tenth of a second after
+  # `rm -rf`, leaving a temp dir behind on every killed run. Ask it to stop
+  # first; `pkill` is best-effort and the retry loop below is the real
+  # guarantee, so a box without procps is no worse off.
+  pkill -TERM -P $$ >/dev/null 2>&1 || true
   if [[ -n "$SCRATCH_WT" ]]; then
     git -C "$PROJECT_ROOT" worktree remove --force "$SCRATCH_WT" >/dev/null 2>&1 || true
   fi
-  [[ -n "$SCRATCH_TMP" ]] && rm -rf "$SCRATCH_TMP"
+  if [[ -n "$SCRATCH_TMP" ]]; then
+    for i in 1 2 3 4 5 6 7 8 9 10; do
+      rm -rf "$SCRATCH_TMP" 2>/dev/null || true
+      [[ -d "$SCRATCH_TMP" ]] || break
+      sleep 0.2
+    done
+  fi
   # The graph repo's own prune, not the engine's: part 3's `_fb_cleanup` prunes
   # $ENGINE_ROOT and this worktree is a worktree of $PROJECT_ROOT. Two repos,
   # two prunes; neither call is a substitute for the other.
@@ -584,10 +599,33 @@ _scratch_tmp_root() {
   echo "$root"
 }
 
+# The one leak the EXIT trap cannot cover: SIGKILL, an OOM kill or a power cut,
+# where no trap runs at all. `git worktree prune` will not reclaim such a
+# worktree because its directory is still there, so without this it survives
+# until a human notices — and this is the hourly cron, so "until a human
+# notices" is the leak. Bounded by AGE, not by name alone: a run takes ~25s and
+# fires hourly, so nothing six hours old can be live and nothing live can be six
+# hours old. Skipped under --dry-run, which may not write, and removing
+# something is a write.
+_sweep_stale_scratch() {
+  local d
+  [[ "$DRY_RUN" == "1" ]] && return 0
+  while IFS= read -r d; do
+    [[ -z "$d" ]] && continue
+    say "sweeping a scratch tree an earlier run could not clean up: $d"
+    git -C "$PROJECT_ROOT" worktree remove --force "$d/graph" >/dev/null 2>&1 || true
+    rm -rf "$d" 2>/dev/null || true
+  done < <(find "$(_scratch_tmp_root)" -maxdepth 1 -type d \
+                -name 'agi-publish-derive.*' -mmin +360 2>/dev/null || true)
+  git -C "$PROJECT_ROOT" worktree prune >/dev/null 2>&1 || true
+  return 0
+}
+
 # Build the scratch tree and run level3.py into it. Any failure here is an
 # ordinary ERR — `on_unexpected_error` records it and the EXIT trap cleans up.
 derive_into_scratch() {
   local tmproot
+  _sweep_stale_scratch
   tmproot="$(_scratch_tmp_root)"
   SCRATCH_TMP="$(mktemp -d "$tmproot/agi-publish-derive.XXXXXX")"
   SCRATCH_WT="$SCRATCH_TMP/graph"
