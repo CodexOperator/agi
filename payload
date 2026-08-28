@@ -617,8 +617,17 @@ def emit(root: Path, out=None) -> dict:
     if isinstance(blocked, str) and blocked:
         stalled = m.get("hours_since_successful_publish")
         never = stalled == NEVER_PUBLISHED_HOURS
+        # `never-run` is not a stall. A project that has never installed the
+        # publish cron is in a different state from one whose cron is refusing,
+        # and calling both STALLED is how an alarm earns a reputation for crying
+        # wolf — which for this goal is the whole failure mode, one level up.
+        never_run = blocked == NEVER_RUN_REASON
+        headline = (
+            "the engine publish has NEVER RUN" if never_run
+            else "the engine publish is STALLED"
+        )
         print(
-            f"!! METRIC-WARNING the engine publish is STALLED (reason={blocked}). "
+            f"!! METRIC-WARNING {headline} (reason={blocked}). "
             + ("No successful publish has EVER been recorded. "
                if never else f"Last successful publish was {stalled}h ago. ")
             + "Payload bytes are NOT lost — `grid.py commit --all` runs on its own "
