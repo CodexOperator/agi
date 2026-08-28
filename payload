@@ -625,13 +625,16 @@ scratch_new_nodes() {
 # one thing allowed through ahead of the gate.
 adopt_new_nodes() {
   local rel
+  local -a fresh=()
   while IFS= read -r rel; do
     [[ -z "$rel" ]] && continue
+    fresh+=("$rel")
     mkdir -p "$PROJECT_ROOT/$(dirname "$rel")"
     cp -p "$SCRATCH_WT/$rel" "$PROJECT_ROOT/$rel"
+    say "  adopted $rel"
   done < <(scratch_new_nodes)
-  # shellcheck disable=SC2046
-  python3 "$BIN_DIR/grid.py" commit $(scratch_new_nodes) --prefix "publish: "
+  [[ ${#fresh[@]} -eq 0 ]] && return 0
+  python3 "$BIN_DIR/grid.py" commit "${fresh[@]}" --prefix "publish: "
 }
 
 # Make nodes/ match the scratch exactly. Byte-compared rather than copied
@@ -741,21 +744,35 @@ if [[ -n "$(git -C "$PROJECT_ROOT" status --porcelain -- nodes/ GOALS.md)" ]]; t
   refuse "graph-dirty" "the graph has uncommitted changes under nodes/ or GOALS.md; commit them first — a published engine must cite a real graph commit"
 fi
 
-# --- step 1: contracts re-derive from the grid, not from the engine tree ------
-say "re-deriving contracts from the grid"
-python3 "$BIN_DIR/level3.py" --project "$PROJECT_ROOT" \
-        --engine-root "$ENGINE_ROOT" --from-grid
-
-# level3.py rewrites node bodies, so the grid needs the new versions before the
-# publish reads them back out. Without this the published tree would be one
-# derivation behind the nodes that describe it.
-python3 "$BIN_DIR/grid.py" commit --all --prefix "publish: "
+# --- step 1: contracts re-derive from the grid, into a scratch worktree -------
+# The whole of part 4 is the destination of this write. It used to land in
+# `nodes/`, before anything had checked it.
+derive_into_scratch
 
 # --- gate 2: the graph must agree with itself ---------------------------------
-say "verifying the graph against its own payloads"
-if ! python3 "$BIN_DIR/stitch.py" --project "$PROJECT_ROOT" --verify --from-grid \
-        --engine-root "$ENGINE_ROOT" --strict; then
-  refuse "contracts-disagree" "the graph disagrees with its own contracts; nothing published"
+say "verifying the scratch tree against its own payloads"
+if ! verify_scratch; then
+  SCRATCH_NEW_NODES="$(scratch_new_nodes | grep -c . || true)"
+  if [[ "$SCRATCH_NEW_NODES" == "0" ]]; then
+    refuse "contracts-disagree" "the graph disagrees with its own contracts; nothing published, and nothing written — nodes/ and the grid are exactly as this run found them"
+  fi
+  if [[ "$DRY_RUN" == "1" ]]; then
+    # A dry pass may not adopt nodes or write grid versions, so it cannot clear
+    # this the way a real run would. Say so instead of reporting a block that
+    # would not have happened.
+    say "  --dry-run: ${SCRATCH_NEW_NODES} newly minted node(s) would be applied and"
+    say "  --dry-run: grid-committed before this gate; that is not done here, so the"
+    say "  --dry-run: drift above may be nothing but their unpublished payloads."
+    refuse "contracts-disagree" "the graph disagrees with its own contracts; nothing published"
+  fi
+  say "  gate 2 failed with ${SCRATCH_NEW_NODES} newly minted node(s) in the scratch tree."
+  say "  A node minted this run for a file authored under payloads/ has its bytes in"
+  say "  neither the engine nor the grid yet, which reads as missing_payload. Adopting"
+  say "  just those nodes and retrying (goal:g6.1's deadlock, goal:g7.10 part 4)."
+  adopt_new_nodes
+  if ! verify_scratch; then
+    refuse "contracts-disagree" "the graph disagrees with its own contracts; nothing published (${SCRATCH_NEW_NODES} newly minted node(s) were adopted first and did not clear it)"
+  fi
 fi
 
 if [[ "$DRY_RUN" == "1" ]]; then
@@ -763,12 +780,20 @@ if [[ "$DRY_RUN" == "1" ]]; then
   exit 0
 fi
 
-# --- step 3: publish ----------------------------------------------------------
+# --- step 3: the gate passed, so now the graph may be written -----------------
+# Order is load-bearing. `grid.py commit --all` reads node bodies off disk, so
+# the apply has to precede it; and both have to follow gate 2, or a refusal is
+# still leaving junk nodes and burned versions behind, which is part 4's whole
+# subject.
+apply_scratch
+python3 "$BIN_DIR/grid.py" commit --all --prefix "publish: "
+
+# --- step 4: publish ----------------------------------------------------------
 say "publishing to $ENGINE_ROOT"
 python3 "$BIN_DIR/stitch.py" --project "$PROJECT_ROOT" --out "$ENGINE_ROOT" \
         --from-grid --publish --engine-root "$ENGINE_ROOT"
 
-# --- step 4: commit the engine, citing what produced it -----------------------
+# --- step 5: commit the engine, citing what produced it -----------------------
 if [[ -z "$(git -C "$ENGINE_ROOT" status --porcelain)" ]]; then
   # A successful publish that wrote no new bytes. Recorded as success, not as
   # a no-op: the engine matches the graph, which is the entire point, and
