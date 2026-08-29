@@ -27,7 +27,7 @@ never will: those are resolved at apply time by the reader, not encoded
 here (G8.2 — no machine's layout belongs in a graph node any more than in
 the engine that ships to every project).
 
-## `crons_live: false` is the kill-switch for the goal:g11 repo migration
+## `crons_live: true` is the kill-switch for the goal:g11 repo migration
 
 `goal:g11` moves the graph inside the repo it builds — a change to where
 things live on disk while four crons are independently reading and writing
@@ -35,7 +35,7 @@ that same disk on their own timers. `grid_sync` snapshotting mid-move,
 `branch_push` pushing a half-moved branch, `publish_engine` publishing
 against a graph commit that the move has not settled yet, `engine_push`
 committing an engine tree mid-shuffle — any one of the four racing the move
-is a way to corrupt it. `crons_live: false` is the single flip that removes
+is a way to corrupt it. `crons_live: true` is the single flip that removes
 every managed line at once, so the migration can run with nothing else
 touching the tree, and `crons_live: true` is the equally single flip that
 brings all four back when it is safe. One boolean rather than four
@@ -49,7 +49,7 @@ that reconciles the real scheduled-job table against this node. So editing
 `cadences` or `crons_live` here and letting the graph get committed is the
 whole change: within 5 minutes the running schedule matches what this node
 says, with no command typed against the schedule itself. The one edge case
-worth naming is `crons_live: false` — the job that would re-apply the new
+worth naming is `crons_live: true` — the job that would re-apply the new
 state is itself one of the four lines removed, so turning cadences back on
 takes one manual re-run of the applier once, not a wait for a cadence that
 no longer exists.
