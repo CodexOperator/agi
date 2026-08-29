@@ -822,3 +822,114 @@ def test_main_errors_without_tree_and_without_rollback(repos, capsys):
     engine, _tree = repos
     with pytest.raises(SystemExit):
         unify.main(["--engine", str(engine)])
+
+
+# --- the stale-payload half of the publish gate -----------------------------
+#
+# Parent review, iteration 4. find_missing_payloads answers "is the file
+# there"; these answer "is it current". The distinction was invisible until
+# the gate was run against the real repos, where 0 were missing and 2 were
+# stale -- so the gate passed on data that would have produced a unified repo
+# whose working tree disagreed with its own grid refs.
+
+
+def _make_build_node_with_payload(tree: Path, engine: Path, *, mint: str,
+                                  ref: str, grid_bytes: bytes,
+                                  engine_bytes: bytes) -> None:
+    """Wire up one build node whose payload lives in the grid at `grid_bytes`
+    and in the engine tree at `engine_bytes`. Equal bytes model a published
+    file; different bytes model one edited since the last publish."""
+    build_dir = tree / "nodes" / "build"
+    build_dir.mkdir(parents=True, exist_ok=True)
+    (build_dir / f"{mint}.md").write_text(
+        f'---\nid: "build:{mint}"\nmint_id: {mint}\ntype: build\n'
+        f'payload_ref: {ref}\n---\n\nbuild node\n'
+    )
+    _git(tree, "add", "-A")
+    _git(tree, "commit", "-q", "-m", f"tree: add build node {mint}")
+
+    # A real two-entry grid tree: node.md + payload, same shape grid.py writes.
+    blob = subprocess.run(["git", "-C", str(tree), "hash-object", "-w", "--stdin"],
+                          input=grid_bytes, capture_output=True,
+                          check=True).stdout.decode().strip()
+    idx = tree / ".git" / "gridindex"
+    subprocess.run(["git", "update-index", "--add", "--cacheinfo",
+                    f"100644,{blob},payload"],
+                   cwd=tree, env={**os.environ, "GIT_INDEX_FILE": str(idx)},
+                   check=True, capture_output=True)
+    gtree = subprocess.run(["git", "write-tree"], cwd=tree,
+                           env={**os.environ, "GIT_INDEX_FILE": str(idx)},
+                           check=True, capture_output=True, text=True).stdout.strip()
+    gcommit = _git(tree, "commit-tree", gtree, "-m", f"grid: {mint}")
+    _git(tree, "update-ref", f"refs/grid/node/{mint}", gcommit)
+    idx.unlink(missing_ok=True)
+
+    target = engine / ref
+    target.parent.mkdir(parents=True, exist_ok=True)
+    target.write_bytes(engine_bytes)
+    _git(engine, "add", "-A")
+    _git(engine, "commit", "-q", "-m", f"engine: add {ref}")
+
+
+def test_stale_payload_is_detected(repos):
+    engine, tree = repos
+    _make_build_node_with_payload(
+        tree, engine, mint="c" * 32, ref="src/thing.py",
+        grid_bytes=b"current bytes\n", engine_bytes=b"OLD bytes\n")
+
+    assert unify.find_stale_payloads(tree, engine) == ["src/thing.py"]
+    # And it is NOT reported as missing -- the file is right there.
+    assert unify.find_missing_payloads(tree, engine) == []
+
+
+def test_published_payload_is_not_stale(repos):
+    engine, tree = repos
+    _make_build_node_with_payload(
+        tree, engine, mint="d" * 32, ref="src/same.py",
+        grid_bytes=b"identical\n", engine_bytes=b"identical\n")
+
+    assert unify.find_stale_payloads(tree, engine) == []
+
+
+def test_preflight_refuses_on_stale_payload(repos):
+    engine, tree = repos
+    _make_build_node_with_payload(
+        tree, engine, mint="e" * 32, ref="src/drift.py",
+        grid_bytes=b"new\n", engine_bytes=b"old\n")
+
+    res = unify.preflight(engine, tree, force=False)
+    assert res["ok"] is False
+    assert res["reason"] == "engine_stale_payloads"
+    assert res["stale_payload_count"] == 1
+    assert "publish-engine.sh" in res["detail"]
+
+
+def test_force_overrides_the_stale_gate(repos):
+    engine, tree = repos
+    _make_build_node_with_payload(
+        tree, engine, mint="f" * 32, ref="src/drift2.py",
+        grid_bytes=b"new\n", engine_bytes=b"old\n")
+
+    assert unify.preflight(engine, tree, force=True)["ok"] is True
+
+
+def test_node_without_a_grid_ref_is_skipped_not_flagged(repos):
+    """A node whose payload was never gridded has no recorded bytes to
+    disagree with. Flagging it would make the gate refuse on every
+    newly-authored file, which is find_missing_payloads' job and only when
+    the file is genuinely absent."""
+    engine, tree = repos
+    build_dir = tree / "nodes" / "build"
+    build_dir.mkdir(parents=True, exist_ok=True)
+    (build_dir / "ungridded.md").write_text(
+        '---\nid: "build:ungridded"\nmint_id: ' + "9" * 32 + '\ntype: build\n'
+        'payload_ref: src/ungridded.py\n---\n\nno grid ref for this one\n'
+    )
+    _git(tree, "add", "-A")
+    _git(tree, "commit", "-q", "-m", "tree: ungridded build node")
+    (engine / "src").mkdir(parents=True, exist_ok=True)
+    (engine / "src" / "ungridded.py").write_text("whatever\n")
+    _git(engine, "add", "-A")
+    _git(engine, "commit", "-q", "-m", "engine: ungridded")
+
+    assert unify.find_stale_payloads(tree, engine) == []
