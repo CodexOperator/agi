@@ -23,44 +23,44 @@ payload_ref: extensions/agi/bin/adapters/__init__.py
 parse_ok: true
 inputs:
 - name: __future__.annotations
-  how: '`from __future__ import annotations` at line 26'
+  how: '`from __future__ import annotations` at line 27'
   why: TODO(model)
   perf: TODO(model)
   security: TODO(model)
 - name: importlib
-  how: '`import importlib` at line 28'
+  how: '`import importlib` at line 29'
   why: TODO(model)
   perf: TODO(model)
   security: TODO(model)
 - name: pathlib.Path
-  how: '`from pathlib import Path` at line 29'
+  how: '`from pathlib import Path` at line 30'
   why: TODO(model)
   perf: TODO(model)
   security: TODO(model)
 - name: types.ModuleType
-  how: '`from types import ModuleType` at line 30'
+  how: '`from types import ModuleType` at line 31'
   why: TODO(model)
   perf: TODO(model)
   security: TODO(model)
 outputs:
 - name: AdapterError
-  how: defines public class `AdapterError` at line 37
+  how: defines public class `AdapterError` at line 38
   why: TODO(model)
   perf: TODO(model)
   security: TODO(model)
 - name: load
-  how: 'defines public function `load` at line 41, signature: (name: str)'
+  how: 'defines public function `load` at line 42, signature: (name: str)'
   why: TODO(model)
   perf: TODO(model)
   security: TODO(model)
 - name: resolve
-  how: 'defines public function `resolve` at line 81, signature: (cfg: dict, name:
+  how: 'defines public function `resolve` at line 82, signature: (cfg: dict, name:
     str | None=None)'
   why: TODO(model)
   perf: TODO(model)
   security: TODO(model)
 - name: parallelism
-  how: 'defines public function `parallelism` at line 140, signature: (cfg: dict,
+  how: 'defines public function `parallelism` at line 141, signature: (cfg: dict,
     default: int=1)'
   why: TODO(model)
   perf: TODO(model)
