@@ -5,10 +5,11 @@ type: hypothesis
 parents:
   - goal:g4.6
 next_edges: []
+confidence: 0.75
 scaffold_hash: f7d52ff171c7f75e
 title: A01 391172f1 7157cf
+verdict: inconclusive_lean_proved:75
 ---
-
 # hypothesis:a01-391172f1-7157cf
 
 ## Hypothesis
@@ -58,3 +59,6 @@ concurrent work, unrelated to this adapter; running and reporting on the
 whole suite would attribute pass/fail noise from that unrelated work to this
 claim. The targeted adapter test file is the relevant evidence here.
 
+
+## Agent Notes
+claude_code_adapter.py landed 2026-09-03 as a live 2nd harness; grep shows zero harness-name branches in dispatch.py outside adapters.load(), test_claude_code_adapter.py 22/22 pass
