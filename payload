@@ -98,6 +98,17 @@ domains, no git: (1) implement the `claude_code` adapter, `adapters/`;
 `post_wire.py`; (3) audit the 9 wave-3 mvps, `metrics.py`; (4) s18 mining
 survey → `.agi/sessions/L1.09-mining/report.md`, read-only.
 
+**(3) landed — `L1.08f`:** 7 of 9 wave-3 mvps forward, **2 backward**
+(`a00-e284d9f5`, `a00-eeaa5239` — bodies verify shipped code). `metrics.py`
+now excludes an mvp from `scoring_mvp_count` only when it has **no**
+`source_files`/`payload_ref`/build child **and** its body matches
+verified-in-tree language; emits `backward_mvp_count`. Primary 0.245 → 0.234.
+Caveat on record: the language half is a regex heuristic (2/48 hits, 0 false
+positives today) — a future backward mvp phrased differently slips through.
+Also learned: `write.py set` is `set field value` (space), and
+`evidence_runs` must be a **list of node ids** — a bare int scores 0
+(`goal:g7.3`).
+
 Next, as each returns: check `caveats:`/`struggles:` first, verify the node
 file on disk, `run tests`, commit **immediately** (trap 5), `grid-commit`,
 push. Then act on the s18 survey (L1.09) and the L1.10 items.
