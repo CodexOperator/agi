@@ -1,19 +1,21 @@
 ---
-confidence: 0.5
-id: "hyp:embeddings-r4"
+id: hyp:embeddings-r4
 mint_id: 93c6b5bf11a846bd8de85eccda012042
-origin: build-site
+type: hypothesis
 parents:
   - idea:domain-embeddings
+confidence: 0.5
+edited_by: l1.09-execution-parent
+origin: build-site
+status: deprecated
 subgraph: false
 tags:
   - embeddings
   - R4
 testable_claim: Cache Invalidation on Graph Change
+thought_session: L1.09
 title: "embeddings/R4: Cache Invalidation on Graph Change"
-type: hypothesis
 ---
-
 **Description:** Embedding state is invalidated when the underlying graph changes. UMAP coordinates remain stable across rebuilds when the graph is unchanged and the seed is fixed.
 
 **Acceptance Criteria:**
@@ -23,3 +25,7 @@ type: hypothesis
 - [ ] A documented flag forces a full re-embed regardless of cache state
 
 **Dependencies:** graph-core (R7 warm-load caching, R9 portability)
+
+<!-- THOUGHT:BEGIN — authored, not derived; carried across regenerating scans. The reasoning behind THIS version. -->
+Deprecated 2026-09-03 in L1.09 per the build-site survey (`.agi/sessions/L1.09-mining/report.md` §C/§E); disposition GENUINELY-OPEN, not run: no dedicated cache module under `src/embeddings/`; scoped by `goal:s32` (reuse `graph_core/cache.py`'s digest-and-invalidate pattern).
+<!-- THOUGHT:END -->
