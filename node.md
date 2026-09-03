@@ -1,19 +1,21 @@
 ---
-confidence: 0.5
-id: "hyp:renderers-r8"
+id: hyp:renderers-r8
 mint_id: 959082b110414a08833982915c662094
-origin: build-site
+type: hypothesis
 parents:
   - idea:domain-renderers
+confidence: 0.5
+edited_by: l1.09-execution-parent
+origin: build-site
+status: deprecated
 subgraph: false
 tags:
   - renderers
   - R8
 testable_claim: Pure Function Guarantee
+thought_session: L1.09
 title: "renderers/R8: Pure Function Guarantee"
-type: hypothesis
 ---
-
 **Description:** Every renderer is a pure function over the representation: it never mutates input, never reads external state, and never writes outside the returned string.
 
 **Acceptance Criteria:**
@@ -35,3 +37,7 @@ type: hypothesis
 - See also: cavekit-embeddings.md (provides the coordinate values consumed in R1 tokens)
 - See also: cavekit-chain-engine.md (chain shapes consumed by R4 and R5)
 - See also: cavekit-autoresearch-tree-skill.md (selects renderers per iteration)
+
+<!-- THOUGHT:BEGIN — authored, not derived; carried across regenerating scans. The reasoning behind THIS version. -->
+Deprecated 2026-09-03 in L1.09 per the build-site survey (`.agi/sessions/L1.09-mining/report.md` §C/§E); disposition CLOSE-BY-SMALL-EXPERIMENT, not run: testable against the three existing renderers with no new code: call twice and assert equal, mock `open`/env/socket and assert no calls.
+<!-- THOUGHT:END -->
