@@ -1,19 +1,21 @@
 ---
-confidence: 0.5
-id: "hyp:environment-indexers-r9"
+id: hyp:environment-indexers-r9
 mint_id: 106a6365f70644bead2028d672df7ee9
-origin: build-site
+type: hypothesis
 parents:
   - idea:domain-environment-indexers
+confidence: 0.5
+edited_by: l1.09-execution-parent
+origin: build-site
+status: deprecated
 subgraph: false
 tags:
   - environment-indexers
   - R9
 testable_claim: Indexer Documentation and Upgrade Markers
+thought_session: L1.09
 title: "environment-indexers/R9: Indexer Documentation and Upgrade Markers"
-type: hypothesis
 ---
-
 **Description:** Each indexer's source documents its own internals well enough that a future contributor can replace the parsing or scanning core without re-deriving the schema mapping.
 
 **Acceptance Criteria:**
@@ -35,3 +37,7 @@ type: hypothesis
 - See also: cavekit-schema-registry.md (each indexer registers or references a schema)
 - See also: cavekit-renderers.md (consumes nodes the indexers produce)
 - See also: cavekit-autoresearch-tree-skill.md (invokes indexers as part of the loop)
+
+<!-- THOUGHT:BEGIN — authored, not derived; carried across regenerating scans. The reasoning behind THIS version. -->
+Deprecated 2026-09-03 in L1.09 per the build-site survey (`.agi/sessions/L1.09-mining/report.md` §C/§E); disposition GENUINELY-OPEN, not run: no `environment_indexers` package exists anywhere under `extensions/agi/` and the domain's own R1 closure is hollow (§F R1: `verdict:environment-indexers-r1` is self-asserted, `evidence_runs: []`, demoted from proved), so this is open by elimination; the domain is the one that did not survive `goal:g11` -- an index-arbitrary-environments library has no customer inside a single-repo `agi` -- and no goal is minted for it.
+<!-- THOUGHT:END -->
