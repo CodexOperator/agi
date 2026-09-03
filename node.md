@@ -1,19 +1,21 @@
 ---
-confidence: 0.5
-id: "hyp:embeddings-r7"
+id: hyp:embeddings-r7
 mint_id: b3bd5c7126914e5d9e49c0b1a491b844
-origin: build-site
+type: hypothesis
 parents:
   - idea:domain-embeddings
+confidence: 0.5
+edited_by: l1.09-execution-parent
+origin: build-site
+status: deprecated
 subgraph: false
 tags:
   - embeddings
   - R7
 testable_claim: Optional In-Graph Embedding Storage
+thought_session: L1.09
 title: "embeddings/R7: Optional In-Graph Embedding Storage"
-type: hypothesis
 ---
-
 **Description:** Per-node vectors may optionally be stored as a payload field on the node itself so the embedding is persisted alongside the graph.
 
 **Acceptance Criteria:**
@@ -34,3 +36,7 @@ type: hypothesis
 - See also: cavekit-graph-core.md (R1 nodes, R7 caching, R9 portability)
 - See also: cavekit-renderers.md (R1 shared representation, R7 plugin contract)
 - See also: cavekit-autoresearch-tree-skill.md (may consume similarity for agent dispatch)
+
+<!-- THOUGHT:BEGIN — authored, not derived; carried across regenerating scans. The reasoning behind THIS version. -->
+Deprecated 2026-09-03 in L1.09 per the build-site survey (`.agi/sessions/L1.09-mining/report.md` §C/§E); disposition GENUINELY-OPEN, not run: no `in_graph_storage.py` or equivalent; scoped by `goal:s32`.
+<!-- THOUGHT:END -->
