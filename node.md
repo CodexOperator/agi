@@ -1,19 +1,21 @@
 ---
-confidence: 0.5
-id: "hyp:graph-core-r11"
+id: hyp:graph-core-r11
 mint_id: d150cfab6a12409e9653ad179585dce3
-origin: build-site
+type: hypothesis
 parents:
   - idea:domain-graph-core
+confidence: 0.5
+edited_by: l1.09-execution-parent
+origin: build-site
+status: deprecated
 subgraph: false
 tags:
   - graph-core
   - R11
 testable_claim: Traversal and Query API
+thought_session: L1.09
 title: "graph-core/R11: Traversal and Query API"
-type: hypothesis
 ---
-
 **Description:** The graph exposes traversal primitives and a query API over the loaded node set, returning lazy iterators so a caller never pays for a full materialization it does not use.
 
 **Acceptance Criteria:**
@@ -42,3 +44,7 @@ type: hypothesis
 - See also: cavekit-renderers.md (renders graph-core nodes)
 - See also: cavekit-embeddings.md (vectorizes graph-core nodes)
 - See also: cavekit-autoresearch-tree-skill.md (drives the loop on top of graph-core)
+
+<!-- THOUGHT:BEGIN — authored, not derived; carried across regenerating scans. The reasoning behind THIS version. -->
+Deprecated 2026-09-03 in L1.09 per the build-site survey (`.agi/sessions/L1.09-mining/report.md` §C/§E); disposition CLOSE-BY-SMALL-EXPERIMENT, not run: `graph.py` exposes none of BFS/DFS/find_paths/ancestors/descendants publicly, but `chain_engine/query_api.py` already carries a private `_bfs_descendants`; promoting it into `graph_core` with a thin test file is small -- no existing goal obviously covers it, so this THOUGHT is the record.
+<!-- THOUGHT:END -->
