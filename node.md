@@ -1,19 +1,21 @@
 ---
-confidence: 0.5
-id: "hyp:autoresearch-tree-skill-r8"
+id: hyp:autoresearch-tree-skill-r8
 mint_id: a909debfc3274ea38bddbc7090ae02ff
-origin: build-site
+type: hypothesis
 parents:
   - idea:domain-autoresearch-tree-skill
+confidence: 0.5
+edited_by: l1.09-execution-parent
+origin: build-site
+status: deprecated
 subgraph: false
 tags:
   - autoresearch-tree-skill
   - R8
 testable_claim: Drop-In Portability
+thought_session: L1.09
 title: "autoresearch-tree-skill/R8: Drop-In Portability"
-type: hypothesis
 ---
-
 **Description:** The skill is portable: dropping the project context directory into any repository should be sufficient to run the skill there.
 
 **Acceptance Criteria:**
@@ -31,3 +33,7 @@ type: hypothesis
 - Domain-specific verdict-judging logic beyond emitting taxonomy-conformant values — out of scope
 - Modification of the existing autoresearch-create or autoresearch-finalize skills — explicitly forbidden
 - Cross-repository or multi-project orchestration — out of scope
+
+<!-- THOUGHT:BEGIN — authored, not derived; carried across regenerating scans. The reasoning behind THIS version. -->
+Deprecated 2026-09-03 in L1.09 per the build-site survey (`.agi/sessions/L1.09-mining/report.md` §C/§E); disposition GENUINELY-OPEN, not run: no formal drop-in self-test, though the skill is symlink-portable by construction (`CLAUDE.md`: everything reachable globally by symlink) -- informally true, not testably proven; this THOUGHT is the record.
+<!-- THOUGHT:END -->
