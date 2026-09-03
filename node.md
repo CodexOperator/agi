@@ -1,21 +1,23 @@
 ---
-confidence: 0.5
-id: "hyp:embeddings-r3"
+id: hyp:embeddings-r3
 mint_id: e356a8ee1cc4429e94cb9bff07268cb6
-next_edges:
-  - exp:embeddings-r3
-origin: build-site
+type: hypothesis
 parents:
   - idea:domain-embeddings
+next_edges:
+  - exp:embeddings-r3
+confidence: 0.5
+edited_by: l1.09-execution-parent
+origin: build-site
+status: deprecated
 subgraph: false
 tags:
   - embeddings
   - R3
 testable_claim: Coordinate Isomorphism with Renderers
+thought_session: L1.09
 title: "embeddings/R3: Coordinate Isomorphism with Renderers"
-type: hypothesis
 ---
-
 **Description:** The `(x, y)` coordinates produced by projection are exactly the `x` and `y` values used by the renderers' shared representation. There is one source of truth.
 
 **Acceptance Criteria:**
@@ -25,3 +27,7 @@ type: hypothesis
 - [ ] An integration check confirms that for every node, the renderer-side and embedding-side coordinates are equal
 
 **Dependencies:** renderers (R1)
+
+<!-- THOUGHT:BEGIN — authored, not derived; carried across regenerating scans. The reasoning behind THIS version. -->
+Deprecated 2026-09-03 in L1.09 per the build-site survey (`.agi/sessions/L1.09-mining/report.md` §C/§E); already closed by `verdict:embeddings-r3` before this pass; deprecated with its domain (`idea:domain-embeddings`).
+<!-- THOUGHT:END -->
