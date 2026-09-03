@@ -1,29 +1,30 @@
 ---
+id: task:t-089
+mint_id: a46e1855de464277a5d2ba81175cfb78
+type: task
+parents:
+  - hyp:autoresearch-tree-skill-r9
 acceptance_criteria:
   - R9.1 (agent process exceeding agent_timeout_mins terminated with SIGTERM
   - then SIGKILL if unresponsive after 30s)
-  - R9.2 (healer subagent dispatched on timeout receives: original task
+  - {"R9.2 (healer subagent dispatched on timeout receives": "original task"}
   - elapsed time
   - partial output from session dir)
 blocked_by:
   - task:t-078
   - task:t-081
 cavekit_req: autoresearch-tree-skill/R9
+edited_by: l1.09-execution-parent
 effort: M
-id: "task:t-089"
-mint_id: a46e1855de464277a5d2ba81175cfb78
 origin: build-site
-parents:
-  - hyp:autoresearch-tree-skill-r9
-status: pending
+status: deprecated
 tags:
   - M
   - tier--1
-tier: -1
+thought_session: L1.09
+tier: "-1"
 title: "T-089: Agent timeout and healer dispatch mechanism"
-type: task
 ---
-
 **Description:** Implement heal.py monitoring agent PIDs, graceful termination (SIGTERM → SIGKILL), healer subagent dispatch with partial output context, and verdict emission with calibrated confidence. Partial results from timed-out agents flow into manifest.json alongside successful agents.
 
 **Files:** `extensions/autoresearch-tree/bin/heal.py`, `extensions/autoresearch-tree/lib/agent-prompt.md`
@@ -225,3 +226,7 @@ type: task
 - Tasks marked `[CONDITIONAL]` or `[DYNAMIC]` are not present in this plan; all 88 tasks have determinate scope.
 
 - Tier 3 widths (9 tasks) and Tier 4 widths (9 tasks) are the prime parallelization opportunities; the 5-builder pool can pull continuously from those tiers.
+
+<!-- THOUGHT:BEGIN — authored, not derived; carried across regenerating scans. The reasoning behind THIS version. -->
+Deprecated 2026-09-03 in L1.09 per the build-site survey (`.agi/sessions/L1.09-mining/report.md` §E); task `autoresearch-tree-skill/R9` under `hyp:autoresearch-tree-skill-r9`, whose disposition is disposition CLOSE-BY-CITATION -- closed by `verdict:autoresearch-tree-skill-r9-by-citation` citing `build:bin-heal`: `heal.py` is SIGTERM-then-SIGKILL-after-grace, healer dispatch on hung agents, manifest-based partial results -- a strong match; the build-site's own `verdict:autoresearch-tree-skill-r1` is hollow and is not cited (§F R1).
+<!-- THOUGHT:END -->
