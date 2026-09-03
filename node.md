@@ -1,19 +1,21 @@
 ---
-confidence: 0.5
-id: "hyp:chain-engine-r9"
+id: hyp:chain-engine-r9
 mint_id: f8344ddba1684850b27284131bb505ac
-origin: build-site
+type: hypothesis
 parents:
   - idea:domain-chain-engine
+confidence: 0.5
+edited_by: l1.09-execution-parent
+origin: build-site
+status: deprecated
 subgraph: false
 tags:
   - chain-engine
   - R9
 testable_claim: Chain Query API
+thought_session: L1.09
 title: "chain-engine/R9: Chain Query API"
-type: hypothesis
 ---
-
 **Description:** A documented set of queries over chains is available without requiring callers to traverse the graph by hand.
 
 **Acceptance Criteria:**
@@ -37,3 +39,7 @@ type: hypothesis
 - See also: cavekit-renderers.md (renders chains as multi-format views)
 - See also: cavekit-embeddings.md (embeds nodes including chain participants)
 - See also: cavekit-autoresearch-tree-skill.md (consumes chain queries to drive iterations)
+
+<!-- THOUGHT:BEGIN — authored, not derived; carried across regenerating scans. The reasoning behind THIS version. -->
+Deprecated 2026-09-03 in L1.09 per the build-site survey (`.agi/sessions/L1.09-mining/report.md` §C/§E); disposition CLOSE-BY-CITATION -- closed by `verdict:chain-engine-r9-by-citation` citing `build:src-chain-engine-queries`: `queries.py` has `longest_n`, `branching_factor` and `mid_chain_candidates` by name, plus `all_chain_queries_pure`.
+<!-- THOUGHT:END -->
