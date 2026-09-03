@@ -1,19 +1,21 @@
 ---
-confidence: 0.5
-id: "hyp:schema-registry-r8"
+id: hyp:schema-registry-r8
 mint_id: c15b12ebc5594c4c985075fea10dd0ba
-origin: build-site
+type: hypothesis
 parents:
   - idea:domain-schema-registry
+confidence: 0.5
+edited_by: l1.09-execution-parent
+origin: build-site
+status: deprecated
 subgraph: false
 tags:
   - schema-registry
   - R8
 testable_claim: Built-In Schemas for Autoresearch Types
+thought_session: L1.09
 title: "schema-registry/R8: Built-In Schemas for Autoresearch Types"
-type: hypothesis
 ---
-
 **Description:** A baseline set of schemas ships with the registry to define the autoresearch node types so chain-engine, renderers, and the skill can rely on them.
 
 **Acceptance Criteria:**
@@ -38,3 +40,7 @@ type: hypothesis
 - See also: cavekit-chain-engine.md (uses built-in autoresearch schemas)
 - See also: cavekit-renderers.md (may render meta-nodes)
 - See also: cavekit-autoresearch-tree-skill.md (relies on built-in schemas to emit verdicts and chain nodes)
+
+<!-- THOUGHT:BEGIN — authored, not derived; carried across regenerating scans. The reasoning behind THIS version. -->
+Deprecated 2026-09-03 in L1.09 per the build-site survey (`.agi/sessions/L1.09-mining/report.md` §C/§E); disposition CLOSE-BY-CITATION -- closed by `verdict:schema-registry-r8-by-citation` citing `build:src-schema-registry-active-set`, `build:src-schema-registry-loader`, `build:tests-schema-registry-test-brackets`, `build:tests-schema-registry-test-schema-files`: `.agi/context/schemas/[*].md` is the real built-in schema set (a superset of the fictional eight, adapted to this project's taxonomy); bracket override is `active_set.py` and `loader.py::_generic_schema()` is the fallback for a missing schema.
+<!-- THOUGHT:END -->
