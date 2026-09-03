@@ -1,19 +1,21 @@
 ---
-confidence: 0.5
-id: "hyp:schema-registry-r1"
+id: hyp:schema-registry-r1
 mint_id: adea558d09a24134a14a27d4cd234d9b
-origin: build-site
+type: hypothesis
 parents:
   - idea:domain-schema-registry
+confidence: 0.5
+edited_by: l1.09-execution-parent
+origin: build-site
+status: deprecated
 subgraph: false
 tags:
   - schema-registry
   - R1
 testable_claim: Schema as File
+thought_session: L1.09
 title: "schema-registry/R1: Schema as File"
-type: hypothesis
 ---
-
 **Description:** Each schema is a single file in a known directory of the project's context. Adding, editing, or removing a schema requires only file operations.
 
 **Acceptance Criteria:**
@@ -23,3 +25,7 @@ type: hypothesis
 - [ ] Either Markdown-with-frontmatter or a structured-data file format is accepted as a schema container
 
 **Dependencies:** graph-core (R4 frontmatter persistence)
+
+<!-- THOUGHT:BEGIN — authored, not derived; carried across regenerating scans. The reasoning behind THIS version. -->
+Deprecated 2026-09-03 in L1.09 per the build-site survey (`.agi/sessions/L1.09-mining/report.md` §C/§E); already closed by `verdict:schema-registry-r1` before this pass; deprecated with its domain (`idea:domain-schema-registry`).
+<!-- THOUGHT:END -->
