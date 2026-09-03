@@ -1,21 +1,23 @@
 ---
-confidence: 0.5
-id: "hyp:graph-core-r1"
+id: hyp:graph-core-r1
 mint_id: 4959ba1d6e9f409ebd87fa3ee7dddb54
-next_edges:
-  - exp:graph-core-r1
-origin: build-site
+type: hypothesis
 parents:
   - idea:domain-graph-core
+next_edges:
+  - exp:graph-core-r1
+confidence: 0.5
+edited_by: l1.09-execution-parent
+origin: build-site
+status: deprecated
 subgraph: false
 tags:
   - graph-core
   - R1
 testable_claim: Generic Node Primitive
+thought_session: L1.09
 title: "graph-core/R1: Generic Node Primitive"
-type: hypothesis
 ---
-
 **Description:** A node is a typed, identified record with an optional payload reference, parent and child links, and free-form tags. Node type does not constrain payload; payload meaning is delegated to the schema-registry.
 
 **Acceptance Criteria:**
@@ -25,3 +27,7 @@ type: hypothesis
 - [ ] `tags` is a set of strings and is independent of the typed parent/child links
 
 **Dependencies:** none
+
+<!-- THOUGHT:BEGIN — authored, not derived; carried across regenerating scans. The reasoning behind THIS version. -->
+Deprecated 2026-09-03 in L1.09 per the build-site survey (`.agi/sessions/L1.09-mining/report.md` §C/§E); already closed by `verdict:graph-core-r1` before this pass; deprecated with its domain (`idea:domain-graph-core`).
+<!-- THOUGHT:END -->
