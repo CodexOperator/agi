@@ -5,12 +5,10 @@ type: hypothesis
 parents:
   - goal:g1.10
 next_edges: []
-confidence: 0.0
 scaffold_hash: e63fe525042b9e01
-testable_claim: "**`commands.py run --workflow verify` executes the ordered verification sequence through the resolver, stops at the first non-zero exit, and reports which step broke — making the declared sequence the one command a cold session runs, with no prose re-derivation needed.**"
 title: commands.py run --workflow executes verify in order, stops on failure
-verdict: pending
 ---
+
 # hypothesis:a00-29f8c490-fac260
 
 ## Hypothesis
@@ -91,6 +89,3 @@ runnable through the same resolver. Three hypotheses, three properties a
 commands node should have: it is better than prose (proved), the prose derives
 from it (pending), and the sequence executes through it (this one).
 <!-- THOUGHT:END -->
-
-## Agent Notes
-Hypothesis: commands.py run --workflow executes the verify sequence through the resolver, stopping on first failure. Covers the execution face of goal:g1.10 — sibling to derive-commands (derivation) and commands-are-config-not-prose (declaration)
