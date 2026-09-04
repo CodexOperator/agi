@@ -51,10 +51,14 @@ Full director authority for the run. Explicitly authorized, on the record:
 ## §1 The plan
 
 - [x] **L1.01–L1.07** — prior session. See grid for detail.
-- [ ] **L1.08** — the removal guard (`goal:g3` symmetry: removal cannot move
-      scoring either). **In flight, PARENT-A.** Gates L1.09.
-- [ ] **L1.08b** — live scale: parent-spawns-kid, cap 8→16→25, `goal:g4.8`
-      clauses 2 & 3. **In flight, PARENT-D.**
+- [x] **L1.08** — the removal guard landed (`L1.08`), then held for real in
+      L1.09 (`deprecation_score_delta=-0.102` withheld).
+- [x] **L1.08b** — live scale: parent tier ran live on pi (44 parents, waves
+      2–4), **cap 25 reached and held**, budget refused overflow cleanly;
+      parent-spawns-kid observed on both harnesses. `goal:g4.8` clause 2 (a
+      parent demoting unaided) was **not** separately observed — the
+      commit-path gate now makes it moot at acceptance. Clause 3 (spend): a
+      pi parent key read $0.05–0.15, a kid $0.015; a CC kid ~$0.30.
 - [x] **L1.09** — **DONE, commit `L1.09`.** 159 build-site nodes deprecated
       in one atomic pass with per-node dispositions, 29 verdicts by citation,
       kits + plan deleted, 7 build nodes deprecated, `goal:s32` (embeddings
@@ -65,7 +69,11 @@ Full director authority for the run. Explicitly authorized, on the record:
       `CLAUDE.md` rows) dispatched to a cleanup agent.
 - [ ] **L1.10** — chat-to-node linking (`goal:g10.1`, `goal:g2.7`),
       engine-commit pinning (`goal:g8.1`), loop-scoped iteration numbering.
-      Design recon in flight (PARENT-E).
+      **In flight via engine CC parents:** `iter-1039` (loop-scoped ids,
+      `hypothesis:loop-scoped-iteration-ids-cannot-clobber` under g7),
+      `iter-1041` (g10.1). `iter-1040` = attractor-filter follow-up
+      (`hypothesis:attractor-list-must-hide-deprecated-ideas` under g9.7).
+      g8.1 dispatch waits for 1039 to drain (subscription rate limit).
 
 ## §2 Concurrency discipline this session
 
@@ -77,6 +85,16 @@ and no `grid.py`. The director commits, serially, between waves. Parents own
 Kids see each other's untracked files — report, never clean.
 
 ## §3 🔴 Where it stands, and the next command
+
+**01:20 — owner reset the OpenRouter workspace budget (+$30 balance).** pi
+dispatch is back. `L1.10b` committed the loop-scoped iteration ids
+(`sessions/iter-L1.NN`, 6 engine files, suite 1454). **Wave 6 live on pi:**
+iters `1043`–`1054`, 12 targets (g4.1, g13, g13.1, g10.1, g8.1, the
+loop-scoped hypothesis, s32, g9.4, g4.7, g1.10, g5, g4.8), 22 parents
+admitted, **25/25 held**, 0 × 403. Sampler: `L1-logs/samples3.log`.
+Loop: drain → verify (smoke/links/tests) → commit → grid-commit → push →
+next wave. Rule stands: rather waste OpenRouter tokens than director context.
+
 
 **L1.08 guard landed** (commit "L1.08: removal guard in metrics.py"): new
 metrics `deprecated_open_hypotheses`, `deprecated_excluded_nodes`,
@@ -188,7 +206,17 @@ python3 extensions/agi/bin/commands.py run tests     # 1371
    outstanding. `provisioning.py` unchanged since L1.02, so this is a
    non-hermetic test hitting the real account, not a regression. Confirm after
    full drain; belongs to `goal:g1.11`.
-7. **`iter-NNN` did not end at 116** — `ls .agi/sessions` shows `iter-1005`;
+7. 🔴 **Nothing enforces `agent_timeout_mins` when parents are launched with
+   `dispatch.py` alone** — `heal.py` runs only under `driver.sh`. Wave-6
+   parents sat at 25/25 for 34 min, the oldest with a 0-byte output log.
+   Director killed every `pi` older than 1800 s; `spawn_budget` released the
+   leases on process death (25 → 10). Next session: run `heal.py <root>
+   <iter>` per dispatch, or fix dispatch to hand the timeout to the reaper.
+8. **pi parents commit scratch into the repo** — `.agi/tmp_*.py`,
+   `_benchmark.py` at the root, and a hand edit to `HANDOFF.md`. Moved to
+   `.agi/sessions/L1-logs/parent-scratch/`. The parent brief should forbid
+   writes outside `.agi/nodes/`, `extensions/`, `src/`, `skills/`, `tests/`.
+9. **`iter-NNN` did not end at 116** — `ls .agi/sessions` shows `iter-1005`;
    this session uses 1006+. Loop-scoped numbering (L1.10) is still unbuilt.
 
 ## §5 Known-good verification sequence
