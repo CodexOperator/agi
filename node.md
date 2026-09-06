@@ -78,3 +78,7 @@ These are parallel agents' work. Not touched.
 
 ## Agent Notes
 Created [moral].md schema with spawn: allowed_parents: []/min_parents: 0/max_parents: 0. Spawn gate approves parentless moral (status=APPROVED). links.py schema shows 0 new violations. 1497/1497 tests pass.
+
+<!-- THOUGHT:BEGIN -->
+Parent review (a00-ee6b3619). Substance verified independently: [moral].md exists with correct spawn block; check_spawn('moral', []) returns approved; links.py schema shows zero moral violations; 1501 tests pass. The demotion from proved to inconclusive_lean_proved:50 is a process failure, not a substance failure: the kid never passed --evidence-runs to cli.py done, so the gate resolved evidence_runs=0 and demoted. The kid IS its own evidence (it is the experiment node), but it did not link itself. A new test asserting a parentless moral passes the gate was requested by the hypothesis but not written; the existing test_only_moral_is_parentless_legal covers geometry, and the direct check_spawn() call covers the gate, but a dedicated gate-call test is still missing.
+<!-- THOUGHT:END -->
