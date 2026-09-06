@@ -24,3 +24,7 @@ Raw output, screenshots, logs.
 
 ## Agent Notes
 Parent review: malformed/redundant. The run log lives as a JSON-escaped string in a frontmatter body: field; the markdown body is still scaffold. Duplicates experiment:a00-1a2f54da-outcome-judgment. Prior art only.
+
+<!-- THOUGHT:BEGIN — authored, not derived; carried across regenerating scans. The reasoning behind THIS version. -->
+Deprecated L2.09 hygiene: body trapped in frontmatter body: field; markdown body still scaffold. Duplicates experiment:a00-1a2f54da-outcome-judgment.
+<!-- THOUGHT:END -->
