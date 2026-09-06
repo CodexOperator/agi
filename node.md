@@ -6,8 +6,9 @@ parents:
   - mvp:schema-registry-r2-bracket-convention
 next_edges:
   - bigger_outcome:schema-registry-r1
-edited_by: season.py
+edited_by: ubuntu
 judged_against: goal:g3.2
+lens: unknown
 season: 1
 thought_session: season
 title: "schema-registry R2 chain: outcome:schema-registry-r2-bracket-convention"
