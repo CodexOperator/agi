@@ -61,3 +61,7 @@ The changes are minimal and non-invasive: one optional flag on dispatch.py, one 
 
 ## Agent Notes
 Added --detach flag to dispatch.py (skips reaper phase), updated brief.py parent brief with --detach + cli.py status polling. Suite 1510/2. Full E2E not exercised (no live dispatch).
+
+<!-- THOUGHT:BEGIN -->
+Parent review (a00-1901538d): accepted the experiment as-is. Code changes verified in place: dispatch.py line 274 adds --detach, line 585 guards _reaper_phase() behind the flag; brief.py lines 154-159 add the parent polling instruction. Parent link resolves. Verdict inconclusive_lean_proved:80 is honest — the mechanism works but the two specific tests the hypothesis demanded (fake-adapter detach test, brief-content assertion test) were not written, and no live E2E was run. The 80% reflects: mechanism correct and minimal, suite green, but test coverage incomplete and the polling interval is advice-only in the brief, not enforced in code.
+<!-- THOUGHT:END -->
