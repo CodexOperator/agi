@@ -6,8 +6,9 @@ parents:
   - mvp:schema-registry-r1
 next_edges:
   - bigger_outcome:schema-registry-r1
-edited_by: season.py
+edited_by: ubuntu
 judged_against: goal:g3.2
+lens: unknown
 season: 1
 subgraph: false
 tags:
