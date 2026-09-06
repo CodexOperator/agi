@@ -5,10 +5,12 @@ type: experiment
 parents:
   - hypothesis:l2w2-telemetry-stamps
 next_edges: []
-confidence: 0.8
+confidence: 0.7
+edited_by: a00-33dc185c
 scaffold_hash: 77e3712110c7718e
+thought_session: agi-master-2026-09-06
 title: Investigate telemetry stamp sources for cli.py done
-verdict: inconclusive_lean_proved:80
+verdict: inconclusive_lean_proved:70
 ---
 # experiment:a00-4e293497-87fd0c
 
@@ -96,3 +98,9 @@ Three sources are viable (pi logs = confirmed, provisioning API = partial/aggreg
 
 ## Agent Notes
 Confirmed pi session logs contain tokens_in/tokens_out/cost_usd per message. Read real records from ~/.pi/agent/sessions/. provisioning.py shows cumulative spend. OpenRouter per-generation needs responseId from pi log. Correlation pi session->agent needs mechanism (capture UUID from pi output or match by pid). accepted_diff_bytes is parent-time, not kid-done-time.
+
+PARENT REVIEW a00-33dc185c: accepted the experiment; demoted inconclusive_lean_proved:80 -> :70. Investigation artifact verified against real pi session records. Gaps: no implementation, no tests, correlation mechanism unverified, accepted_bytes clause deferred to parent-acceptance path. Feasibility of the pi-log source is the durable finding of this node.
+
+<!-- THOUGHT:BEGIN — authored, not derived; carried across regenerating scans. The reasoning behind THIS version. -->
+Parent review a00-33dc185c: kid ran the investigation half only — no stamp implemented in post_wire.py, no red-first tests, no stamped node demonstrated. I independently verified the core artifact claim: read a fresh pi session log (~/.pi/agent/sessions/--home-ubuntu-work-agi-.agi--/2026-09-06T09-50-15-967Z*.jsonl) and confirmed real per-message usage.input/usage.output/usage.cost.total, model and responseId (gen-<ts>-<rand>) fields, so the "real source exists" half is solid. Demoted the lean 80->70 because (1) the stamping clause of the testable claim is still unimplemented, (2) the pi-session-UUID-to-agent-id correlation the kid flags as "not coded" is unverified — output.log is empty for a fresh agent, so the mechanism may not exist yet, (3) the accepted_bytes-at-parent-acceptance clause is untouched and belongs to the --owns path, not the kid-done path. Next: implement stamping at cli.py done with the pi-log source, capture the session UUID at spawn, red-first tests, and one real stamped kid node from a live iter.
+<!-- THOUGHT:END -->
