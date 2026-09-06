@@ -6,6 +6,10 @@ parents:
   - hypothesis:l2w15-write-guard
 next_edges: []
 confidence: 0.85
+edited_by: ubuntu
+evidence_runs:
+  - experiment:a00-8be94922-2ea0a8
+  - experiment:a00-7607d2bc-083c93
 scaffold_hash: 9a9418b0ba8b54be
 season: 1
 title: "a00-7607d2bc-083c93: instrument remaining unlogged writers (write_frontmatter, replace_payload)"
@@ -82,3 +86,9 @@ Confidence: 0.85
 
 ## Agent Notes
 Instrumented remaining unlogged writers: snapshot-goals.write_frontmatter (covers post_wire fallback, snapshot-build-site, backfill-mint-ids, decompose-engine, level3) and node_writer.replace_payload. All 9 write_guard tests pass; full suite 1621/9/1 (1 pre-existing failure on clean HEAD).
+
+<!-- THOUGHT:BEGIN — authored, not derived; carried across regenerating scans. The reasoning behind THIS version. -->
+Parent review a00-b8760a0e, 2026-09-06: this version adds evidence_runs (absent from the kid frontmatter) and records live verification of every claim in the body. I re-ran snapshot-goals --render then write_guard.py check: silent, exit 0 — the exact verification the hypothesis FOLLOW-UP demanded, which the kid did not itself report. I built a scratch git sandbox and confirmed: a sanctioned replace_payload(data=...) appends a log line with the payload sha (operation=replace_payload), a direct node edit and a direct payload edit under a modified build node each print WARN with the exact write.py redo hint, --strict exits 1, non-strict exits 0. All three refutations from experiment:a00-8be94922-2ea0a8 are closed by reading plus these runs: write_frontmatter is logged and its five reusers (post_wire fallback, snapshot-build-site, backfill-mint-ids, decompose-engine, level3) route through it; replace_payload is logged. One correction to the body: the kid caveat that payload detection reads ALL build nodes is false — cmd_check filters to modified build nodes only, which is exactly what the owner brief specifies; the sentence misdescribes the code, the behavior is right. The kid kept the 85 lean honestly: the literal claim wording says ONE engine function and two logged writers now exist, but the owner brief anticipated that (log in both if there are two), so the residual gap is wording, not function. I agree with the lean and hold it at 85. The single suite failure (test_minted_node_stamps_loop_model_profile_from_env) is unrelated to this diff — the stamping code is untouched and the kid confirmed it fails on clean HEAD.
+<!-- THOUGHT:END -->
+
+REVIEW a00-b8760a0e (2026-09-06): ACCEPTED the mechanism; held the kid lean at 85 (proved not warranted — claim wording says ONE function, two logged writers exist, but owner brief anticipated both). Live-verified: render->check silent exit 0; sandbox confirmed replace_payload(data=) logs payload sha, unsanctioned node+payload edits print the exact write.py hint, --strict=1 else 0. Set evidence_runs (was missing). Corrected the kid caveat: payload check reads MODIFIED build nodes only (matches owner brief); the sentence as written is wrong, behavior is right. Flagged: no sanctioned-payload false-positive test was added (mechanism verified manually, needs a pinning test); test suite appends /tmp/pytest entries to the real write-log via snapshot_goals.PROJECT_ROOT.
