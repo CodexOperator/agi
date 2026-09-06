@@ -1140,3 +1140,32 @@ def test_season_parents_check_skipped_when_rule_has_none(season_project):
         current_season=cs,
     )
     assert res.status == sg.APPROVED
+
+
+def test_node_writer_rejects_wrong_season_parent_type(season_project):
+    """The creation path enforces season_parents, not just check_spawn.
+    Red before node_writer passed season_parents/current_season to
+    check_spawn: write_node let a wrong-type season_parent through."""
+    import node_writer
+    res = node_writer.write_node(
+        season_project, "vision", "seasoned-bad", ["moral:faith"],
+        extra_fm={"season": 2, "season_parents": ["bigger_outcome:bo1"]},
+        body="b\n",
+    )
+    assert res.rejected, (
+        f"expected rejection, gate={getattr(res.gate, 'status', None)}")
+    assert "season_parents_allowed" in (res.reason or "")
+    assert not (season_project / "nodes" / "vision" / "seasoned-bad.md").exists()
+
+
+def test_node_writer_accepts_valid_season_parent(season_project):
+    """A vision node whose season_parent resolves to an existing overview
+    writes through the gate."""
+    import node_writer
+    res = node_writer.write_node(
+        season_project, "vision", "seasoned-good", ["moral:faith"],
+        extra_fm={"season": 2, "season_parents": ["overview:o1"]},
+        body="b\n",
+    )
+    assert not res.rejected, res.reason
+    assert (season_project / "nodes" / "vision" / "seasoned-good.md").exists()
