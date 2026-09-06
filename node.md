@@ -5,11 +5,14 @@ type: experiment
 parents:
   - hypothesis:l2w3-brief-heads
 next_edges: []
+confidence: 0.95
+demote_reason: no experiment evidence (evidence_runs=0) for 'proved' [caught at grid commit, not by a writer path]
+demoted_from: proved
 scaffold_hash: 34c86eeece675736
 season: 1
 title: A00 e2d1d0dd 772cec
+verdict: inconclusive_lean_proved:50
 ---
-
 # experiment:a00-e2d1d0dd-772cec
 
 ## Experiment
@@ -45,3 +48,5 @@ Full test output:
 - test_kid_brief_contains_write_py_syntax PASSED
 - All 31/31 non-skipped tests passed.
 
+## Agent Notes
+Added constitution head prepending for kid and parent tiers in brief.py assemble(); added WRITE.PY SYNTAX line and evidence-runs hint to kid brief done template; 4 new red-first tests pass. All 4 tiers (kid, parent, director, prime_director) now get tier-appropriate constitution heads from moral:faith REFERENCE via ladder read_order.
