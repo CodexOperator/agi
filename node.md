@@ -5,9 +5,10 @@ type: experiment
 parents:
   - hypothesis:l2w6-telemetry-rollup
 next_edges: []
-confidence: 0.88
+confidence: 0.82
 demote_reason: no experiment evidence (evidence_runs=0) for 'proved' [caught at grid commit, not by a writer path]
 demoted_from: proved
+edited_by: ubuntu
 scaffold_hash: a4f1ed34576a9eda
 season: 1
 title: A00 6856367d telemetry rollup
@@ -36,3 +37,8 @@ Key commands and outputs:
   Report shows same zero baseline, updates node with totals + skip counts.
 - python3 extensions/agi/bin/telemetry_rollup.py --dry-run --json overview:embeddings-overview
   experiments_found:8, nodes_skipped:8, sums zero, dry_run true.
+
+## Agent Notes
+telemetry_rollup tool + tests + real-node dry runs; baseline zeros now honest
+
+Parent a00-403a3639 review: this node is a twin minted when kid a00-6856367d was restarted (pid 1316280 disappeared 08:25, restart 08:25:08 scaffolded this node). Its own recorded outputs (9/1/8-experiment runs, suite 1650 passed) are consistent with the canonical twin experiment:a00-6856367d-7b307d, which is what hypothesis:l2w6-telemetry-rollup next_edges links and which carries the parent-reviewed verdict. This node holds the gate-demoted duplicate; not canonical.
