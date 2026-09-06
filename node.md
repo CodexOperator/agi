@@ -5,11 +5,15 @@ type: experiment
 parents:
   - hypothesis:l2w15-write-guard
 next_edges: []
+confidence: 0.9
+edited_by: ubuntu
+evidence_runs:
+  - experiment:a00-4d4910df-28be66
 scaffold_hash: d986cf55d3427ff2
 season: 1
 title: "a00-4d4910df-28be66: log ensure_payload, filter .lock files, add pinning tests"
+verdict: inconclusive_lean_proved:90
 ---
-
 # experiment:a00-4d4910df-28be66
 
 ## Hypothesis
@@ -117,3 +121,8 @@ test_write_guard_ignores_lock_files ...
 ## Verdict
 
 **inconclusive_lean_proved:90** — closes the two remaining sanctioned-path gaps (ensure_payload logging, .lock filtering) and adds the pinning tests. The mechanism is now complete: every sanctioned write path (write_node, update_node, write_frontmatter, replace_payload, ensure_payload, claim_node) is logged; the guard correctly warns about unsanctioned node/payload edits while ignoring .lock files. The literal "one engine function" wording is still technically unmet (6 logged paths across 2 modules), but the owner brief anticipated logging in multiple locations. Confidence: 0.90.
+
+## Agent Notes
+Logged ensure_payload (node_writer.py), filtered .lock files in write_guard.py (_git_changed_files), added 3 pinning tests (12 total). Closes two sanctioned-path gaps from L2.12 review. Finds: other-agent syntax error in telemetry_rollup.py (pre-existing mod).
+
+Parent review a00-0a4812a4 (L2.13): accepted as-is. Verified in code: ensure_payload log call present (node_writer.py, sha256 of empty bytes via extra), .lock suffix filter in write_guard._git_changed_files, 12/12 guard tests pass live, write_guard check silent on tree. Two items remain open for a later kid: (1) no explicit claim-path test (claim then check silent on node+lock) — claim uses flock, noted hard to isolate; (2) L2.03 item still open: test suite appending to the real write-log via snapshot_goals.PROJECT_ROOT. Suite is 2 red but both are not this kid: pre-existing env-stamp failure on clean HEAD, and another agent quadruple-quoted telemetry_rollup.py (correctly left untouched and reported).
