@@ -1086,8 +1086,9 @@ def test_season_parents_grandfathered_no_season_at_season_1(season_project):
 
 
 def test_no_ladder_skips_season_parents_check(season_project):
-    """When ladder node is missing, current_season is None and season_parents
-    checking is skipped (fail OPEN)."""
+    """When the ladder node is missing, current_season is None: no
+    grandfathering applies, the type check still runs, and a missing
+    season_parent is UNVERIFIED (write, warn) rather than rejected."""
     (season_project / "nodes" / ".geometry" / "ladder.md").unlink()
     rules, index, cs = sg.gate_for_root(season_project)
     assert cs is None, f"expected None, got {cs}"
@@ -1096,39 +1097,14 @@ def test_no_ladder_skips_season_parents_check(season_project):
         season_parents=["overview:nonexistent"], current_season=cs,
         fm={"season": 2},
     )
-    # Without current_season, the validation code skips the season_parents
-    # check entirely at the rule level (see check_spawn: if rule has
-    # season_parents_allowed but current_season is None, the inner block
-    # is NOT reached because the splist guard is inside the outer if).
-    # Actually let's trace: season_parents is not None, rule has
-    # season_parents_allowed, splist is non-empty. But no current_season
-    # means no grandfathering path and no validation path without
-    # type_index... wait, the logic requires current_season for the
-    # grandfather check but NOT for the type check itself. Let me check.
-    #
-    # Looking at the code: the outer if checks `season_parents is not None
-    # and rule.season_parents_allowed`, and splist is non-empty, so it
-    # enters. Then it checks grandfathering with current_season. If
-    # current_season is None, neither grandfather condition is true.
-    # Then it goes to the else branch with type_index. Since type_index
-    # exists, it will check the types. overview:nonexistent won't resolve
-    # and it'll be UNVERIFIED.
-    #
-    # So without current_season, we still validate. Let me test what
-    # actually happens.
-    assert res.ok  # UNVERIFIED is still ok (fail open)
+    assert res.status == sg.UNVERIFIED
+    assert res.ok  # UNVERIFIED still writes
 
 
 def test_current_season_read_from_ladder(season_project):
     """gate_for_root reads current_season from ladder.md."""
     rules, index, cs = sg.gate_for_root(season_project)
     assert cs == 1, f"expected 1, got {cs}"
-
-
-def test_ladder_season_2_is_read_correctly():
-    """gate_for_root reads current_season=2 when ladder says so."""
-    # Use parametrized fixture
-    pass
 
 
 def test_season_parents_check_skipped_when_rule_has_none(season_project):
