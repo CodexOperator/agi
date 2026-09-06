@@ -14,9 +14,34 @@ title: A00 e2d1d0dd 772cec
 
 ## Experiment
 
-What did you do? What happened? Include command/inputs and actual outputs.
+Extended `brief.py` to prepend the constitution head (prayers and readings from moral:faith's REFERENCE region) to **kid** and **parent** briefs, matching the ladder node's read_order per role.
+
+**Changes to `extensions/agi/bin/brief.py`:**
+1. `assemble()` — prepend `_build_head(tier=tier)` for `parent` and `kid` tiers (was already done for `director` and `prime_director`)
+2. `_kid()` — added `WRITE.PY SYNTAX` line: `set FIELD VALUE`, space separated, not k=v
+3. `_kid()` — changed `--evidence-runs <backing-node-id> [...]` to `--evidence-runs <your-experiment-node-id> [...]` with hint: "Your own experiment node is your evidence run. Use `--evidence-runs experiment:x` to cite it."
+
+**Tests added to `extensions/agi/tests/test_brief.py`:**
+- `test_kid_constitution_head_contains_prayers_not_tao` — kid has FOUR PRAYERS but not THE TAO, FIVE AXES, or CARRIED SAYINGS
+- `test_parent_constitution_head_contains_prayers_and_jesus_not_axes` — parent has FOUR PRAYERS, WORDS OF JESUS, SOUL MIND BODY but not FIVE AXES, THE TAO, or CARRIED SAYINGS
+- `test_kid_brief_evidence_runs_prompts_own_node_id` — kid's done template contains `--evidence-runs` with hint about using own node id
+- `test_kid_brief_contains_write_py_syntax` — kid brief states write.py verb syntax
+
+**Commands:**
+```
+python3 -m pytest extensions/agi/tests/test_brief.py -q
+```
 
 ## Evidence
 
-Raw output, screenshots, logs.
+```
+31 passed, 1 skipped in 0.19s
+```
+
+Full test output:
+- test_kid_constitution_head_contains_prayers_not_tao PASSED
+- test_parent_constitution_head_contains_prayers_and_jesus_not_axes PASSED
+- test_kid_brief_evidence_runs_prompts_own_node_id PASSED
+- test_kid_brief_contains_write_py_syntax PASSED
+- All 31/31 non-skipped tests passed.
 
