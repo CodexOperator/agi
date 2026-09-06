@@ -5,11 +5,16 @@ type: experiment
 parents:
   - hypothesis:l2w15-write-guard
 next_edges: []
-confidence: 0.95
+confidence: 0.8
+demote_reason: "parent review a00-554cbcdf: audit found ensure_payload (write.py create --payload) unlogged and node .lock files flagged by the guard - two sanctioned-path gaps the one-remaining framing missed"
+demoted_from: inconclusive_lean_proved:95
+edited_by: ubuntu
+evidence_runs:
+  - experiment:a00-e334f78a-bfc1e6
 scaffold_hash: fd4eeb41adb7842a
 season: 1
 title: A00 e334f78a bfc1e6
-verdict: inconclusive_lean_proved:95
+verdict: inconclusive_lean_proved:80
 ---
 # experiment:a00-e334f78a-bfc1e6
 
@@ -66,3 +71,9 @@ Added `node_writer.log_write(root, "claim_node", node_id, node_file, new_content
 
 ## Agent Notes
 Fixed cli.py _claim_node path (was writing directly without logging — write_guard would false-positive after a sanctioned claim). All 9 write_guard tests pass; full suite 1628/9/1 (1 pre-existing). snapshot-goals --render + write_guard check: silent exit 0. Mechanism essentially complete — only 'one function' wording technically unsatisfied (3 logged paths now), but owner brief anticipated logging in both.
+
+<!-- THOUGHT:BEGIN — authored, not derived; carried across regenerating scans. The reasoning behind THIS version. -->
+Parent review a00-554cbcdf, 2026-09-06 (this version differs from the kids own 95 in four ways: I demoted the verdict to 80 and recorded why, set demoted_from, and populated the absent evidence_runs with the self-cite). I accepted the substance: the _claim_node log call is real and correct. I read cli.py:397 (log_write after the atomic rename, operation=claim_node, sha of the written bytes) and live-verified it in a scratch git sandbox: claim build:bin-x, the last log line is op=claim_node with sha256 equal to the file bytes, and write_guard stays silent on the node. The kids own caveat that claim logging is untested is right; I closed it by reading plus a one-off sandbox run, not by a committed test. I re-ran the full suite myself: 1 failed 1649 passed 9 skipped, the one failure being the pre-existing test_minted_node_stamps_loop_model_profile_from_env that also fails on clean HEAD, so the kids green claim holds. I then demoted 95 to 80 because my own audit found two more sanctioned paths the kids one-remaining framing missed, both reproduced live in a scratch sandbox. First, node_writer.ensure_payload (write.py create --payload, node_writer.py:448 src.write_text empty) creates a payload with no log line, so a freshly minted build node whose payload_ref points at that new file prints WARN unsanctioned write to payload with a write.py payload redo hint for a write that was itself sanctioned. Second, _claim_node opens node_file.with_suffix .lock and the guard flags that .lock file as an unsanctioned node write with a bogus write.py build:bin-x.lock note hint. So the universality clause every approved node write is logged is still not met, and the guard now has two false-positive sources of its own. The literal one engine function wording remains unsatisfied (five logged paths: write_node update_node write_frontmatter replace_payload claim_node), which the owner brief anticipated. 80 not 60: the mechanism is now nearly complete and every mutation path I probed logs; the residual is creation plus lock-file plus test pinning, all bounded. Next kid: log ensure_payload, suppress or gitignore node .lock files, and add the two pinning tests this node keeps flagging as missing.
+<!-- THOUGHT:END -->
+
+REVIEW a00-554cbcdf (2026-09-06): ACCEPTED the _claim_node fix (read + scratch-sandbox live run: op=claim_node, sha matches file, guard silent). Demoted 95 to 80: (1) ensure_payload is unlogged, so create --payload false-positives a payload WARN (reproduced); (2) _claim_node .lock file is flagged by the guard with a bogus hint (reproduced); (3) claim_node logging still has no committed test (kids caveat, confirmed by read); (4) prior reviews pinning test for a sanctioned-payload false positive still absent. Set evidence_runs (was missing) and demoted_from. Re-ran full suite: 1649 passed, 1 pre-existing failure unchanged.
