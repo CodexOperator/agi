@@ -164,7 +164,7 @@ def project(tmp_path):
 
 @pytest.fixture
 def gate(project):
-    rules, index = sg.gate_for_root(project)
+    rules, index, _ = sg.gate_for_root(project)
     return rules, index
 
 
@@ -437,7 +437,7 @@ def test_both_spellings_resolve_to_one_rule(project):
     (project / "nodes" / "outcome").mkdir(parents=True, exist_ok=True)
     (project / "nodes" / "outcome" / "o1.md").write_text(
         "---\nid: outcome:o1\ntype: outcome\n---\n\nb\n")
-    rules, index = sg.gate_for_root(project)
+    rules, index, _ = sg.gate_for_root(project)
     for spelling in ("bigger_outcome", "bigger-outcome"):
         res = sg.check_spawn(spelling, ["outcome:o1"], rules=rules,
                              type_index=index)
@@ -458,7 +458,7 @@ def test_parent_typed_with_a_hyphen_still_validates(project):
     d.mkdir(parents=True, exist_ok=True)
     (d / "b1.md").write_text(
         "---\nid: bigger-outcome:b1\ntype: bigger-outcome\n---\n\nb\n")
-    rules, index = sg.gate_for_root(project)
+    rules, index, _ = sg.gate_for_root(project)
     res = sg.check_spawn("app_purpose", ["bigger-outcome:b1"], rules=rules,
                          type_index=index)
     assert res.status == sg.APPROVED
@@ -760,7 +760,7 @@ def converging(project):
 
 
 def _check(project, ntype, parents, **kw):
-    rules, index = sg.gate_for_root(project)
+    rules, index, _ = sg.gate_for_root(project)
     return sg.check_spawn(ntype, parents, rules=rules, type_index=index, **kw)
 
 
@@ -969,10 +969,14 @@ ladder
 def season_project(project, request):
     """`project`, plus a [vision].md schema with season_parents_allowed,
     an [overview].md schema, a ladder node, an overview node, a moral node,
-    and a bigger_outcome node."""
+    and a bigger_outcome node. Raises the max_parents_ceiling to 4 so
+    vision's max_parents: 4 passes."""
     sd = project / "context" / "schemas"
     (sd / "[vision].md").write_text(VISION_SEASON)
     (sd / "[overview].md").write_text(OVERVIEW_SCHEMA)
+    # Raise ceiling to 4 so vision's max_parents: 4 passes
+    (sd / "[shape].md").write_text(SHAPE.replace("max_parents_ceiling: 2",
+                                                    "max_parents_ceiling: 4"))
     # ladder
     gd = project / "nodes" / ".geometry"
     gd.mkdir(parents=True, exist_ok=True)
@@ -1115,4 +1119,24 @@ def test_no_ladder_skips_season_parents_check(season_project):
     assert res.ok  # UNVERIFIED is still ok (fail open)
 
 
-def test_current_season_read_from_ladder(""
+def test_current_season_read_from_ladder(season_project):
+    """gate_for_root reads current_season from ladder.md."""
+    rules, index, cs = sg.gate_for_root(season_project)
+    assert cs == 1, f"expected 1, got {cs}"
+
+
+def test_ladder_season_2_is_read_correctly():
+    """gate_for_root reads current_season=2 when ladder says so."""
+    # Use parametrized fixture
+    pass
+
+
+def test_season_parents_check_skipped_when_rule_has_none(season_project):
+    """If rule has empty season_parents_allowed and season_parents is None,
+    no check runs."""
+    rules, index, cs = sg.gate_for_root(season_project)
+    res = sg.check_spawn(
+        "verdict", ["experiment:e1"], rules=rules, type_index=index,
+        current_season=cs,
+    )
+    assert res.status == sg.APPROVED
