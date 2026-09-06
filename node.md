@@ -9,6 +9,7 @@ body: "\"# experiment:season:l2w4\\n\\n## Experiment\\n\\nSeason 1 tier-0 pairin
 edited_by: ubuntu
 scaffold_hash: 71d7be2c51f2323b
 season: 1
+status: deprecated
 thought_session: iter-L2.09
 title: "Experiment: season pairing run"
 ---
