@@ -21,3 +21,6 @@ What did you do? What happened? Include command/inputs and actual outputs.
 ## Evidence
 
 Raw output, screenshots, logs.
+
+## Agent Notes
+Parent review: malformed/redundant. The run log lives as a JSON-escaped string in a frontmatter body: field; the markdown body is still scaffold. Duplicates experiment:a00-1a2f54da-outcome-judgment. Prior art only.
