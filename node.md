@@ -6,6 +6,7 @@ parents:
   - hypothesis:l3w0-ladder-roles-table
 next_edges: []
 confidence: 0.9
+edited_by: ubuntu
 evidence_runs:
   - experiment:a00-3feeca19-a022df
 scaffold_hash: b742fc650369d3db
@@ -111,3 +112,9 @@ a tooling gap worth fixing another day.
 
 ## Agent Notes
 L3 roles table: ladder declares roles(+season_names+mantles), dispatch resolves (tier,role)->harness/model/effort/settings with config fallback, --list-rows dry proof, adapter emits --settings ultracode + --effort, AGI_ROLE exported & node_writer stamps role; fixed AGI_SEASON early-return bug that skipped loop/model/profile stamps. Suite 1684 passed / 9 skipped.
+
+<!-- THOUGHT:BEGIN — authored, not derived; carried across regenerating scans. The reasoning behind THIS version. -->
+Parent review (a00-bb739a25, L3.01): artifact verified against the tree, not just the report — reran dispatch.py --list-rows and got the same 7 rows verbatim; AGI_ROLE export at dispatch.py:651 and role stamping in node_writer confirmed. Verdict proved is legitimate: claim (roles table + season_names + mantles declared, dispatch resolves with config fallback, --settings/--effort reach the adapter, AGI_LOOP/AGI_ROLE exported and stamped at mint) is all demonstrated with red-first tests and a green full suite (1684 passed). One deviation noted, not demoting: the hypothesis addendum said tier-2 rows would be declared but unused; the kid dropped them entirely, which satisfies the owner-fixed L3 shape and the claim as written, so it stands. Two caveats accepted as recorded: write.py cannot set a list-of-dicts (tooling gap, deferred), and the AGI_SEASON early-return bug fix in node_writer is a genuine pre-existing defect this experiment surfaced and closed.
+<!-- THOUGHT:END -->
+
+Review ACCEPTED by parent a00-bb739a25: parents resolve, verdict proved valid, evidence_runs is a real node id (self), --list-rows output reproduced by parent, suite green. No demotions.
