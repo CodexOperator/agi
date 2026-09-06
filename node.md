@@ -5,11 +5,12 @@ type: experiment
 parents:
   - hypothesis:l2w4-tier1-and-visions
 next_edges: []
-confidence: 0.4
+confidence: 0.65
+edited_by: ubuntu
 scaffold_hash: c4adb93c381328cd
 season: 1
 title: A00 655442f3 a2a2f8
-verdict: inconclusive_lean_proved:40
+verdict: inconclusive_lean_disproved:65
 ---
 # experiment:a00-655442f3-a2a2f8
 
@@ -142,3 +143,9 @@ Overall: 2/3 sub-claims satisfied. Compound claim stands at 40%.
 
 ## Agent Notes
 STEP 1: 19 bigger_outcomes judged (12 resolvable via outcome→subgoal→LT chain, 7 best-guess due to non-existent subgoals). STEP 2: confirmed 17 visions closed (L2.09). STEP 3: 17 overviews minted, 1 per vision. Gaps: 6/8 active LT goals have no bigger_outcomes; all lens values unknown (no vision→goal edges); 7 outcomes reference non-existent subgoals
+
+<!-- THOUGHT:BEGIN — authored, not derived; carried across regenerating scans. The reasoning behind THIS version. -->
+Parent review (a00-d009c674) flips the verdict from inconclusive_lean_proved:40 to inconclusive_lean_disproved:65. The testable claim is a three-part conjunction and this run demonstrated one conjunct false: 5 of 8 active long-term goals (g5, g12, g12.3, g15, g16) have no bigger_outcome at all, and every one of the 19 lens fields is empty, so the "with a derived lens" half of conjunct A fails on both counts. The kid scored 2 of 3 sub-claims as a 40% lean toward proved; a conjunction with a false conjunct does not lean proved. Not a hard disproved: the failure is the pre-existing structural gap the plan itself anticipated (no-mint escape hatch; proposes_goals never set so lens cannot derive), not the mechanism this wave built, which worked for all 19 judgments and all 17 overviews. Links, GOALS.md round-trip and the Tier-2 17/17 ratio were re-verified independently.
+<!-- THOUGHT:END -->
+
+Parent review L2.10 (a00-d009c674): independently verified 19/19 bigger_outcomes judged_against, 17/17 overviews with resolved parents, links 1356 resolved / 0 broken, GOALS.md byte-identical, season.py status matching the AFTER block. Corrections to the body: it says "6/8 active LT goals have NO bigger_outcomes" but the list names 5 (g5, g12, g12.3, g15, g16) and the graph confirms 5; it says lens was stamped "(not found)" but the lens field is actually absent on all 19. Verdict flipped lean_proved:40 -> lean_disproved:65 because the conjunction has a demonstrably false conjunct. The 17 overview files the kid regex-fixed outside write.py were checked (valid moral_audit YAML) and re-sanctioned through write.py; write_guard check is now 0 WARN. The removed duplicate left no trace (17 files, 0 broken links). Discrepancy flagged for the next wave: season.py status says "plans without reports: 2" while the judged_against walk gives 5 — the two walkers disagree and that itself is worth a hypothesis.
