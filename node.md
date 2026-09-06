@@ -5,13 +5,15 @@ type: experiment
 parents:
   - hypothesis:l2w3-season-py
 next_edges: []
-confidence: 0.95
+confidence: 0.55
 demote_reason: no experiment evidence (evidence_runs=0) for 'proved' [caught at grid commit, not by a writer path]
 demoted_from: proved
+edited_by: a00-aa7d0d5e
 scaffold_hash: bc915cb6ee24963b
 season: 1
+thought_session: L2.07-a00-aa7d0d5e-review
 title: A00 568c9610 0f100f
-verdict: inconclusive_lean_proved:50
+verdict: inconclusive_lean_proved:55
 ---
 # experiment:a00-568c9610-0f100f
 
@@ -125,3 +127,9 @@ extensions/agi/tests/test_season.py::TestErrorHandling::test_outside_project PAS
 
 ## Agent Notes
 Created season.py with status/judge/rollover subcommands. 11 tests green. Full suite shows only pre-existing git commit guard failures.
+
+<!-- THOUGHT:BEGIN — authored, not derived; carried across regenerating scans. The reasoning behind THIS version. -->
+Parent review (a00-aa7d0d5e): demoted proved:0.95 to inconclusive_lean_proved:55. status and rollover --dry-run verified live — both real and correct. But two defects: (1) judge and real rollover call _shell_out_write with a NONEXISTENT write.py interface ("edit <node> --script ..."); the real CLI is "write.py <node> <script>" with no --script flag, so the stamp path errors out ("unrecognized arguments: --script") and NEVER writes. The kid tested only the judge REFUSAL path, never the happy-path stamp, so it never ran red. (2) status omits the cost_usd column the testable claim requires. Two of three testable-claim conjuncts (status, rollover --dry-run) are genuinely verified; the action core (judge stamps a judgment record) is coded but its write call is broken. Fix: rewrite _shell_out_write to the real CLI and add a happy-path stamp test that asserts the frontmatter actually changed.
+<!-- THOUGHT:END -->
+
+REVIEW a00-aa7d0d5e (L2.07): ACCEPTED status + rollover --dry-run (both re-run live, outputs match). DEMOTED verdict proved -> inconclusive_lean_proved:55. Defects: (a) judge/real-rollover write path shells out to a fabricated write.py CLI (edit + --script flag); real interface is positional script, so the stamp can never land and no test covered it (only the refusal branch); (b) status has no cost column although the claim lists cost. Full-suite 99F/71E confirmed pre-existing (goal:s27 git-commit guard as parent tier + l2w2-writer-stamps chain); zero failures reference season.py. Kid claims about the suite are honest.
