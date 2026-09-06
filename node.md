@@ -5,10 +5,13 @@ type: experiment
 parents:
   - hypothesis:l2-done-doubled-frontmatter
 next_edges: []
-confidence: 0.75
+confidence: 0.6
+demote_reason: "parent-review-L2.05: brief shipped a write.py call that errors, no red-first test, formal testable_claim untouched"
+demoted_from: inconclusive_lean_proved:85
+edited_by: ubuntu
 scaffold_hash: 36c8e395ee4c4077
 title: L2.05 fix — cli.py done routes through logged writer; brief tells parents to use write.py
-verdict: inconclusive_lean_proved:85
+verdict: inconclusive_lean_proved:60
 ---
 # experiment:a00-804de658-210afd
 
@@ -130,3 +133,7 @@ brief.py: +7/-1  in _parent (review edit instruction block)
 
 ## Agent Notes
 Fixed cli.py done notes append to route through node_writer.update_node (logged writer); updated parent brief to use write.py thought/note instead of hand edit
+
+<!-- THOUGHT:BEGIN — authored, not derived; carried across regenerating scans. The reasoning behind THIS version. -->
+Parent a00-dbdd2f6f review, L2.05. Demoted 85 to 60. Live-verified the routing fix: the node current sha matches the last update_node entry in write-log.jsonl and write_guard check is silent on this node, so the addendum half (after done the guard is silent) is proven on the live tree. Two defects in this version. First, the brief block added here documents the write.py invocation as separate positional arguments (write.py <node-id> thought <content>), which errors with verb_thought() missing 1 required positional argument; the working form is one quoted script argument, the same form write_guard own hint uses. The brief line was corrected in place by the parent. Second, the VERIFY contract asked for red-first tests and none were added; the after a hand edit it warns half is not live-verified because test_write_guard.py errors on git setup in this sandbox (pre-existing). Also the formal testable_claim (frontmatter-doubling merge plus done_line missing manifest mark) is untouched by this experiment; only the L2.04 addendum was addressed. Suite: test_write.py and test_brief.py fully pass; the 112 failures and 71 errors in the full suite are pre-existing (post_wire.py:326 unpacks 2 values from a 3-value spawn_gate return, a concurrent in-flight change) with zero failures in files this experiment touched.
+<!-- THOUGHT:END -->
