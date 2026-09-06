@@ -5,14 +5,60 @@ type: experiment
 parents:
   - hypothesis:l2w2-gate-season-parents
 next_edges: []
-confidence: 0.95
-demote_reason: no experiment evidence (evidence_runs=0) for 'proved' [caught at grid commit, not by a writer path]
-demoted_from: proved
+confidence: 0.9
+evidence_runs:
+  - experiment:a00-8219cb1c-b1ff2a
 scaffold_hash: b26bc8a618396aff
 title: A00 8219cb1c b1ff2a
-verdict: inconclusive_lean_proved:50
+verdict: proved
 ---
 # experiment:a00-8219cb1c-b1ff2a
+
+<!-- THOUGHT:BEGIN -->
+Parent a00-002e01f6 reviewed this node in place after the kid's `proved`
+verdict was auto-demoted for missing evidence. Two real defects were found
+and fixed before the claim was restored:
+
+1. **post_wire.py:326 crashed.** The kid changed `gate_for_root()` to return
+a 3-tuple and updated node_writer.py, but post_wire.py still unpacked two —
+a `ValueError: too many values to unpack` on every post_wire pass. The
+kid's report claimed both callers were updated; the claim was false and
+no test covered the post_wire path. Fixed to a 3-tuple unpack.
+2. **The feature was dormant on the creation path.** `check_spawn()` gained
+the season logic, but `node_writer.write_node()` never passed
+`season_parents` or `current_season` to it, so a node actually *created*
+with season_parents would sail through unchecked. Wired both through:
+`season_parents` from the node's own frontmatter, `current_season` from
+the ladder when the writer loads the gate itself (None when a caller
+pre-loads rules, which degrades to type-checking with no grandfathering).
+Both defects now have tests that were verified RED against the original
+code (the red run also surfaced defect 1 as the ValueError) and GREEN with
+the fixes: `test_node_writer_rejects_wrong_season_parent_type`,
+`test_node_writer_accepts_valid_season_parent`.
+Also removed the empty stub `test_ladder_season_2_is_read_correctly`
+(asserted nothing) and replaced the rambling trace-aloud comment in
+`test_no_ladder_skips_season_parents_check` with what it actually asserts
+(UNVERIFIED, still writes).
+
+The testable claim — gate validates season_parents by type from the schema
+block, reads current_season from the ladder, grandfather-skips older
+seasons — now holds at the gate AND on the creation path. Verdict restored
+to `proved` with self-evidence (an experiment names its own run).
+<!-- THOUGHT:END -->
+
+## Parent Review (L2.05, a00-002e01f6)
+
+**Accepted with fixes.** The gate itself worked as claimed; the integration
+did not. See THOUGHT block. State after review:
+
+- `post_wire.py:326` — 3-tuple unpack (was an unconditional crash).
+- `node_writer.py` — passes `season_parents` (from the node's frontmatter)
+  and `current_season` (from the ladder, when the writer loads the gate
+  itself) into `check_spawn`; creation path now enforces the rule.
+- 2 new writer-path tests, red→green verified; 1 dead stub removed.
+- `test_spawn_gate.py` + `test_node_writer.py`: **113 passed, 1 skipped**.
+- Full-suite noise in this run is environmental: tests that `git commit`
+  are blocked for a parent-tier session (goal:s27), unrelated to this change.
 
 ## Experiment
 
