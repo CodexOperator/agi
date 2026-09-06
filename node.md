@@ -7,15 +7,16 @@ parents:
   - experiment:a00-1a2f54da-outcome-judgment
 next_edges: []
 confidence: 0.78
+demote_reason: no experiment evidence (evidence_runs=0) for 'proved' [caught at grid commit, not by a writer path]
+demoted_from: proved
 scaffold_hash: 8b6b8239a0d9798c
 season: 1
 tags:
   - season
   - judgment
 title: "Verdict: Season 1 outcomes judged"
-verdict: proved
+verdict: inconclusive_lean_proved:50
 ---
-
 # verdict:a00-1a2f54da-outcome-judgment
 
 ## Verdict
@@ -32,3 +33,6 @@ verdict: proved
 ## Confidence
 
 0.78 — direct verification via season.py output plus suite+links checks; residual risk limited to future outcomes being minted without judgments.
+
+## Agent Notes
+Season 1 tier-0 outcomes now stamped with judged_against/lens; status/links/pytest green.
