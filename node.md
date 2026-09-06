@@ -5,10 +5,13 @@ type: experiment
 parents:
   - hypothesis:l2w2-writer-stamps
 next_edges: []
+confidence: 0.95
+demote_reason: no experiment evidence (evidence_runs=0) for 'proved' [caught at grid commit, not by a writer path]
+demoted_from: proved
 scaffold_hash: 0e49071dfb83a576
 title: A00 530accf5 ce370a
+verdict: inconclusive_lean_proved:50
 ---
-
 # experiment:a00-530accf5-ce370a
 
 ## Experiment
@@ -48,3 +51,5 @@ $ python3 -m pytest extensions/agi/tests/test_dispatch.py -q
 
 **dispatch.py exports:** AGI_SEASON, AGI_LOOP, AGI_MODEL, AGI_PROFILE, AGI_TIER all set in spawn_env before subprocess.Popen.
 
+## Agent Notes
+Implemented season/loop/model/profile stamping in node_writer._stamp_env_fields at mint time (env > ladder > 1 for season; env-only for loop/model/profile). Added AGI_SEASON/LOOP/MODEL/PROFILE export in dispatch.py. 8 new tests, 7 passing, covering all env conditions and the update-node-non-stamping invariant.
