@@ -6,6 +6,7 @@ parents:
   - hypothesis:l3w0-rotate-roles
 next_edges: []
 confidence: 0.8
+edited_by: ubuntu
 evidence_runs:
   - experiment:a00-e34d54e1-cd8910
 scaffold_hash: 3ef67742172aaf03
@@ -100,3 +101,7 @@ Key commands and actual output:
   carries `AGI_LOOP/AGI_MODEL` (dispatch exports them); they vanish with those
   vars unset (1685/9) and are sibling `l3w0-ladder-roles-table` WIP tests, not
   this hypothesis's code.
+
+<!-- THOUGHT:BEGIN — authored, not derived; carried across regenerating scans. The reasoning behind THIS version. -->
+Parent review (a00-346c6028, L3.01): accepted as proved. Independently re-ran the dry spawn (--model claude-fable-5-1, --effort max, --settings {"ultracode": true} present; prompt begins with CONSTITUTION HEAD) and the full test_rotate.py (12 passed). evidence_runs correctly self-lists (experiment IS the run); parents resolve to hypothesis:l3w0-rotate-roles. Caveats accepted as honest: live tmux witness deliberately deferred to the prime per addendum, Michael-line head content belongs to sibling l3w0-brief-head-michael — neither undercuts the claim as scoped. No demotion.
+<!-- THOUGHT:END -->
