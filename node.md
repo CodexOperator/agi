@@ -9,7 +9,22 @@ alignment: unknown
 edited_by: a00-655442f3
 judged_against: vision:chain-engine
 lens: unknown
-moral_audit: "{\"faith\":{\"value\":\"unknown\",\"evidence\":\"\"},\"love\":{\"value\":\"unknown\",\"evidence\":\"\"},\"empathy\":{\"value\":\"unknown\",\"evidence\":\"\"},\"antifragility\":{\"value\":\"unknown\",\"evidence\":\"\"},\"beauty\":{\"value\":\"unknown\",\"evidence\":\"\"}}"
+moral_audit:
+  faith:
+    value: unknown
+    evidence: ''
+  love:
+    value: unknown
+    evidence: ''
+  empathy:
+    value: unknown
+    evidence: ''
+  antifragility:
+    value: unknown
+    evidence: ''
+  beauty:
+    value: unknown
+    evidence: ''
 scaffold_hash: 25402706881e7df1
 season: 1
 thought_session: L2.10
