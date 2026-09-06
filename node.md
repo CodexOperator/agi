@@ -4,7 +4,7 @@ mint_id: 8ab76841dcd546f8adbdca54ebb790c1
 type: hypothesis
 parents:
   - goal:g16
-next_edges: []
+next_edges: experiment:a00-6856367d-7b307d
 edited_by: ubuntu
 scaffold_hash: c6fcbfd659d755ea
 season: 1
