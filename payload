@@ -707,6 +707,30 @@ def test_minted_node_stamps_loop_model_profile_from_env(project, monkeypatch):
     assert fm.get("profile") == "balanced"
 
 
+def test_minted_node_stamps_role_from_env(project, monkeypatch):
+    """hypothesis:l3w0-ladder-roles-table — dispatch exports AGI_ROLE and
+    node_writer stamps it as `role:` alongside loop/model/profile."""
+    import yaml
+    monkeypatch.setenv("AGI_ROLE", "parent")
+    res = nw.write_node(project, "hypothesis", "roled",
+                        parents=["idea:i1"], announce=False)
+    assert res.written
+    fm = yaml.safe_load(res.path.read_text().split("---", 2)[1])
+    assert fm.get("role") == "parent"
+
+
+def test_minted_node_omits_role_when_env_absent(project, monkeypatch):
+    """No AGI_ROLE -> no `role:` field; never fabricated."""
+    import yaml
+    monkeypatch.delenv("AGI_ROLE", raising=False)
+    monkeypatch.setenv("AGI_SEASON", "1")
+    res = nw.write_node(project, "mvp", "norole",
+                        parents=["verdict:v1"], announce=False)
+    assert res.written
+    fm = yaml.safe_load(res.path.read_text().split("---", 2)[1])
+    assert "role" not in fm
+
+
 def test_minted_node_omits_loop_when_env_absent(project, monkeypatch):
     """Absent env vars must NOT fabricate values."""
     import yaml
