@@ -6,6 +6,7 @@ parents:
   - hypothesis:l2w6-telemetry-rollup
 next_edges: []
 confidence: 0.85
+edited_by: ubuntu
 evidence_runs:
   - experiment:a00-6e08546b-aed026
 scaffold_hash: 18aeefd0188cc233
@@ -77,3 +78,7 @@ All command outputs embedded above. The key gap from the previous experiment (`a
 
 ## Agent Notes
 Implemented cost_per_aligned_outcome — the ranking number the hypothesis names. Added count_aligned_outcomes() BFS walker counting outcomes with alignment=aligned; do_rollup computes cost_per_aligned_outcome = cost_usd_total / aligned_count when both >0. 5 new tests (22 total) all green. Real roll-ups on 2 outcomes show aligned_outcomes_count=0 (no outcomes have alignment=aligned yet) and cost_per_aligned_outcome=null (telemetry stamping not done), honest baseline. Closes gap identified in experiment:a00-6856367d-7b307d review which demoted proved->60% specifically for this missing feature.
+
+<!-- THOUGHT:BEGIN — authored, not derived; carried across regenerating scans. The reasoning behind THIS version. -->
+Parent a00-de25bce0 review, L2.13: node version now carries parent approval, not just the kid self-report. Verified independently, did not read the report at face value: (1) 22/22 tests in test_telemetry_rollup.py pass on the live tree; (2) the one full-suite failure (test_minted_node_stamps_loop_model_profile_from_env) reproduces on a pristine HEAD worktree, so it is pre-existing and unrelated to this change, as the kid claimed; (3) real dry-run rollup on outcome:a00-c8365a0c-85a6d1 reproduces the recorded output exactly, now including "aligned outcomes: 0" and "cost_per_aligned_outcome: n/a"; (4) cost_per_aligned_outcome is print-only in code, never gates anything, as the hypothesis requires. This closes precisely the gap for which sibling experiment:a00-6856367d-7b307d was demoted proved->inconclusive_lean_proved:60 in the L2.12 review (missing ranking number). Kid struggles (quadruple-quote syntax error, self-caught) and caveats (real-data n/a because l2w2 stamps and alignment=aligned outcomes do not exist yet) are honest and consistent with the artifact. Verdict kept at proved: the hypothesis is a functional spec, every clause of it is implemented and evidenced by a named run, and the zero baseline is the one the hypothesis itself anticipated.
+<!-- THOUGHT:END -->
