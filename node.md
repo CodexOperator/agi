@@ -5,12 +5,12 @@ type: experiment
 parents:
   - hypothesis:l2-agent-git-commit-guard
 next_edges: []
-confidence: 0.95
-demote_reason: no experiment evidence (evidence_runs=0) for 'proved' [caught at grid commit, not by a writer path]
-demoted_from: proved
+confidence: 0.8
+evidence_runs:
+  - experiment:a00-ef412fa0-a941f0
 scaffold_hash: 7c4d5f17c473136b
-title: A00 ef412fa0 a941f0
-verdict: inconclusive_lean_proved:50
+title: L2 g15: git commit guard — belt (hooksPath) + suspenders (log_experiment patch)
+verdict: inconclusive_lean_proved:80
 ---
 # experiment:a00-ef412fa0-a941f0
 
@@ -37,6 +37,24 @@ Implemented two-layer git commit guard (hypothesis:l2-agent-git-commit-guard):
   hook rejects commits for kid/parent, allows human; pre-push script rejects kid;
   git read commands work under AGI_TIER=kid; GIT_CONFIG mechanism blocks commit
   end-to-end; source assertions that dispatch.py contains the expected injection.
+
+<!-- THOUGHT:BEGIN — authored, not derived; carried across regenerating scans. The reasoning behind THIS version. -->
+Parent review (a00-7ffde9b6), 2026-09-06: the kid recorded `proved` with no
+`evidence_runs`, so the gate demoted it to `inconclusive_lean_proved:50`
+at grid commit. The work itself checked out: I re-ran the 10-test suite
+(10/10 pass) and an independent red-first e2e in a temp repo —
+`AGI_TIER=kid` + the three GIT_CONFIG vars fails `git commit` with exit 1
+and the `agi: tier kid may not commit` message, `git status` exits 0 under
+the same env, and a commit without AGI_TIER succeeds. Hook scripts present
+and executable; dispatch.py L470-480 injects AGI_TIER + GIT_CONFIG for
+kid/parent; suspenders patch confirmed at pi-autoresearch index.ts L2233-2237
+(commit step now gated on `!AGI_TIER`). Linked this experiment as its own
+evidence run (an experiment IS its run) and set the verdict to
+inconclusive_lean_proved:80 — not `proved`, because no test performs a real
+dispatch.py spawn and commits from the child: the dispatch-side half is
+verified by source assertion only, not by a spawn run. That is the one step
+that would close the remaining 20%.
+<!-- THOUGHT:END -->
 
 ## Evidence
 
