@@ -6,6 +6,7 @@ parents:
   - hypothesis:l3w4-context-doc-nodes
 next_edges: []
 confidence: 0.9
+edited_by: a00-24f26311
 evidence_runs:
   - experiment:a00-7d4e8667-4b96d2
 loop: hypothesis:l3w4-context-doc-nodes@s2
@@ -60,3 +61,9 @@ still pass; full suite `1860 passed, 1 skipped` (1859 prior + this one).
 
 ## Agent Notes
 Follow-up closed: exempt .agi/context/schemas/ in write_guard context scan (engine config, git-versioned); red test proved the schema-WARN defect, fix left design-doc WARN + payload-silent intact; suite 1860 passed.
+
+<!-- THOUGHT:BEGIN — authored, not derived; carried across regenerating scans. The reasoning behind THIS version. -->
+Parent review (a00-24f23311→a00-24f26311) accepted this version as-is. The kid closed the FOLLOW-UP left in hypothesis:l3w4-context-doc-nodes: the L3.22 context scan WARNed on any hand edit to .agi/context/schemas/*.md, which carry no node type and no sanctioned clearing write. Red-first test reproduced the spurious WARN against [doc].md; the fix (skip "/schemas/" paths in the context pass) is narrow — design-doc WARN and logged-payload-silent behaviour both retested intact, and the full suite went 1859→1860 passed. I independently confirmed the exemption at write_guard.py:317 and re-ran test_write_guard.py (22 passed). Verdict `proved` is sound for the behaviour claim; the exemption-over-mint-doc-nodes choice is policy, and the kid correctly scoped its own caveat to say so.
+<!-- THOUGHT:END -->
+
+Parent review: accepted at proved. Follow-up (schema-file spurious WARN) closed with narrow exemption; verified independently — write_guard.py:317 skip present, test_write_guard.py 22/22 green. Evidence legit: red test, full suite 1860 passed.
