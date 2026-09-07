@@ -967,7 +967,12 @@ def _log_write(root, operation: str, node_id: str, path: Path,
     in that project's own sessions/ dir. A caller whose module-global root
     defaults to the real repo (snapshot_goals/level3 reusing this writer)
     cannot then leak a test-fixture node into the box's real write-log.
-    Payload writes (no `nodes` component) keep the passed `root`.
+    Payload writes (no `nodes` component) keep the passed `root` **only when
+    the file really belongs to that project** — a payload always does (it is
+    resolved off `root`), but a bare fixture path in another tree (e.g. a test
+    writing `tmp/n.md` under pytest) is a foreign write with no project here,
+    and is **not logged anywhere** rather than leaked into the box's real
+    `.agi/sessions/write-log.jsonl`.
     """
     try:
         root_p = Path(root)
@@ -976,6 +981,15 @@ def _log_write(root, operation: str, node_id: str, path: Path,
             root_p = derived.resolve()
         else:
             root_p = root_p.resolve()
+            proj = root_p.parent if root_p.name == ".agi" else root_p
+            p = path.resolve()
+            inside = (str(p) == str(root_p) or str(p).startswith(str(root_p) + os.sep)
+                      or str(p) == str(proj) or str(p).startswith(str(proj) + os.sep))
+            if not inside:
+                # Not this project's file (no node-tree component, and not
+                # under root/project): it has no home in this log. Skip rather
+                # than leak a foreign write into a real project's log.
+                return
         log_path = root_p / WRITE_LOG
         log_path.parent.mkdir(parents=True, exist_ok=True)
         entry = {
