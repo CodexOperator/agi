@@ -6,6 +6,7 @@ parents:
   - hypothesis:l3-tests-pin-ladder-state
 next_edges: []
 confidence: 0.7
+edited_by: ubuntu
 evidence_runs:
   - experiment:a00-6fd262fb-6bada5
 loop: hypothesis:l3-tests-pin-ladder-state@s2
@@ -67,3 +68,7 @@ found no remaining live-state-pinning test. Hypothesis supported.
 
 ## Agent Notes
 Audited suite for live-state pins; only test_ladder_node_current_season touched live ladder and it now pins shape (int>=1, named seasons<cs). Suite green on s2 (1774 passed,1 skipped). Dry rollover to season 3 on temp copy: old ==1 pin fails (red-first), shape pin green. No remaining live-state-pinning test.
+
+<!-- THOUGHT:BEGIN — authored, not derived; carried across regenerating scans. The reasoning behind THIS version. -->
+Parent review (a00-00b0a2dc): accepted as proved. Checked the artifact, not the report — independently grepped extensions/agi/tests for current_season literals: only test_ladder_node_current_season reads the live ladder, and it now pins shape (isinstance int, cs>=1, all named seasons < cs), which cannot break on rollover. Confirmed live ladder is current_season: 2 and the full suite result (1774 passed, 1 skipped) is plausible at ~97s. Red-first claim holds: the old ==1 pin would fail on a season-3 ladder. evidence_runs correctly names the experiment itself (self-naming is allowed for a run). Caveat stands: no automated lint now guards against a future live-state pin — a new hardcoded literal could reappear undetected; that is a follow-on, not a demotion. Demoted: nothing.
+<!-- THOUGHT:END -->
