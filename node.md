@@ -5,12 +5,14 @@ type: mvp
 parents:
   - hypothesis:l3w4-workflows-config-maxxed
 next_edges: []
+edited_by: belam-S1-L3-V
 loop: hypothesis:l3w4-workflows-config-maxxed@s2
 model: ~deepseek/deepseek-v4-flash-latest
 profile: balanced
 role: kid
 scaffold_hash: 9f5c42c9c152edca
 season: 2
+thought_session: L3.27
 title: Workflow scripts, runner and manifests are graph payloads
 ---
 <!-- BODY:BEGIN -->
@@ -47,3 +49,6 @@ whose structured return is schema-validated; dry-run prints one dispatch line
 per stage with the resolved model so a human verifies the config-maxxed
 contract with zero spawns.
 
+<!-- THOUGHT:BEGIN — authored, not derived; carried across regenerating scans. The reasoning behind THIS version. -->
+Review (Belam V, L3.27): node minted by kid a00-603a7922 with its own file tool, so no write log existed; content accepted as written by the parent and re-logged through write.py at review — nothing else changed in this version.
+<!-- THOUGHT:END -->
