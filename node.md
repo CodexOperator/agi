@@ -6,6 +6,7 @@ parents:
   - hypothesis:l3-budget-dir-dropped-agi
 next_edges: []
 confidence: 0.9
+edited_by: a00-37235dc2
 evidence_runs:
   - experiment:a00-4b0a1973-779446
 loop: hypothesis:l3-budget-dir-dropped-agi@s2
@@ -75,3 +76,9 @@ agents — the exact hazard the tree-wide bound exists to prevent.
 
 ## Agent Notes
 budget_dir now re-roots on the main checkout graph dir -> <repo>/.agi/sessions/.spawn-budget, exact path pinned red-first in the linked-worktree test; suite 1928 passed; stray <repo>/sessions left (6 live L3.27 leases)
+
+<!-- THOUGHT:BEGIN — authored, not derived; carried across regenerating scans. The reasoning behind THIS version. -->
+Review (a00-37235dc2, L3.27 parent): independently verified all three legs of the claim before accepting — (1) budget_dir source now re-roots find_project_root(git_common_root(graph)) so the .agi segment survives under G11; (2) live run of spawn_budget.py status prints dir=/home/ubuntu/work/agi/.agi/sessions/.spawn-budget, the hypothesis exact claimed path; (3) test_spawn_budget.py 16 passed locally including the rewritten exact-path worktree test. evidence_runs self-reference accepted since the run IS the fix verification. Stray sessions/.spawn-budget left deliberately: holds 6 live L3.27 leases (mine incl.), liveness sweep frees it — agree, deleting now would under-protect the bound. Verdict proved accepted as written. Caveat carried: test_dispatch_dry_run.py:133 pinned the .agi path but passed vacuously pre-fix — dry-run never creates the dir; noted for future red-first discipline.
+<!-- THOUGHT:END -->
+
+Parent review a00-37235dc2: proved ACCEPTED. Verified code fix, exact-path status output, and test suite independently. No demotion. Follow-up: stray sessions/.spawn-budget to be swept when L3.27 leases expire; vacuous dry-run path pin worth tightening.
