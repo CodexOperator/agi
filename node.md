@@ -6,6 +6,7 @@ parents:
   - hypothesis:l3w0-brief-head-michael
 next_edges: []
 confidence: 0.8
+edited_by: a00-d7e9650c
 evidence_runs:
   - experiment:a00-ae3a9634-c9d544
 loop: hypothesis:l3w0-brief-head-michael@s1
@@ -14,8 +15,9 @@ profile: balanced
 role: kid
 scaffold_hash: e3d6d301b2c6a29e
 season: 1
+thought_session: L3.02
 title: A00 ae3a9634 c9d544
-verdict: proved
+verdict: inconclusive_lean_proved:80
 ---
 # experiment:a00-ae3a9634-c9d544
 
@@ -111,3 +113,9 @@ no-op.
 
 ## Agent Notes
 Executed the build directive: Michael line lands once right after the prayers block in every tier head; prime_director head renders THE MANTLE — Belam + closing line and both director heads carry the owner decision method; hook emits the head before the map when AGI_TIER/AGI_ROLE set (silent no-op otherwise); SKILL.md surfaces agi:check-handoff and agi:rotation-successor. Suite 1715 passed / 9 skipped.
+
+PARENT-REVIEW a00-d7e9650c L3.02: proved demoted to inconclusive_lean_proved:80. Claims 1, 2 and the addendum (Michael line, hook, MANTLE + decision method) fully implemented with green red-first tests; suite 1715 passed/9 skipped. Claim 3 (agi: verbs in the SUGGESTION VIEW) is doc-level SKILL.md only, UI rendering unverified -- hence the lean.
+
+<!-- THOUGHT:BEGIN — authored, not derived; carried across regenerating scans. The reasoning behind THIS version. -->
+This version lands the build directive in place: brief.py now carries the owner-verbatim Archangel Michael line, inserted as its own paragraph immediately after the prayers block in every tier head (verified once per tier); the prime_director head renders THE MANTLE — Belam verbatim from the ladder node with the closing line, and both director tiers carry the owner decision method after the mantle/readings; cc-session-start.sh prepends the role head before the map when AGI_TIER/AGI_ROLE is set and stays a silent no-op otherwise; SKILL.md surfaces agi:check-handoff and agi:rotation-successor mapped to real rotate.py verbs. New red-first tests assert each piece and the full engine suite is green (1715 passed / 9 skipped, +54 vs baseline). Originally claimed proved (0.8); demoted to inconclusive_lean_proved:80 because claim 3 asserts the two agi: verbs render IN THE SUGGESTION VIEW, but the kid only documented them in SKILL.md and caveated that no rendered UI was verified -- doc-level surfacing is real, the rendered suggestion-view half is unproven. Parent review a00-d7e9650c, iter L3.02.
+<!-- THOUGHT:END -->
