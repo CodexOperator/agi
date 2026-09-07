@@ -22,3 +22,6 @@ title: A scaffolded node is stamped with the SPAWNER role, model and loop, not t
 ## Hypothesis
 
 What is the testable claim? What would prove it? What would disprove it?
+
+## Agent Notes
+Second live witness, one tier down, 2026-09-07 05:02 UTC: outcome:a00-a4a9db7e-ec4e27 was written by DeepSeek kid a00-a4a9db7e and is stamped role=parent model=~z-ai/glm-flash-latest loop=mvp:the-corpus-becomes-schema-valid@s2 — the GLM parent that ran dispatch.py. Sibling defect, same family (identity at write time): the parent review on that node is stamped edited_by=ubuntu because dispatch.py exports no AGI_AGENT_ID and write.py defaults --actor to the OS user; the all-is-one advisor found the missing export independently (idea:declared-differentiation, finding C). One fix could cover both: dispatch exports AGI_AGENT_ID, node_writer stamps from the resolved row it is handed rather than from os.environ, write.py defaults --actor to AGI_AGENT_ID.
