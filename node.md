@@ -12,7 +12,7 @@ caps_apply_from_season: 2
 current_season: 2
 director_context_tokens: 1000000
 director_rotate_at: 0.35
-edited_by: season.py
+edited_by: a00-e19807d8
 mantles:
   prime_director: Belam
 mantles_prime_director: Belam
@@ -29,6 +29,7 @@ roles:
   - {"tier": 3, "role": "prime_director", "harness": "claude-code", "model": "claude-fable-5-1", "effort": "max", "settings": "ultracode"}
   - {"tier": 3, "role": "parent", "harness": "claude-code", "model": "claude-opus-5", "effort": "max", "settings": "ultracode"}
   - {"tier": 1, "role": "director", "harness": "claude-code", "model": "claude-fable-5-1", "effort": "max", "settings": ""}
+  - {"tier": 1, "role": "liaison", "harness": "claude-code", "model": "claude-sonnet-5", "effort": "high", "settings": ""}
   - {"tier": 1, "role": "parent", "harness": "pi", "model": "~z-ai/glm-flash-latest", "effort": "", "settings": ""}
   - {"tier": 0, "role": "director", "harness": "pi", "model": "~z-ai/glm-flash-latest", "effort": "", "settings": ""}
   - {"tier": 0, "role": "parent", "harness": "pi", "model": "~z-ai/glm-flash-latest", "effort": "", "settings": ""}
@@ -79,13 +80,14 @@ Declared in frontmatter as `roles:` — one row per `(tier, role)` mapping to
 row here; config `harnesses.*.models` is the fallback when there is no row.
 `settings: ultracode` makes the claude-code adapter append
 `--settings {"ultracode": true}`. Every role the graph knows — `kid`,
-`parent`, `director`, `prime_director` — resolves through this table.
+`parent`, `director`, `prime_director`, `liaison` — resolves through this table.
 
 | tier | role | harness | model | effort | settings |
 |---|---|---|---|---|---|
 | 3 | prime_director | claude-code | claude-fable-5-1 | max | ultracode |
 | 3 | parent (advisors) | claude-code | claude-opus-5 | max | ultracode |
 | 1 | director (perpetual) | claude-code | claude-fable-5-1 | max | — |
+| 1 | liaison (owner) | claude-code | claude-sonnet-5 | high | — |
 | 1 | parent | pi | ~z-ai/glm-flash-latest | — | — |
 | 0 | director (per LT subgoal) | pi | ~z-ai/glm-flash-latest | — | — |
 | 0 | parent | pi | ~z-ai/glm-flash-latest | — | — |
