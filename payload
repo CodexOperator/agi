@@ -1,4 +1,4 @@
-# SESSION HANDOFF — 2026-09-07: `belam` (Belam, L3 prime) ROTATED to `belam-S1-L3-II` (Belam II) after L3.01–L3.11 + the wave-2 rollover. Waves 0–2 DONE; wave 3 (the live g15 slice) is Belam II's. Read §0, §0.7, §6 items 9–15, then continue on `season/s2`.
+# SESSION HANDOFF — 2026-09-07: `belam-S1-L3-II` (Belam II, L3 prime) LIVE SCRATCHPAD (session in progress). Successor of `belam` (L3.01–L3.11 + the wave-2 rollover). Waves 0–2 DONE; **L3.12 RUNNING**; wave 3 (the live g15 slice) next. Read §0, §0.7, §6 items 9–15, then continue on `season/s2`.
 
 **Owner's instruction 2026-09-06: this handoff is carried forward, not replaced** — the 2026-09-05 plan below stays and the live session diffs it in place. Successors: read before touching.
 
@@ -29,10 +29,10 @@ telemetry, comms — and every wave below mints nodes from it. Do not re-derive 
 | broken links | 0 (1367 resolved, after L2.13) |
 | crons | **ON** since round 1 landed the grid master-guard: `grid_sync` every 5 min, `branch_push` hourly at :07. Kill switch: `write.py cron:crons "set crons_live false"` then `crons.py apply`. |
 | branch | **`season/s2`** (opened by the wave-2 rollover). `master` = season 1 (genesis), **frozen**: merges + cherry-picks only, never rebase. Grid `commit --all` runs on `season/*` or master only. |
-| agents live | **0/25** at rotation. `belam` meter **0.29** at rotation (cap 0.35). |
+| agents live | **2 parents + kids** for L3.12 (p-route, p-roman; launched 03:51 UTC). Belam II meter **0.12** at L3.12 dispatch (cap 0.35). |
 | spend | OpenRouter **$15.05** left at rotation (usage 56.95 of 72; L3 rounds cost $0.07–0.25 each, 11 rounds ≈ $1.46). Rule §6 item 14: to a ~$3 reserve, then owner tops up; CC fallback lowest effort. |
 | disk | 81% |
-| this session | `belam-S1-L3-II` = **Belam II**, spawned by `belam` via `rotate.py spawn --name belam-S1-L3-II` (head + Fable 5.1 max + ultracode env). Predecessor window `belam-S1-L3` may still be open (idle). |
+| this session | `belam-S1-L3-II` = **Belam II**, spawned by `belam` via `rotate.py spawn --name belam-S1-L3-II` (head + Fable 5.1 max + ultracode env). Predecessor window `belam-S1-L3` still open (idle). **Belam II verified at open (03:15–03:50 UTC):** smoke 1257/194 (node_count 1451, no drop), suite 1785/1, links 0 broken (1431 resolved), guard silent, dispatch ok, 0/25 live, OpenRouter $15.05. |
 
 ## §0.7 Session 2026-09-06 (belam) — LOOP L3, WAVE 0, LIVE
 
@@ -60,7 +60,9 @@ then top-up, CC fallback = opus/sonnet at LOWEST effort; wave-3 first slice
 | L3.07 | `hypothesis:l3-corrupt-frontmatter-19` (p-corrupt), `hypothesis:l3w1-goal-kind-perpetual` (p-perp, wave 1) | **LANDED** |
 | L3.08 | `hypothesis:l3w1-tier0-director-brief` (p-t0dir, wave 1), `hypothesis:l3w2-rollover-genesis` (p-roll, wave 2 mechanics: build + dry-run only) | **LANDED — wave 1 complete** |
 | wave 2 | real rollover by the prime: `season.py rollover --visions-from .agi/context/visions --name genesis --branch` → 3 visions, season 1 = genesis, `season/s2` | **DONE** — `vision:alive`, `vision:all-is-one`, `vision:self-perpetuating` minted (actor owner, parents = 5 morals, season_parents = 17 season-1 overviews, season 2); ladder `current_season: 2`, `season_names: {1: genesis}`; branch `season/s2` |
-| L3.09+ (belam-2) | wave 3 = the g15 slice on `season/s2`: advisors (`tier3-quorum`, opus ultracode) → Fable-max director for g15 → GLM parent → GLM director per LT subgoal → GLM parent per ST → DeepSeek kids; open g15 briefs first: `l3-dispatch-role-default`, `l3-openrouter-codex-spend` (slice 2) | |
+| L3.09–L3.11 (belam) | L3.09 `l3-dispatch-role-default` (dispatch role follows tier, proved) + `l2-done-doubled-frontmatter` (writer absorbs doubled frontmatter, proved); L3.10 ladder-state test audit (proved), advisor-brief kid built nothing → brief re-marked BUILD; L3.11 `brief.py assemble(tier=advisor)` (proved; dispatch routing gap left) + rotate-roles verdict (Roman derivation still open) | **LANDED** (commits `de08077ca`, `af689a53a`, `6b326966c`) |
+| L3.12 (Belam II) | p-route = `hypothesis:l3w3-advisor-brief` (route a tier-3 vision-target spawn to the advisor template), p-roman = `hypothesis:l3w0-rotate-roles` (Roman-numeral successor derivation) | **RUNNING** since 03:51 UTC |
+| wave 3 (Belam II) | wave 3 = the g15 slice on `season/s2`: advisors (`tier3-quorum`, opus ultracode) → Fable-max director for g15 → GLM parent → GLM director per LT subgoal → GLM parent per ST → DeepSeek kids; open g15 briefs first: `l3-dispatch-role-default`, `l3-openrouter-codex-spend` (slice 2) | |
 | then | wave 2: `season.py rollover --dry-run` → real (visions `--actor owner`, season 1 named genesis, `season/s2` opened, prime moves onto it); wave 3 = the g15 slice | |
 | wave 3, slice 2 | owner ask 2026-09-06: `hypothesis:l3-openrouter-codex-spend` (under g16) — gpt-5.1-codex calls on the OpenRouter key; the LIVE ladder investigates and fixes it, never the prime before wave 3 | banked |
 | then | wave 1 rest (`goal_kind: perpetual` + GOALS.md Perpetual section, tier-0 GLM director role in `brief.py`), wave 2 rollover (visions `--actor owner`, season 1 named genesis, `season/s2` opened), wave 3 = the g15 slice | |
@@ -94,17 +96,13 @@ genesis. L3.11 landed and committed on `season/s2` (`iter-L3.11`). **belam rotat
 belam-S1-L3-II (Belam II) here.** Nothing is mid-flight: 0/25 live, tree clean,
 branch `season/s2` pushed.
 
-**Belam II, first commands:** `git branch --show-current` (season/s2) ·
-`bash extensions/agi/driver.sh --smoke --max-iters 1` (≥1257/194) ·
-`python3 extensions/agi/bin/commands.py run tests` (1785/1) ·
-`spawn_budget.py status` (0) · `rotate.py meter`.
-**L3.12** (two pi parents, round loop above): p-route =
+**Belam II opened 2026-09-07 03:15 UTC; verification green (see §0). L3.12 dispatched 03:51 UTC** (two pi parents, round loop above): p-route =
 `hypothesis:l3w3-advisor-brief` (dispatch routing gap — the last wave-3
 precondition) + p-roman = `hypothesis:l3w0-rotate-roles` (Roman-numeral
-derivation, still open). Then **wave 3**, step 3 of the list below. If this file still says "running", the
+derivation, still open). Then **wave 3**, step 3 of the list below. If this file still says RUNNING, the
 round may be mid-flight: `spawn_budget.py status` and `git status` first; if
 0 live and a diff is present, review it with the round loop above and commit
-it as `iter-L3.10` before anything else.
+it as `iter-L3.12` before anything else.
 NEXT (belam-2), on `season/s2`: wave 3 = the g15 slice. In order:
 1. Verify: `git branch --show-current` = season/s2; smoke 1245/194; suite
    1765/1; `spawn_budget.py status` 0 live; OpenRouter ≈ $15.6 left.
@@ -127,8 +125,8 @@ of the prime must wait for L3.05's ultracode-env fix or export
 ### Rotation
 
 At meter 0.35: finish the round in flight, write this file, run
-`python3 extensions/agi/bin/rotate.py spawn --name belam-2` (post-L3.01 it
-passes model/effort/settings and the head), confirm the window answered
+`python3 extensions/agi/bin/rotate.py spawn --name belam-S1-L3-III` (owner rule §6 item 15: Roman numerals; post-L3.01 it
+passes model/effort/settings and the head; needs `CLAUDE_CODE_WORKFLOWS=1`, which rotate.py exports since L3.05), confirm the window answered
 `continue`, stop.
 
 ## §0.6 Session 2026-09-06 (agi-master-2) — post-close round L2.12, LANDED
