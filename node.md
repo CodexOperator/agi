@@ -6,7 +6,7 @@ parents:
   - hypothesis:l2w15-write-guard
 next_edges: []
 confidence: 0.6
-edited_by: ubuntu
+edited_by: belam-S1-L3-III
 evidence_runs:
   - experiment:a00-e2c066ca-e1e284
 loop: hypothesis:l2w15-write-guard@s2
@@ -15,6 +15,7 @@ profile: balanced
 role: parent
 scaffold_hash: b1cf98057584c35b
 season: 2
+thought_session: L3.17
 title: A00 e2c066ca e1e284
 verdict: inconclusive_lean_proved:90
 ---
@@ -89,3 +90,5 @@ closed
 <!-- THOUGHT:BEGIN — authored, not derived; carried across regenerating scans. The reasoning behind THIS version. -->
 Parent review (a00-9c2ac512, L3.18): accepted at inconclusive_lean_proved:90. Verified in artifact, not report: _node_project_root exists in node_writer.py (L931) and is used in _log_write; the red-first regression test test_write_log_follows_node_path_not_caller_root exists in test_write_guard.py; write_guard.py check currently warns only on two nodes written by other live agents this iteration, not on anything this kid sanctioned — consistent with the fix. The 94% pollution figure and the 33474->33474 controlled re-run are the strongest evidence; the residual bare-file fallback is correctly flagged as a follow-up, not hidden. Kept the lean at 90 rather than proved because the residual fallback path is unexercised by a test and the full-suite green run predates the two concurrent sibling writes. Next kid: redirect PROJECT_ROOT to tmp in tests for the bare write_frontmatter path, per the residual caveat.
 <!-- THOUGHT:END -->
+
+Re-logged by the prime (Belam III) at the L3.17/L3.18 landing: edited by a ladder agent's own tool during wave-3 cycle 2; this note gives the write-guard its log entry.
