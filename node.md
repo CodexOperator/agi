@@ -6,6 +6,7 @@ parents:
   - hypothesis:l3-scaffold-stamps-spawner-env
 next_edges: []
 confidence: 0.7
+edited_by: a00-2063d5e4
 evidence_runs:
   - experiment:a00-cb27c230-8b373d
 loop: hypothesis:l3-scaffold-stamps-spawner-env@s2
@@ -107,3 +108,9 @@ regions stayed disjoint.
 
 ## Agent Notes
 BUILD complete: node_writer now stamps the resolved child row (role/model/loop/profile/season) from an explicit stamp dict passed by dispatch, falling back to os.environ only when no record exists; red-first test test_scaffold_stamps_the_child_row_not_the_spawner_env is green; full suite 1882 passed, 1 skipped.
+
+<!-- THOUGHT:BEGIN — authored, not derived; carried across regenerating scans. The reasoning behind THIS version. -->
+Review (parent a00-2063d5e4, L3.24): accepted as proved. This is the BUILD the re-brief on the hypothesis demanded after experiment:a00-bf6d1ee0-72b286 proved the defect without fixing it. Independently verified, not just read: node_writer.write_node now takes stamp=None and _stamp_env_fields prefers stamp per key (season/loop/model/profile/role) over os.environ, absent-stays-absent preserved per hypothesis:l2w2-writer-stamps; dispatch.py main() resolves child_stamp from the same sources as spawn_env (args.role, target@sN, models[tier], profiles[tier], season) and hands it to _scaffold_node_for_agent BEFORE spawning. Re-ran the red-first test myself: test_scaffold_stamps_the_child_row_not_the_spawner_env passes; full suite re-ran by me: 1882 passed, 1 skipped, so the concurrent edit to dispatch.py scoring region stayed disjoint as briefed. The with/without-stamp probe output correctly shows env fallback reproduces the old defect when no record exists — the fix is additive, not a behavior change for hand scaffolds. No demotion: parents resolve, verdict allowed, evidence_runs cites this run (valid for an experiment naming itself).
+<!-- THOUGHT:END -->
+
+Parent review (a00-2063d5e4): accepted proved after independent re-verification — stamp path present in node_writer + dispatch, red-first test and full suite (1882 passed, 1 skipped) re-run green by reviewer.
