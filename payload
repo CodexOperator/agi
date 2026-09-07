@@ -975,9 +975,9 @@ def main() -> int:
         # Shared state (budget dir, comms, meter pins) resolves to the MAIN
         # checkout through git_common_root, so the concurrency bound and the
         # rooms stay ONE directory even with N worktrees live.
-        child_root = root
         child_graph = root
-        branch_record: dict = {}
+        branch_root = root
+        branch_ref: dict = {}
         if args.branch:
             base = spawner_base_branch(Path.cwd())
             if not base:
@@ -1014,6 +1014,8 @@ def main() -> int:
             # instead of surfacing a CalledProcessError traceback.
             print(f"ERR: no context for target {target!r} at level {level}: "
                   f"{(exc.stderr or '').strip()}", file=sys.stderr)
+            if branch_ref:
+                drop_branch_worktree(root, branch_ref["worktree"])
             spawn_budget.release(lease)
             return 1
 
@@ -1127,7 +1129,15 @@ def main() -> int:
                 # toplevel with AGI_PROJECT_ROOT to scope the refusal to
                 # only the project repo, so test repos under /tmp are
                 # allowed even under AGI_TIER=kid
-                spawn_env["AGI_PROJECT_ROOT"] = str(root.resolve())
+                spawn_env["AGI_PROJECT_ROOT"] = str(branch_root.resolve())
+            # hypothesis:l3w4-parent-branch-merge-up — under `--branch` the
+            # child is told (cwd AND AGI_TREE_PROJECT_ROOT, which
+            # project_root_from_env and the bash half check first) that its
+            # project root is the WORKTREE, so its node writes and grid ops
+            # edit only that tree while shared budget/comms/meter resolve to
+            # the main checkout through git_common_root.
+            if args.branch:
+                spawn_env["AGI_TREE_PROJECT_ROOT"] = str(branch_root.resolve())
             # goal:g1.11 -- mint AFTER the brief is assembled and BEFORE the
             # process exists, so a key is never issued for a slot that then
             # fails to spawn for some other reason. The secret goes into the
@@ -1153,6 +1163,8 @@ def main() -> int:
             # protect, while reporting success.
             print(f"ERR: could not mint a credential for {agent_id}: {exc}",
                   file=sys.stderr)
+            if branch_ref:
+                drop_branch_worktree(root, branch_ref["worktree"])
             spawn_budget.release(lease)
             return 1
         except (KeyError, NotImplementedError) as exc:
@@ -1161,6 +1173,8 @@ def main() -> int:
             # than surfacing a traceback from inside an adapter.
             print(f"ERR: harness {harness_name!r} cannot spawn tier "
                   f"{args.tier!r}: {exc}", file=sys.stderr)
+            if branch_ref:
+                drop_branch_worktree(root, branch_ref["worktree"])
             spawn_budget.release(lease)
             return 1
         log_file = sess_dir / "output.log"
@@ -1172,12 +1186,16 @@ def main() -> int:
                     stderr=subprocess.STDOUT,
                     stdin=subprocess.DEVNULL,
                     start_new_session=True,
-                    cwd=str(root),
+                    cwd=str(branch_root),
                     env=spawn_env,
                 )
         except BaseException:
             # Nothing was started, so nothing holds the slot. Give it back
-            # now rather than leaving it to expire with this process.
+            # now rather than leaving it to expire with this process, and if
+            # a `--branch` worktree was cut for this agent, drop it so a
+            # botched spawn does not leak a worktree and its branch.
+            if branch_ref:
+                drop_branch_worktree(root, branch_ref["worktree"])
             spawn_budget.release(lease)
             raise
         # goal:g4.8 item 3 — the lease changes hands the instant a pid exists.
@@ -1202,6 +1220,14 @@ def main() -> int:
             "tier": args.tier,
             "command": " ".join(shlex.quote(a) for a in spawn_args),
         }
+        if branch_ref:
+            # hypothesis:l3w4-parent-branch-merge-up — the recorded
+            # base_branch is what season.py merge-up targets (ADDENDUM item
+            # 2), so this agent's branch climbs into the layer that cut it,
+            # one rung at a time. Season.py reads these from --record.
+            agent_record["branch"] = branch_ref["branch"]
+            agent_record["base_branch"] = branch_ref["base_branch"]
+            agent_record["worktree"] = branch_ref["worktree"]
         if scaffold_info:
             agent_record["node_id"] = scaffold_info.get("node_id", "")
             agent_record["parent"] = scaffold_info.get("parent", "")
