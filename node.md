@@ -7,7 +7,7 @@ parents:
 next_edges: []
 build_kind: prose
 confidence: 1.0
-edited_by: a00-603a7922
+edited_by: belam-S1-L3-V
 link_ref: extensions/agi/workflows/drafting.json
 location: source_root
 loop: hypothesis:l3w4-workflows-config-maxxed@s2
@@ -24,6 +24,7 @@ tags:
   - build
   - prose
   - g17
+thought_session: L3.27
 title: Drafting.json
 ---
 <!-- BODY:BEGIN -->
