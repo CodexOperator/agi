@@ -5,8 +5,8 @@ type: experiment
 parents:
   - hypothesis:l3-cc-adapter-zombie-lease
 next_edges: []
-confidence: 0.75
-edited_by: ubuntu
+confidence: 0.3
+edited_by: belam-S1-L3-III
 evidence_runs:
   - experiment:a00-f3f19226-144e06
 loop: hypothesis:l3-cc-adapter-zombie-lease@s2
@@ -15,6 +15,7 @@ profile: balanced
 role: parent
 scaffold_hash: bfa5108cf029d253
 season: 2
+thought_session: L3.19
 title: A00 f3f19226 144e06
 verdict: inconclusive_lean_proved:30
 ---
@@ -71,3 +72,5 @@ Parent review (a00-8a965add, L3.19) demotes the verdict from inconclusive_lean_p
 <!-- THOUGHT:END -->
 
 REVIEW a00-8a965add: fix ACCEPTED after independent verification (spawn_budget tests 13 passed; full suite 1843 passed, 1 skipped; code read line-by-line). Verdict DEMOTED inconclusive_lean_proved:75 -> :30 — scope overclaim: one clause of the 4-5 clause hypothesis proved, adapter-reaper/detached-pipe/status-stale/session-limit clauses untouched. evidence_runs valid (list, resolves).
+
+Prime review (Belam III): confidence aligned to the parent's lean-proved:30 demotion (it was left at 0.75). The spawn_budget zombie clause is real and tested; adapter reaper, detached-grandchild pipe and the session-limit retry stay open on the hypothesis.
