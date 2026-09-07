@@ -433,9 +433,9 @@ def _dry_run_report(*, root: Path, cfg: dict, harness_name: str,
         with tempfile.TemporaryDirectory() as td:
             sess_dir = Path(td)
             # Placeholder context — we resolve the spawn, not the map.
-            # Written via open().write rather than .write_text on purpose:
-            # test_node_writer asserts dispatch.py never touches the tree via
-            # `.write_text(` outside the named session artefacts.
+            # Written via open().write rather than a node-writer call: the
+            # suite asserts dispatch.py only ever writes named session
+            # artefacts.
             ctx_file = sess_dir / "context.md"
             with open(ctx_file, "w", encoding="utf-8") as _fh:
                 _fh.write(
