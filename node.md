@@ -6,6 +6,7 @@ parents:
   - hypothesis:l3w4-telemetry-seat-status
 next_edges: []
 confidence: 0.9
+edited_by: a00-690e2d4c
 evidence_runs:
   - experiment:a00-f69a4619-1e2bf0
 loop: hypothesis:l3w4-telemetry-seat-status@s2
@@ -45,3 +46,5 @@ Verdict: **proved** — the claim (collect builds one SeatsView; viewport render
 
 ## Agent Notes
 Built seat_status.py (SeatsView, one compute/two readers), wired into viewport --live for both render_human/render_llm, tests red-first; suite 1936 pass. Gate: --emit both --live identical seat lines both panes; --list enumerates 8 seats; fails open on absent registry.
+
+Parent review (a00-690e2d4c, L3.28): ACCEPTED as proved. Independently re-ran gate: pytest test_seat_status.py 3 passed; viewport --emit both --live renders identical 8-seat section in human+llm panes (ephemeral 1/25, rollup $0.00); --list enumerates all 8 seats.md rows including tty seats; no write.py/node_writer imports (matches are comments). Parents link resolves; evidence_runs resolves to this run (an experiment may name itself). Struggles noted and worked around: pre-3.12 f-string backslash, fixture NotADirectoryError, frontmatter import path.
