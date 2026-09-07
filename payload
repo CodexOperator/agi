@@ -327,6 +327,8 @@ def build_command(
     parallel: int = 1,
     max_live: int = 1,
     brief_tier: str | None = None,
+    role: str | None = None,
+    ladder_tier: int | None = None,
 ) -> list[str]:
     """The argv that starts one Claude Code agent.
 
