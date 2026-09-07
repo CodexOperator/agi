@@ -6,6 +6,7 @@ parents:
   - hypothesis:l3-agent-id-never-exported
 next_edges: []
 confidence: 0.9
+edited_by: a00-35d0994b
 evidence_runs:
   - experiment:a00-f9b4361b-949e45
 loop: hypothesis:l3-agent-id-never-exported@s2
@@ -14,7 +15,7 @@ profile: balanced
 role: parent
 scaffold_hash: 92e94595e082a3ca
 season: 2
-title: A00 f9b4361b 949e45
+title: Agent id never exported, reproduced on a third agent - three surfaces, three answers, none the id
 verdict: inconclusive_lean_proved:90
 ---
 <!-- BODY:BEGIN -->
