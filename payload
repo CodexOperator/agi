@@ -639,11 +639,24 @@ def main() -> int:
     if args.role is None:
         args.role = _default_role_for_tier(args.tier)
 
+    # goal:g11.1 — resolve the given path the way every entry point resolves
+    # cwd, rather than demanding it already BE the graph root. Identity on a
+    # legacy root (phase 1), so no existing project resolves differently.
+    given = Path(args.project_root).resolve()
+    root = locations.find_project_root(given)
+    cfg_path = locations.config_path(root) if root is not None else None
+    if cfg_path is None:
+        print(f"ERR: not an agi project: {given}", file=sys.stderr)
+        return 1
+    cfg = json.loads(cfg_path.read_text())
+
     # hypothesis:l3w4-seat-registry — a named seat overrides the (tier, role)
-    # ladder class table with its own row.
+    # ladder class table with the seat's own row. Resolved here, after `root`
+    # exists and before the harness block reads the ladder.
     if args.seat is not None:
-        seats = spawn_gate.read_seat_registry(root / "nodes" if root else None)
-        seat_spec = resolve_seat_spec(seats, args.seat)
+        seat_spec = resolve_seat_spec(
+            spawn_gate.read_seat_registry(root / "nodes" if root else None),
+            args.seat)
         if seat_spec is None:
             print(f"seats: no row for seat '{args.seat}'; falling back to "
                   f"ladder/config", file=sys.stderr)
@@ -659,17 +672,6 @@ def main() -> int:
                   f"{seat_spec['harness'] or '-'}/{seat_spec['model'] or '-'}/"
                   f"effort={seat_spec['effort'] or '-'}/"
                   f"settings={seat_spec['settings'] or '-'}")
-
-    # goal:g11.1 — resolve the given path the way every entry point resolves
-    # cwd, rather than demanding it already BE the graph root. Identity on a
-    # legacy root (phase 1), so no existing project resolves differently.
-    given = Path(args.project_root).resolve()
-    root = locations.find_project_root(given)
-    cfg_path = locations.config_path(root) if root is not None else None
-    if cfg_path is None:
-        print(f"ERR: not an agi project: {given}", file=sys.stderr)
-        return 1
-    cfg = json.loads(cfg_path.read_text())
 
     # hypothesis:l3w0-ladder-roles-table — dry print: resolve every declared
     # role row and exit without spawning anything. Nothing is written.
