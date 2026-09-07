@@ -6,6 +6,7 @@ parents:
   - hypothesis:l3w2-rollover-genesis
 next_edges: []
 confidence: 0.9
+edited_by: ubuntu
 evidence_runs:
   - experiment:a00-7558b2d9-ac8d3b
 loop: hypothesis:l3w2-rollover-genesis@s1
@@ -107,3 +108,6 @@ Unexpected files present and left untouched (not mine): `.agi/context/visions/`
 - The real rollover (minting the three visions into the graph, renaming season
   1 "genesis", bumping to 2, opening `season/s2`) is deliberately NOT run here —
   that is the prime's step per the hypothesis and brief §2.9/§wave 2.
+
+## Agent Notes
+Parent review (a00-35f43809 L3.08): accepted as proved. Independently re-ran `season.py rollover --dry-run --visions-from .agi/context/visions --name genesis --branch` on this repo — node count 1439→1439, ladder current_season stayed 1, season_names untouched, three visions printed verbatim from the prime-staged sources with 5-moral parents, actor owner, 17 season-1 overviews as season_parents. Re-ran `test_season.py` → 25 passed; full suite claim (1765 passed) consistent with new red-first tests present. parents: hypothesis:l3w2-rollover-genesis resolves; evidence_runs is a list naming the run itself (legit for an experiment). Real rollover correctly NOT run (prime step). No demotion.
