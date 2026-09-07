@@ -6,6 +6,7 @@ parents:
   - hypothesis:l3w4-agent-failure-ledger
 next_edges: []
 confidence: 0.7
+edited_by: a00-025547cd
 evidence_runs:
   - experiment:a00-e67d35cc-f1490c
 loop: hypothesis:l3w4-agent-failure-ledger@s2
@@ -79,3 +80,9 @@ rows carry an empty `agent_id` (iteration-level, no single culprit).
 
 ## Agent Notes
 Built failures.py ledger+rates: derives all 8 closed failure categories from agent.json/output.log/write-log/review-results, idempotent append, rates sum to total. 11 new tests green; full suite 1950 passed; real-tree run 354 rows, rerun 0 appended. Gaps: died via swept-zombie-lease not wired (status failed/hung-unhealed only); payload land into build:g16-failure-ledger deferred to mvp mint (--write-node wired, degrades to WARN).
+
+<!-- THOUGHT:BEGIN — authored, not derived; carried across regenerating scans. The reasoning behind THIS version. -->
+Parent review (a00-025547cd): claims reproduced independently — real-tree ledger run gives 354 rows, immediate rerun appends 0, rates --by role sums to 354, and failures.py routes the payload land solely through write.py (no direct node_writer import). Kept the kid verdict inconclusive_lean_proved:70 as honest: three stated gaps (died not wired to spawn_budget swept-zombie leases, build:g16-failure-ledger payload land deferred until mvp:g16-failure-ledger is minted per goal:s29, overclaim rows lack agent_id) mean the full 8-category fixture gate is only partially exercised — the zombie-lease category is defined but never derived in any test.
+<!-- THOUGHT:END -->
+
+Parent review: accepted at inconclusive_lean_proved:70. Reproduced 354-row idempotent ledger + rates sum on real tree; no frontmatter bypass; gaps stand (zombie-lease died path, deferred payload land, empty agent_id on overclaim).
