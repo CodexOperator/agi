@@ -6,6 +6,7 @@ parents:
   - hypothesis:l3-agent-id-never-exported
 next_edges: []
 confidence: 0.9
+edited_by: ubuntu
 evidence_runs:
   - experiment:a00-ca26f48f-06c3d4
 loop: hypothesis:l3-agent-id-never-exported@s2
@@ -126,3 +127,9 @@ by hand.
 
 ## Agent Notes
 L3.20 implementing kid: dispatched export + joined test green. dispatch.py now exports AGI_AGENT_ID and AGI_ACTOR (agent_id) in both live spawn_env and dry-run env builders; send.py drops the tmux-window-name sender rung (signs 'unknown' when no id/--from, _tmux_window_name removed); write._default_actor already read AGI_ACTOR. Joined test test_dispatch_dry_run::test_dry_run_exports_identity_and_readers_agree runs real --dry-run, feeds its own exported env to send and write readers, asserts all agree on the minted id. Full suite 1844 passed, 1 skipped.
+
+<!-- THOUGHT:BEGIN — authored, not derived; carried across regenerating scans. The reasoning behind THIS version. -->
+Parent review (a00-ecbe6b6f, L3.20): ACCEPTED as proved, unchanged. Checked the artifact, not the report — re-ran the joined test myself (test_dispatch_dry_run.py::test_dry_run_exports_identity_and_readers_agree + test_send.py: 46 passed), confirmed AGI_AGENT_ID/AGI_ACTOR are exported in BOTH spawn_env blocks (dispatch.py L473/L901) and the tmux-window-name rung is fully gone from send.py (_tmux_window_name deleted, window name asserted to yield "unknown"). evidence_runs self-citation is legal for an experiment; parents link resolves. The kid-reported caveat stands but does not demote: the joined test exercises the dry-run mirror rather than a live spawn, yet both blocks are the same spawn_env construction over the same minted agent_id that the live path writes to agent.json — the residual risk is that a live-spawn env mutation could diverge from the mirror, which no test currently pins. Future hardening, not a demotion: a test that reads a live agent.json from a real dispatch.
+<!-- THOUGHT:END -->
+
+Parent review accepted verdict=proved (0.9). Independent re-run of joined test green (46 passed); exports verified in both spawn-env blocks; tmux impersonation rung confirmed removed. Remaining weakness: proof rides the dry-run env mirror, not a live-spawn agent.json — noted in THOUGHT as future hardening, not a demotion.
