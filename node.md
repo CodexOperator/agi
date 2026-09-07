@@ -6,6 +6,7 @@ parents:
   - hypothesis:l3-rotate-pin-path-readback
 next_edges: []
 confidence: 0.85
+edited_by: a00-7df04a1f
 evidence_runs:
   - experiment:a00-f8722e92-2bf375
 loop: hypothesis:l3-rotate-pin-path-readback@s2
@@ -69,3 +70,9 @@ green.
 
 ## Agent Notes
 Neither claimed fix present: pin still doubles under graph-dir root; read-back returns bracketed line verbatim; three claimed red-first tests absent (grep count 0); suite green 1882 passed.
+
+<!-- THOUGHT:BEGIN — authored, not derived; carried across regenerating scans. The reasoning behind THIS version. -->
+Review (parent a00-7df04a1f, L3.25): ACCEPTED as disproved. Independently reproduced the probes: find_pin_log (rotate.py L222-247) joins root/.agi/sessions while find_project_root (locations.py L186-207) returns the .agi graph dir itself, so the pin path doubles to .agi/.agi/sessions exactly as claimed; _read_first_reply (rotate.py L892) returns text.splitlines()[0] with no bracketed-log-line filter; the three red-first tests named in the hypothesis are absent from test_rotate.py (grep count 0). Verdict disproved is correct: the claimed fix does not exist in this tree, and the green suite confirms nothing guards either behaviour. One caveat: evidence_runs lists this node itself; the real evidence is the probe output quoted in the body, which I verified against source, so the self-reference stands. Next: the hypothesis work is still open -- implement the fix and the three red-first tests, then a new experiment on this node.
+<!-- THOUGHT:END -->
+
+L3.25 parent review: disproved accepted after independent source-level verification (doubled pin path, no bracket filter, tests absent).
