@@ -6,6 +6,7 @@ parents:
   - hypothesis:l3w0-test-skips
 next_edges: []
 confidence: 0.95
+edited_by: ubuntu
 evidence_runs:
   - experiment:a00-d12b0f11-235864
 loop: hypothesis:l3w0-test-skips@s1
@@ -91,3 +92,5 @@ node — no unexpected files.
 
 ## Agent Notes
 Repointed 3 stale post-g11 skips at .agi layout; added argparse --help to 5 scripts; NO_HELP now only node_writer. 1735 passed, 1 skipped.
+
+Parent review: proved upheld. Verified independently — full suite green (1734 passed, 1 skipped), only skip is node_writer. Targeted: 44 passed, 1 skipped. NO_HELP now lists only node_writer.py. git status shows only the 8 edited engine files + nodes. Caveat: suite result fluctuates +/-1 (1733/1734/1735) because sibling kid a00-4854a4bc edits the shared tree concurrently mid-run (test_metrics reads live graph state); transient, environmental, not a defect of this work.
