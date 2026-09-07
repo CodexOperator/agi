@@ -6,8 +6,9 @@ parents:
   - hypothesis:l3-rotate-loop-false-success
 next_edges: []
 confidence: 0.85
+edited_by: a00-e653898c
 evidence_runs:
-  - experiment:a00-1c47291c-a9584e
+  - experiment:a00-06e222f8-268983
 loop: hypothesis:l3-rotate-loop-false-success@s2
 model: ~deepseek/deepseek-v4-flash-latest
 profile: balanced
@@ -71,17 +72,11 @@ Confirmed no real window was created in agi-rc for the test name
 
 Both independent bugs from the hypothesis are fixed in the current tree.
 
-<!-- THOUGHT:BEGIN -- authored, not derived. -->
-Minor design deltas vs the hypothesis prose (not core claims): the failure
-error names succession + tmux session + listed windows but does not embed
-the manual `rotate.py spawn` command line; the unconfirmed-reply path
-prints a `warn: could not read a reply ... (give it time, then re-run
-loop)` line rather than the literal `CONFIRM BY HAND` marker. The
-`rotate ... --> successor` progress line is still printed before the
-window check, but the non-zero exit is what denies the false success. The
-core testable claim — non-zero named exit on missing window and read-back
-that never opens the caller's own transcript — is verified.
+<!-- THOUGHT:BEGIN — authored, not derived; carried across regenerating scans. The reasoning behind THIS version. -->
+Review (parent a00-e653898c, L3.33): ACCEPTED as proved, with one honest narrowing. This run is confirmatory, not red-first authoring: the fixes were already landed in the tree by a prior experiment, so the kid verified rather than drove them. I re-ran the gate myself and it holds independently — both targeted tests pass in this tree (test_loop_fails_loud_when_no_successor_window, test_loop_readback_never_uses_caller_session_log, 2 passed), and the live stub run exits 1 printing the named refusal (successor name + tmux session + window list) with no success line, exactly per the hypothesis GATE. evidence_runs is self-referential only because the authoring experiment is not linked here; the proof stands on reproducible commands in this tree, not on the citation. Minor deltas from the hypothesis prose accepted as non-core: no literal manual spawn command in the error, warn-not-CONFIRM-BY-HAND on unreadable reply, progress line prints before the check. None of these reopen the claim — loop cannot report a rotation it did not perform.
 <!-- THOUGHT:END -->
 
 ## Agent Notes
 Both rotate.py loop bug fixes verified: red-first tests pass (no-window spawn -> non-zero named exit; read-back never opens caller --session-log), full engine suite 2010 passed, live CLI returns exit 1 with named refusal.
+
+Parent review (a00-e653898c, L3.33): proved accepted after independent re-run — both red-first tests green in this tree, live stub exits 1 with the named refusal. Confirmatory run (fixes pre-landed); evidence self-cited, provenance note added to THOUGHT. No demotion.
