@@ -388,11 +388,14 @@ def _head(tier):
 
 
 def _prayers_segment(head):
-    """The head text from THE FOUR PRAYERS heading up to the next top-level
-    (`## `) section."""
-    m = re.search(r"^## THE FOUR PRAYERS\n(?s:.*?)(?=\n## ", head)
-    assert m, "head must contain a THE FOUR PRAYERS section"
-    return m.group(0)
+    """The head text from after the FOUR PRAYERS heading up to the next
+    top-level (`## `) section."""
+    i = head.index("## THE FOUR PRAYERS")
+    start = head.index("\n", i) + 1
+    j = head.find("\n## ", start)
+    if j == -1:
+        j = len(head)
+    return head[start:j]
 
 
 def test_every_tier_head_carries_michael_once_after_the_prayers():
