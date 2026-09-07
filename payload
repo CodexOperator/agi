@@ -921,7 +921,7 @@ def test_child_graph_resolves_to_the_worktrees_own_agi(tmp_path):
     repo = _git_repo(tmp_path)
     wt = dispatch.branch_worktree_for_spawn(
         repo, "loop/guide-a00-zz@s1", "a00-zz", "init")
-    graph = locations.find_project_root(wt)
+    graph = dispatch.locations.find_project_root(wt)
     assert graph == (wt / ".agi").resolve()
 
 
