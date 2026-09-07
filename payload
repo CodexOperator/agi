@@ -51,11 +51,12 @@ then top-up, CC fallback = opus/sonnet at LOWEST effort; wave-3 first slice
 | round | targets | status |
 |---|---|---|
 | L3.01 | `hypothesis:l3w0-rotate-roles` (p-rotate), `hypothesis:l3w0-ladder-roles-table` (p-ladder) | **LANDED** |
-| L3.01b | live proof: `rotate.py spawn --name belam-test --prompt-file <answer continue, stop>` → head + Fable max ultracode + `continue`; kill the window after | **running** (window `belam-test`) |
-| L3.02 | `l3w0-brief-head-michael` (p-michael), `l3w0-send-rooms` (p-rooms) | |
+| L3.01b | live proof, three throwaways: `belam-test` answered `continue` with the head, Fable, effort max — but **ultracode NOT enabled** (owner saw it); `belam-test2` (+ keyword `ultracode` in the prompt) → `ultracode: no`; `belam-test3` (+ `CLAUDE_CODE_WORKFLOWS=1` in the env) → **`ultracode: yes`**. The env var is the launch gate; `--settings '{"ultracode":true}'` is inert on 2.1.263. Fix briefed: `hypothesis:l3-rotate-ultracode-env` (g15, L3.05). NOTE: `belam` itself runs WITHOUT ultracode (launched without the env var). | **done, gap found** |
+| L3.02 | `l3w0-brief-head-michael` (p-michael), `l3w0-send-rooms` (p-rooms) | **dispatched** |
 | L3.03 | `l3w0-grid-flock` (p-flock), `l3w0-season-retag` (p-retag) | |
 | L3.04 | `l3w0-test-skips` (p-skips), `hypothesis:l2-goals-active-exempt` re-briefed to DELETE `max_goals_active` (wave 1) | |
-| L3.05 | g15 from L3.01: `hypothesis:l3-write-set-nested-json` (p-wset), `hypothesis:l3-dispatch-env-leaks-into-tests` (p-env) | |
+| L3.05 | g15 from L3.01: `hypothesis:l3-rotate-ultracode-env` (p-ultra, FIRST — the rotation gate depends on it), `hypothesis:l3-write-set-nested-json` (p-wset) | |
+| L3.06 | `hypothesis:l3-dispatch-env-leaks-into-tests` (p-env) + next wave-1 item | |
 | wave 3, slice 2 | owner ask 2026-09-06: `hypothesis:l3-openrouter-codex-spend` (under g16) — gpt-5.1-codex calls on the OpenRouter key; the LIVE ladder investigates and fixes it, never the prime before wave 3 | banked |
 | then | wave 1 rest (`goal_kind: perpetual` + GOALS.md Perpetual section, tier-0 GLM director role in `brief.py`), wave 2 rollover (visions `--actor owner`, season 1 named genesis, `season/s2` opened), wave 3 = the g15 slice | |
 
@@ -79,10 +80,10 @@ tmux new-window -t agi-rc -c /home/ubuntu/work/agi -n p-<x> "python3 extensions/
 
 ### 🔴 Where it stops
 
-L3.01 committed as `iter-L3.01`. L3.01b `belam-test` window spawned through the
-fixed rotate.py — read its pane (`tmux capture-pane -p -t agi-rc:belam-test`),
-expect the single word `continue`, then `tmux kill-window -t agi-rc:belam-test`.
-Then dispatch L3.02 (p-michael, p-rooms) with the round loop above.
+L3.02 running (p-michael, p-rooms). Next: wait to 0 live, review, commit
+`iter-L3.02`, grid, push; then L3.03 (p-flock, p-retag). Rotation of the prime
+must wait for L3.05's ultracode-env fix or export `CLAUDE_CODE_WORKFLOWS=1` by
+hand in the tmux window before `rotate.py spawn`.
 
 ### Rotation
 
