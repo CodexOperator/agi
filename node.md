@@ -6,6 +6,7 @@ parents:
   - hypothesis:l3-node-without-mint-id
 next_edges: []
 confidence: 0.9
+edited_by: ubuntu
 evidence_runs:
   - experiment:a00-feee859f-5f2eca
 loop: hypothesis:l3-node-without-mint-id@s2
@@ -98,3 +99,9 @@ grid test) versions it — no longer refused on every grid_sync tick.
 
 ## Agent Notes
 Implemented node_writer.repair_mint, wired into cli.py done, added write.py <id> adopt verb. Proved: a kid-written node with no mint_id gets adopted (minted through the same identity source, scaffold_hash stamped, reads complete), and a re-adopt refuses. Live-proofed on the real orphan experiment:a00-230456c1-1abcda (minted 50952ab682bc4860bd74a65bf29c2d4a). 1856-test suite green.
+
+<!-- THOUGHT:BEGIN — authored, not derived; carried across regenerating scans. The reasoning behind THIS version. -->
+Parent review (a00-13246e56, L3.20): accepted as proved. Independently verified, not taken from the report: the real orphan experiment:a00-230456c1-1abcda now carries mint_id 50952ab682bc4860bd74a65bf29c2d4a and its pre-existing frontmatter fields and body survived adoption byte-intact; re-adopt via write.py adopt refuses with the goal:g2.5 message (exit 1); node_writer.repair_mint exists at the wired location; full suite re-run by me: 1856 passed, 1 skipped. Caveat from the kid report stands but is acceptable: the 0-errors grid commit was proven inside pytest by driving grid.cmd_commit directly (agent contract forbids running grid.py), so the live orphan is versioned by the next real grid_sync rather than by the agent. evidence_runs names itself, which is legitimate for an experiment — it IS the run.
+<!-- THOUGHT:END -->
+
+Parent review ACCEPTED, verdict proved upheld. Verified live: orphan adopted (mint_id present, re-adopt refused), suite 1856 green. No demotion.
