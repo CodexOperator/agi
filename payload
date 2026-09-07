@@ -14,6 +14,22 @@ sg = importlib.util.module_from_spec(spec)
 spec.loader.exec_module(sg)
 
 
+@pytest.fixture(autouse=True)
+def _isolate_write_log(tmp_path, monkeypatch):
+    """Keep snapshot_goals' write-log out of the box's real sessions/ dir.
+
+    `snapshot_goals.PROJECT_ROOT` is a module global that defaults to the real
+    repo's cwd during pytest. The in-process serializer tests call
+    `write_frontmatter` on bare fixture paths (a `tmp/n.md` with no `nodes/`
+    component), so log_write's "follow the node" rule cannot find their
+    project and falls back to that global -- leaking /tmp/pytest entries into
+    the box's real `.agi/sessions/write-log.jsonl` (was 94% test data).
+    Point the module root at the fixture's own tmp dir for logging instead.
+    (l2w15-write-guard, L2.13 follow-up item 2.)
+    """
+    monkeypatch.setattr(sg, "PROJECT_ROOT", tmp_path)
+
+
 GOALS_DOC = """# GOALS.md — sample
 
 Preamble prose that must be ignored, including a stray G9 mention.
