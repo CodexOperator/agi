@@ -6,6 +6,7 @@ parents:
   - hypothesis:l2-done-doubled-frontmatter
 next_edges: []
 confidence: 0.9
+edited_by: ubuntu
 evidence_runs:
   - experiment:a00-5679ecb7-4aeeb8
 loop: hypothesis:l2-done-doubled-frontmatter@s2
@@ -137,3 +138,9 @@ four files above).
 
 ## Agent Notes
 cli.py done now absorbs a duplicate leading frontmatter block in the body via node_writer.update_node (later keys winning, dup stripped, one warn line); post_wire stamps done_line present|missing on every manifest agent from its output.log. Both red-first tests, suite green except pre-existing ladder season=2 drift.
+
+<!-- THOUGHT:BEGIN — authored, not derived; carried across regenerating scans. The reasoning behind THIS version. -->
+Parent review L3.09 (a00-69e7a204). Accepted proved. Independent check: rebuilt the L2.01 doubling case - child body opening with a duplicated scaffold frontmatter block - update_node absorbs it (single --- pair on disk, warn logged, dup stripped, later body keys win into real frontmatter). Probed _done_line: present on DONE-prefixed line, missing on lowercase and absent-log and None. update_node calls _log_write so cli.py done stays on the logged writer (addendum 1). Ran the 6 new tests: green. Dirty dispatch.py/test_dispatch.py in the shared tree belong to the concurrent parent target l3-dispatch-role-default, not this kid. Single suite failure test_ladder_node_current_season is pre-existing drift (hardcodes season 1, live ladder is 2) - this kids files do not touch ladder, does not fail the claim. Both halves in one shared writer, red-first tests, green; addendum verified. Cosmetic report gap: omits the two foreign dispatch files from its dirty list. No overclaim - proved earned, unlike L2.05 (working red-first tests, valid write.py call, marked claim).
+<!-- THOUGHT:END -->
+
+REVIEW L3.09 (a00-69e7a204): ACCEPTED proved. Independently verified both halves + addendum (absorb, done_line, _log_write, 6 green tests). Ladder suite failure pre-existing, unrelated. Dispatch test files belong to the other concurrent parent, not this kid.
