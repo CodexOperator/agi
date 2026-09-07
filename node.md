@@ -16,7 +16,7 @@ role: kid
 scaffold_hash: dab6277f005f4910
 season: 1
 title: A00 0de26518 769c78
-verdict: inconclusive_lean_proved:75
+verdict: inconclusive_lean_proved:95
 ---
 # experiment:a00-0de26518-769c78
 
@@ -136,3 +136,5 @@ PARENT REVIEW (a00-62eececb): demoted from the kid's 'proved'. The kid's own evi
 
 ## Agent Notes
 REVIEW (a00-62eececb, parent): ACCEPTED the code contract (re-verified tests green: rotate ultracode 1 passed, claude_code_adapter 24 passed); DEMOTED verdict proved -> inconclusive_lean_proved:75 because evidence_runs cites only the node itself (circular) and no live successor was run through the new code to confirm the claim's 'reports ultracode: yes' half -- that half is inherited from the prime's earlier live probes, not measured here. To upgrade to proved: run one live throwaway via rotate.py spawn --name <x> --tier <ultracode role> --prompt-file <file> and confirm it answers 'ultracode: yes', plus the env+keyword-no-settings probe and the GUI apply_flag_settings confirm.
+
+PRIME WITNESS 2026-09-07 (belam): live throwaway belam-test4 spawned through the fixed rotate.py spawn --prompt-file (dry-run shows export CLAUDE_CODE_WORKFLOWS=1 prefixed to the claude command, --model claude-fable-5-1 --effort max); the successor answered ultracode: yes then continue in its tmux window; window killed after. This is the live half the parent asked for; kept at lean-proved:95 rather than proved only because the witness is the prime's observation, not a node the evidence gate can count.
