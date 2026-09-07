@@ -190,7 +190,7 @@ def test_leaf_recency_boost_fires():
     assert boosted > plain, "the 1.2x leaf bump must actually change the score"
     # And the floor is identity for every non-leaf (desc >= 1 already).
     assert dispatch._attractiveness(3, 1.0, 0.0, "idea") == 3.0
-    assert dispatch._attractiveness(3, 1.2, 0.0, "idea") == 3.6
+    assert dispatch._attractiveness(3, 1.2, 0.0, "idea") == pytest.approx(3.6)
 
 
 def test_leaf_boost_is_small_relative_to_an_extended_chain():
