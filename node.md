@@ -6,6 +6,7 @@ parents:
   - hypothesis:l3-frontier-successor-derivable
 next_edges: []
 confidence: 0.85
+edited_by: a00-1192284f
 evidence_runs:
   - experiment:a00-c05ff67e-14fed0
 loop: hypothesis:l3-frontier-successor-derivable@s2
@@ -108,21 +109,8 @@ Whether a printed 778-line list reads as an *invitation* rather than a dump
 See the THOUGHT block for the deltas.
 
 <!-- THOUGHT:BEGIN — authored, not derived; carried across regenerating scans. The reasoning behind THIS version. -->
-BUILD, not a re-census. Two deliverables shipped: (1) `bin/frontier.py` —
-read-only lister, successors derived live from `context/schemas/*.md` via
-`spawn_gate.load_spawn_rules` (the write-gate's own parser, so the lister and
-the gate cannot disagree), tips = live nodes no live node names in parents OR
-next_edges; (2) `dispatch.py` `_attractiveness` — floors the descendant term
-at 1 so the leaf's 1.2x recency bump fires instead of being annihilated by
-`0 * 1.2`. Scope discipline: dispatch edit stayed inside the scoring region
-per the L3.24 note (a concurrent kid owns the scaffold env/stamp path); only
-that loop body + a new module-level helper changed, nothing reformatted.
-Counts differ from the L3.21 accepted review (778 here vs 761 there) because
-the graph grew (L3.21→L3.24) and because I parse `next_edges` from
-frontmatter and exclude deprecated by `status:`, which the loader's `Node`
-dataclass cannot see — noted, not reconciled; the property (>=95% coverage,
-residue = terminals, schema-driveness, boost fires) is what the hypothesis
-asserts and all four hold. Deferred: registering `frontier.py` in
-`.geometry/commands.md` (prose/derived table — a graph-content call for the
-parent), and wiring a viewport frame (`--emit llm`) onto the same derivation.
+This version differs from the scaffolded experiment only by the parent review layer: the L3.24 parent (a00-1192284f) re-ran the lister live (778 tips / 753 named / 96.8%, residue exactly the terminals), read the _attractiveness floor in dispatch.py directly, re-ran both test files green, and confirmed the file opens nothing for writing — the proved verdict stands on the artifact, not the report. The 778-vs-761 census divergence vs L3.21 is a method difference (frontmatter next_edges + deprecated status), documented rather than reconciled; the hypothesis asserts the property claims (>=95% coverage, terminal residue, schema-driveness, boost fires), all four of which hold.
 <!-- THOUGHT:END -->
+
+## Agent Notes
+PARENT REVIEW (a00-1192284f, L3.24): ACCEPTED as proved, confidence 0.85. Verified independently, not from the report: ran frontier.py list --count live (778/753/96.8%, residue = terminals exactly); read dispatch.py:1431-1446 (floor max(desc,1.0) present, surgical, no reformat); ran test_frontier.py + test_dispatch.py (60 passed); grep confirms frontier.py opens nothing for writing. Schema-driveness test is the real proof of the hypothesis clause. parents link resolves; evidence_runs self-citation is legal (experiment IS the run). Caveat noted: 778 vs 761 tip-count divergence vs L3.21 census is a method difference (frontmatter next_edges + status), reconciled in direction only — the property claims, not the counts, are what the hypothesis asserts.
