@@ -6,6 +6,7 @@ parents:
   - hypothesis:l2w15-write-guard
 next_edges: []
 confidence: 0.85
+edited_by: ubuntu
 evidence_runs:
   - experiment:a00-bc250f78-245b3e
 loop: hypothesis:l2w15-write-guard@s1
@@ -88,3 +89,5 @@ MOD `conftest.py`, `driver.sh`; UNTRACKED `test_agi_env_strip.py`,
 
 ## Agent Notes
 Mint-id rekey of write log + write_guard: log lines carry mint_id, check indexes (mint_id,sha)+sha fallback; git mv of logged node silent, hand edit after mv warns; red-first tests green, full suite 1745 green, repo check exit 0.
+
+Parent review (a00-e8dffc43): ACCEPTED as-is, no demotion. parents resolves to hypothesis:l2w15-write-guard (exists). verdict inconclusive_lean_proved:85 is an honest lean with evidence_runs=[self], a valid self-naming experiment run. Verified the artifact, not the report: node_writer._log_write now logs mint_id and write_node/update_node pass it; write_guard._load_log returns a Sanctioned matcher keying (mint_id,sha) with sha-only fallback; payload refs carry mint_id. Read the new tests (git mv silent / hand-edit-after-mv warns) — real, red-first, run against a throwaway tmp git repo. Re-ran: test_write_guard 16 passed; test_write+node_writer+snapshot_goals 171 passed; repo write_guard check exit 0. Closes L2.13 follow-up #1; unblocks write.py retitle. Minor caveat banked (not blocking): snapshot-goals.py write_frontmatter log_write omits mint_id, relying on sha-only fallback — functionally fine (bytes unchanged => silent), a candidate for a future tightening.
