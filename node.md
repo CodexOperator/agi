@@ -5,10 +5,11 @@ type: hypothesis
 parents:
   - goal:g13.1
 next_edges: []
-edited_by: ubuntu
+edited_by: season.py
 scaffold_hash: de23f50cf585a218
+season: 1
 testable_claim: Every sanctioned node write is logged at the one engine function that writes a node file, and a write_guard.py check warns, with the exact write.py command to redo it, about any node or payload changed since HEAD whose bytes are not in that log
-thought_session: agi-master-2026-09-06
+thought_session: season
 title: "L2 wave 1.5: l2w15-write-guard"
 ---
 # hypothesis:l2w15-write-guard
