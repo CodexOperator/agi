@@ -148,7 +148,12 @@ def spawner_base_branch(workdir: Path) -> str | None:
     if out.returncode != 0:
         return None
     name = out.stdout.strip()
-    return name or None
+    # On a detached HEAD `--abbrev-ref HEAD` prints the literal "HEAD" —
+    # there is no branch to base a child on, which is exactly the case the
+    # helper exists to detect for the caller.
+    if not name or name == "HEAD":
+        return None
+    return name
 
 
 def loop_branch_name(target: str | None, agent_id: str, season: int) -> str:
