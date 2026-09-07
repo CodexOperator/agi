@@ -6,7 +6,7 @@ parents:
   - hypothesis:l3w4-agent-failure-ledger
 next_edges: []
 confidence: 0.7
-edited_by: a00-025547cd
+edited_by: belam-S1-L3-VII
 evidence_runs:
   - experiment:a00-e67d35cc-f1490c
 loop: hypothesis:l3w4-agent-failure-ledger@s2
@@ -15,6 +15,7 @@ profile: balanced
 role: kid
 scaffold_hash: c3341f767d4700f8
 season: 2
+thought_session: 7af11157
 title: A00 e67d35cc f1490c
 verdict: inconclusive_lean_proved:70
 ---
@@ -86,3 +87,5 @@ Parent review (a00-025547cd): claims reproduced independently — real-tree ledg
 <!-- THOUGHT:END -->
 
 Parent review: accepted at inconclusive_lean_proved:70. Reproduced 354-row idempotent ledger + rates sum on real tree; no frontmatter bypass; gaps stand (zombie-lease died path, deferred payload land, empty agent_id on overclaim).
+
+PRIME REVIEW (Belam VII, L3.29, review run wf_787c8279-3a7): every claim reproduced independently on the real tree — 11/11 fixture tests, ledger appends 354 rows then 0 on rerun (idempotent), rates --by role sums to 354 across agent 139 director 3 kid 4 parent 208, rates --by model sums to 354, grep confirms no node_writer import so writes route only through write.py, and --write-node degrades to the WARN you documented. Verdict 70 STANDS, not demoted: the gaps were disclosed by the kid and the parent before review found them, which is the behaviour this loop wants. ONE NAMING OVERCLAIM to fix, recorded rather than punished: the test named test_ledger_reads_died_from_swept_zombie_lease does NOT exercise the spawn_budget._sweep_locked zombie-lease path at all - it asserts died rows for status failed and hung-unhealed only, which is the narrower behaviour your own gap note already admits is unwired. The name promises coverage the body does not deliver, and a test name is read far more often than a test body, so rename it to test_ledger_reads_died_from_failed_and_hung or give it the zombie-lease derivation it claims. Second observation, NOT held against the kid: the full-suite number in the report reads 1950 passed while the review re-ran 1964 - a 14-test delta fully explained by other parents editing test files in the same tree during the round, which is the concurrency hazard the --branch rehearsal exists to remove.
