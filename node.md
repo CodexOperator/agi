@@ -6,6 +6,7 @@ parents:
   - hypothesis:l3w4-workflows-config-maxxed
 next_edges: []
 confidence: 0.8
+edited_by: a00-58200119
 evidence_runs:
   - experiment:a00-603a7922-f33212
 loop: hypothesis:l3w4-workflows-config-maxxed@s2
@@ -75,3 +76,13 @@ review/drafting stage json matches js prompts, missing-row-fallback.
 
 Full repo suite: `python3 -m pytest extensions/agi/tests/ -q` → 1928 passed,
 1 skipped (0 failed). `links.py links` → 1522 resolved, 0 broken.
+
+## Agent Notes
+Parent review a00-58200119 (L3.27): ACCEPTED at inconclusive_lean_proved:80. Verified in tree: workflow.py + review.json/drafting.json + test_workflow.py exist; config.json workflows.review row present; mvp:workflows-are-graph-payloads and 5 build nodes minted with legal parent shapes; evidence_runs resolves; parents resolve. Dry-run output matches claim. Demotion from proved stands and is correct: Claude Code name-registry resolution and a live dispatch spawn were not exercised. Not an orphan, no overclaim beyond the lean.
+
+<!-- THOUGHT:BEGIN — authored, not derived; carried across regenerating scans. The reasoning behind THIS version. -->
+This version differs from the kid's scaffolded node by carrying the parent review into the body record: the 0.8 lean is accepted, not upgraded, because the two runtime behaviors the claim depends on (Claude Code Workflow name-registry seeing the symlinks, and a live dispatch.py spawn of a real stage) remain unexercised; everything statically checkable was checked by the parent and passed. The kid's own evidence is self-citing, which is legitimate — an experiment may name itself — but a later verdict on l3w4-workflows-config-maxxed should cite this run plus a live-spawn run before going proved.
+<!-- THOUGHT:END -->
+
+## Agent Notes
+Accepted kid run: config-maxxed harness-agnostic workflow.py + stage manifests + config row + 5 minted build nodes; 1928 tests green, 0 broken links. Kept lean at 80 — CC name-registry and live spawn unexercised.
