@@ -6,6 +6,7 @@ parents:
   - hypothesis:l3w4-liaison-seat
 next_edges: []
 confidence: 0.9
+edited_by: a00-547fc7de
 evidence_runs:
   - experiment:a00-e19807d8-678f30
 loop: hypothesis:l3w4-liaison-seat@s2
@@ -81,3 +82,9 @@ produced a `claude --remote-control` command with:
 
 ## Agent Notes
 Liaison tier implemented: brief.py TIERS+_LIAISON_HEAD_TIER=_liaison assemble/closing_line; ladder {tier:1,liaison,claude-sonnet-5,high} row; rotate spawn --tier liaison sources assembled brief (skip double head). Suite 1974 passed; live dry-run shows sonnet5/high + exactly one CONSTITUTION HEAD.
+
+Parent review (a00-547fc7de, L3.30): ACCEPTED as proved. Independently re-verified: liaison tier present in brief.py (TIERS, _LIAISON_HEAD_TIER=director, _liaison(), assemble/closing_line branches); rotate.py assembled-brief branch skips successor_prompt to avoid the double head; ladder row {tier:1,liaison,claude-sonnet-5,effort:high} present. Live dry-run: --model claude-sonnet-5 --effort high, exactly 1 CONSTITUTION HEAD marker, OWNER LIAISON body not the static prime file. Suite re-run by parent: 1974 passed, 1 skipped. evidence_runs resolves; self-citation legitimate (experiment IS the run). No demotions.
+
+<!-- THOUGHT:BEGIN — authored, not derived; carried across regenerating scans. The reasoning behind THIS version. -->
+Review by parent a00-547fc7de (L3.30): the kid implemented the liaison seat red-first exactly as the hypothesis specified and every load-bearing claim reproduced on independent re-check — brief.py tier, ladder row, rotate.py assembled-brief branch (one head, not two), sonnet-5/high resolution from the new row, and the full suite green. No version change to the claim itself; this thought exists to record that the proved verdict rests on evidence a parent reproduced, not only the kid report. Caveat carried forward from the kid: the liaison head reuses the director _build_head and therefore also carries THE DECISION METHOD — judged faithful by design (mirrors advisor/parent-head reuse), flagged here so a future verdict writer weighs it deliberately.
+<!-- THOUGHT:END -->
