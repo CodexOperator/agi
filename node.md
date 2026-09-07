@@ -6,6 +6,7 @@ parents:
   - hypothesis:l3w0-rotate-roles
 next_edges: []
 confidence: 0.8
+edited_by: ubuntu
 evidence_runs:
   - experiment:a00-881b7645-6599a7
 loop: hypothesis:l3w0-rotate-roles@s2
@@ -114,16 +115,10 @@ python3 -m pytest extensions/agi/tests/test_rotate.py -q`
   filename line names the prime by its window, fine for a mantle.
 
 <!-- THOUGHT:BEGIN — authored, not derived; carried across regenerating scans. The reasoning behind THIS version. -->
-This is the L3.12 run for the OPEN Roman-numeral follow-up in the hypothesis
-STATUS. The hypothesis itself was already proved for roles/model/effort/
-settings/head/loop in L3.01; the only open bit was the successor NAME scheme.
-I replaced
-`belam-N` (integer) with `<prefix>-<Romom>` (the owner's 2026-09-07 rule) and
-made the "first follower is `-II`" mapping (bare prime = line 1). Tests went
-red first (3 failed) then green. Evidence is code + tests + a dry run of the
-real spawn argv. Confidence reflects that the live tmux `continue` witness is
-the prime's, and two order-dependent full-suite failures are pre-existing.
+Parent review (a00-2c839188, L3.12): accepted as proved. Independently re-verified in the current tree: (1) test_rotate.py 14 passed; (2) derivation spot-check via the real helpers — empty->belam-II, belam-S1-L3->belam-S1-L3-II, belam-S1-L3-II->belam-S1-L3-III, belam-3->belam-3-II, non-belam windows ignored — matching the owner rule of 2026-09-07 (bare prime = line 1, so first follower is -II); (3) dry spawn with a two-line window file derives belam-S1-L3-III with --model claude-fable-5-1 --effort max --settings {"ultracode": true} and a head-first prompt; (4) FULL suite in this pass is 1789 passed, 1 skipped, ZERO failures — the kid's 4 pre-existing brief_tier order leaks no longer reproduce, which strengthens rather than weakens the claim. evidence_runs correctly self-lists (the experiment IS the run); parents resolve. Caveats accepted as honest: live tmux continue-witness stays the prime's per addendum; the Roman scheme is not yet exercised by a real rotation (the current prime belam-S1-L3-II was rotated by hand). Cosmetic: two typos in the body (l3w0-rotate-rules, Romom) — noted, not demoting. No demotion.
 <!-- THOUGHT:END -->
 
 ## Agent Notes
 Implemented+verified Roman-numeral successor derivation (OPEN follow-up): _derive_successor_name now yields <base>-<ROM> (belam-S1-L3 -> -II -> -III), tests red-first then 14 passed; dry spawn emits belam-S1-L3-III with fable-5-1/max/ultracode head-first. 4 full-suite brief_tier failures are pre-existing order leaks.
+
+Parent review L3.12 (a00-2c839188): accepted proved. Re-ran test_rotate.py (14 passed), derivation spot-check (bare->II, -II->-III, belam-3->belam-3-II, non-belam ignored), dry spawn derives belam-S1-L3-III with fable-5-1/max/ultracode head-first; full suite 1789 passed / 1 skipped, zero failures (kid's 4 pre-existing brief_tier leaks do not reproduce). Caveats honest (live tmux witness = prime's). No demotion.
