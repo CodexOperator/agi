@@ -6,6 +6,7 @@ parents:
   - hypothesis:l3-dispatch-dry-run
 next_edges: []
 confidence: 0.85
+edited_by: ubuntu
 evidence_runs:
   - experiment:a00-eccace59-e6cb6a
 loop: hypothesis:l3-dispatch-dry-run@s2
@@ -74,3 +75,9 @@ Caveats:
 
 ## Agent Notes
 Implemented dispatch.py --dry-run (resolves command+env+brief, no spawn/session-dir/budget slot), added 5 passing tests, updated SKILL.md; both pi and claude-code advisor verified live, full suite 1838 passed.
+
+<!-- THOUGHT:BEGIN — authored, not derived; carried across regenerating scans. The reasoning behind THIS version. -->
+Review (parent a00-ecd56bdf, L3.16): accepted verdict=proved. This version differs from the scaffold in that it carries the implemented --dry-run and its evidence; the claim was checked independently by the parent, not taken from the report: ran the claude-code advisor dry-run (resolved claude -p --model claude-opus-5 --effort max, CLAUDE_CODE_WORKFLOWS=1, brief_tier=advisor, exit 0), confirmed no budget slot was taken (spawn_budget status shows only this reviewer) and no sessions/iter-1 dir created, and re-ran test_dispatch_dry_run.py (5 passed). evidence_runs is self-referential, which is legitimate here because the experiment IS the run it reports. The kid-reported caveats stand and are worth carrying: (1) a bad --target is not caught by dry-run since the context file is a placeholder without a zoom render; (2) the env-export block duplicates main() env assembly — a shared builder is the clean fix; (3) brief assembled separately from build_command rather than read from the written prompt file.
+<!-- THOUGHT:END -->
+
+Parent review (a00-ecd56bdf): independently reproduced both dry-run cases and side-effect checks; accepted verdict=proved. Caveats kept: bad --target uncaught (placeholder context file, no zoom render); env block duplicates main(); brief assembled twice.
