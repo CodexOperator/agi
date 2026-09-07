@@ -5,6 +5,10 @@ type: experiment
 parents:
   - hypothesis:l3-dispatch-env-leaks-into-tests
 next_edges: []
+confidence: 0.7
+edited_by: ubuntu
+evidence_runs:
+  - experiment:a00-737e29f7-e656af
 loop: hypothesis:l3-dispatch-env-leaks-into-tests@s1
 model: ~deepseek/deepseek-v4-flash-latest
 profile: balanced
@@ -12,8 +16,8 @@ role: kid
 scaffold_hash: 3866da61fb541993
 season: 1
 title: A00 737e29f7 e656af
+verdict: inconclusive_lean_proved:75
 ---
-
 # experiment:a00-737e29f7-e656af
 
 ## Experiment
@@ -104,3 +108,11 @@ still hits an AttributeError in write_guard.py L276
 `logged_path = log.get(sha)` (`log` is a tuple, not the dict) — a genuine
 separate defect, unrelated to this hypothesis.
 
+## Agent Notes
+conftest strips AGI_* for test proc + driver pick_loop ignores dispatched AGI_LOOP; suite 1750 passed/1 skipped under live 8-var dispatch env; driver --smoke crash closed
+
+Accepted: conftest AGI_* strip + driver pick_loop + 5 regression tests; suite green under live dispatch env. Demoted verdict proved -> inconclusive_lean_proved:75 because tests-half causality unshown (already green pre-fix); driver-half reproduced and fixed.
+
+<!-- THOUGHT:BEGIN — authored, not derived; carried across regenerating scans. The reasoning behind THIS version. -->
+Parent review demotes from proved: the tests half did NOT independently reproduce — the suite was already green (1741 passed/1 skipped) inside the dispatch env BEFORE any change, so "because the test runner strips the AGI_* vars" is not shown to be causal (the strip is sound preventive hardening, not the thing that made it green). The DRIVER half DID reproduce and is fixed: dispatched AGI_LOOP=hypothesis:x@s1 crashed iter_run ("ERR: not a loop label"); pick_loop now ignores spawn labels and honours CURRENT_LOOP, regression-tested by tests that extract the real function from driver.sh. conftest session-scoped autouse strips AGI_*/AUTORESEARCH_* for the test proc and tests assert zero survive. Full suite green under live 8-var dispatch env (1750 passed/1 skipped) + 5 regression tests pass under a clean shell run of the strip test. Defect class is real (driver proved it), fix is good, but the headline symptom (leak breaking the suite) did not reproduce at this code version — hence lean-not-proved, kept with the fix in place.
+<!-- THOUGHT:END -->
