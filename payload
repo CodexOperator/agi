@@ -712,6 +712,11 @@ def main() -> int:
                 target=target,
                 parallel=adapters.parallelism(cfg),
                 max_live=cap,
+                # hypothesis:l3-cc-tools-by-tier -- who this agent is on the
+                # ladder selects its tool bundle (kids keep the closed list;
+                # advisors/directors add the ultracode/loop tools).
+                role=args.role,
+                ladder_tier=tier_eff,
             )
             spawn_env = adapter.child_env(harness=dispatch_harness, base=scrubbed_env(),
                                            tier=args.tier)
