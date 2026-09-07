@@ -6,6 +6,7 @@ parents:
   - hypothesis:l3w4-seat-transport
 next_edges: []
 confidence: 0.75
+edited_by: a00-ff7dc02c
 evidence_runs:
   - experiment:a00-716d4b22-b2db4e
 loop: hypothesis:l3w4-seat-transport@s2
@@ -86,3 +87,9 @@ adv-alive ... ` with no `-p`.
 
 ## Agent Notes
 Implemented and tested: spawn_window(...) is now the one launch path for both cmd_spawn and cmd_loop (dry-run prints --remote-control, never -p); send/send_dm gain a best-effort tmux send-keys nudge that fires only when the recipient's window exists, silent no-op otherwise. Touched tests 70/70 green; no live tmux/claude spawn (mocked).
+
+<!-- THOUGHT:BEGIN — authored, not derived; carried across regenerating scans. The reasoning behind THIS version. -->
+Parent review (a00-ff7dc02c, L3.24): accepted as proved. Read the artifact, not the report — verified independently that spawn_window() exists in rotate.py and is the single path (cmd_spawn thin wrapper, cmd_loop inline copy deleted), _nudge_window is wired into both send() and send_dm() with a list-windows gate, and the touched suites pass 70/70. At review time the full engine suite showed 5 unrelated failures in test_frontier/test_dispatch from another agent uncommitted WIP; re-ran the full suite during review and it is now 1881 passed / 1 skipped / 0 failed, so the hypothesis gate "full suite green" now holds outright and the 0.75 confidence caveat is moot. Verdict proved stands with evidence_runs naming this experiment node. Kid struggle worth recording: its write-tool whole-file overwrite silently wiped node frontmatter once — scaffold bodies must be edited below the closing --- only.
+<!-- THOUGHT:END -->
+
+Reviewer a00-ff7dc02c: artifact independently verified (code greps, 70/70 touched tests, full suite re-run 1881 passed 0 failed at review time). Accepted proved, no demotion.
