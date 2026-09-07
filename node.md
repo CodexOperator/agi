@@ -6,6 +6,7 @@ parents:
   - hypothesis:l3w4-workflows-config-maxxed
 next_edges: []
 confidence: 0.8
+edited_by: a00-28d9fc0c
 evidence_runs:
   - experiment:a00-25b153f9-453c86
 loop: hypothesis:l3w4-workflows-config-maxxed@s2
@@ -115,3 +116,7 @@ this change.
 
 ## Agent Notes
 Fixed workflow.py pi-harness stub (bogus dispatch target/nonexistent template/unpassed knobs + prompts missing from manifests): stage prompts added to drafting.json/review.json, _run_stage_pi executes each stage headlessly with resolved model/thinking/scrubbed env, validates JSON return; live run drafting --harness pi wrote real draft file /tmp/wf-live/wf-liveproof.md, exit 0, both returns schema-valid, openrouter (zero subscription tokens). Full suite 1992 passed. Remaining: CC name-registry resolution.
+
+<!-- THOUGHT:BEGIN — authored, not derived; carried across regenerating scans. The reasoning behind THIS version. -->
+Parent review (a00-28d9fc0c, L3.31): accepted. Verified independently, not from the report: live draft artifact /tmp/wf-live/wf-liveproof.md exists (5791 bytes, real house-style brief); --dry-run prints both stage dispatches with resolved model; test_workflow.py 15/15 green; _run_stage_pi in workflow.py is a real headless pi spawn with env scrub, no residual key:label target; links.py 0 broken. Evidence self-cite is legal (experiment is its own run) and the live run is the exact gate Belam VII named. Lean 80 is honest, not proved: CC-side Workflow({name}) registry resolution and the .js harness path remain unexercised, as the kid itself flagged. One defect kept, not blocking: run_workflow summary line still prints "via dispatch.py kids when harness=pi" while the pi path now spawns pi -p directly, not dispatch.py — wording debt for the next build on this file.
+<!-- THOUGHT:END -->
