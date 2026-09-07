@@ -809,7 +809,7 @@ def test_scaffold_stamps_the_child_row_not_the_spawner_env(tmp_path, monkeypatch
     info = d._scaffold_node_for_agent(root, 1, "a00-stubchild", "small",
                                       "hypothesis:seed", role="kid", stamp=child)
     assert info, "scaffold must write a node"
-    fm = _yaml.safe_load(info["path"].read_text().split("---", 2)[1])
+    fm = _yaml.safe_load(Path(info["path"]).read_text().split("---", 2)[1])
     assert fm["role"] == "kid", "node must carry the CHILD's role, not the parent's env"
     assert fm["model"] == "~deepseek/deepseek-v4-flash-latest"
     assert fm["loop"] == "hypothesis:seed@s2"
