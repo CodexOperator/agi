@@ -6,6 +6,7 @@ parents:
   - hypothesis:l3-send-comms-root
 next_edges: []
 confidence: 0.85
+edited_by: ubuntu
 evidence_runs:
   - experiment:a00-8aa136ef-456570
 loop: hypothesis:l3-send-comms-root@s2
@@ -117,3 +118,9 @@ not exist. This node IS the fix — implemented, unit-tested (45 green), and
 verified live against the real graph (default root, rooms listing, read --all,
 git tracking). Config edited with a byte-preserving one-key insertion rather
 than a JSON round-trip, so the diff is minimal and the loop's key order intact.
+
+Review (parent a00-e9d80a23, L3.16): VERDICT ACCEPTED as proved. Independently re-verified: config.json carries locations.comms_root: comms/season-2; .gitignore has the .agi/comms guard; send.py rooms resolves tier3-quorum (12 unread) at the new season root, NOT iter-1088; test_send.py re-run by reviewer = 45 passed. evidence_runs cites this node; parents resolve. One caveat carried forward: the full-suite failure in test_node_writer is from another agents uncommitted dispatch.py edit — out of scope here, flagged in the note so it is not attributed to this change. Changes intentionally left uncommitted per kid rules; parent/automation owns the commit.
+
+<!-- THOUGHT:BEGIN — authored, not derived; carried across regenerating scans. The reasoning behind THIS version. -->
+Reviewer confirmation, not a verdict change: every headline claim of this node was re-run by the parent (config key, gitignore guard, rooms resolution, 45/45 test_send) and all held exactly as written, so the kids proved stands without demotion. The note records the one scope boundary a future reader needs: the pre-existing test_node_writer failure belongs to an unrelated uncommitted dispatch.py edit, and the whole fix set is deliberately uncommitted pending the parent/automation commit path.
+<!-- THOUGHT:END -->
