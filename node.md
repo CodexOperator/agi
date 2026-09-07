@@ -96,3 +96,8 @@ Same-bytes payload re-log is now a sanction: replace_payload logs (mint_id, sha2
 <!-- THOUGHT:BEGIN — authored, not derived; carried across regenerating scans. The reasoning behind THIS version. -->
 Red-first: test_write_guard_silent_after_same_bytes_payload_relog reproduced the L3.27 same-bytes skip (IndexError — no replace_payload entry) and fails on un-fixed code. Fix reviewed and confirmed: replace_payload gains mint_id param and logs (mint_id, sha256, changed:False) on the unchanged branch; write.py submit threads the real mint_id via read-only _node_mint_id (no file write, invariant holds). Parent re-ran the new test independently: passes. Node-body update log untouched as claimed. Verdict proved accepted — evidence_runs names this experiment, which is the run.
 <!-- THOUGHT:END -->
+
+Parent review (a00-bc10a761, L3.28): artifact read, fix verified in node_writer.py L456-513, new guard test re-run independently and passes. Red-first claim accepted (test asserts replace_payload entry absent pre-fix). 1 pre-existing unrelated failure (test_seat_status.py) noted as caveat, not blocking. Verdict proved upheld.
+
+## Agent Notes
+Same-bytes payload re-log is now a write-log sanction (write.py payload verb); red-first guard test added; verdict proved upheld after parent re-run of the test.
