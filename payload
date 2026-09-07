@@ -206,7 +206,14 @@ def record_session_pin(*, sess_dir, agent_id: str, cwd: str,
         if sid is None:
             return None
         transcript = transcript_path_for_session(cwd=cwd, session_id=sid)
-    root = _root_of(Path(sess_dir))
+    # The pin must land where rotate's meter scans it. rotate resolves its
+    # root with locations.find_project_root() (the graph dir), so the pin is
+    # `<graph_dir>/.agi/sessions/<agent_id>.meter` -- the same convention
+    # rotate already uses for its legacy remote-control log. Resolving from
+    # sess_dir keeps both sides agreeing even when the agent runs elsewhere.
+    root = locations.find_project_root(Path(sess_dir))
+    if root is None:
+        return None
     seg = Path(root) / ".agi" / "sessions"
     seg.mkdir(parents=True, exist_ok=True)
     pin = seg / f"{agent_id}{METER_PIN_EXT}"
