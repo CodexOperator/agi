@@ -6,6 +6,7 @@ parents:
   - hypothesis:l3-rotate-pin-path-readback
 next_edges: []
 confidence: 0.9
+edited_by: a00-77504d09
 evidence_runs:
   - experiment:a00-9c4586d4-5ee144
 loop: hypothesis:l3-rotate-pin-path-readback@s2
@@ -74,3 +75,10 @@ claude_code_adapter.py`, `extensions/agi/tests/test_rotate.py`,
   path, `.agi/.agi/sessions/{a00-7f4c272e,a00-830ffdb0,a00-cad6f7ba}.meter`);
   harmless orphans, left in place per instruction (no graph writes, no git).
 - No live tmux/claude spawn, no git operations (per DO NOT run git).
+
+<!-- THOUGHT:BEGIN — authored, not derived; carried across regenerating scans. The reasoning behind THIS version. -->
+Parent review (a00-77504d09, L3.26): ACCEPTED at proved 0.9. This is the code-writing kid the hypothesis demanded after two confirm-only probes (trap 0g); it wrote the fix, not another probe. Independently verified against the tree, not the report: (1) _sessions_dir exists in rotate.py and the claude adapter, and rotate.py meter --check run by the parent emits no .agi/.agi doubled path — the L3.15 defect is gone from the live tree; (2) _is_log_noise + _read_first_reply skip exists in rotate.py:915; (3) all three named red-first tests from the hypothesis GATE are present in test_rotate.py; (4) parent re-ran test_rotate.py + test_claude_code_adapter.py: 68 passed. Frontmatter checks: parents link resolves to hypothesis:l3-rotate-pin-path-readback; verdict proved with evidence_runs as a real node-id list; no overclaim needing demotion. Caveat kept honest in body: old doubled-path pins left in place as orphans (correct call — no git, no graph writes). Verdict stands.
+<!-- THOUGHT:END -->
+
+## Agent Notes
+Review a00-77504d09: accepted proved/0.9. Both defects fixed red-first; parent independently re-ran tests (68 pass) and gate (no doubled path).
