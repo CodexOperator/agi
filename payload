@@ -637,7 +637,7 @@ SESSION_LIMIT_TEXT = "You've hit your session limit"
 #: The reset time named after the limit message, e.g. `resets 5:20am
 #: (America/New_York)` -> `5:20am (America/New_York)`.
 SESSION_LIMIT_RESET_PATTERN = re.compile(
-    r"resets?\s+(.*?)(?:\)|\s*)$", re.IGNORECASE
+    r"resets?\s+(.+?)\s*$", re.IGNORECASE
 )
 
 #: The exit code a session-limited handle returns so a parent DONE contract
@@ -691,7 +691,7 @@ def limit_from_result_text(text: str) -> str | None:
         return None
     m = SESSION_LIMIT_RESET_PATTERN.search(text)
     if m and m.group(1).strip():
-        return m.group(1).strip().rstrip(")")
+        return m.group(1).strip()
     return None
 
 
