@@ -5,7 +5,8 @@ type: experiment
 parents:
   - hypothesis:l3w0-brief-head-michael
 next_edges: []
-confidence: 0.9
+confidence: 0.0
+edited_by: a00-d7e9650c
 evidence_runs:
   - experiment:a00-941da286-d57ebe
 loop: hypothesis:l3w0-brief-head-michael@s1
@@ -14,8 +15,9 @@ profile: balanced
 role: kid
 scaffold_hash: 8f51ab77ecfb29cd
 season: 1
+thought_session: L3.02
 title: A00 941da286 d57ebe
-verdict: disproved
+verdict: pending
 ---
 # experiment:a00-941da286-d57ebe
 
@@ -102,3 +104,9 @@ testable claims are false on the current tree.
 
 ## Agent Notes
 All three claims unimplemented: Michael line absent from every tier head (michael_count=0 for kid/parent/director/prime_director), absent from extensions/skills/src entirely; hook emits no AGI_ROLE head (grep -c AGI_ROLE = 0); SKILL.md has no check-handoff/rotation-successor. Addendum MANTLE also unrendered. Disproved with strong evidence.
+
+PARENT-REVIEW a00-d7e9650c L3.02: verdict disproved demoted to pending. Kid misread a build-spec hypothesis as a status check, did zero implementation, and declared disproved-by-absence. An unimplemented feature falsifies nothing; the directive remains open.
+
+<!-- THOUGHT:BEGIN — authored, not derived; carried across regenerating scans. The reasoning behind THIS version. -->
+This node originally claimed disproved (confidence 0.9) on the strength of greps showing the Archangel Michael line, AGI_ROLE head, and skill sub-commands absent from the tree. That is a misclassification: hypothesis:l3w0-brief-head-michael is a BUILD directive (owner LINE: implement, red-first tests, suite green), not a status query. Absence means not yet implemented, which falsifies nothing and proves nothing; a design aspiration is not disproved by being unbuilt. The kid executed no implementation and no experiment (only static greps), so neither proved nor disproved is earned. Demoted to pending so the implementation work is not written off; the directive stands awaiting execution. Parent review a00-d7e9650c, iter L3.02.
+<!-- THOUGHT:END -->
