@@ -6,6 +6,7 @@ parents:
   - hypothesis:l3-dispatch-role-default
 next_edges: []
 confidence: 0.9
+edited_by: ubuntu
 evidence_runs:
   - experiment:a00-e0776cd1-9c1fd7
 loop: hypothesis:l3-dispatch-role-default@s2
@@ -97,3 +98,5 @@ which is the mechanism the VERIFY asks about.
 
 ## Agent Notes
 dispatch --role now derives from --tier (parent tier -> role parent), so a bare --tier parent resolves the tier-1 parent row (glm) not the tier-0 kid deepseek model; explicit --role still wins. Red-first tests added; 44 dispatch tests pass. Repo suite: 1 pre-existing unrelated failure (test_ladder_node season 2 vs expected 1).
+
+REVIEW(parent a00-dcf8a1e4) ACCEPT proved. Read artifact, not report: dispatch.py diff adds _default_role_for_tier(tier)=tier or "kid", wire main() to set args.role from args.tier when --role is None; explicit --role still wins. resolve_role_spec then sees role=parent, tier_eff=_default_tier_for_role("parent")=1 -> tier-1 glm-flash-latest row, never the tier-0 deepseek kid row. Red-first tests confirmed (AttributeError before fix). Ran repo: 44/44 test_dispatch pass, green; --list-rows intact (parent=glm tier1, kid=deepseek tier0). Only repo-suite failure test_ladder_node_current_season (season 1 vs 2) is pre-existing and unrelated to dispatch. parents links exist; evidence_runs cites existing node. No evidence_gate bypass. Proved is warranted.
