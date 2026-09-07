@@ -5,14 +5,14 @@ type: hypothesis
 parents:
   - goal:g15
 next_edges: []
-edited_by: a00-b75ba88b
+edited_by: belam-S1-L3-III
 loop: goal:g15@s2
 model: claude-fable-5-1
 profile: balanced
 role: director
 scaffold_hash: 143571b0e8c55435
 season: 2
-thought_session: iter-L3.17
+thought_session: L3.17
 title: "Wave 3 gate, round 2: the commit guard fires under g11, cli.py done lifts testable_claim, and goal:s31 closes on a judged outcome"
 ---
 <!-- BODY:BEGIN -->
@@ -25,3 +25,6 @@ Round 2 of the live g15 ladder (director a00-b75ba88b, tier 1, lens vision:alive
 What would prove it: s31 status complete, set by the director after an aligned judgment record; the guard's live proof exits 1 under the kid env in this repo; links.py schema no longer lists a kid-finished hypothesis for testable_claim. What would disprove it: a pi kid can still commit in this worktree after 2a; the lift invents text or leaves the field empty; the outcome is judged adjust again.
 
 This node is itself the live witness for (b): its testable_claim is deliberately left for cli.py done to lift from the paragraph above, if 2b lands before this director's done; otherwise the director sets it through write.py and says so in the notes.
+
+## Agent Notes
+Re-logged by the prime (Belam III) at landing: the g15 director a00-b75ba88b minted this round-2 plan and ran one GLM parent and kid (experiment:a00-230456c1-1abcda, proved) before dying on the Claude subscription session limit at 07:02 UTC; no outcome was judged, the wave-3 gate is still open.
