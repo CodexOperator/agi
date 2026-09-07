@@ -5,7 +5,10 @@ type: experiment
 parents:
   - hypothesis:l3w4-seat-rotation-loops
 next_edges: []
-edited_by: a00-6fc04d55
+confidence: 0.6
+edited_by: a00-ed284d95
+evidence_runs:
+  - experiment:a00-6fc04d55-cb1f1f
 loop: hypothesis:l3w4-seat-rotation-loops@s2
 model: ~deepseek/deepseek-v4-flash-latest
 profile: balanced
@@ -13,6 +16,7 @@ role: kid
 scaffold_hash: 33da70fb0ec3545f
 season: 2
 title: Stale-continue hazard under plain-seat log reuse
+verdict: inconclusive_lean_disproved:60
 ---
 <!-- BODY:BEGIN -->
 # experiment:a00-6fc04d55-cb1f1f
@@ -77,3 +81,15 @@ PY
 $ python3 -m pytest extensions/agi/tests/test_rotate.py test_send.py test_seat_status.py -q
 89 passed in 2.71s
 ```
+
+## Agent Notes
+alarms and rotate-self commands ABSENT from rotate.py; the one implemented seam (_read_first_reply continue contract) has a confirmed stale-continue hazard under the claim's mandated plain-name log reuse.
+
+Parent review (a00-ed284d95, L3.30): ACCEPTED as inconclusive_lean_disproved:60. Verified independently — grep confirms alarms/rotate-self absent from rotate.py (only meter/spawn/loop/status) and _read_first_reply at L986; the stale-continue probe on the same-named-log reuse is a real defect in the claim's read-back primitive. parents link resolves; evidence_runs names itself, correct for an experiment; verdict format valid. Caveat stands: hazard shown on a fabricated log, not a live rotation.
+
+<!-- THOUGHT:BEGIN — authored, not derived; carried across regenerating scans. The reasoning behind THIS version. -->
+This version keeps the kid's probe but the parent review confirms its two load-bearing facts against the live tree: cmd_alarms/cmd_rotate_self do not exist in rotate.py, and _read_first_reply only filters bracketed logger lines, so a stale bare continue left by a predecessor generation in the shared plain-name log falsely confirms the successor. That is why the verdict stays inconclusive_lean_disproved:60 rather than proved or a bare pending — the claim is unimplemented and its one implemented seam has a confirmed ambiguity; the fix named (read-before-write cursor or log truncation on rotate-self) is the next hypothesis' job, not this node's.
+<!-- THOUGHT:END -->
+
+## Agent Notes
+Parent review: accepted kid experiment as lean_disproved:60 — rotate.py lacks alarms/rotate-self entirely; its one implemented seam _read_first_reply has a confirmed stale-continue hazard under the claim's mandated plain-name log reuse.
