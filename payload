@@ -1428,6 +1428,24 @@ def _explicit_targets(
     return [(level or "small", target, strategy)] * n
 
 
+def _attractiveness(desc: int, recency_boost: float, diversity: float,
+                   node_type: str) -> float:
+    """Attractiveness score for one node (dispatch chain-ranking).
+
+    The recency leaf boost used to be `desc * 1.2` — and `_descendant_count`
+    returns 0 for a leaf, so `0 * 1.2 == 0.0` and the boost never fired:
+    every chain tip scored 0 and sorted last (idea:frontier-invitation
+    measured this at dispatch.py:1466). Flooring the descendant term at 1
+    is what lets a leaf's boost mean anything: a leaf scores 1.2 (not 0.0)
+    and can rank. The floor is identity for every non-leaf, which already
+    has desc >= 1, so nothing else changes.
+    """
+    type_weight = {"hypothesis": 1.4, "experiment": 1.2, "verdict": 1.1}.get(
+        node_type, 1.0
+    )
+    return max(desc, 1.0) * recency_boost * type_weight * (1.0 + 0.1 * diversity)
+
+
 def _pick_targets(root: Path, n: int) -> list[tuple[str, str | None, str]]:
     """Choose (zoom_level, target_node_id, strategy) for each of N slots.
 
@@ -1530,16 +1548,15 @@ def _pick_targets(root: Path, n: int) -> list[tuple[str, str | None, str]]:
         return len(sub_types) / max(len(list(g.nodes)), 1)
 
     for node_id in g.node_ids:
-        desc = _descendant_count(node_id)
         node = g.get_node(node_id)
-        # Recency: leaf nodes with no children get a small boost (untested = potential)
+        # Recency: leaf nodes with no children get a small boost.
         recency_boost = 1.2 if (node and not node.children) else 1.0
-        diversity = _type_diversity(node_id)
-        # Type weighting: hypothesis and experiment are high-value chain starts
-        type_weight = {"hypothesis": 1.4, "experiment": 1.2, "verdict": 1.1}.get(
-            node.type if node else "", 1.0
+        scores[node_id] = _attractiveness(
+            _descendant_count(node_id),
+            recency_boost,
+            _type_diversity(node_id),
+            node.type if node else "",
         )
-        scores[node_id] = desc * recency_boost * type_weight * (1.0 + 0.1 * diversity)
 
     # Sort nodes by attractiveness (descending)
     ranked = sorted(scores.items(), key=lambda x: x[1], reverse=True)
