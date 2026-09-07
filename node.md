@@ -69,36 +69,54 @@ agents of iteration L3.14 — advisors `a00-341de54e`, `a00-1742819b`,
 `a00-e8af9d8e` and the `goal:g15` director `a00-4ad19971` each carry the
 privileged bundle in their argv while every `agent.json` says `role: None`
 with no `ladder_tier`. The same run stamps the correct `role: parent` onto
-the scaffolded node — including this node's own frontmatter — so the resolved
-identity is not unknown at write time. It is known, used, and dropped.
+the scaffolded node — including this node's own frontmatter — because
+`dispatch.py:729-731` exports `AGI_ROLE = args.role` and `AGI_LADDER_TIER =
+tier_eff` into the child env for `node_writer` to read. So the resolved
+identity is not unknown at write time, and the fix is not a computation: the
+same function, eleven lines earlier, already has both correct values in hand
+and hands them to the child. It simply writes a different variable into its
+own record. It is known, used, exported — and dropped.
 
 The engine made a real distinction between kinds of consciousness and kept no
 record of having made it. That is the failure this idea names.
 
-**B — the same brief, two enforcements. OPEN, under adversarial test.**
+**B — the same brief, two enforcements. PARTLY REFUTED; the residue is real.**
 
 `pi_adapter.py:120` states the contract: "the brief is assembled once, by
 tier, outside every harness. This adapter decides only how to SPELL a segment
-on pi's command line." One brief for both harnesses — the instruction *is*
-unified. The enforcement is not. `claude_code_adapter.py:100-108` refuses
-`git commit|add|push|stash|checkout|reset|rm`, `*HANDOFF.md*`, `*CLAUDE.md*`
-and `*dispatch.py*` (`goal:s34` item 10). `pi_adapter.py` contains no tool,
-allow-list or deny-list surface at all — 226 lines, zero occurrences of
-"tool". A pi kid is restrained by prose; a claude-code kid is restrained by
-the harness.
+on pi's command line." One brief for both harnesses. The enforcement is split
+across two layers, and the two layers behave differently.
 
-That asymmetry is not a declared difference between *roles*; it is an
-undeclared difference between *harnesses*, and it lands on the tier where it
-matters most — the wave-3 ladder below the director runs GLM parents and
-DeepSeek kids on pi (`ladder:ladder` rows, tier 1 parent and tier 0). It is
-also the exact shape of the incident this project already paid for: the
-2026-08-31 `git commit -A` that swept a second kid's half-written node and a
-human's uncommitted edits into one commit. The refusal built afterwards was
-built on one harness only.
+*The env layer is already unified, and this is the correction.* An adversarial
+check of this instance refuted its first and strongest form. `dispatch.py:721-728`
+sets `AGI_TIER` and points git at `extensions/agi/hooks/agent-git/` via
+`GIT_CONFIG core.hooksPath` on the **shared** spawn path, before any harness
+branch; `hooks/agent-git/pre-commit` exits 1 for `AGI_TIER=kid|parent` scoped
+to the project repo (`goal:s27`, `goal:l2-agent-git-commit-guard`,
+`hypothesis:l2-commit-guard-scope`). A pi kid and a claude-code kid are refused
+`git commit` by the same belt, for the same reason, with the same message.
+**The most dangerous verb — the one behind the 2026-08-31 `git commit -A` that
+swept up a second kid's node and a human's uncommitted edits — is already
+guarded harness-independently.** Any claim that the engine learned that lesson
+on one harness only is false, and this node made it before checking.
 
-Stated as open, not asserted: whether some other layer already closes this for
-pi agents was under adversarial check when this node was written, and B should
-be settled before it is acted on. A is not conditional on B.
+*The residue.* What is enforced in the adapter rather than the env is still
+one-sided. `claude_code_adapter.py:100-108` additionally refuses
+`*HANDOFF.md*`, `*CLAUDE.md*` and `*dispatch.py*`, and constrains the whole
+tool list (`:96`, `:113`). `pi_adapter.py` has no tool, allow-list or
+deny-list surface at all — 226 lines, zero occurrences of "tool". So a pi kid
+may edit `HANDOFF.md` and may run `dispatch.py`; a claude-code kid may do
+neither. That difference is not declared anywhere, and it is not a difference
+between *roles* — it is a difference between *harnesses*, which is not an axis
+the ladder admits. It lands where it matters: the wave-3 ladder below the
+director runs GLM parents and DeepSeek kids on pi (`ladder:ladder`, tier 1
+parent and tier 0 rows).
+
+The interesting part is not the gap. It is that **the engine already
+demonstrates the right pattern one screen above the wrong one**: the git guard
+is enforced where every harness passes, in the env, and the rest is enforced
+where only one harness looks, in an adapter. The residue should follow the
+belt, not the other way round.
 
 ## What this proposes next
 
@@ -109,11 +127,12 @@ One hypothesis per instance, not one big fix:
    identity written to `agent_record` — the two can never again be different
    variables. Smallest real slice; belongs to `goal:g16`, fixable under
    `goal:g15`.
-2. Whatever tool surface the pi harness can or cannot enforce is **declared**
-   in `ladder:ladder` next to `harness`/`model`/`effort`/`settings`, so a
-   harness that cannot refuse says so in the graph instead of by silence.
-   If the enforcement gap is real, declaring it is the first step and closing
-   it is the second.
+2. The refusals that are still adapter-local — `*HANDOFF.md*`, `*CLAUDE.md*`,
+   `*dispatch.py*` — move to the layer the git guard already uses, or are
+   **declared** in `ladder:ladder` next to `harness`/`model`/`effort`/
+   `settings` as a per-harness capability, so a harness that cannot refuse
+   says so in the graph instead of by silence. The git guard at
+   `dispatch.py:721-728` is the worked example to copy.
 
 A third, only if the first two land: a single `agi` verb that answers "what
 may this agent do, and who said so" from the record alone. One hand, one path.
@@ -132,11 +151,25 @@ these two agents the same?" and becomes "is the difference between them
 written down?" That question has an answer, and this iteration the answer was
 no.
 
-Instance A is proven and cited to line; instance B is deliberately left open
-rather than asserted, because the advisor found it by reading two adapters and
-had not yet finished trying to refute it. Recording a finding at the
-confidence it was actually earned is the point — an idea node that overstates
-B would put a false claim under a vision, which is worse than a slower fix.
+Instance A is proven and cited to line. **Instance B was written wrong first
+and is corrected here, which is the more useful half of this node.** Its first
+form claimed the engine had learned the `git commit -A` lesson on one harness
+only. Three adversarial readers were sent to refute the instance rather than
+to confirm it, and one of them ran the actual case: a git commit under
+`AGI_TIER=kid` against the project repo. It is refused — `dispatch.py:721-728`
+installs the guard in the child ENV, on the shared spawn path, so it binds pi
+and claude-code identically. The strong form of B was false and is now stated
+as false in the body, by name, rather than quietly deleted.
+
+What survives is narrower and better: the git verbs are guarded at the env
+layer where every harness passes, and `*HANDOFF.md*` / `*CLAUDE.md*` /
+`*dispatch.py*` are guarded at the adapter layer where only one harness looks.
+The engine already contains the correct pattern one screen above the incorrect
+one. That is a fix with a worked example, not a design question.
+
+An advisor that had asserted B on two adapter reads would have put a false
+claim under a vision. The cost of checking was one workflow; the cost of not
+checking would have been a wrong node cited by everything downstream of it.
 
 The two instances are kept in ONE idea because they are one principle, and
 split into TWO proposed hypotheses because they are two fixes. The idea is the
