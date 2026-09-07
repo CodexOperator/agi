@@ -6,6 +6,7 @@ parents:
   - hypothesis:l3w4-parent-branch-merge-up
 next_edges: []
 confidence: 0.6
+edited_by: a00-918d1dec
 evidence_runs:
   - experiment:a00-c1288274-713bdb
 loop: hypothesis:l3w4-parent-branch-merge-up@s2
@@ -121,3 +122,9 @@ the two-live-parents rehearsal gate still needs a seat to run real dispatches
 
 ## Agent Notes
 Built the dispatch --branch half of hypothesis:l3w4-parent-branch-merge-up: git worktree add from the SPAWNER's branch, child cwd+AGI_TREE_PROJECT_ROOT=worktree, lease+agent-record carry branch/base_branch/worktree, comms root + rotate meter pin dir routed to main git_common_root; spawn_budget.attach_branch + send._main_graph_root + rotate._sessions_dir. Region 257 green, full suite 1919 passed. Lean-proved (not proved) because the two-live-parents rehearsal gate needs a seat to run real dispatches + merge-up; restart-under-branch is also not wired.
+
+REVIEW (parent a00-918d1dec, L3.26): accepted at inconclusive_lean_proved:65. Independently reproduced: full suite 1919 passed, 1 skipped on this tree. dispatch.py --branch is real (spawner-branch base, worktree under main .agi/worktrees/<agent>, child cwd+env = worktree, kill-paths drop the worktree), lease+record carry branch/base_branch/worktree, comms root and meter pins resolve to the main checkout. Honest ceiling: the two-live-parents rehearsal gate is the only thing between this and proved, correctly left unclaimed.
+
+<!-- THOUGHT:BEGIN — authored, not derived; carried across regenerating scans. The reasoning behind THIS version. -->
+Review accepted as landed. This node closes the dispatch --branch half of the claim; combined with experiment:a00-3923283a-090f9e (merge-up), every mechanical piece of hypothesis:l3w4-parent-branch-merge-up now exists and is test-covered, and the full suite is green with both slices on one tree. Held at lean-proved:65 rather than proved because the claim is only complete once two live parents on the same file run concurrently and merge up green through a seat - a paid, live-dispatch rehearsal no unit slice can substitute. Restart-under-branch is correctly flagged as out of scope for this slice and the sensible workaround (re-dispatch) is named.
+<!-- THOUGHT:END -->
