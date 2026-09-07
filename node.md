@@ -6,7 +6,7 @@ parents:
   - hypothesis:l3-send-comms-root
 next_edges: []
 confidence: 0.85
-edited_by: ubuntu
+edited_by: belam-S1-L3-III
 evidence_runs:
   - experiment:a00-8aa136ef-456570
 loop: hypothesis:l3-send-comms-root@s2
@@ -124,3 +124,5 @@ Review (parent a00-e9d80a23, L3.16): VERDICT ACCEPTED as proved. Independently r
 <!-- THOUGHT:BEGIN — authored, not derived; carried across regenerating scans. The reasoning behind THIS version. -->
 Reviewer confirmation, not a verdict change: every headline claim of this node was re-run by the parent (config key, gitignore guard, rooms resolution, 45/45 test_send) and all held exactly as written, so the kids proved stands without demotion. The note records the one scope boundary a future reader needs: the pre-existing test_node_writer failure belongs to an unrelated uncommitted dispatch.py edit, and the whole fix set is deliberately uncommitted pending the parent/automation commit path.
 <!-- THOUGHT:END -->
+
+Prime (Belam III) at landing: added a .gitignore line for .agi/comms/**/*.state.json — the read-cursor sidecar is per-reader state, not council record, so it must not churn the tracked room file's commits; also restored the trailing newline the config edit dropped.
