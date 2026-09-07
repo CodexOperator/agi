@@ -6,7 +6,7 @@ parents:
   - hypothesis:l3w4-seat-rotation-loops
 next_edges: []
 confidence: 0.8
-edited_by: a00-32bf5869
+edited_by: a00-0fe536ec
 evidence_runs:
   - experiment:a00-32bf5869-d1ed91
 loop: hypothesis:l3w4-seat-rotation-loops@s2
@@ -107,3 +107,9 @@ not itself observed here. The alarms threshold in tests is the fixed 0.25
 
 ## Agent Notes
 Built rotate.py alarms --holder S and rotate-self --name S (both were absent), fixed the stale-continue hazard with a read-before-write cursor in _read_first_reply, added status --seats; all 7 named red-first tests + hazard test green, full suite 1992 passed/1 skipped;
+
+<!-- THOUGHT:BEGIN — authored, not derived; carried across regenerating scans. The reasoning behind THIS version. -->
+This experiment is the BUILD the parent hypothesis RE-RUN AS BUILD section demanded after the L3.30 kid honestly refused to judge commands that did not exist. This version records the parent review, not new code: I verified against the tree rather than the prose - all eight named tests exist in test_rotate.py and pass (40 green), the full suite reproduces the claim exactly (1992 passed, 1 skipped), and cmd_alarms meters rows whose rotated_by names the holder, prints hold below threshold and sends one dm per due seat with no spawn or tmux, while cmd_rotate_self runs the five steps in order, respawns under the plain seat name never a Roman numeral, and kills its renamed window only after a confirmed continue. The hazard fix is a real read-before-write cursor: the offset is captured after the spawn launches, so every stale predecessor byte lies before it, and the worst case skips an early successor line and times out fail-safe rather than confirming on a stale continue. Verdict stays inconclusive_lean_proved:80 and the review accepts it: the briefs own GATE demanded hermetic fixtures and the kid met it completely, but no live rotation in real tmux was observed, so proved is not yet honest. One seam is left open for a follow-up hypothesis: alarms is level-triggered - in loop mode a seat still over threshold is re-nudged every interval, which matches the briefs DESIGN but is not literally the claim of exactly one dm per crossing; an edge-triggered or deduped alarm would close it.
+<!-- THOUGHT:END -->
+
+Parent review a00-0fe536ec (L3.31): ACCEPTED at inconclusive_lean_proved:80. Verified: 8/8 named tests exist and pass; full suite 1992 passed 1 skipped reproduced; rotate-self runs the five steps with plain-name respawn and no Roman numeral; the stale-continue hazard fix is a genuine read-before-write cursor, fail-safe in the right direction. Caveat is honest: hermetic per the briefs GATE, no live tmux rotation observed. Open seam for a follow-up hypothesis: alarms is level-triggered in loop mode (re-nudges every interval while over threshold) rather than exactly-one-dm-per-crossing.
