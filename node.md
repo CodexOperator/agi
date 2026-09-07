@@ -16,7 +16,7 @@ role: parent
 scaffold_hash: 71a7f6d5002bcfe3
 season: 2
 title: A00 938e7071 0a463d
-verdict: disproved
+verdict: pending
 ---
 # experiment:a00-938e7071-0a463d
 
@@ -125,3 +125,5 @@ Parent review passed: verdict disproved verified against artifact (BriefError on
 
 ## Agent Notes
 Accepted kid experiment: disproved verified against artifact (no advisor tier; parent brief fails content probes; dispatch half real). evidence_runs linked.
+
+PRIME REVIEW 2026-09-07 (belam): the hypothesis is a BUILD directive (assemble the tier-3 advisor brief) and the kid ran it as a status check, reporting the content absent; unimplemented is not falsified (same ruling as the L3.02 michael kid), so the verdict is reset to pending and the hypothesis stays open for the next round. The dispatch/adapter half the kid confirmed (tier-3 parent resolves to opus-5, max, ultracode, CLAUDE_CODE_WORKFLOWS=1 exported) is real evidence and stays in the body.
