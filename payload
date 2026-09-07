@@ -38,6 +38,7 @@ the `:N`-read-as-`0.6` incident that `VERDICT_HELP` now spells out).
 from __future__ import annotations
 
 import re
+import sys
 from pathlib import Path
 
 import evidence_gate
@@ -258,19 +259,22 @@ def _read_mantle(root: Path) -> tuple[str, str] | None:
     value = fm.get("mantles_prime_director") or fm.get("mantles", {}).get("prime_director")
     if not value:
         value = ""
-    m = re.search(
-        rf"^{re.escape(_MANTLE_BODY_PREFIX)}[^\n]*\n?", text, re.MULTILINE
-    )
-    if not m:
+    # The ladder node's body prose is one unwrapped paragraph, so the heading
+    # and the mantle bite share a line. Find the heading label, then take the
+    # rest of that line after the colon.
+    i = text.find(_MANTLE_BODY_PREFIX)
+    if i == -1:
         return (str(value), "")
-    rest = text[m.end():]
-    body = rest.split("\n## ", 1)[0].strip()
+    nl = text.find("\n", i)
+    line = text[i: nl if nl != -1 else len(text)]
+    colon = line.find(":")
+    rest = line[colon + 1:].strip() if colon != -1 else line
     # Drop the meta parenthetical that follows the value ("Belam (owner text
     # 2026-09-06, verbatim; ...)."), keeping the owner's mantle prose verbatim.
-    j = body.find("). ")
+    j = rest.find("). ")
     if j != -1:
-        body = body[j + len("). "):].strip()
-    return (str(value), body)
+        rest = rest[j + len("). "):].strip()
+    return (str(value), rest)
 
 
 def _split_top_sections(body: str) -> list[str]:
@@ -783,3 +787,49 @@ def closing_line(tier: str, agent_id: str, iter_n: int) -> str:
                 f"reports, write HANDOFF.md live, rotate when due.")
     return (f"Begin iteration {iter_n} as agent {agent_id}. "
             f"Read your zoom context, do the work, signal done.")
+
+
+# ---- head CLI: the SessionStart hook fetches a tier's head through this -------
+
+
+def main(argv: list[str] | None = None) -> int:
+    """`brief.py head --tier T [--project-root ROOT]` — print one tier's
+    constitution head to stdout, so the SessionStart hook (cc-session-start.sh,
+    `hypothesis:l3w0-brief-head-michael`) can prepend it before the prompt
+    text when a role/tier is named in the environment."""
+    import argparse
+
+    if argv is None:
+        argv = sys.argv[1:]
+    p = argparse.ArgumentParser(prog="brief.py")
+    sub = p.add_subparsers(dest="cmd", required=True)
+    ph = sub.add_parser("head", help="print a tier's constitution head")
+    ph.add_argument("--tier", required=False, default=None,
+                    choices=TIERS)
+    ph.add_argument("--role", required=False, default=None,
+                    help="alias for --tier (AGI_ROLE spelling)")
+    ph.add_argument("--project-root", default=None,
+                    help="graph root (.agi); defaults to the nearest enclosing "
+                         ".agi walked up from this file")
+    ph.set_defaults(func=_cmd_head)
+    args = p.parse_args(argv)
+    return args.func(args)
+
+
+def _cmd_head(args: argparse.Namespace) -> int:
+    tier = args.tier or args.role
+    if not tier:
+        print("ERR: brief.py head needs --tier (or --role)", file=sys.stderr)
+        return 1
+    root = Path(args.project_root) if args.project_root else None
+    head = _build_head(tier=tier, project_root=root)
+    if not head:
+        # A tier with no head (e.g. no read_order entry) is a silent nothing,
+        # matching _build_head's contract.
+        return 0
+    print(head)
+    return 0
+
+
+if __name__ == "__main__":
+    raise SystemExit(main())
