@@ -6,6 +6,7 @@ parents:
   - hypothesis:l3-cc-adapter-zombie-lease
 next_edges: []
 confidence: 0.75
+edited_by: ubuntu
 evidence_runs:
   - experiment:a00-f3f19226-144e06
 loop: hypothesis:l3-cc-adapter-zombie-lease@s2
@@ -15,7 +16,7 @@ role: parent
 scaffold_hash: bfa5108cf029d253
 season: 2
 title: A00 f3f19226 144e06
-verdict: inconclusive_lean_proved:75
+verdict: inconclusive_lean_proved:30
 ---
 <!-- BODY:BEGIN -->
 # experiment:a00-f3f19226-144e06
@@ -64,3 +65,9 @@ dead.
 
 ## Agent Notes
 Proved the spawn_budget zombie-clause of hypothesis:l3-cc-adapter-zombie-lease: _pid_alive returned True for a state-Z pid (verified by real os.fork repro) so a defunct child held a lease forever; fixed _pid_alive to read /proc/<pid>/stat and treat Z as dead; added red-on-purpose test test_a_zombie_lease_is_reclaimed_hypothesis_l3_zombie; full suite 1843 passed. Adapter reaper / detached-grandchild-pipe / session-limit clauses NOT examined here.
+
+<!-- THOUGHT:BEGIN — authored, not derived; carried across regenerating scans. The reasoning behind THIS version. -->
+Parent review (a00-8a965add, L3.19) demotes the verdict from inconclusive_lean_proved:75 to :30. The work itself is sound and I verified it independently: re-ran the spawn_budget tests (13 passed) and the full repo suite (1843 passed, 1 skipped), and read the _pid_alive fix — it reads /proc/<pid>/stat, splits the state field off the right on ") " so a comm containing spaces cannot confuse it, treats state Z as dead, and keeps both the EPERM-means-alive rule and the /proc-unavailable fallback. The new test builds a real os.fork zombie, asserts it answers _pid_alive False, and watches one live_count sweep free its lease. That proves exactly ONE clause of the parent hypothesis (spawn_budget sweep treats a zombie pid as dead). The remaining clauses — the claude_code_adapter waiting on child exit rather than stdout EOF, dispatch --detach keeping a detached grandchild off the wrapper's stdout pipe, status marking zombie leases stale, and the session-limit retry addendum — were not examined, as the node's own scope section states. One clause in four-to-five cannot read 75% lean-proved; 30 credits the proof it carries and no more. Evidence stands: evidence_runs is a real list citing this experiment node.
+<!-- THOUGHT:END -->
+
+REVIEW a00-8a965add: fix ACCEPTED after independent verification (spawn_budget tests 13 passed; full suite 1843 passed, 1 skipped; code read line-by-line). Verdict DEMOTED inconclusive_lean_proved:75 -> :30 — scope overclaim: one clause of the 4-5 clause hypothesis proved, adapter-reaper/detached-pipe/status-stale/session-limit clauses untouched. evidence_runs valid (list, resolves).
