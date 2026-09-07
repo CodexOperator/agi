@@ -7,7 +7,7 @@ parents:
 next_edges: []
 build_kind: code
 confidence: 1.0
-edited_by: a00-603a7922
+edited_by: belam-S1-L3-V
 link_ref: extensions/agi/workflows/agi-brief-drafting.js
 location: source_root
 loop: hypothesis:l3w4-workflows-config-maxxed@s2
@@ -24,6 +24,7 @@ tags:
   - build
   - code
   - g17
+thought_session: L3.27
 title: Agi brief drafting.js
 ---
 <!-- BODY:BEGIN -->
