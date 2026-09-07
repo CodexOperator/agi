@@ -198,23 +198,41 @@ def _ensure_frontmatter(root: Path, node_file: Path, ap: Path,
     ok, _fm, defect = _load_frontmatter(text)
     if ok:
         return True, "frontmatter ok"
-    if _BODY_BEGIN not in text:
-        return False, (
-            f"{node_file.name}: {defect}, and the body-start marker "
-            f"({_BODY_BEGIN!r}) is absent -- cannot separate a mangled "
-            "frontmatter from the body safely. Restore the `---` block (or "
-            "edit below the closing `---` only) and re-run done."
-        )
+
+    # Determine the body. A *cleanly closed* `---` block delimits it as
+    # `parts[2]` even when the block itself is YAML-broken or missing required
+    # fields -- the close means the body below is intact by construction, so it
+    # can be repaired without the marker. Only when there is no closed block to
+    # delimit the body (missing / unterminated `---`) is the BODY:BEGIN anchor
+    # required: without it there is no safe way to tell a mangled frontmatter
+    # from the start of the body, and a repair might swallow the kid's work.
+    body = None
+    header = None
+    if text.startswith("---"):
+        parts = text.split("---", 2)
+        if len(parts) == 3:
+            body = parts[2]
+            header = parts[1]
+    if body is None:
+        if _BODY_BEGIN not in text:
+            return False, (
+                f"{node_file.name}: {defect}, and the body-start marker "
+                f"({_BODY_BEGIN!r}) is absent -- cannot separate a mangled "
+                "frontmatter from the body safely. Restore the `---` block "
+                "(or edit below the closing `---` only) and re-run done."
+            )
+        header, _marker, body = text.partition(_BODY_BEGIN)
     manifest: dict = {}
     if ap and ap.exists():
         try:
             manifest = json.loads(ap.read_text())
         except Exception:
             manifest = {}
-    header, _marker, body = text.partition(_BODY_BEGIN)
-    new_fm = _salvage_frontmatter(header)
+    # Preserve a block that parsed (it may just be missing fields); salvage
+    # line-by-line only when it did not parse at all.
+    new_fm = dict(_fm) if isinstance(_fm, dict) else _salvage_frontmatter(header or "")
     nid = manifest.get("node_id") or node_id or new_fm.get("id") or ""
-    ntype = manifest.get("scaffolded_node_type") or new_fm.get("type")
+    ntype = manifest.get("scaffolded_node_type") or (_fm or {}).get("type") or new_fm.get("type")
     if ":" in str(nid) and not ntype:
         ntype = str(nid).split(":", 1)[0]
     try:
@@ -235,7 +253,10 @@ def _ensure_frontmatter(root: Path, node_file: Path, ap: Path,
             "id/type to repair from -- cannot rebuild the frontmatter. Fix by "
             "hand, then re-run done."
         )
-    new_body = _BODY_BEGIN + body
+    # `body` is the raw remainder from either branch (the closed-block split or
+    # the marker partition); it already carries the BODY:BEGIN marker when one
+    # was present, so it is written through untouched.
+    new_body = body
     repaired = "\n".join(
         ["---", *node_writer.render_frontmatter(new_fm), "---", ""]
     ) + new_body
