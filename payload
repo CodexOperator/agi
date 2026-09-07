@@ -163,6 +163,11 @@ def project(tmp_path):
 
 
 @pytest.fixture
+def gate(project):
+    rules, index, _ = sg.gate_for_root(project)
+    return rules, index
+
+
 # ---------------------------------------------------------------------------
 # hypothesis:l3w4-seat-registry — read_seat_registry
 # ---------------------------------------------------------------------------
@@ -193,11 +198,6 @@ def test_read_seat_registry_returns_declared_rows(tmp_path):
     names = [r["name"] for r in rows]
     assert names == ["liaison", "belam"]
     assert rows[0]["model"] == "claude-sonnet-5"
-
-
-def gate(project):
-    rules, index, _ = sg.gate_for_root(project)
-    return rules, index
 
 
 # --------------------------------------------------------------------------
