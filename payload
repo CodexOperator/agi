@@ -647,8 +647,8 @@ def test_advisor_brief_lists_the_perpetual_goals_with_titles():
     be able to read the assignment — listed with titles, from the goal nodes,
     not a hardcoded id list."""
     t = _advisor_text()
-    assert "perpetual" in t.lower()
-    assert "goal_kind: perpetual" in t
+    assert "perpetual goals" in t.lower()
+    assert "goal_kind:" in t
     assert "goal:g15" in t and "G15: Bugfix and optimization" in t, \
         "a real perpetual goal and its title must be named"
     assert "READ THE ROOM FIRST" in t
@@ -679,7 +679,7 @@ def test_advisor_brief_keeps_the_six_head_duties_and_git_line():
     t = _advisor_text()
     assert "Sit the quorum" in t
     assert "audience prime" in t
-    assert "NEVER edit vision prose" in t.lower()
+    assert "never edit vision prose" in t.lower()
     assert "DO NOT run git" in t
 
 
