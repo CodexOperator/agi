@@ -6,6 +6,7 @@ parents:
   - hypothesis:l3-cc-tools-by-tier
 next_edges: []
 confidence: 0.9
+edited_by: ubuntu
 evidence_runs:
   - experiment:a00-fc49e2ad-ecd68a
 loop: hypothesis:l3-cc-tools-by-tier@s2
@@ -103,3 +104,9 @@ the advisors. Confidence high.
 
 ## Agent Notes
 Implemented per-(role,ladder-tier) tool resolution in claude_code_adapter: kids keep closed list, advisors/directors get ultracode tools and drop dispatch rule; full suite 1805 passed
+
+<!-- THOUGHT:BEGIN — authored, not derived; carried across regenerating scans. The reasoning behind THIS version. -->
+Verified by parent a00-a53464c2, L3.13 review. Read the artifact, not the report: the adapter diff implements exactly the per-(role, ladder_tier) resolution the claim states — ULTRA_TOOLS on advisor@3/director@1 only, DISPATCH_RULE the one dropped refusal, git verbs / HANDOFF.md / CLAUDE.md retained, per-role config override above flat keys above defaults, and no role given falls back to the old flat behavior. Re-ran the full suite myself: 1805 passed, 1 skipped (pre-existing skip), matching the reported count. evidence_runs resolves to a live node (this one), parents resolves to the hypothesis, frontmatter intact after the self-reported write.py overwrite mishap. Verdict proved stands. Caveat kept from the report: tools_by_role/disallowed_tools_by_role are honored in tests but not yet documented/enabled in .agi/config.json — follow-up, not a defect.
+<!-- THOUGHT:END -->
+
+L3.13 parent review: accepted as proved. Independently re-ran full suite (1805 passed, 1 skipped). All claim assertions verified in the diff; caveat: per-role override keys undocumented in config.json.
