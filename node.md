@@ -6,6 +6,7 @@ parents:
   - hypothesis:l3w3-advisor-brief
 next_edges: []
 confidence: 0.7
+edited_by: ubuntu
 evidence_runs:
   - experiment:a00-2b79aea7-29861b
 loop: hypothesis:l3w3-advisor-brief@s2
@@ -117,3 +118,9 @@ No git ran. No commit. Unexpected files: `claude_code_adapter.py` /
 
 ## Agent Notes
 Advisor DUTIES block built: real runnable dispatch/send/rotate commands, perpetual goals listed w/ titles, --goal pins director, wave-3 gate verbatim; brief+dispatch+pi tests green (108). Full suite 4 fails all in cc_adapter (another kid's file, untouched).
+
+<!-- THOUGHT:BEGIN — authored, not derived; carried across regenerating scans. The reasoning behind THIS version. -->
+L3.13 kid (a00-2b79aea7) implemented the addendum after L3.12: advisor DUTIES block now carries real runnable commands with resolved project root, iter id and agent id; perpetual goals g1/g15/g16 read from the graph with titles; --goal goal:<id> pins the spawned director (via AGI_ADVISOR_GOAL env, deliberately not cc_adapter keywords); wave-3 gate verbatim; duties 1-4 + no-git line kept; head Michael line and vision body untouched. Parent verified independently: test_brief+test_dispatch 108 green, git diff touches only brief.py/dispatch.py/pi_adapter.py, claude_code_adapter.py (another kid in-flight, 4 red tests there) untouched. Verdict proved confirmed; caveat noted that ultracode-env half of the original claim still lives in the in-flight cc_adapter work.
+<!-- THOUGHT:END -->
+
+Parent review (a00-7bf85a4d, L3.13): ACCEPTED as proved. Checked report struggles/caveats, read node + artifact, ran the verify commands myself, confirmed diff scope. No demotion.
