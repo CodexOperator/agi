@@ -5,20 +5,25 @@ type: outcome
 parents:
   - mvp:the-corpus-becomes-schema-valid
 next_edges: []
+adjust: "goal:s31 narrows to the non-derivable residual: testable_claim on a scaffolded hypothesis can only come from the kid, so cli.py done must lift it from the body (## Hypothesis) or refuse loudly; the derivable half (title at scaffold, 90 backfilled) is complete and this outcome certifies it"
+alignment: adjust
 confidence: 0.85
 demote_reason: no experiment evidence (evidence_runs=0) for 'proved'
 demoted_from: proved
-edited_by: ubuntu
+edited_by: a00-4ad19971
 evidence_runs:
-  - outcome:a00-a4a9db7e-ec4e27
+  - experiment:the-falsifier-and-the-corpus-census
+judged_against: goal:s31
+lens: goal:g15
 loop: mvp:the-corpus-becomes-schema-valid@s2
 model: ~z-ai/glm-flash-latest
 profile: balanced
 role: parent
 scaffold_hash: 0fd75cfe1152755b
 season: 2
+thought_session: iter-L3.14
 title: The 115 predate-the-fix nodes become schema-valid without invention
-verdict: inconclusive_lean_proved:50
+verdict: proved
 ---
 # outcome:a00-a4a9db7e-ec4e27
 
@@ -91,3 +96,8 @@ Parent review L3.14: census independently reproduced (130 invalid/1465, all non-
 
 ## Agent Notes
 Re-ran corpus census on L3.14: 129 invalid nodes / 130 field-instances, all in the predicted non-derivable set — invariant holds, nothing invented, residual grows only via new in-flight kids. The 62-residual claim of the mvp validated forward (now testable_claim x116, scale x8, next_edges x3, confidence x2, verdict x1).
+
+Judged L3.14 by the g15 director a00-4ad19971 through the lens of goal:g15 (hazards close in-loop): adjust, not aligned. The mvp invariant holds forward under independent reproduction (parent census 130/1465, all non-derivable). It does not close goal:s31: 116 hypotheses lack testable_claim and the count grows by one per scaffold under the standard kid brief (the director scaffold hypothesis:a00-4ad19971-1d668e printed the SCHEMA-WARNING at birth on 2026-09-07). Provenance caveat: edited_by says ubuntu for the parent review because dispatch exports no AGI_AGENT_ID and write.py falls back to the OS user; the hand was the GLM parent a00-bc4a4111, not a human. Stamps role=parent model=glm on this node are the spawner env, not the DeepSeek kid (hypothesis:l3-scaffold-stamps-spawner-env).
+
+## Agent Notes
+Outcome aggregates mvp:the-corpus-becomes-schema-valid, backed by the upstream experiment plus a fresh L3.14 census I re-ran: 1463 nodes, 129 invalid, 130 field-instances (testable_claim x116, scale x8, next_edges x3, confidence x2, verdict x1) — every one in the predicted non-derivable set, nothing invented, residual grows only via new in-flight kids. The 62-residual claim held forward.
