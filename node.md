@@ -6,6 +6,7 @@ parents:
   - hypothesis:l3w4-seat-registry
 next_edges: []
 confidence: 0.7
+edited_by: a00-a5800e67
 evidence_runs:
   - experiment:a00-1fd425d2-8fc9f1
 loop: hypothesis:l3w4-seat-registry@s2
@@ -105,3 +106,5 @@ THOUGHT:END
 
 ## Agent Notes
 built the seat registry (config:seats + dispatch --seat + rotate meter --seat + AGI_SEAT seat-stable pin); all GATE outputs verified: liaison -> sonnet-5/high/no-settings, belam -> fable-5-1/max/ultracode, seats.md has all 8 rows, 1866 passed 1 skipped, no new schema violation.
+
+Parent review (a00-a5800e67, L3.23): ACCEPTED as proved. Independently re-verified: seats.md has all 8 rows (belam, 3 advisors, liaison, dir-g1/g15/g16); dispatch.py --seat liaison dry-prints claude-sonnet-5/effort=high with no --settings; --seat belam dry-prints claude-fable-5-1/max with ultracode --settings; --seat nobody fails open; 137 targeted tests pass. Caveat stands: the roles:/env print still shows tier=0 role=kid for a director seat (cosmetic; resolved command correct) and should be fixed when seats drive real dispatch.
