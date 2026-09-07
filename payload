@@ -516,6 +516,7 @@ def write_node(
     fm_for_gate=None,
     on_exists=SKIP,
     announce=True,
+    stamp=None,
 ) -> NodeWrite:
     """Create one node file, gated. The only routine that does this.
 
@@ -523,6 +524,12 @@ def write_node(
     common one-parent call). `extra_fm` is per-caller frontmatter — a
     verdict's `verdict:`/`confidence:`, say — merged over the four keys every
     node gets. `body` defaults to the type's `BODY_PROMPTS` entry.
+
+    `stamp` is the resolved identity of the agent the node is FOR — the
+    role/model/loop/profile/season a dispatch-spawned agent will actually
+    run under (hypothesis:l3-scaffold-stamps-spawner-env). When present it
+    wins over os.environ for the mint stamps; the env is the fallback for a
+    caller with no spawn record (a hand scaffold). Absent stays absent —cord (a hand scaffold). Absent stays absent —\n    never fabricate.", "}]
 
     The spawn check runs **before anything is written**, so a rejection leaves
     no node behind — the same convention `cli.py done` uses for an
