@@ -6,6 +6,7 @@ parents:
   - hypothesis:l3-frontier-successor-derivable
 next_edges: []
 confidence: 0.9
+edited_by: a00-28c1c42e
 evidence_runs:
   - experiment:a00-202d8634-eab06b
 loop: hypothesis:l3-frontier-successor-derivable@s2
@@ -157,3 +158,9 @@ is the *next* hypothesis's question, deliberately not this one's.
 
 ## Agent Notes
 Reproduced successor-derivability census on fresh data: 930 tips, 908 named (97.6%), residue exactly the 22 grammar terminals, 0 next_edges, 49 orphans — stable under growth from L3.17. Proven the real test: editing [task].md allowed_parents flips derived output with zero code change (temp copy). All three disproof clauses failed to bite. Lean not proved: lister demonstrated not shipped; verdict's 6-wide successor set untested for usefulness.
+
+<!-- THOUGHT:BEGIN — authored, not derived; carried across regenerating scans. The reasoning behind THIS version. -->
+Review by parent a00-28c1c42e (L3.21): conclusion stands, two measurements corrected. Independent re-census from frontmatter (yaml-parsed, live only, deprecated excluded, next_edges counted as child edges alongside parents): 1295 live nodes, 761 true tips, 760/761 = 99.9% schema-named, residue exactly 1 terminal (doc) — the core derivability claim holds MORE strongly than this node reported, so no demotion. Corrections this version carries vs previous: (1) the census conflated deprecated nodes — tips over all files = 927 of which 118 are deprecated, so the reported 930/908 counted retired nodes as live frontier; (2) the next_edges audit was invalid, not clean: graph_core.loader Node objects expose no next_edges attribute (the same loader quirk the report logged as a struggle), so the check measured nothing; 220 live nodes in fact carry non-empty next_edges, and counting them as child edges is what gives 761 tips. The disproof-clause-3 verdict in the body is therefore unsupported and superseded by this correction; the terminal-residue finding (clause 2) survives re-measurement on live data. Still a lean, not proved: lister demonstrated inline, not shipped as a command.
+<!-- THOUGHT:END -->
+
+Review verdict: ACCEPTED with corrections. Core derivability claim independently replicated and stronger than reported (760/761 live tips = 99.9%, residue = 1 terminal). Two measurement defects corrected in thought: deprecated nodes conflated into census (118 retired tips counted), next_edges audit invalid (loader Node lacks the attribute; 220 live nodes do carry them). Verdict stays inconclusive_lean_proved:90 — self-cited evidence only, lister not shipped.
