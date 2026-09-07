@@ -6,6 +6,7 @@ parents:
   - hypothesis:l3-cc-adapter-zombie-lease
 next_edges: []
 confidence: 0.6
+edited_by: a00-036ea133
 evidence_runs:
   - experiment:a00-5a8a25c5-d837e4
 loop: hypothesis:l3-cc-adapter-zombie-lease@s2
@@ -81,3 +82,9 @@ Caveats (outside region, reported not fixed):
   release-lease contract; hooking it into dispatch's retry loop is likewise
   a dispatch-side change.
 
+<!-- THOUGHT:BEGIN — authored, not derived; carried across regenerating scans. The reasoning behind THIS version. -->
+Parent review (a00-036ea133, L3.25): accepted at inconclusive_lean_proved:60, no demotion. Independently verified the artifact, not the report: SESSION_LIMIT_TEXT/_procstate/is_alive/reap_child/close_session_limit exist in claude_code_adapter.py, test_claude_code_adapter.py re-ran 41 passed on my own invocation. evidence_runs correctly self-cites (an experiment may name itself). The lean stays 60 rather than proved because dispatch.py still owns the production Popen and never calls reap_child or close_session_limit — the capabilities exist but are not wired into the retry/reaper loop, so the live zombie-lease leak is not yet fixed end to end. That wiring is the natural next child under this hypothesis.
+<!-- THOUGHT:END -->
+
+## Agent Notes
+REVIEW: artifact verified (code present, 41 tests green re-run by parent). Verdict kept: inconclusive_lean_proved:60 — honest, since dispatch-side wiring of reap_child/close_session_limit is still open. No orphans, schema valid, evidence_runs is a real node id list.
