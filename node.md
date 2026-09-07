@@ -24,45 +24,60 @@ verdict: inconclusive_lean_proved:90
 ## Experiment
 
 Closed the last open item on the write-guard chain: the box's real write log
-was being polluted by the test suite. Every sanctioned node write is logged by
-`node_writer._log_write`, and the follow-up (L2.13) flagged that tests
+was being polluted by the test suite. Every sanctioned node write is logged
+by `node_writer._log_write`, and the L2.13 follow-up flagged that tests
 appending to `.agi/sessions/write-log.jsonl` via `snapshot_goals.PROJECT_ROOT`
 pollute the real log with `/tmp/pytest-*` entries. Measured live before any
 change: **31,169 of 33,169 lines (94%)** in the box log were test paths.
 
-Cause: `snapshot_goals.write_frontmatter` (reused by level3 / decompose /
+Root cause: `snapshot_goals.write_frontmatter` (reused by level3 / decompose /
 publish) logs to `snapshot_goals.PROJECT_ROOT`, which defaults to the real
 repo's cwd during pytest even when the node being written lives in a tmp
-fixture project — so every test fixture write went to the real log.
+fixture project — so every test fixture write went to the real log. Two
+vectors, both fixed in the engine:
 
-Fix (in place, engine): `node_writer._log_write` now derives the log
-destination from the **written node's own path** — the project root is the
-parent of the `nodes/` component of the file — instead of trusting the
-caller's module-global root. New helper `_node_project_root(path)`; fallback
-to the caller root for payload paths (no `nodes` component, unchanged).
+1. **Node-tree writes** (the publishers, and every real node):
+   `_log_write` now derives the destination from the written node's own path
+   — the project root is the parent of the `nodes/` component — via new
+   helper `_node_project_root(path)`, instead of trusting the caller's
+   module-global root.
+2. **Bare fixture files** (`tmp/n.md`, no `nodes/` component — the snapshot
+   serializer tests): when a path has no node-tree component, `_log_write`
+   only falls back to the caller's root if the file is actually under that
+   root's project; a truly foreign path (test fixture in an unrelated tree)
+   is a no-log write, never a leak into a real project's log.
 
-Regression test (red first): `test_write_log_follows_node_path_not_caller_root`
-writes a node whose file lives in tmp project X but passes a different root Y
-as `root`; asserts the log lands in X/sessions and Y/sessions is never created.
-Confirmed RED against the pre-fix `_log_write`, GREEN after.
+A conftest tried first (monkeypatching `sys.modules` PROJECT_ROOT) was
+dropped: `spec.loader.exec_module` does not register the module in
+`sys.modules`, so the patch never landed — the engine-side guard is the
+reliable fix.
 
 ## Evidence
 
-- `python3 -m pytest extensions/agi/tests/ -q` → **1841 passed, 1 skipped**.
-- `write_guard` suite: all 30+ write/guard/mint-id/git-mv tests green.
-- Controlled re-run of `test_publish_alarm.py test_level3.py test_stitch.py`
-  (the heaviest leakers): box `write-log.jsonl` line count **unchanged**
-  (33474 → 33474) across the run — previously each added dozens of entries.
-- Real-write lines (`nodes/...`) still log correctly (guard silent on a
-  sanctioned `update_node`).
+Two regression tests, each red first:
+- `test_write_log_follows_node_path_not_caller_root` — a node file in project
+  X logged with a different root Y lands in X/sessions; Y/sessions is never
+  created.
+- `test_foreign_bare_file_is_not_leaked_into_caller_log` — a bare `n.md` in
+  an unrelated tree passed a real project root appends nothing to that
+  project's log. RED against the pre-guard `_log_write`, GREEN after.
 
-Caveat: a bare-file `sg.write_frontmatter(path)` with **no `nodes/`
-component** (snapshot_goals fixture files written `tmp/n.md`) still falls
-back to the caller's root and can pollute if PROJECT_ROOT is left at the real
-cwd — the engine rule only reaches node-tree paths. That residual wants the
-follow-up's literal prescription (tests redirect PROJECT_ROOT to tmp), which
-is a follow-up, not an engine defect: production writes are always under a
-node tree.
+- `python3 -m pytest extensions/agi/tests/ -q` → **1842 passed, 1 skipped**.
+- Real `write-log.jsonl` measured across a full suite run: max `/tmp/pytest`
+  timestamp **unchanged** before vs after (07:27:26 → 07:27:26) — zero new
+  test entries leaked. Previously each run added dozens.
+- Controlled re-run of the heaviest leakers (publish/level3/stitch/snapshot):
+  log line count flat.
+- Real sanctioned writes (`nodes/...` paths) still log correctly; guard
+  silent on a real `update_node`.
+
+## Caveat
+
+Payload writes and bare files resolve their project conservatively (path under
+root or `root.parent`); a legitimate cross-project write would be a no-log.
+No current engine caller does that — every payload is resolved off its own
+root. The historical 94% test pollution already in the box log is untouched
+(scratch, gitignored); only future pollution is stopped.
 <!-- BODY:END -->
 
 ## Agent Notes
