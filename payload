@@ -451,6 +451,15 @@ def main() -> int:
              "exit without spawning (hypothesis:l3w0-ladder-roles-table)",
     )
     ap.add_argument(
+        "--dry-run",
+        action="store_true",
+        help="Resolve and print the fully-resolved spawn for every slot -- "
+             "command line, exported env, brief tier, brief line count and "
+             "first 20 lines -- WITHOUT spawning, writing a session dir, or "
+             "taking a spawn-budget slot. Exits 0 (hypothesis:l3-dispatch-\n"
+             "dry-run).",
+    )
+    ap.add_argument(
         "--detach",
         action="store_true",
         help="Skip the reaper phase and return immediately after spawn. "
@@ -564,7 +573,8 @@ def main() -> int:
         print(f"season: ladder current_season={current_season}")
 
     iter_dir = locations.iteration_dir(root, args.iter_n)
-    iter_dir.mkdir(parents=True, exist_ok=True)
+    # Deferred `.mkdir()` until AFTER the dry-run return: a dry-run must not
+    # create a session dir (hypothesis:l3-dispatch-dry-run).
 
     # Two-agent research pipeline: architect (slot 0) + builder (slot 1)
     # Slot 1 waits for slot 0 to produce a node, then implements it.
@@ -584,6 +594,20 @@ def main() -> int:
         targets = _research_pipeline_targets(root, n, iter_dir)
     else:
         targets = _pick_targets(root, n)
+
+    # hypothesis:l3-dispatch-dry-run — a dry run resolves everything the live
+    # path resolves (target, tier, role, ladder tier, brief tier via
+    # `_brief_tier_for`, model and effort rows, env exports) then assembles the
+    # brief, prints a compact report and exits 0 — without spawning, let a
+    # single spawn-budget slot, write a manifest or session dir, or call
+    # Popen. It also must not create the iteration dir — hence the deferred
+    # `.mkdir()` above.
+    if args.dry_run:
+        return _dry_run_report(
+            root=root, cfg=cfg, harness_name=harness_name,
+            dispatch_harness=dispatch_harness, adapter=adapter,
+            args=args, targets=targets, tier_eff=tier_eff)
+    iter_dir.mkdir(parents=True, exist_ok=True)
 
     # goal:s28 — merge into existing manifest rather than overwriting.
     # A parent dispatch into the same iter dir must not clobber its own
