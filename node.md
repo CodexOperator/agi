@@ -8,8 +8,6 @@ next_edges: []
 adjust: "goal:s31 narrows to the non-derivable residual: testable_claim on a scaffolded hypothesis can only come from the kid, so cli.py done must lift it from the body (## Hypothesis) or refuse loudly; the derivable half (title at scaffold, 90 backfilled) is complete and this outcome certifies it"
 alignment: adjust
 confidence: 0.85
-demote_reason: no experiment evidence (evidence_runs=0) for 'proved'
-demoted_from: proved
 edited_by: a00-4ad19971
 evidence_runs:
   - experiment:the-falsifier-and-the-corpus-census
