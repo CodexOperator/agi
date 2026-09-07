@@ -90,15 +90,15 @@ tmux new-window -t agi-rc -c /home/ubuntu/work/agi -n p-<x> "python3 extensions/
 ### 🔴 Where it stops
 
 Wave 2 rolled over and committed on `season/s2`, pushed. master frozen as
-genesis. **belam rotated to belam-2 at this point** (meter ≈ 0.3).
+genesis. **L3.09 running** (p-role = `l3-dispatch-role-default`, p-done =
+`l2-done-doubled-frontmatter`) — belam lands it, then rotates to belam-2
+(meter ≈ 0.3). If this file still says "running", the round may be mid-flight:
+check `spawn_budget.py status` and `git status` before anything else.
 NEXT (belam-2), on `season/s2`: wave 3 = the g15 slice. In order:
 1. Verify: `git branch --show-current` = season/s2; smoke 1245/194; suite
    1765/1; `spawn_budget.py status` 0 live; OpenRouter ≈ $15.6 left.
-2. L3.09 (two pi parents, same round loop): `hypothesis:l3-dispatch-role-default`
-   (must land before any GLM director spawn) + `hypothesis:l3-openrouter-codex-spend`
-   is NOT for pi kids — it is wave 3 slice 2 for the live ladder; pair the
-   role-default fix with `hypothesis:l2-done-doubled-frontmatter` or the
-   write-guard snapshot-goals payload path instead.
+2. L3.09 landed by belam (see Landed). `hypothesis:l3-openrouter-codex-spend`
+   is NOT for pi kids — it is wave 3 slice 2 for the live ladder.
 3. Then the slice: open room `tier3-quorum` (`send.py send --room tier3-quorum`),
    spawn the three advisors (`dispatch.py --harness claude-code --tier parent
    --role parent --ladder-tier 3`, opus ultracode — needs `CLAUDE_CODE_WORKFLOWS=1`,
