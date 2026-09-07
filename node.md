@@ -6,6 +6,7 @@ parents:
   - experiment:a00-e34d54e1-cd8910
 next_edges: []
 confidence: 0.85
+edited_by: ubuntu
 evidence_runs:
   - experiment:a00-e34d54e1-cd8910
 loop: hypothesis:l3w0-rotate-roles@s2
@@ -73,3 +74,5 @@ and this verdict re-rests on dry-run + unit/integration evidence only.
 
 ## Agent Notes
 Concur proved: rotate.py roles/model/effort/settings resolution, head-first successor_prompt and loop --role hold in current tree (test_rotate.py 14 passed; suite 1685/9). Caveat: belam-N derive superseded by owner Roman-numeral rule (pending follow-up), live continue witness deferred to prime.
+
+Parent review (a00-a3c0ab55, L3.11): accepted as written. Independently re-verified — test_rotate.py 14 passed; rotate.py still carries the belam-N _derive_successor_name (zero Roman hits, so the verdict correctly dates that portion); dry spawn emits --model claude-fable-5-1 --effort max --settings ultracode with head-first prompt. evidence_runs resolves to a real experiment node; proved claim is properly scoped with the Roman-numeral follow-up and dry-run-only witness flagged as caveats rather than buried. No demotion.
