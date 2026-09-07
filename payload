@@ -215,35 +215,28 @@ def record_session_pin(*, sess_dir, agent_id: str, cwd: str,
 
 
 def pin_child_transcript_in_background(*, sess_dir, agent_id: str, cwd: str,
-                                       log_file, timeout: int = 120) -> str | None:
-    """Daemon-thread wrapper that waits for the child's first session_id and
-    then pins it, returning the AGI_SESSION_LOG value the child's meters will
-    read. Returns an env value immediately ({} -> never set) only when the
-    thread finds a session_id or times out."""
-    deadline = time.time() + timeout
-    done = threading.Event()
-    captured = {"path": None}
+                                       log_file, timeout: int = 120) -> None:
+    """Fire-and-forget: once the child's output holds its first session_id,
+    write this agent's meter pin so its own meters/loop read ITS transcript
+    and never the newest foreign `.jsonl` in the shared project dir
+    (hypothesis:l3-meter-own-transcript).
 
+    The session_id only appears after the child prints its first stream-json
+    event, so the capture is necessarily asynchronous -- a daemon thread polls
+    `log_file`, bounded by `timeout`, and never blocks the spawner. A child
+    that never prints a session_id just times out and writes no pin."""
     def _work():
-        while time.time() < deadline and not captured["path"]:
+        deadline = time.time() + timeout
+        while time.time() < deadline:
             try:
-                pin = record_session_pin(sess_dir=sess_dir, agent_id=agent_id,
-                                         cwd=cwd, log_file=log_file)
+                if record_session_pin(sess_dir=sess_dir, agent_id=agent_id,
+                                      cwd=cwd, log_file=log_file) is not None:
+                    return
             except OSError:
-                pin = None
-            if pin is not None:
-                captured["path"] = pin
-                done.set()
-                return
+                pass
             time.sleep(1)
-        done.set()
 
     threading.Thread(target=_work, daemon=True).start()
-    # The transcript path is derived from a session_id we only learn after
-    # launch, so the pin (and any AGI_SESSION_LOG for wide-eyed grandchildren)
-    # is written asynchronously; this call returns the pin path when the thread
-    # captures it, else None -- it never blocks.
-    return captured["path"]
 
 
 def resolve_bin(harness: dict) -> str:
