@@ -1640,12 +1640,19 @@ def _node_type_for(level: str, target: str | None, role: str | None) -> str:
 
 
 def _scaffold_node_for_agent(
-    root: Path, iter_n: int, agent_id: str, level: str, target: str | None, role: str | None = None
+    root: Path, iter_n: int, agent_id: str, level: str, target: str | None,
+    role: str | None = None, stamp: dict | None = None,
 ) -> dict | None:
     """Decide what node type to scaffold and pre-create the file skeleton.
 
     Returns `node_writer.NodeWrite.as_info()`, or None when nothing was
     written — a rejected spawn, or a file that already holds real content.
+
+    `stamp` is the resolved identity of the agent this scaffold is FOR
+    (hypothesis:l3-scaffold-stamps-spawner-env), forwarded to node_writer so
+    the mint stamps the child's row -- role/model/loop/profile/season --
+    rather than the DISPATCHER's os.environ a parent handset. Absent means
+    node_writer falls back to the env (a hand scaffold).
 
     goal:s17 -- this function used to carry a duplicated copy of `cli.py
     scaffold`: its own type tuple, its own body prompts and its own
@@ -1661,6 +1668,7 @@ def _scaffold_node_for_agent(
     slug = f"{agent_id}-{(uuid.uuid4().hex[:6])}"
     res = node_writer.write_node(
         root, node_type, slug, [target] if target else [],
+        stamp=stamp,
         on_exists=node_writer.REUSE_SCAFFOLD,
     )
     if not res.written:
