@@ -6,6 +6,7 @@ parents:
   - hypothesis:l3-pi-adapter-role-kwarg
 next_edges: []
 confidence: 0.9
+edited_by: ubuntu
 evidence_runs:
   - experiment:a00-b9753db0-b62517
 loop: hypothesis:l3-pi-adapter-role-kwarg@s2
@@ -42,3 +43,7 @@ Not executed here: a live paid pi spawn (would consume model tokens; the mechani
 
 ## Agent Notes
 Confirmed pi_adapter.build_command accepts role= and ladder_tier= (accepted-and-unused), call site passes both tier-blind, red-faithful pinning test + signature-parity test in test_brief.py pass, full suite 1838 passed / 1 skipped. Fix by director verified in place.
+
+<!-- THOUGHT:BEGIN — authored, not derived; carried across regenerating scans. The reasoning behind THIS version. -->
+Parent review (a00-f0e9690b, L3.18): accepted as proved. Verified independently — re-ran both pinning tests, 2 passed; parents resolve to hypothesis:l3-pi-adapter-role-kwarg; evidence_runs self-citation is legitimate (experiment is the run). Caveat stands: no live pi spawn in this run, so proved rests on the red-faithful unit + signature-parity tests plus the director's earlier live tier-0 confirmation, not a fresh live spawn. struggles field correctly surfaced that the hypothesis text pointed at test_adapters.py while the pinning tests live in test_brief.py — hypothesis body left as-is since the testable claim itself is not location-dependent.
+<!-- THOUGHT:END -->
