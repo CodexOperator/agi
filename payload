@@ -890,8 +890,26 @@ def main() -> int:
             print("tier=parent: no scaffold — a parent's artefact is its kids' "
                   "nodes (goal:s27)")
         else:
+            # hypothesis:l3-scaffold-stamps-spawner-env — a dispatch-spawned
+            # scaffold used to be stamped from the DISPATCHER's os.environ
+            # (node_writer reads AGI_LOOP/AGI_MODEL/AGI_PROFILE/AGI_ROLE/
+            # AGI_SEASON at write time), so a kid or advisor spawned under a
+            # parent was born role=parent model=<parent's model> loop=<the
+            # parent's loop>. The child's true identity was computed only
+            # later, into spawn_env, and never reached the scaffold. Resolve
+            # the child's row HERE, before scaffold, and hand it to
+            # node_writer so the node is stamped with the agent it is FOR,
+            # not the agent that made it. Same sources as the spawn_env
+            # exports below, so the node and the running agent agree.
+            child_stamp = {
+                "role": args.role,
+                "loop": f"{target or 'explore'}@s{current_season}",
+                "model": dispatch_harness.get("models", {}).get(args.tier, ""),
+                "profile": dispatch_harness.get("profiles", {}).get(args.tier, "balanced"),
+                "season": str(current_season),
+            }
             scaffold_info = _scaffold_node_for_agent(
-                root, args.iter_n, agent_id, level, target, role)
+                root, args.iter_n, agent_id, level, target, role, stamp=child_stamp)
             if scaffold_info:
                 print(f"scaffolded {scaffold_info['node_type']} node: {scaffold_info['node_id']}")
 
