@@ -6,6 +6,7 @@ parents:
   - hypothesis:l3w0-season-retag
 next_edges: []
 confidence: 0.9
+edited_by: ubuntu
 evidence_runs:
   - experiment:a00-855d562e-c271ba
 loop: hypothesis:l3w0-season-retag@s1
@@ -169,3 +170,10 @@ restored via `write.py moral:* "set thought_session agi-master-2026-09-06"
   goal:g12). All other nodes get actor `season.py`, session `season`.
 - Shell-out to write.py per node: the write guard stays silent because every
   mutation is a sanctioned, logged write. Never a direct file write.
+
+## Agent Notes
+review: independent verification confirms verdict proved. Under codebase loader (frontmatter.load_node_file) parseable-but-no-season=0 / unparseable=19 — durable claim holds. Moral five verified owner+season:1; deprecated 0 gaps; test_season.py 20 passed. Retag legitimately skips the 19 corrupted files.
+
+<!-- THOUGHT:BEGIN — authored, not derived; carried across regenerating scans. The reasoning behind THIS version. -->
+PARENT-REVIEW L3.03 (a00-a2b80171): kept verdict=proved after independent check. Direct probe: 1419 .md, parseable nodes 1400, unparseable 19, parseable-but-no-season 0 — via frontmatter.load_node_file, the same loader cmd_retag uses, so skip reasons are exact. Caveat surfaced: a naive text.split(---) loader (node_writer id-index, L242) parses corrupted node a00-d315f97b-8ec39a (starts "---id:" no newline) and would show it as a season gap; the strict loader rightfully treats it as corruption. That is a latent loader-leniency mismatch worth a follow-up, not a retag defect. 19 unparseable files (experiment/verdict/mvp/hypothesis from concurrent a0X/a1X writers, unquoted "title: ..." colons) remain season-less — kid correctly left them untouched and escalated as a separate live writer-corruption bug. Verify criterion literal "grep -L returns nothing" is unmet by these 19, but re-scoped durable claim (every parseable node carries season:1) is proven; residuals are provably not a retag gap. Acceptance rests on that re-scope.
+<!-- THOUGHT:END -->
