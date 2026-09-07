@@ -176,6 +176,39 @@ def test_aiming_does_not_scaffold_a_parentless_idea():
     assert dispatch._node_type_for("big", None, None) == "idea"
 
 
+def test_leaf_recency_boost_fires():
+    """idea:frontier-invitation / l3-frontier-successor-derivable.
+
+    The 1.2x leaf bump used to be `desc * 1.2`, and `_descendant_count`
+    returns 0 for a leaf, so the boost was dead on arrival: `0 * 1.2 == 0.0`
+    and every chain tip scored 0.0 and sorted last. The fix floors the
+    descendant term at 1; these assert the boost now means something.
+    """
+    boosted = dispatch._attractiveness(0, 1.2, 0.0, "idea")
+    plain = dispatch._attractiveness(0, 1.0, 0.0, "idea")
+    assert boosted > 0.0, "a leaf must no longer be condemned to score 0"
+    assert boosted > plain, "the 1.2x leaf bump must actually change the score"
+    # And the floor is identity for every non-leaf (desc >= 1 already).
+    assert dispatch._attractiveness(3, 1.0, 0.0, "idea") == 3.0
+    assert dispatch._attractiveness(3, 1.2, 0.0, "idea") == 3.6
+
+
+def test_leaf_boost_is_small_relative_to_an_extended_chain():
+    """The floor must not let a lone leaf dwarf a real chain: one descendant
+    (desc=1, no leaf bump) must still outrank an empty leaf (desc floored to
+    1 with the bump) for the same type and diversity."""
+    chain = dispatch._attractiveness(2, 1.0, 0.0, "idea")
+    leaf = dispatch._attractiveness(0, 1.2, 0.0, "idea")
+    assert chain > leaf
+
+
+def test_attractiveness_type_weighting_preserved():
+    assert dispatch._attractiveness(1, 1.0, 0.0, "hypothesis") == pytest.approx(1.4)
+    assert dispatch._attractiveness(1, 1.0, 0.0, "experiment") == pytest.approx(1.2)
+    assert dispatch._attractiveness(1, 1.0, 0.0, "verdict") == pytest.approx(1.1)
+    assert dispatch._attractiveness(1, 1.0, 0.0, "idea") == pytest.approx(1.0)
+
+
 # ---------------------------------------------------------------------------
 # goal:s28 — a parent must not erase itself from the manifest by spawning a kid.
 # goal:g4.8 — and that merge has to survive concurrency, which it did not.
