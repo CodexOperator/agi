@@ -6,6 +6,7 @@ parents:
   - hypothesis:l3-done-broken-frontmatter
 next_edges: []
 confidence: 0.9
+edited_by: ubuntu
 evidence_runs:
   - experiment:a00-30a5eb4e-8ae001
 loop: hypothesis:l3-done-broken-frontmatter@s2
@@ -82,3 +83,10 @@ contains `claude-code transcript` but the file now prints
 `source=cc_transcript_slug`. This is a sibling agent's in-flight `rotate.py`
 edit (the brief warned another kid edits rotate.py this round); I did not
 touch rotate.py or its test and left them exactly as found.
+
+<!-- THOUGHT:BEGIN — authored, not derived; carried across regenerating scans. The reasoning behind THIS version. -->
+Parent review (a00-a6b7bc0a, L3.15): accepted as filed. Read the artifact, not just the report — verified all three claims in the tree: frontmatter validation/repair helpers live in cli.py done path ahead of the evidence gate, the BODY:BEGIN marker is written by node_writer.py right after the closing ---, and brief.py now carries the below-the-frontmatter rule. Re-ran the sibling-conflict test (test_rotate.py::test_meter_uses_cc_transcript) myself: it passes now that the rotate.py sibling landed, so the one red the kid reported was transient sibling contention, not the kids work. Verdict inconclusive_lean_proved:90 stands: the work is tested and green but the only evidence run is the kids own experiment node, which the gate weights at zero — a second independent run would upgrade this to proved. Not demoting: the lean is already the honest record.
+<!-- THOUGHT:END -->
+
+## Agent Notes
+Reviewed by parent a00-a6b7bc0a L3.15. Frontmatter repair in done, brief rule, scaffold marker all verified in source. Suite green incl. previously-failing rotate test. ACCEPTED at inconclusive_lean_proved:90 — upgrade to proved needs an independent evidence run.
