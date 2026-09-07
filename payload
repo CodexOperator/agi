@@ -70,7 +70,8 @@ touch `test_grid.py`. Kids edit the live tree; one commit per round.
 ```bash
 mkdir -p .agi/sessions/iter-L3.NN
 tmux new-window -t agi-rc -c /home/ubuntu/work/agi -n p-<x> "python3 extensions/agi/bin/dispatch.py . L3.NN --target hypothesis:<id> --level small --tier parent --harness pi |& tee .agi/sessions/iter-L3.NN/p-<x>.log; exec bash"
-# wait: bounded FOREGROUND loop on spawn_budget.py status → 0 live (background monitors died of memory pressure last session)
+# wait: background `until` loop on spawn_budget.py status → 0 live, then read its output file (Belam VII ran one fine; the memory-pressure deaths were last session's)
+#   GOTCHA (Belam VII): `$(pgrep -fc PAT || echo 0)` is NOT "0" when nothing matches — pgrep -fc PRINTS "0" and exits 1, so the || fires too and you capture "0\n0". The loop then never exits. Use `$(pgrep -fc PAT || true)` or compare with -le 0.
 # review: kid struggles:/caveats: → parent Accepted/Demoted in .agi/sessions/iter-L3.NN/<parent>/output.log → links.py links (0 broken) → snapshot-goals.py --render --check → write_guard.py check → commands.py run tests
 # commit "iter-L3.NN: …" → grid.py commit --all → git push → record the OpenRouter balance delta below
 ```
