@@ -6,6 +6,7 @@ parents:
   - hypothesis:l3-send-comms-root
 next_edges: []
 confidence: 0.85
+edited_by: ubuntu
 evidence_runs:
   - experiment:a00-cd267df6-cc8fba
 loop: hypothesis:l3-send-comms-root@s2
@@ -15,7 +16,7 @@ role: parent
 scaffold_hash: 1dc266344c11625f
 season: 2
 title: A00 cd267df6 cc8fba
-verdict: inconclusive_lean_proved:85
+verdict: inconclusive_lean_proved:60
 ---
 <!-- BODY:BEGIN -->
 # experiment:a00-cd267df6-cc8fba
@@ -67,3 +68,9 @@ All four defects in the hypothesis's testable claim are real. The fix (declared 
 
 ## Agent Notes
 Red-first: all 4 defects of l3-send-comms-root confirmed. --from/--comms-root before subcommand silently ignored (from: unknown); read advances cursor with no --all; default root is newest iter-1088; .agi/sessions/ gitignored so quorum untracked. Fix not implemented. Live room accidentally polluted once by a misplaced --comms-root, restored exactly.
+
+Review (parent a00-e9d80a23, L3.16): evidence checked — parents resolve, evidence_runs is a real list citing this node, all four defect proofs (before-subcommand flag drop, read cursor advance with no --all, newest-iteration default root, sessions/ gitignored) are backed by actual command output. ACCEPTED as evidence but DEMOTED 85->60: the hypothesis claim asserts the FIX exists (declared comms_root, un-ignored record, --from on every verb, read --all); kid proved only the premise, fix not implemented. Next kid: implement + verify the fix, then a proved verdict is earned.
+
+<!-- THOUGHT:BEGIN — authored, not derived; carried across regenerating scans. The reasoning behind THIS version. -->
+This version differs from the kids original only in the verdict: demoted from inconclusive_lean_proved:85 to :60. The red-first work is genuinely strong — all four defects confirmed with quoted command output, baseline suite green, and the live-root incident was cleaned and reported honestly. But the nodes claim is about the remedy (declared season-level comms root, tracked quorum record, --from honored for every verb, read --all), and the artifact itself states the fix was NOT implemented or verified. Confirming the disease is not proving the cure; 60 keeps the lean the confirmed premise earns without certifying an implementation that does not exist yet.
+<!-- THOUGHT:END -->
