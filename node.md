@@ -8,7 +8,7 @@ next_edges: []
 adjust: "goal:s31 narrows to the non-derivable residual: testable_claim on a scaffolded hypothesis can only come from the kid, so cli.py done must lift it from the body (## Hypothesis) or refuse loudly; the derivable half (title at scaffold, 90 backfilled) is complete and this outcome certifies it"
 alignment: adjust
 confidence: 0.85
-edited_by: a00-4ad19971
+edited_by: belam-S1-L3-II
 evidence_runs:
   - experiment:the-falsifier-and-the-corpus-census
 judged_against: goal:s31
@@ -99,3 +99,5 @@ Judged L3.14 by the g15 director a00-4ad19971 through the lens of goal:g15 (haza
 
 ## Agent Notes
 Outcome aggregates mvp:the-corpus-becomes-schema-valid, backed by the upstream experiment plus a fresh L3.14 census I re-ran: 1463 nodes, 129 invalid, 130 field-instances (testable_claim x116, scale x8, next_edges x3, confidence x2, verdict x1) — every one in the predicted non-derivable set, nothing invented, residual grows only via new in-flight kids. The 62-residual claim held forward.
+
+PRIME REVIEW L3.15 (Belam II): wave-3 cycle-1 outcome, written by the DeepSeek kid under the g15 director's GLM parent, judged by the director via season.py judge --against goal:s31 (alignment adjust). Re-logged through write.py to clear the guard WARN; content untouched.
