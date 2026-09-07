@@ -92,6 +92,41 @@ def test_ensure_frontmatter_refuses_when_the_body_is_damaged(tmp_path):
     assert "broken frontmatter:" in node_file.read_text()
 
 
+def test_ensure_frontmatter_repairs_a_closed_block_missing_parents(tmp_path):
+    """A node whose `---` block closes cleanly but is missing a required field
+    (here `parents`) has a provably intact body -- the close delimits it -- so
+    it is repaired from the manifest WITHOUT needing the BODY:BEGIN marker. The
+    parsed block is preserved as a whole, not flattened by line salvage."""
+    cli = _load_cli()
+    node_file = tmp_path / "e1.md"
+    node_file.write_text(
+        "---\nid: experiment:e1\ntype: experiment\n"
+        "evidence_runs:\n  - experiment:run-a\n---\n\nran it twice\n")
+    ap = tmp_path / "agent.json"
+    ap.write_text('{"parent": "hypothesis:h1"}')
+    ok, msg = cli._ensure_frontmatter(tmp_path, node_file, ap, "experiment:e1")
+    assert ok
+    assert "repaired" in msg
+    text = node_file.read_text()
+    assert "parents:\n  - hypothesis:h1" in text
+    # parsed structure survived -- not flattened to a bare scalar by salvage
+    assert "- experiment:run-a" in text
+    assert "ran it twice" in text
+
+
+def test_ensure_frontmatter_repairs_a_closed_block_missing_type(tmp_path):
+    cli = _load_cli()
+    node_file = tmp_path / "e1.md"
+    node_file.write_text(
+        "---\nid: experiment:e1\nparents:\n- hypothesis:h1\n---\n\nbody\n")
+    ap = tmp_path / "agent.json"
+    ap.write_text('{}')
+    ok, msg = cli._ensure_frontmatter(tmp_path, node_file, ap, "experiment:e1")
+    assert ok
+    text = node_file.read_text()
+    assert "type: experiment" in text
+
+
 def _cmd_done_project(tmp_path):
     """A minimal project root + a broken experiment node, ready for cmd_done.
     Returns (graph_root, args)."""
