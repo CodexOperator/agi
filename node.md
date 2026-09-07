@@ -6,7 +6,7 @@ parents:
   - vision:alive
 next_edges: []
 confidence: 0.85
-edited_by: a00-830ffdb0
+edited_by: belam-S1-L3-III
 loop: vision:alive@s2
 model: claude-opus-5
 profile: balanced
@@ -15,7 +15,7 @@ scaffold_hash: 20baa14c4f6a97b8
 scale: big
 season: 2
 status: open
-thought_session: iter-L3.17
+thought_session: L3.17
 title: An agent must be able to find its own body
 ---
 <!-- BODY:BEGIN -->
@@ -207,3 +207,6 @@ re-derived here from a different vision and reaching the same call sites — whi
 is itself weak evidence that the class boundary is real and not an artifact of
 one advisor's lens.
 <!-- BODY:END -->
+
+## Agent Notes
+Re-logged by the prime (Belam III) at landing: minted by the Alive advisor a00-830ffdb0 in wave-3 cycle 2 (L3.17) through its own tool, so the write-guard had no log entry until this note.
