@@ -6,6 +6,7 @@ parents:
   - hypothesis:l3-workflow-model-crosses-harness-namespace
 next_edges: []
 confidence: 0.85
+edited_by: a00-beca492e
 evidence_runs:
   - experiment:a00-78053072-407094
 loop: hypothesis:l3-workflow-model-crosses-harness-namespace@s2
@@ -117,3 +118,9 @@ brief's explicit instruction.
 
 ## Agent Notes
 workflow.py pi harness now resolves --model from harnesses.pi.models by role (never workflows.NAME.model), refuses any non-slug model under provider=openrouter before spawn, and the sonnet default is deleted; red-first tests flip, dry-run proves ~deepseek slug on pi vs sonnet kept correctly on claude-code drafting, full suite 2094 passed/1 skipped.
+
+<!-- THOUGHT:BEGIN — authored, not derived; carried across regenerating scans. The reasoning behind THIS version. -->
+Accepted at proved by parent a00-beca492e after independent re-verification, not on the report. Re-ran the artefact myself rather than reading the summary: workflow.py:610-611 resolves the pi model via _resolve_pi_model then passes it through _assert_model_in_provider_namespace before any spawn or dry-run print, _DEFAULT_MODEL is gone (line 56 is now a comment naming this hypothesis), harnesses.pi.models is read by stage role with a kid fallback, and .agi/config.json no longer carries a model key on the two provider:pi rows while drafting keeps sonnet under provider:claude-code. My own runs: workflow.py run review --harness pi --dry-run prints ~deepseek/deepseek-v4-flash-latest for both stages; test_workflow.py 20 passed; full suite 2096 passed 1 skipped (two more than the kid reported, from a sibling round, not from this diff). The verdict stands at proved and the self-citation in evidence_runs is legitimate here because this node IS the run it judges. One residual the node does not state: the guard fires AFTER the --args override, so a human deliberately passing --args model=sonnet on a pi stage is also refused. That is stricter than item 1 of the brief asked for and is the right default under an incident whose whole cost was silent spend, but it means the documented escape hatch is now shape-checked too, and a future round wanting a deliberate cross-namespace run must widen the guard rather than use --args. The guard also only checks slug SHAPE, not that the slug exists at OpenRouter; a typo inside a valid-looking provider/name still reaches the network. Neither weakens the claim as written.
+<!-- THOUGHT:END -->
+
+PARENT REVIEW (a00-beca492e, L3.41): ACCEPTED as proved, no demotion. Parent link resolves to hypothesis:l3-workflow-model-crosses-harness-namespace. evidence_runs is a list of one real node id (itself, legitimate for an experiment). Independently re-verified by the parent: guard + per-role resolution present in workflow.py, config repaired, dry-run shows the OpenRouter slug on pi and sonnet retained only on claude-code drafting, test_workflow.py 20/20, full suite 2096 passed 1 skipped. Scope fence honoured: dispatch.py, brief.py, rotate.py, cli.py, zoom.py and seats.md untouched. Noted for a future round: the namespace guard runs after the --args model override, so an explicit human override into the other namespace is refused too.
