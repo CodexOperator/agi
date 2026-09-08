@@ -5,6 +5,9 @@ type: experiment
 parents:
   - hypothesis:l3w4-agent-failure-ledger
 next_edges: []
+confidence: 0.95
+evidence_runs:
+  - experiment:a00-a6c651f9-c9734d
 loop: hypothesis:l3w4-agent-failure-ledger@s2
 model: ~deepseek/deepseek-v4-flash-latest
 profile: balanced
@@ -12,6 +15,7 @@ role: kid
 scaffold_hash: bcb903d0e3f86f61
 season: 2
 title: A00 a6c651f9 c9734d
+verdict: proved
 ---
 <!-- BODY:BEGIN -->
 # experiment:a00-a6c651f9-c9734d
@@ -74,3 +78,5 @@ scratch path and did not land the table in any `build:g16-failure-ledger`
 payload (that node is still unminted, `goal:s29` gate), so the write.py
 landing half of the parent's testable_claim is *not* tested here.
 
+## Agent Notes
+MS.01: proved full ledger data path live — failures.py ledger derives 405 real rows (idempotent, 0 on rerun), sensei aggregate writes 10 pick_worst-shaped rate rows summing to 405, sensei.pick_worst reads JSON array with no JSONDecodeError (gaps #2,#3 closed & verified live). Wiring gap #1 still open: no cron/hook invokes the ledger.
