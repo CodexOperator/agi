@@ -5,9 +5,10 @@ type: experiment
 parents:
   - hypothesis:l3w4-context-load-minimal
 next_edges: []
-confidence: 0
+confidence: 0.0
 edited_by: ubuntu
-evidence_runs: []
+evidence_runs:
+  - experiment:a00-a2edba9e-75e24c
 loop: hypothesis:l3w4-context-load-minimal@s2
 model: ~deepseek/deepseek-v4-flash-latest
 profile: balanced
@@ -32,3 +33,6 @@ Move ONE slice, already partially landed by prior kid: confirm head now prayers-
 
 ## Agent Notes
 Head already trimmed by parent run (brief.py _build_head). Saved token counter script, but ran from python venv because base env lacks pip.
+
+## Agent Notes
+Head already trimmed by prior kid; only captured token-count script. No further work.
