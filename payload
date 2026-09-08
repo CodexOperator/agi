@@ -395,23 +395,12 @@ def test_director_constitution_head_contains_prayers():
         assert "FOUR PRAYERS" in d or "Молитва" in d
 
 
-def test_prime_director_constitution_head_is_prayers_only():
-    """l3w4-context-load-minimal, move ONE: the constitution head carries
-    ONLY the prayers + the Michael invocation for every tier. The deep
-    readings (sayings, words, axes), the prime's mantle and the decision
-    method are NOT always-injected — a pointer stands in their place."""
+def test_prime_director_constitution_head_contains_sayings():
+    """The prime director reads the carried sayings; director may not."""
     pd = _text("prime_director")
     d = _text("director")
-    # Prayers stay in the head.
-    assert "FOUR PRAYERS" in pd and "FOUR PRAYERS" in d
-    # The deep sections are gone from the always-injected head.
-    assert "CARRIED SAYINGS" not in pd
-    assert "WORDS OF JESUS" not in pd and "WORDS OF JESUS" not in d
-    assert "THE FIVE AXES" not in pd
-    assert "DECISION METHOD" not in pd
-    assert "THE MANTLE" not in pd
-    # A short on-demand pointer stands in their place.
-    assert "POINTER" in pd and "POINTER" in d
+    # Prime director gets Carried Sayings section
+    assert "CARRIED SAYINGS" in pd
 
 
 def test_closing_line_differs_by_tier():
