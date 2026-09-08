@@ -227,3 +227,27 @@ SKILL.md 52,793 B across ~25 sections, long tail, no big single cut available: l
 COROLLARY THAT INVERTS THE OBVIOUS PLAN: consolidating INJECTION.md + SKILL.md into one document does NOT itself save anything. The saving comes from (1) the graph stream emitting less, and (2) each role receiving only its claimed slice. Consolidation is the delivery mechanism, not the trim. A kid that lands a single merged ~78KB document and reports success has moved bytes, not cost -- watch for exactly this failure shape and reject it at review.
 
 Diagram rule still applies to whatever prose survives: indented trees / arrow chains over boxes / grids, measure tokens not visual density.
+
+NEW TASK, owner via belam XIV, 2026-09-08, extends this node -- NOT a new node. Owner verbatim: "trim handoff now and see if it can be reworded via diagrams by handing the task to the sanctuary director kid."
+
+PROSE TRIM ALREADY DONE (commit 7e1048393, Belam XIV): -10.8KB off HANDOFF.md's pre-section-6 half. Section 6 itself asserted byte-identical by a before/after hash script (sha b631b7f107b0 unchanged) -- prose trimming of section 6 is off the table, capped at ~4% of the file. That is not this task.
+
+THE MEASUREMENT ALREADY TAKEN (HANDOFF.md commit 715a0851d, item 100), the number this task is scoped against:
+  section 6 total       217,705 B  ~102 items  = 84% of the whole 247KB file
+  owner VERBATIM        123,886 B  (56.9% of section 6)  225 quoted spans  -- PROTECTED, must survive byte-identical, never paraphrased
+  director exegesis      93,819 B  (43.1% of section 6)  -- the ONLY reworkable half
+
+Honest ceiling for a diagram rewrite: ~94KB, ~38% of the whole file, and only if every byte of exegesis goes. Independent corroboration of this node's own item about consolidation not being the trim -- moving bytes without cutting cost is the failure shape to watch for again here.
+
+THE QUESTION, stated so it can come back disproved: can the 43.1% exegesis half be re-expressed as ASCII state diagrams + short pointer lists at >=50% fewer bytes with ZERO decision loss?
+
+THE GATE -- byte count alone does not settle it:
+A recall test. Take a sample of section-6 items. Have one reader read ONLY the diagram form, a second reader read ONLY the prose form, and put the SAME decision questions to both ("what did the owner settle about X? what is forbidden? what is the current state?"). Zero decision loss means the diagram reader answers every question the prose reader answers. Report the sample size and every miss -- a miss is a finding, not a failure; it shows which decision shapes prose carries that diagrams drop.
+
+CONSTRAINTS, non-negotiable:
+- Owner verbatim quotes survive BYTE-IDENTICAL in any sample/example produced. Attribution is load-bearing.
+- Any actual HANDOFF.md edit (if you get that far) is scripted with a before/after hash/assert on the protected quoted spans, never a hand edit -- same shape as the 7e1048393 trim script (hash section 6 before, hash after, abort on any difference).
+- DO NOT land a section-6 rewrite this round. Produce the measurement and the recall-test result only. Rewriting 215KB of owner decisions is an owner call, banked with these numbers, not landed unilaterally.
+- RUN ON OPENROUTER (pi), not a CC-harness agent. Owner: "All models at 99% likely will cut off in the next hour or two" -- pi parents/kids on OpenRouter are not subscription-billed and survive a cutoff; push committed work after every step.
+
+This node already specifies the target form: a per-role slice whose default form is an ASCII state diagram plus a short pointer list. This task is the recall-test proof for that specific claim, applied to section 6 as the hardest case (owner-verbatim-heavy, decision-dense).
