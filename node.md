@@ -6,7 +6,6 @@ parents:
   - goal:g17
 next_edges: []
 edited_by: quorum-2
-link_ref: /tmp/claude-1001/-home-ubuntu-work-agi/4d069885-5b8e-47bd-b4c5-96a5b39ed870/scratchpad/l3w4-branch-visibility.md
 location: source_root
 scaffold_hash: 168d6bf31abee0bb
 season: 2
