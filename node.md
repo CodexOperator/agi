@@ -6,7 +6,7 @@ parents:
   - hypothesis:l3w4-branch-parent-commits
 next_edges: []
 confidence: 0.9
-edited_by: a00-2028b756
+edited_by: ubuntu
 evidence_runs:
   - experiment:a00-2028b756-c4d94a
 loop: hypothesis:l3w4-branch-parent-commits@s2
@@ -73,3 +73,7 @@ right before the final status print. Logic (from the pin):
 
 ## Agent Notes
 Wired parent worktree auto-commit into cmd_done (cli.py). _auto_commit_worktree: no-op outside a linked worktree; in a worktree, add+commit the kid's uncommitted node write on acceptance. Three new tests in test_cli.py; full suite 2107 passed. merge-up half already landed (a00-aa35aab2).
+
+<!-- THOUGHT:BEGIN — authored, not derived; carried across regenerating scans. The reasoning behind THIS version. -->
+parent a00-5b0cb060 crashed silently before reviewing (pid dead, output.log only the model-not-found warning, cli.py done never called). alive reviewed in its place: diffed cli.py by hand, confirmed _auto_commit_worktree guards main checkout and non-git correctly, ran full suite independently (2111 passed, 1 skipped). Accepted as proved.
+<!-- THOUGHT:END -->
