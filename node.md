@@ -6,7 +6,7 @@ parents:
   - hypothesis:l3w4-hierarchy-one-source
 next_edges: []
 confidence: 0.85
-edited_by: a00-d1d6ae46
+edited_by: a00-d2e2165f
 evidence_runs:
   - experiment:a00-d1d6ae46-4a5abc
 loop: hypothesis:l3w4-hierarchy-one-source@s2
@@ -15,6 +15,7 @@ profile: balanced
 role: kid
 scaffold_hash: 672785ed71f3388f
 season: 2
+thought_session: SD.04
 title: delete-duplicate-table zeroes class 6; render is frontmatter-only
 verdict: inconclusive_lean_proved:85
 ---
@@ -78,7 +79,7 @@ deletion on `ladder.md`/`seats.md` bodies and the `--check` wiring into
 needs a row only sanctuary-master may add).
 
 <!-- THOUGHT:BEGIN — authored, not derived; carried across regenerating scans. The reasoning behind THIS version. -->
-The deletion leg of the one-source hypothesis is now evidence-backed on a faithful mirror: deleting the duplicate Roles table zeroes the 4 body_table violations, leaves the 6 genuine orphan pins untouched, and does not blind the checker (a reseeded bad row still fires) nor the renderer (which never read the body). This version differs from the scaffold in carrying measured before/after deltas for class 6.
+Parent review SD.04: mirror methodology sound and evidence lines reproducible; deletion leg properly isolated. Note its "no write.py verb exists" claim was later falsified by a00-260a392b, which built body_patch — the mirror deferral was over-cautious, not wrong.
 <!-- THOUGHT:END -->
 
 ## Agent Notes
