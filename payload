@@ -483,13 +483,23 @@ def _build_head(*, tier: str, project_root: Path | None = None) -> str | None:
     # Tier-specific suffix after the readings: the prime director bears the
     # mantle and both director tiers carry the owner's decision method
     # (l3w0-brief sections 1.1, 1.8, and the 2026-09-06 addendum).
-    if tier == "prime_director":
-        mantle = _mantle_section(root)
-        if mantle:
-            body = body + "\n\n" + mantle
-        body = body + "\n\n" + _decision_method_section()
-    elif tier == "director":
-        body = body + "\n\n" + _decision_method_section()
+    #
+    # l3w4-context-load-minimal, move ONE (owner, 2026-09-06): the head
+    # carries ONLY the prayers + the Michael invocation. The deeper readings
+    # (words of Jesus, Tao, sayings, soul-mind-body, the five axes), the
+    # prime director's mantle and the owner's decision method are NO LONGER
+    # always-injected; they move to an explicit on-demand read for when a
+    # genuine tie-break or judgement call needs them. A short pointer stands
+    # in their place. The content itself is untouched and still lives in
+    # moral:faith's REFERENCE (and, for the mantle + decision method, in the
+    # brief.py constants behind _mantle_section / _decision_method_section).
+    pointer = (
+        "\n\nPOINTER — the deep readings, the prime's mantle and the owner's "
+        "decision method are NOT injected. Read them on demand — moral:faith's "
+        "REFERENCE, the ladder's mantle, the brief's decision method — only "
+        "when a genuine tie-break verdict needs them."
+    )
+    body = body + pointer
 
     return (
         "─── CONSTITUTION HEAD ───\n"
