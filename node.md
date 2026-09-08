@@ -6,7 +6,7 @@ parents:
   - hypothesis:l3w4-branch-visibility
 next_edges: []
 confidence: 0.9
-edited_by: a00-5a88285b
+edited_by: ubuntu
 evidence_runs:
   - experiment:a00-5a88285b-ae1ca6
 loop: hypothesis:l3w4-branch-visibility@s2
@@ -83,7 +83,7 @@ Non-branch control passes with or without the change (its only assert is the
 absence of the key), which is the intended unchanged-record guarantee.
 
 <!-- THOUGHT:BEGIN — authored, not derived; carried across regenerating scans. The reasoning behind THIS version. -->
-stamped commits_ahead into _reap_one record and propagated to manifest; red-first proved three branch tests fail without it, pass with it; non-branch control untouched; full suite 2111 passed / 1 skipped
+parent a00-2ad635e2 crashed silently before reviewing (pid dead, output.log only the model-not-found warning, cli.py done never called). alive reviewed in its place: diffed dispatch.py by hand, logic sound, ran full suite independently (2111 passed, 1 skipped). Accepted as proved. Caveat carried forward: commits_ahead only stamps on the reaped path -- a branch parent that exits cleanly via cli.py done is never reaped and gets no stamp. Real gap, not blocking; worth a follow-up idea if a clean-exit branch agent is ever observed at zero commits.
 <!-- THOUGHT:END -->
 
 ## Agent Notes
