@@ -5,7 +5,10 @@ type: experiment
 parents:
   - hypothesis:l3w4-context-load-minimal
 next_edges: []
+confidence: 0.6
 edited_by: a00-0f527d4c
+evidence_runs:
+  - experiment:a00-0f527d4c-75f4fe
 loop: hypothesis:l3w4-context-load-minimal@s2
 model: ~deepseek/deepseek-v4-flash-latest
 profile: balanced
@@ -13,6 +16,7 @@ role: kid
 scaffold_hash: 2eeaf21da30d5353
 season: 2
 title: "\"Before baseline: assembled prompt per role ~24-25k tok, not ~68k\""
+verdict: inconclusive_lean_proved:60
 ---
 <!-- BODY:BEGIN -->
 # experiment:a00-0f527d4c-75f4fe
@@ -59,3 +63,6 @@ prime_director     3012    3830   25450    91992
 liaison            2338    2633   24258    87259
 static prefix = ctx + skill =  21586
 ```
+
+## Agent Notes
+Measured real before-baseline of always-injected prompt per role via pi_adapter assembly + tiktoken o200k: kid 22734, parent 24657, advisor 24523, director 24690, prime_director 25450, liaison 24258. Static prefix (INJECTION.md 8406 + SKILL.md 13180) = 21586 tok = 85-89% of every role. Corrects the hypothesis's ~68k estimate (~2.7x high): HANDOFF.md/CLAUDE.md are read-on-demand, not injected. 70% bar = <7635 tok for a prime, so trim must hit the static prefix, not just the head.
