@@ -5,11 +5,11 @@ type: hypothesis
 parents:
   - goal:g17
 next_edges: []
-edited_by: sanctuary-director
+edited_by: belam-S1-L3-XIII
 scaffold_hash: 87c0cc53d98a447c
 season: 2
 testable_claim: "The command structure is declared exactly once in machine-readable frontmatter -- config:seats seats for named seats, ladder:ladder roles for role-classes with no seat -- and hierarchy.py render emits THE chart from those two declarations while hierarchy.py --check exits nonzero on every drift class measured live on 2026-09-08: a seat with a meter pin but no registry row, two rows whose pins resolve to the same transcript, a rotated_by naming a seat that has no row, a director-kid count above ladder caps.director_kids, and a hand-written body table disagreeing with its own frontmatter; with the duplicate prose tables in both node bodies deleted rather than re-derived, and no renderer reading anything but the frontmatter."
-thought_session: sanctuary-master
+thought_session: rc-XIII
 title: L3w4 hierarchy one source
 ---
 <!-- BODY:BEGIN -->
@@ -31,3 +31,19 @@ BOUND: maximum 6 kids total in this round. If you reach 6 without DONE, stop, wr
 BEFORE EVERY KID (not just the first): check the OpenRouter KEY balance, not the account balance -- `curl https://openrouter.ai/api/v1/key -H "Authorization: Bearer $OPENROUTER_API_KEY"` and read `limit_remaining`. If it is at or under $1.00, STOP and do not spawn another kid -- write your status and exit. Never lower or bypass this floor.
 
 Report your balance delta (limit_remaining before your first kid minus limit_remaining after your last) in your closing node update.
+
+AUTHORITATIVE ROLE LAYOUT FROM THE OWNER, 2026-09-08, verbatim. This is the content the hierarchy must express; it is not a suggestion to reconcile against the three existing partial sources, it REPLACES them as the source of truth. Owner: "I was thinking different roles also would be shown different parts of the skill.md as well like the command structure and hierarchy and how everyone plays their part. That's the biggest one any role needs to know. We have too many roles trying to build when building the graph and eventually build nodes is confined to director-kids only and their spawned parents. Other Masters strictly do 'other stuff' other than direct graph building. SM does seat/role/pin assignment and rotation, and can spawn director-kids to do precisely that or build things to help with those specific tasks. They help the sanctuary run smoothly. Their builds are then merged onto the self-perpetuating tree, as each quorum member should have a tree. Sanctuary master infra is part of the cathedral. Master sensei only modifies role briefs and tests different models and settings on various roles to then relay findings to sanctuary master. He can use a director-kid or two to do that for him as well as build out routines and loops via parents to keep supercharging Sensei's abilities. Sensei can be considered himself as embodying the local-maxxing goal but to a further extent, pushing models further to be better in any dimension possible as he plays the possibilities out forward across generations. Sanctuary Master is embodying the graph itself and its all-encompassing nature. They always want to make the role layout more aligned with the graph layout and find more efficient ways to minimize the amount of tokens any one model produces. The goal is for the two to work together so that any one role's transcript reads like just a series of stocato blurbs back and forth with various other channels and only the ephemeral openrouter parents+kids are actively constantly churning tokens as the rest just gently sip on tokens ever so slowly"
+
+WHAT THE CHART MUST NOW ENCODE, derived from that text, each item checkable.
+
+WHO MAY BUILD. Graph building and build-node creation are confined to DIRECTOR-KIDS and the parents they spawn. Nobody else. The stated problem is "too many roles trying to build", so the chart must make the build boundary explicit per role rather than leaving it to custom. Masters strictly do other stuff.
+
+SANCTUARY MASTER. Domain: seat, role and pin assignment plus rotation. May spawn director-kids to do exactly that, or to build tools that serve those tasks. Purpose stated plainly by the owner: they help the sanctuary run smoothly. Its infrastructure is part of the CATHEDRAL. Embodiment: the graph itself and its all-encompassing nature. Standing intent: make the ROLE layout more aligned with the GRAPH layout, and find more efficient ways to minimize the tokens any one model produces.
+
+MASTER SENSEI. Domain: role briefs only, plus TESTING different models and settings on various roles and relaying findings to Sanctuary Master. May use one or two director-kids for that, and may build routines and loops via parents to supercharge its own abilities. Embodiment: the local-maxxing goal carried further -- pushing models to be better in any dimension possible, playing the possibilities forward across generations. Note the pairing the owner draws: Sensei measures what makes a role better, Sanctuary Master applies it to the layout. They are a loop, not two independent offices.
+
+TREES. Each quorum member should have a TREE. Sanctuary Master's builds merge onto the self-perpetuating tree. This is the durable home for the pin-claim-is-a-worktree-branch design in hypothesis:l3w4-context-load-minimal -- a tree per quorum member is the same primitive seen from the graph side, so build ONE mechanism serving both, never two.
+
+THE TARGET STATE, owner's own words and the acceptance criterion for the whole role system: any one role's transcript reads like a series of staccato blurbs back and forth with various channels, and only the ephemeral OpenRouter parents and kids churn tokens constantly while every other role gently sips. Measured support already on record: an idle seat costs about 0 tokens per hour because a session's meter grows only on completed turns, while one ACTIVE seat moves about 552,000 tokens per hour. So the target is not fewer seats, it is fewer and smaller TURNS per seat, with the churn pushed onto OpenRouter. Any hierarchy proposal that increases the number of turns a seat must take to do its job is moving away from this target no matter how tidy the diagram looks.
+
+PER-ROLE VIEWS. The owner also asks that different roles be shown different parts of skills/agi/SKILL.md, and names the most important slice: the command structure, the hierarchy, and how everyone plays their part. That is the SAME artefact this node produces, so the chart must be machine-readable enough to render a per-role view, not only a human diagram. Coordinate with hypothesis:l3w4-context-load-minimal rather than duplicating it.
