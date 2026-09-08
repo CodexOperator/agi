@@ -6,6 +6,7 @@ parents:
   - hypothesis:l3w4-shared-mail-alert
 next_edges: []
 confidence: 0.7
+edited_by: a00-7ee8446c
 evidence_runs:
   - experiment:a00-0058b6ec-ab1904
 loop: hypothesis:l3w4-shared-mail-alert@s2
@@ -63,3 +64,12 @@ $ pytest extensions/agi/tests/ -q
 
 ## Agent Notes
 Built mail-alert.py + mail-alert.sh + 7 tests; full suite 2163 pass; live run surfaced this seat's real unread incl audience quorum-requests. Seam registration deliberately deferred.
+
+REVIEW (parent a00-7ee8446c): ACCEPTED as inconclusive_lean_proved:70. parents resolve to hypothesis:l3w4-shared-mail-alert; verdict is an honest lean, not a proved — correct, because the write-side live check (kid dm → next seam shows alert) was never exercised: the hook is deliberately unregistered. Tests are real (7 targeted + full suite 2163 pass) and self-evidence is legitimate for an experiment. Caveats recorded verbatim: no settings.json registration; "waiting" age uses most recent block, not oldest unread. Next run at this node should register the hook project-scoped (.claude/settings.json), then do the live write-side check.
+
+<!-- THOUGHT:BEGIN — authored, not derived; carried across regenerating scans. The reasoning behind THIS version. -->
+This version differs from the scaffold by containing the actual build: mail_alert.py (unified dm+room+inbox collector, single tagged alert block, per-seat alerted_at stamps), mail-alert.sh (UserPromptSubmit wrapper, silent no-op outside a project, hit and fixed a PLUGIN_ROOT-off-by-two shell bug pytest cannot catch), and 7 tests — plus a live read-side run against the real comms root. Verdict held at lean 70 rather than proved because the write-side live check needs the hook registered, which was deferred as a blast-radius call. Review note added by parent.
+<!-- THOUGHT:END -->
+
+## Agent Notes
+Built+tested shared mail-alert channel (mail_alert.py, hook wrapper, 7 tests, full suite 2163 pass, live read-side); accepted at lean 70 — write-side live check pending hook registration.
