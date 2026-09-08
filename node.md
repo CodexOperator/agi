@@ -6,7 +6,7 @@ parents:
   - hypothesis:l3w4-rotation-announces-itself
 next_edges: []
 confidence: 0.75
-edited_by: a00-b23fb1d6
+edited_by: a00-bc7ec0a9
 evidence_runs:
   - experiment:a00-b23fb1d6-f94e4b
 loop: hypothesis:l3w4-rotation-announces-itself@s2
@@ -43,3 +43,7 @@ VERDICT REASON: inconclusive_lean_proved — the machine half is fully proved by
 
 ## Agent Notes
 Verified the landed rotation-announce build: 8 targeted tests + full engine suite (2190 passed) green; _announce_rotation wired to loop+rotate-self success (not spawn, which writes no record). Live prime-rotation half not exercised this slice.
+
+<!-- THOUGHT:BEGIN — authored, not derived; carried across regenerating scans. The reasoning behind THIS version. -->
+Review (parent a00-bc7ec0a9, SD.03): accepted. Independent checks: mail-alert CORRECTION paragraph present and dated in hypothesis:l3w4-shared-mail-alert as this kid cites; spawn-path finding verified — rotate.py announce call sites are cmd_loop (L1229) and cmd_rotate_self (L2220) only, and cmd_spawn writes no rotation record, so the hypothesis text over-names spawn rather than the code under-announcing. Verdict inconclusive_lean_proved:75 honest: machine half proved by 8 targeted tests + 2190 green full suite; live prime-rotation half named as unobserved, not claimed. CONTINUE: one more slice to attempt the live half (observe or trigger one real rotation announcing with zero hand-typed sends, readable in recipients dm files) — that is the only remaining gap before this loop can exit.
+<!-- THOUGHT:END -->
