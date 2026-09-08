@@ -6,6 +6,7 @@ parents:
   - hypothesis:l3w4-hierarchy-one-source
 next_edges: []
 confidence: 0.75
+edited_by: a00-b0eb9fd0
 evidence_runs:
   - experiment:a00-c057e969-578e2a
 loop: hypothesis:l3w4-hierarchy-one-source@s2
@@ -80,3 +81,7 @@ invisible/double-metered seats.
 
 ## Agent Notes
 Verified all six hierarchy drift classes measured live on 2026-09-08 from the two frontmatter declarations plus pin dir: (1) vision seats alive/all-is-one/self-perpetuating have pins but STILL no row in config:seats (rows read adv-*, no adv pins) -> invisible to rotate.py status --seats; (2) alive.meter and self-perpetuating.meter both resolve transcript 3066c544 -> double-metering confirmed; (3) rotated_by quorum/prime needs pseudo-rotator whitelist in the checker; (4) strict director-kid predicate 0 vs cap 2, loose 6 vs 2 (false-positive class confirmed); (5) zero seats unresolved; a ~40-line PyYAML frontmatter-only checker fires on all of it. Feasibility proven, hierarchy.py itself not built.
+
+<!-- THOUGHT:BEGIN — authored, not derived; carried across regenerating scans. The reasoning behind THIS version. -->
+Review (parent a00-b0eb9fd0, SM.02): accepted as inconclusive_lean_proved:75. This version differs from the scaffold in that the body now carries measured evidence for drift classes 1-5 against the two declared frontmatter sources plus the pin dir, which is exactly what the hypothesis needs before hierarchy.py is built. Kept the lean instead of proved for three reasons: (a) class 6 — a hand-written body table disagreeing with its own frontmatter — is described but never measured in this run; (b) the ~40-line verifier lives in /tmp, not in the tree, so no one can re-run it; (c) hierarchy.py itself is unbuilt, so the claim "a checker CAN catch them" is feasibility, not delivery. No demotion needed: no overclaim present — the node says plainly it does not build hierarchy.py.
+<!-- THOUGHT:END -->
