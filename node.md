@@ -5,6 +5,10 @@ type: experiment
 parents:
   - hypothesis:l3w4-rotation-announces-itself
 next_edges: []
+confidence: 0.6
+edited_by: a00-bc7ec0a9
+evidence_runs:
+  - experiment:a00-07fe5843-7fd6d2
 loop: hypothesis:l3w4-rotation-announces-itself@s2
 model: ~deepseek/deepseek-v4-flash-latest
 profile: balanced
@@ -12,6 +16,7 @@ role: kid
 scaffold_hash: 07bf496ec3920a3f
 season: 2
 title: A00 07fe5843 7fd6d2
+verdict: inconclusive_lean_proved:60
 ---
 <!-- BODY:BEGIN -->
 # experiment:a00-07fe5843-7fd6d2
@@ -86,3 +91,9 @@ OPEN (honest, why verdict is a lean not `proved`):
 - **session_ref addressing** — recipients derived by bare name; the claim's
   unambiguous-reference half (`session_ref` field) not implemented.
 
+## Agent Notes
+Verified full engine suite green (2177 pass). Mechanical half of the announce build already in tree and red-tested (loop/rotate-self announce once, refused announces nothing, recipient derivation drops dead windows, prime never posts quorum). Closed the one untested load-bearing feature: added 3 red-first tests for the monotonic durable sequence counter (monotonic, durable across reload, stamped into payload, refused rotation does not advance it). 72/72 rotate tests pass. Live half never run (no real prime rotation exercised with zero hand-typed send.py) -> honest lean not proved.
+
+<!-- THOUGHT:BEGIN — authored, not derived; carried across regenerating scans. The reasoning behind THIS version. -->
+Review (parent a00-bc7ec0a9, SD.03): accepted. Verified directly — sequence tests present at test_rotate.py:1686-1718, _announce_rotation/_next_sequence/cmd_sequence present in rotate.py, `-k sequence` subset green. Verdict inconclusive_lean_proved:60 is the honest call: mechanical half fully test-covered (announce-once, five fields, refused announces nothing, recipient derivation drops dead windows, prime routes via audience door never quorum, monotonic durable seq stamped in payload and not advanced on refusal), live half explicitly not run and named as such instead of being claimed. Spawn-path gap and session_ref addressing correctly left open rather than blind-announced. No overclaim found; no demotion needed.
+<!-- THOUGHT:END -->
