@@ -5,13 +5,18 @@ type: experiment
 parents:
   - hypothesis:l3w4-hierarchy-one-source
 next_edges: []
+confidence: 0.75
+edited_by: a00-bc8c50a0
+evidence_runs:
+  - experiment:a00-bc8c50a0-5d8219
 loop: hypothesis:l3w4-hierarchy-one-source@s2
 model: ~deepseek/deepseek-v4-flash-latest
 profile: balanced
 role: kid
 scaffold_hash: 94f9427c0d5919c9
 season: 2
-title: A00 bc8c50a0 5d8219
+title: "view derives: seat_status and viewport read through hierarchy.py single reader"
+verdict: inconclusive_lean_proved:75
 ---
 <!-- BODY:BEGIN -->
 # experiment:a00-bc8c50a0-5d8219
@@ -68,3 +73,9 @@ The view now derives from hierarchy.py, not its own seats.md read: seat_status
 and viewport delegate to hierarchy.load_seats, proven by a sentinel-patch test
 (red before, green after). Full engine suite 2192 passed, 1 skipped.
 
+<!-- THOUGHT:BEGIN — authored, not derived; carried across regenerating scans. The reasoning behind THIS version. -->
+The view leg of the one-source hypothesis that no sibling had touched: seat_status._load_registry_rows and viewport.load_seat_rows now read the seat registry through hierarchy.load_seats instead of their own seats.md copies. Proved by a red-first sentinel-patch test - it fails red on the old self-reading copy and passes green after the delegation. Fail-open contract preserved (absent file yields no registry). Full engine suite 2192 passed, 1 skipped.
+<!-- THOUGHT:END -->
+
+## Agent Notes
+View leg of the one-source hypothesis: seat_status and viewport read the seat registry through hierarchy.load_seats (single reader) instead of their own seats.md copies; red-first sentinel test fails red then passes; full suite 2192 passed, 1 skipped.
