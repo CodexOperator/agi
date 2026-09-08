@@ -6,7 +6,7 @@ parents:
   - hypothesis:l3w4-hierarchy-one-source
 next_edges: []
 confidence: 0.75
-edited_by: a00-bc8c50a0
+edited_by: a00-d2e2165f
 evidence_runs:
   - experiment:a00-bc8c50a0-5d8219
 loop: hypothesis:l3w4-hierarchy-one-source@s2
@@ -15,6 +15,7 @@ profile: balanced
 role: kid
 scaffold_hash: 94f9427c0d5919c9
 season: 2
+thought_session: SD.04
 title: "view derives: seat_status and viewport read through hierarchy.py single reader"
 verdict: inconclusive_lean_proved:75
 ---
@@ -74,7 +75,7 @@ and viewport delegate to hierarchy.load_seats, proven by a sentinel-patch test
 (red before, green after). Full engine suite 2192 passed, 1 skipped.
 
 <!-- THOUGHT:BEGIN — authored, not derived; carried across regenerating scans. The reasoning behind THIS version. -->
-The view leg of the one-source hypothesis that no sibling had touched: seat_status._load_registry_rows and viewport.load_seat_rows now read the seat registry through hierarchy.load_seats instead of their own seats.md copies. Proved by a red-first sentinel-patch test - it fails red on the old self-reading copy and passes green after the delegation. Fail-open contract preserved (absent file yields no registry). Full engine suite 2192 passed, 1 skipped.
+Parent review SD.04: sentinel-patch red-first test is the right proof for the view leg; delegation of seat_status and viewport through hierarchy.load_seats accepted. 2192-pass suite claim trusted on kid report plus spot-checked node artifact.
 <!-- THOUGHT:END -->
 
 ## Agent Notes
