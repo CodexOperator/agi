@@ -57,3 +57,21 @@ DO NOT touch `dispatch.py`, `brief.py`, `rotate.py`, `cli.py` or `zoom.py`. Do n
 <!-- THOUGHT:BEGIN — authored, not derived; carried across regenerating scans. The reasoning behind THIS version. -->
 Minted by Belam XI within twenty minutes of the owner reporting an unexplained Sonnet 4.6 charge. Split out of l3-workflow-run-serial-and-unleased deliberately: that brief owns how the route EXECUTES stages (serial, unleased) and this one owns what the route SPENDS. They collide on workflow.py so they can never share a round, and this half is the one with a dollar figure on it, so it goes first. The narrower framing is also the honest one — the cost defect is not a symptom of the serial defect, it is an independent namespace error that would survive a perfect fix to the other.
 <!-- THOUGHT:END -->
+
+HARNESS CONSTRAINT FOR THIS ROUND (Belam XI, 2026-09-08, operational — not part of the claim). The `.env` OpenRouter runtime key is at its cap (`remaining $-0.02`, floor $1.00), so `dispatch.py` refuses every pi spawn with `ERR: runtime key ... below the configured floor`. Spawn your kid on the subscription instead:
+
+    python3 extensions/agi/bin/dispatch.py . L3.41 --target <this node> --level small --tier kid --harness claude-code
+
+Measured: `--harness claude-code` on the PARENT invocation does not reach the kid — the parent's own `dispatch.py` call falls back to the ladder row (pi) and hits the key floor. Pass the flag explicitly on the kid dispatch. Do NOT raise the key limit or edit `.env` to get around this; that is the owner's decision and it is banked. Do NOT treat the blocked spawn as a reason to do the kid's work yourself.
+
+OWNER DECISION, 2026-09-08, verbatim as received (voice transcription, lightly noted where a word is clearly a homophone): "I'm fine deep search being Claude and review I just want it to work the other way as well. When using The sonic [Sonnet] subscription model or the Opus subscription model, I wanted to show up the same way all the workflows show up and call code interactively. And then if I use the black [pi] harness, I still wanted to show up and look the same as the workflow does in Claude code if at all possible. I'm fine using the weaker models on open router or honestly just sawn it [Sonnet] on the review. And then using Opus high on the research one."
+
+WHAT THIS SETTLES FOR THIS NODE. The banked question (cheap slugs vs premium vs subscription) is answered and it is NOT "pick one": BOTH directions must work. The per-harness resolution this brief asks for is exactly the mechanism the owner is describing, so build it as specified. What changes is only the VALUES, and the director sets those at review time, not you:
+
+  review       -> weak OpenRouter models are fine, or Sonnet. Owner is explicitly relaxed here.
+  deep-search  -> Opus at HIGH effort. This is the research loop and the owner wants it strong.
+  drafting     -> unchanged.
+
+So do NOT "fix" the cost defect by making everything cheap. The defect is that a model name crosses a namespace silently, not that a model is expensive. An expensive model chosen deliberately, per harness, is the correct outcome; an expensive model arrived at by accident is the bug. Your fail-closed guard must let a deliberate premium choice through and refuse only a model the target provider cannot own.
+
+The owner's other half - that a workflow should PRESENT identically on both harnesses - is a separate build and is NOT yours: it is minted as `hypothesis:l3-workflow-surface-identical-across-harnesses`. Do not attempt it here.
