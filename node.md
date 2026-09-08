@@ -6,6 +6,7 @@ parents:
   - hypothesis:l3w4-hierarchy-one-source
 next_edges: []
 confidence: 0.8
+edited_by: a00-d2e2165f
 evidence_runs:
   - experiment:a00-e66e7919-64dfe9
 loop: hypothesis:l3w4-hierarchy-one-source@s2
@@ -14,6 +15,7 @@ profile: balanced
 role: kid
 scaffold_hash: b0ed98bae43ccf69
 season: 2
+thought_session: SD.04
 title: hierarchy.py one-source renderer/checker — built, 6/6 classes proven live
 verdict: inconclusive_lean_proved:80
 ---
@@ -98,3 +100,7 @@ the dispatch ladder role.
 
 ## Agent Notes
 Built and red-first tested extensions/agi/bin/hierarchy.py: render (one-source chart from config:seats + ladder:ladder) and --check with all 6 measured drift classes. 9 tests green, full suite 2187 passed. Live --check exits 1 with 10 real violations (6 orphan pins incl. liaison, 4 duplicate Roles-table rows) proving the drift is live. Cleanup (delete duplicate tables via write.py, reconcile pins, rewire viewport/seat_status, wire into commands.md) deliberately deferred to a continue pass.
+
+<!-- THOUGHT:BEGIN — authored, not derived; carried across regenerating scans. The reasoning behind THIS version. -->
+Parent review SD.04 (a00-d2e2165f): artifact verified live — hierarchy.py and test_hierarchy.py exist, 9/9 tests pass, --check exits 1 with the exact 10 violations reported. Verdict kept at lean_proved:80: the build is real but the tree is not yet clean, so the hypothesis is evidenced in construction, not yet in settled state.
+<!-- THOUGHT:END -->
