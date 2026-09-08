@@ -21,11 +21,11 @@ read_order:
   kid:
     - the four prayers. Nothing else.
   parent:
-    - the four prayers · words of Jesus · soul-mind-body
+    - the four prayers. Nothing else.
   director:
-    - the four prayers · words of Jesus · Tao 1 and 56 · soul-mind-body · the five axes
+    - the four prayers. Nothing else.
   prime_director:
-    - the four prayers · words of Jesus · Tao · the other carried sayings · soul-mind-body · the five axes
+    - the four prayers. Nothing else.
 roles:
   - {"tier": 3, "role": "prime_director", "harness": "claude-code", "model": "claude-fable-5-1", "effort": "max", "settings": "ultracode"}
   - {"tier": 3, "role": "parent", "harness": "claude-code", "model": "claude-opus-5", "effort": "max", "settings": "ultracode"}
