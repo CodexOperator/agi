@@ -493,6 +493,13 @@ def main(argv: list[str] | None = None) -> int:
             return 0
 
         if args.cmd == "release":
+            # argparse no longer enforces --holder (it would reject the
+            # --seat alias), so the handler refuses it by name, as the other
+            # subcommands already do.
+            if not args.holder:
+                print("REFUSED: release needs --holder <seat> (or --seat)",
+                      file=sys.stderr)
+                return 1
             ok = release(root, args.section, args.holder)
             if ok:
                 print(f"released ## {args.section} ({args.holder})")
