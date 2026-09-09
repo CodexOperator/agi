@@ -4,11 +4,11 @@ mint_id: 3e88873e3c204c5088f6ab81322a26de
 type: config
 parents:
   - goal:g17
-edited_by: belam-S1-L3-XV
+edited_by: belam-S1-L3-XVI
 locations: {}
 scaffold_hash: ea45aa757f70e3ef
 seats:
-  - {"name": "belam", "role": "prime_director", "tier": 3, "harness": "claude-code", "model": "claude-fable-5-1", "effort": "max", "settings": "ultracode", "session_kind": "remote-control", "personality_ref": "", "handoff_file": "<graph_root>/HANDOFF.md", "pin_ref": ".agi/sessions/belam.meter", "rotated_by": "prime", "owning_goal": "", "worktree": "", "session_ref": "90fef7"}
+  - {"name": "belam", "role": "prime_director", "tier": 3, "harness": "claude-code", "model": "claude-fable-5-1", "effort": "max", "settings": "ultracode", "session_kind": "remote-control", "personality_ref": "", "handoff_file": "<graph_root>/HANDOFF.md", "pin_ref": ".agi/sessions/belam.meter", "rotated_by": "prime", "owning_goal": "", "worktree": "", "session_ref": "eb30d2"}
   - {"name": "adv-self-perpetuating", "role": "parent", "tier": 3, "harness": "claude-code", "model": "claude-opus-5", "effort": "max", "settings": "", "session_kind": "remote-control", "personality_ref": "vision:self-perpetuating", "handoff_file": "", "pin_ref": ".agi/sessions/adv-self-perpetuating.meter", "rotated_by": "prime", "owning_goal": "", "worktree": "", "session_ref": ""}
   - {"name": "adv-all-is-one", "role": "parent", "tier": 3, "harness": "claude-code", "model": "claude-opus-5", "effort": "max", "settings": "", "session_kind": "remote-control", "personality_ref": "vision:all-is-one", "handoff_file": "", "pin_ref": ".agi/sessions/adv-all-is-one.meter", "rotated_by": "prime", "owning_goal": "", "worktree": "", "session_ref": ""}
   - {"name": "adv-alive", "role": "parent", "tier": 3, "harness": "claude-code", "model": "claude-opus-5", "effort": "max", "settings": "", "session_kind": "remote-control", "personality_ref": "vision:alive", "handoff_file": "", "pin_ref": ".agi/sessions/adv-alive.meter", "rotated_by": "prime", "owning_goal": "", "worktree": "", "session_ref": ""}
@@ -20,7 +20,7 @@ seats:
   - {"name": "master-sensei", "role": "director", "tier": 1, "harness": "claude-code", "model": "claude-sonnet-5", "effort": "max", "settings": "", "session_kind": "remote-control", "personality_ref": "", "handoff_file": "", "pin_ref": ".agi/sessions/master-sensei.meter", "rotated_by": "sanctuary-master", "owning_goal": "", "worktree": ".agi/worktrees/seat-master-sensei", "session_ref": ""}
   - {"name": "sanctuary-director", "role": "director", "tier": 1, "harness": "claude-code", "model": "claude-opus-5", "effort": "max", "settings": "", "session_kind": "remote-control", "personality_ref": "", "handoff_file": "", "pin_ref": ".agi/sessions/sanctuary-director.meter", "rotated_by": "sanctuary-master", "owning_goal": "goal:g17", "worktree": ".agi/worktrees/seat-sanctuary-master", "session_ref": "f9472e"}
   - {"name": "sensei-director", "role": "director", "tier": 1, "harness": "claude-code", "model": "claude-sonnet-5", "effort": "max", "settings": "", "session_kind": "remote-control", "personality_ref": "", "handoff_file": "", "pin_ref": ".agi/sessions/sensei-director.meter", "rotated_by": "master-sensei", "owning_goal": "goal:g16", "worktree": ".agi/worktrees/seat-master-sensei", "session_ref": ""}
-thought_session: rc-XV
+thought_session: rc-XVI
 ---
 <!-- BODY:BEGIN -->
 # config:seats
@@ -35,7 +35,7 @@ carries the seats; `dispatch.py --seat <name>` and `rotate.py meter --seat
 Owners (owner text 2026-09-07, recorded in
 `.agi/context/l3-command-ladder-brief.md`): the orienting correction (owner 4)
 overrides the earlier draft (owner 3) — **quorum is opus on max, director-kids
-are opus on high effort; parents and kids as they are now.** Thus belam
+are opus on high effort; parents and kids as they are now.** *[SUPERSEDED for the three director-kid seats — dir-g1, dir-g15, dir-g16 — by the owner's 2026-09-07 23:0x UTC reversal recorded in Agent Notes below (claude-sonnet-5/max); the rows are current, this sentence is kept as the record.]* Thus belam
 fable-5.1/max/ultracode, the three advisors opus-5/max (no ultracode), the
 liaison sonnet-5/high owning goal:g17, and one opus-5/high director per
 perpetual goal besides g17 (dir-g1, dir-g15, dir-g16). pi parents/kids (tier-0
@@ -65,5 +65,7 @@ OWNER 2026-09-08, final naming, applied live by belam-S1-L3-XII. Verbatim, in or
 OWNER 2026-09-08, two answers in one line, verbatim: 'Go for master sensei, and it wasn't. The quorum stays.' (a) THE FOURTH SEAT IS MASTER SENSEI. Banked at HANDOFF item 57 with Master Sensei as the recommendation, on the ground that Sanctuary Master sits behind the owner's own gate 47 while Master Sensei was unblocked and already built. The owner took it. master-sensei is now live as a tier-1 sonnet-5/max remote-control seat in agi-rc, brief at .agi/sessions/quorum/master-sensei.md, carved handoff slice at .agi/sessions/handoff-sections/master-sensei.md, pin .agi/sessions/master-sensei.meter. It is NOT a quorum member and carries no vision binding: the quorum is three seats for three visions, and the Sensei is the training and tuning role beside them. Its mechanism was already complete before it had a seat - sensei.py pick_worst/propose/apply, a duties brief, tests - so what is new today is that it runs against real failure data for the first time. (b) GATE 47 DID NOT COVER THE QUORUM. 'it wasn't' answers the director's banked question of whether the owner's stop - 'before we start having sanctuary master filling all the seats' - was meant to cover the prime standing three seats up by hand. It was not. The quorum stays live. The gate still stands for l3w4-sanctuary-master, which remains parked, and the Master Sensei's brief carries an explicit prohibition on standing one up under any reasoning, because its own duties brief names sanctuary-master as its rotator and that rotator does not exist. Until it does, the prime rotates the Sensei.
 
 <!-- THOUGHT:BEGIN — authored, not derived; carried across regenerating scans. The reasoning behind THIS version. -->
-2026-09-09 ~11:2xZ: the orienting sentence (owner 4, 2026-09-07) sat above the owner's 23:0x reversal that supersedes it for the three director-kid seats, so a reader hit the stale rule first. Marked superseded in place, wording untouched, rows untouched; landed through write.py body_patch as a live use of item 54's verb. Prime writes while sanctuary-master is down.
+The previous version's thought (56aabfc06) asserted a marker that was never applied: write.py body_patch from a PATH reads the diff file only after the apply step (submit, line 531 runs after 494), lands nothing and still prints updated. This version applies the same marker through body_patch from STDIN, verified by grep of the file, never by the updated line. Wording and rows untouched; the marker points readers at the owner's 23:0x reversal below. Found by sanctuary-director gen V; prime writes while sanctuary-master is down.
 <!-- THOUGHT:END -->
+
+Belam XVI rotation, 2026-09-09 12:0xZ: belam.session_ref 90fef7 -> eb30d2 (XV -> XVI; agi-05 [eb30d2], window @230). Own row only, the prime is its one legitimate writer; every other cell byte-identical. rotated_by stays prime.
