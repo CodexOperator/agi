@@ -13,12 +13,41 @@ scaffold_hash: 446e68aaee536bb1
 season: 2
 spawn_check: unverified
 spawn_check_reason: "parent id(s) resolve to no node: ['hypothesis:l4-env-root-override-descends-never-ascends']"
-title: A00 32f358d3 4ee42d
+title: Env-root override descends through any spawn depth, never ascends
 ---
 <!-- BODY:BEGIN -->
 # hypothesis:a00-32f358d3-4ee42d
 
 ## Hypothesis
 
-What is the testable claim? What would prove it? What would disprove it?
+`child_working_graph` re-roots a spawned child to the SPAWNER's worktree wherever
+`AGI_TREE_PROJECT_ROOT` names one (`hypothesis:l3w4-parent-branch-merge-up`). The
+existing tests pin the single hop (parent `--branch` → kid). This chain claims the
+override is **monotonic with depth**: `hypothesis:a00-32f358d3-4ee42d` — the
+env-root override **descends** through any number of spawn generations (each kid
+inherits the deepest worktree from its parent's env and passed root), and it
+**never ascends** back toward the main checkout, even adversarially when a
+descendant's own passed root resolves main.
+
+## Would prove it
+
+A multi-generation chain (parent `--branch` in worktree W → kid → grandkid →
+…) resolves every level's working graph to W's graph — identically and
+monotonically — for depth ≥ 2, and a descendant whose passed root names the main
+checkout is re-rooted back down to W rather than climbing out of it.
+
+## Would disprove it
+
+Any depth at which the working graph drifts back to the main checkout — i.e. a
+generation that resolves `main_graph ≠ wt_graph` while the inherited env still
+names W — breaks the never-ascend property the `merge-up` climb relies on.
+
+## Red
+
+`test_child_working_root_descends_deep_never_ascends` in
+`extensions/agi/tests/test_dispatch.py` (new, this chain): cuts worktree W,
+descends 7 generations asserting every level resolves `wt_graph`, and asserts the
+adversarial main-passed re-root back down to W. Proved green against the current
+implementation, which already satisfies never-ascend; the test is the guard that
+keeps it true.
 
