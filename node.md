@@ -5,6 +5,10 @@ type: hypothesis
 parents:
   - hypothesis:l4-env-root-override-descends-never-ascends
 next_edges: []
+confidence: 0.85
+edited_by: a00-32f358d3
+evidence_runs:
+  - experiment:a00-32f358d3-4ee42d-descend
 loop: hypothesis:l4-env-root-override-descends-never-ascends@s2
 model: ~deepseek/deepseek-v4-flash-latest
 profile: balanced
@@ -13,7 +17,9 @@ scaffold_hash: 446e68aaee536bb1
 season: 2
 spawn_check: unverified
 spawn_check_reason: "parent id(s) resolve to no node: ['hypothesis:l4-env-root-override-descends-never-ascends']"
+testable_claim: "`child_working_graph` re-roots a spawned child to the SPAWNER's worktree wherever `AGI_TREE_PROJECT_ROOT` names one (`hypothesis:l3w4-parent-branch-merge-up`). The existing tests pin the single hop (parent `--branch` → kid). This chain claims the override is **monotonic with depth**: `hypothesis:a00-32f358d3-4ee42d` — the env-root override **descends** through any number of spawn generations (each kid inherits the deepest worktree from its parent's env and passed root), and it **never ascends** back toward the main checkout, even adversarially when a descendant's own passed root resolves main."
 title: Env-root override descends through any spawn depth, never ascends
+verdict: proved
 ---
 <!-- BODY:BEGIN -->
 # hypothesis:a00-32f358d3-4ee42d
@@ -51,3 +57,5 @@ adversarial main-passed re-root back down to W. Proved green against the current
 implementation, which already satisfies never-ascend; the test is the guard that
 keeps it true.
 
+## Agent Notes
+Pinned env-root override descends-never-ascends: 7-generation descent test green, adversarial main-passed re-root back down to worktree held; full suite 2371 passed.
