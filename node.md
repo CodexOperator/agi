@@ -10,10 +10,11 @@ caps:
   vision: 3
   director_kids: 3
 caps_apply_from_season: 2
+caps_vision_scope: town
 current_season: 2
 director_context_tokens: 1000000
 director_rotate_at: 0.47
-edited_by: belam-S1-L4-VI
+edited_by: owner
 mantles:
   prime_director: Belam
 mantles_prime_director: Belam
@@ -55,6 +56,10 @@ tiers:
   - {"tier": 2, "plan_types": ["vision"], "report_type": "overview", "judged_against": "its vision", "lens": "the morals above", "cadence": "season rollover (quarterly)"}
   - {"tier": 3, "plan_types": ["moral"], "report_type": null, "judged_against": "\u2014", "lens": "\u2014", "cadence": "never by machine; hand only"}
 title: Season ladder declaration
+towns:
+  - core
+  - streaming-suite
+  - web-app-suite
 zoom: numeric
 ---
 # ladder:ladder
@@ -135,7 +140,7 @@ makes the brief-head re-read cheap, so early rotation costs less than it
 looks.
 
 <!-- THOUGHT:BEGIN — authored, not derived; carried across regenerating scans. The reasoning behind THIS version. -->
-OWNER 2026-09-10 ~22:2xZ (verbatim in doc:l4-owner-decisions): replace the glm parent model with deepseek/deepseek-v4.1-flash. L4-V applied it to agent_dispatch.model at 6da89f01e, but that key is read only on the legacy no-harnesses path (adapters/__init__.py); a parent's model resolves from THIS roles table first (dispatch.py ladder row lookup), then harnesses.pi.models.parent. Measured by the point gen VIII from the built command: dispatch.py --dry-run still printed the glm model after 6da89f01e. Two cells changed, the tier-1 and tier-0 pi PARENT rows; the tier-0 pi director row keeps glm because the order named the parent model and no pi director is dispatched in this formation; every other byte identical.
+OWNER 2026-09-11 01:0xZ (verbatim in doc:l4-owner-decisions): each town has its own 3 visions. So caps.vision is 3 PER TOWN, not 5 global: restored to 3 with caps_vision_scope town and the towns list declared here (core = the three season-2 visions; streaming-suite and web-app-suite each hold their charter vision now and two slots the OWNER names - visions are owner-authored). The per-town counting in season.py status is the towns round code half; this is the config half, first.
 <!-- THOUGHT:END -->
 
 ## Agent Notes
